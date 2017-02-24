@@ -11,7 +11,7 @@
     <h2 class="form-signin-heading">. 登录 .</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
       {% csrf_token %}
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
 
       <label for="inputPassword" class="sr-only">Password</label>
@@ -29,7 +29,6 @@
     <div style="float: right;padding-right: 8px;">
         <a href="/">返回首页</a>
     </div>
-
 </div>
 
 {% include 'common/footer.html' %}

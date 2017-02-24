@@ -38,7 +38,13 @@
 
 <script type="application/javascript">
     function check(){
-        if($("#inputPassword1").val()!=$("#inputPassword2").val()){
+        if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
+            $("#inputPassword1").popup("请输入密码","right");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else if($("#inputPassword1").val()!=$("#inputPassword2").val()){
             $("#inputPassword1").popup("两次输入的密码不一致","right");
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
@@ -50,6 +56,7 @@
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
             $("#inputPassword1").focus();
+
             return false;
         }else{
             return true;
