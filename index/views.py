@@ -15,13 +15,16 @@ def index(request):
     return render(request,'index/index.html',{'tittle':"首页","userdata":userdata})
 
 def login(request):
-    from django.contrib import auth
-    from django.contrib.auth import authenticate
-    user = authenticate(username="test",password ="test123")
+    if(request.method=='GET'):
 
-    auth.login(request,user)
+        pass
+    elif(request.method=='POST'):
+        from django.contrib import auth
+        pass
+    else:
+        pass
 
-    return render(request,'index/login.html')
+    return render(request,'index/login.html',{'tittle':"登陆"})
 
 def logout(request):
 
@@ -37,7 +40,6 @@ def register(request):
     if(request.method=='GET'):
         pass
     elif(request.method=="POST"):
-        print("checking user")
         pass
     else:
         pass

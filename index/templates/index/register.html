@@ -37,21 +37,22 @@
 {% include 'common/footer-animate.html' %}
 
 <script type="application/javascript">
-    $(document).ready(function () {
-        $("#inputPassword1").popover({
-            trigger:'manual',
-            placement:"right",
-            content:"hello world!",
-
-        });
-        $("#inputPassword1").popover('show');
-        setTimeout(function(){
-            $("#inputPassword1").popover('hide');
-        },2500);
-    });
-
     function check(){
-        console.log($("#inputPassword1").val());
-        return true;
+        if($("#inputPassword1").val()!=$("#inputPassword2").val()){
+            $("#inputPassword1").popup("两次输入的密码不一致","right");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else if($("#inputPassword1").val().length<6){
+            $("#inputPassword1").popup("密码的长度不能小于6位","right");
+
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else{
+            return true;
+        }
     }
 </script>
