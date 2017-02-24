@@ -7,29 +7,51 @@
 </style>
 
 <div class="container text-center" style="width: 300px;margin-top: 60px;" >
-  <form class="form-signin">
+  <form class="form-signin" action="register" method="post">
     <h2 class="form-signin-heading">.注册.</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
+    {% csrf_token %}
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
 
       <label for="inputPassword" class="sr-only">Password</label>
-    <input type="text" id="inputPassword" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
+    <input type="text" id="inputPassword1" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
               <div style="height: 5px;"></div>
 
-      <input type="text" id="inputPassword" class="form-control" onfocus="this.type='password'" placeholder="Password Repeat" required="on" autocomplete="off">
+      <input type="text" id="inputPassword2" class="form-control" onfocus="this.type='password'" placeholder="Password Repeat" required="on" autocomplete="off">
 
     <div class="checkbox">
       <label>
         <input type="checkbox" value="remember-me"> 记住密码
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">确定注册</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return check();">确定注册</button>
   </form>
               <div style="height: 5px;"></div>
 
     <a class="btn btn-lg btn-default btn-block" href="login">返回登陆</a>
 </div>
 
+
 {% include 'common/footer.html' %}
 {% include 'common/footer-animate.html' %}
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#inputPassword1").popover({
+            trigger:'manual',
+            placement:"right",
+            content:"hello world!",
+
+        });
+        $("#inputPassword1").popover('show');
+        setTimeout(function(){
+            $("#inputPassword1").popover('hide');
+        },2500);
+    });
+
+    function check(){
+        console.log($("#inputPassword1").val());
+        return true;
+    }
+</script>
