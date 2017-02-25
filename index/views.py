@@ -55,7 +55,7 @@ def about(request):
 
 @login_required
 def test(request):
-    print(dir(request.user.userprofile))
+    print(request.user.userprofile.lang)
     return HttpResponse("testing...")
 
 
