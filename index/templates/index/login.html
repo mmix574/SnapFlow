@@ -11,7 +11,7 @@
     <h2 class="form-signin-heading">. 登录 .</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
       {% csrf_token %}
-    <input type="text" id="inputEmail" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
+    <input type="text" id="inputName" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
 
       <label for="inputPassword" class="sr-only">Password</label>
@@ -21,7 +21,7 @@
         <input type="checkbox" value="remember-me"> 记住密码
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_validate();">登陆</button>
   </form>
               <div style="height: 5px;"></div>
 
@@ -33,3 +33,38 @@
 
 {% include 'common/footer.html' %}
 {% include 'common/footer-animate.html' %}
+
+<script type="application/javascript">
+    function user_validate(){
+        var username = $("#inputName").val();
+        var password = $('#inputPassword').val();
+        if(!username||!password){
+            return true;
+        }else{
+            var data = {username:username,password:password};
+
+            $.ajax({url:"/api/user_validate",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                success:function(response){
+                    if(response.message == "success"){
+                        $.modal('. 提示 .','登陆成功');
+                    }else{
+                        $.modal('. 提示 .','账号或密码不正确');
+                    }
+            },error:function(response){
+                //do nothing
+            }});
+
+            return false;
+        }
+    }
+
+    $(document).ready(function(){
+        var data = {username:"mmix",password:"mm5201314"};
+
+    });
+
+</script>

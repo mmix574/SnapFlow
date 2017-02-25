@@ -14,3 +14,15 @@ $(document).ready(function () {
         }
     });
 });
+$.warning = function(message){
+    $("#header-warning").html("<div class=\"alert alert-warning alert-dismissible fade in\" role=\"alert\" style=\"height: 50px;text-align:center;margin-bottom: 0px;\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button><strong>"+message+"</strong></div>")
+}
+$.modal = function(tittle,message){
+    if(tittle){
+        $("#default-modal-tittle").html(tittle);
+    }
+    if(message){
+        $("#default-modal-content").html(message);
+    }
+    $("#default-modal").modal();
+}
