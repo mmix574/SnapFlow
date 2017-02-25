@@ -9,13 +9,15 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
 def index(request):
-    userdata = {}
     if(request.user.is_authenticated()):
         userdata = {"username":request.user}
+        logined = True
         pass
     else:
+        userdata = {}
+        logined = False
         pass
-    return render(request,'index/index.html',{'tittle':"首页","userdata":userdata})
+    return render(request,'index/index.html',{'tittle':"首页","userdata":userdata,"logined":logined})
 
 
 def login(request):
