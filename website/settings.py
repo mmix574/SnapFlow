@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'api',
     'forum',
     'index',
     'django.contrib.admin',
@@ -138,5 +139,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(BASE_DIR,'static')
 
+LOGIN_URL = '/login'
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+
+AUTH_PROFILE_MODULE = 'index.UserProfile'

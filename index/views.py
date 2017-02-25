@@ -2,8 +2,10 @@ from django.shortcuts import render
 
 
 from django.http import HttpResponse
-from django.contrib.auth.models import User
 
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def index(request):
     userdata = {}
@@ -14,9 +16,9 @@ def index(request):
         pass
     return render(request,'index/index.html',{'tittle':"首页","userdata":userdata})
 
+
 def login(request):
     if(request.method=='GET'):
-
         pass
     elif(request.method=='POST'):
         from django.contrib import auth
@@ -27,7 +29,7 @@ def login(request):
     return render(request,'index/login.html',{'tittle':"登陆"})
 
 def logout(request):
-
+    auth.logout(request)
     return render(request,'index/logout.html')
 
 def error(request):
@@ -49,7 +51,21 @@ def register(request):
 def about(request):
     return render(request,'index/about.html')
 
-# add test methods here
+
+
+@login_required
 def test(request):
-    from django.contrib.auth.models import User
+    print(dir(request.user.userprofile))
     return HttpResponse("testing...")
+
+
+def dologin(request):
+    user = auth.authenticate(username='mmix',password='mm5201314')
+    if(user):
+        print('ready to login')
+        auth.login(request,user)
+        pass
+    else:
+        print('password incorrect')
+        pass
+    return HttpResponse("...logining...")

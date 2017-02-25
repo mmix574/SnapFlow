@@ -13,6 +13,8 @@
     {% csrf_token %}
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
+    <input type="username" id="inputEmail" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
+          <div style="height: 5px;"></div>
 
       <label for="inputPassword" class="sr-only">Password</label>
     <input type="text" id="inputPassword1" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
@@ -38,7 +40,12 @@
 
 <script type="application/javascript">
     function check(){
-        if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
+        if($("#inputEmail").val().length==0){
+            $("#inputEmail").popup("请输入邮箱地址","right");
+            $("#inputEmail").focus();
+            return false;
+        }else
+            if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
             $("#inputPassword1").popup("请输入密码","right");
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
