@@ -32,6 +32,8 @@ urlpatterns = [
 
     url(r'^api/',include('api.urls')),
 
+    url(r'^space/',include('space.urls')),
+
     # index
     url(r'^',include('index.urls')),
 ]
