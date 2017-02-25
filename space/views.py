@@ -8,4 +8,5 @@ def default(request):
     return HttpResponseRedirect('/space/member/')
 
 def member(request):
-    return HttpResponse("hello member...")
+    # return HttpResponse("hello member...")
+    return render(request,"space/member.html")
