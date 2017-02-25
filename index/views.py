@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 def index(request):
     userdata = {}
@@ -22,6 +23,14 @@ def login(request):
         pass
     elif(request.method=='POST'):
         from django.contrib import auth
+        username = request.POST.get("username","")
+        password = request.POST.get("password","")
+        user = auth.authenticate(username=username,password=password)
+        if(user):
+            auth.login(request,user)
+            return HttpResponseRedirect('/')
+        else:
+            pass
         pass
     else:
         pass
@@ -54,9 +63,8 @@ def about(request):
 
 
 @login_required
-def test(request):
-    print(request.user.userprofile.lang)
-    return HttpResponse("testing...")
+def username(request):
+    return HttpResponse("你好,"+request.user.username)
 
 
 def dologin(request):
@@ -69,3 +77,7 @@ def dologin(request):
         print('password incorrect')
         pass
     return HttpResponse("...logining...")
+
+def test(request):
+    # return HttpResponse("")
+    return HttpResponseRedirect('/')
