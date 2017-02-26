@@ -23,3 +23,10 @@ class AppBaseTemplateView(TemplateView):
         else:
             self.additional_data['logined'] = False
         return super().get(request,*args,**kwargs)
+
+
+from django.template.response import TemplateResponse
+class AppMessageResponse(TemplateResponse):
+    template_name = "index/message"
+    def __init__(self):
+        pass

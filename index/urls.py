@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .import views
+from . import views
 
 urlpatterns = [
     url(r'^$',views.IndexView.as_view()),
@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^about$',views.about),
     url(r'^username$',views.username),
     url(r'^logout$',views.logout),
-    url(r'^test$',views.test)
+    url(r'^test$',views.TestView.as_view())
 ]

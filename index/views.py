@@ -8,23 +8,35 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
-# def index(request):
-#     if(request.user.is_authenticated()):
-#         pass
-#     return render(request,'index/index.html',{'tittle':"首页","user":request.user})
+
+from django.views.generic.base import TemplateView
+from django.views.generic.base import View
+
+from django.http import JsonResponse
+from django.template.response import TemplateResponse
+
+
+
 from website.views import AppBaseTemplateView
 
 class IndexView(AppBaseTemplateView):
     template_name = 'index/index.html'
     pass
 
-
 class MessageView(AppBaseTemplateView):
     template_name = 'index/message.html'
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message_tittle'] = "Message Tittle"
+        context['message_content'] = "Message Content"
+        return context
 
-
-
+class TestView(TemplateView):
+    template_name = 'index/test.html'
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request,'index/test.html',{"content":"那你他妈的很吊哦"})
+        # return JsonResponse(data={})
+        # return super(TestView, self).get(request,args,kwargs)
 
 def login(request):
     if(request.method=='GET'):
