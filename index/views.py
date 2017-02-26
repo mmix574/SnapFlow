@@ -19,6 +19,12 @@ class IndexView(AppBaseTemplateView):
     pass
 
 
+class MessageView(AppBaseTemplateView):
+    template_name = 'index/message.html'
+    pass
+
+
+
 
 def login(request):
     if(request.method=='GET'):
@@ -43,11 +49,6 @@ def logout(request):
     auth.logout(request)
     return render(request,'index/logout.html')
 
-def error(request):
-    return render(request,'index/error.html')
-
-def message(request):
-    return render(request,'index/message.html')
 
 def register(request):
     if(request.method=='GET'):
@@ -82,4 +83,4 @@ def dologin(request):
 
 def test(request):
     # return HttpResponse("")
-    return HttpResponseRedirect('/username')
+    return MessageView.as_view()(request)

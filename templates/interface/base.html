@@ -55,7 +55,7 @@
 {% endif %}
 
 {#-----------------------nav------------------------#}
-<div style="margin-bottom: 50px;box-shadow: 0px 0px 13px 3px #999;">
+<div style="box-shadow: 0px 0px 13px 3px #999;">
 <nav class="navbar navbar-inverse" style="border-radius: 0px;">
   <div class="container">
     <div class="navbar-header">
@@ -73,17 +73,38 @@
         <li><a href="#">最新</a></li>
 {#        <li class="active"><a href="#">最新</a></li>#}
           <li><a href="#about">板块</a></li>
+        <li><a href="#about">问答</a></li>
         <li><a href="#about">时间轴</a></li>
+
       </ul>
 
         <ul class="nav navbar-nav navbar-right">
 
             {% if not logined %}
+            <form class="navbar-form navbar-left">
+             <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            </form>
+
+
             <li ><a href="/register">注册<span class="sr-only">(current)</span></a></li>
             <li ><a href="/login">登陆</a></li>
+            <li>
+                <a style="font-size: 18px;padding-left: 0px;">
+                <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+            </li>
+
             {% else %}
 
-            <li><a>消息</a></li>
+                <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="search">
+        </div>
+      </form>
+
+{#            <li><a>消息</a></li>#}
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好, {{ user.username }}  <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -112,50 +133,68 @@
 
 
 <style>
+    .footer-link-div{
+        float: left;
+    }
+    #foot > div:nth-child(1) > div > ul > li > a{
+        color: #777;
+        text-decoration: none;
 
+    }
+    #foot > div:nth-child(1) > div > ul > li > a:hover{
+        color: rgb(202,219,42);
+    }
+    .footer-link-div{
+        width: 138px;
+    }
+    .footer-link-div > ul >li{
+        height:25px;
+    }
 </style>
-<div style="width: 100%;">
+<div style="width: 100%;margin-top: 20px;">
     <div id="foot" style="background-color: #282828;height: 500px;padding: 50px;box-shadow: 0px 0px 13px #999;">
+        <div>
+            <div class="footer-link-div">
+                <ul>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">官方微信</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">友情链接</a></li>
+                </ul>
+            </div>
+            <div class="footer-link-div">
+                <ul>
+                    <li><a href="#">帮助中心</a></li>
+                    <li><a href="#">教程中心</a></li>
+                    <li><a href="#">侵权申述</a></li>
+                    <li><a href="#">资源免责声明</a></li>
+                </ul>
+            </div>
+            <div class="footer-link-div">
+                <ul>
+                    <li><a href="#">发展建议</a></li>
+                    <li><a href="#">BUG汇报</a></li>
+                    <li><a href="#">我去前面探探路</a></li>
+                    <li><a href="#">H机器人</a></li>
+                </ul>
+            </div>
+            <div class="footer-link-div">
+                <ul>
+                    <li><a href="#">提交工单</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">退出</a></li>
+                </ul>
+            </div>
+        </div>
+        <div >
+            <img style="height: 200px;width: 200px;" src="{% static 'image/liantu.png' %}" >
+        </div>
 
-        <div class="footer-link-div">
-            <ul>
-                <li><a class="a-dark-effective" href="#">关于我们</a></li>
-                <li><a class="a-dark-effective" href="#">官方微信</a></li>
-                <li><a class="a-dark-effective" href="#">加入我们</a></li>
-                <li><a class="a-dark-effective" href="#">友情链接</a></li>
-            </ul>
+        <div >
+            <p style="color: #777;margin-left: 100px;">Copyright;  ©2016-2017  Powered by Django </p>
         </div>
-        <div class="footer-link-div">
-            <ul>
-                <li><a class="a-dark-effective" href="#">帮助中心</a></li>
-                <li><a class="a-dark-effective" href="#">教程中心</a></li>
-                <li><a class="a-dark-effective" href="#">侵权申述</a></li>
-                <li><a class="a-dark-effective" href="#">资源免责声明</a></li>
-            </ul>
-        </div>
-        <div class="footer-link-div">
-            <ul>
-                <li><a class="a-dark-effective" href="#">发展建议</a></li>
-                <li><a class="a-dark-effective" href="#">BUG汇报</a></li>
-                <li><a class="a-dark-effective" href="#">我去前面探探路</a></li>
-                <li><a class="a-dark-effective" href="#">H机器人</a></li>
-            </ul>
-        </div>
-        <div class="footer-link-div">
-            <ul>
-                <li><a class="a-dark-effective" href="#">提交工单</a></li>
-                <li><a class="a-dark-effective" href="#">联系我们</a></li>
-                <li><a class="a-dark-effective" href="#">加入我们</a></li>
-                <li><a class="a-dark-effective" href="#">退出</a></li>
-            </ul>
-        </div>
-
-        <img style="height: 200px;width: 200px;" src="{% static 'image/liantu.png' %}" >
-
-        <p style="color: #777;">Copyright;  ©2016-2017  Powered by Django </p>
-        <p style="color: #777;" id="page-foot-statistics"></p>
     </div>
-
 
 </div>
 

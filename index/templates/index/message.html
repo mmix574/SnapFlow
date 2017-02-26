@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'interface/base.html' %}
+{% block tittle %}
+    ProgramFlow
+{% endblock %}
+{% block body %}
+    <div class="container" style="height: 200px;background-color: #FFFFFF;border-radius: 4px;box-shadow:1px 1px 3px #848A8C;">
+    <div>
+      <div class="container" style="padding-top: 20px;">
+        <h1>{{ message_tittle }}</h1>
+            <div style="margin-top: 20px;">
+                <p>{{ message_content }}</p>
+            </div>
+      </div>
+    </div>
+    </div>
+{% endblock %}
