@@ -1,9 +1,8 @@
-{% extends 'interface/base.html' %}
+{% extends 'interface/base_display.html' %}
 {% block tittle %}
     ProgramFlow
 {% endblock %}
-{% block body %}
-    <div class="container" style="height: 200px;background-color: #FFFFFF;border-radius: 4px;box-shadow:1px 1px 3px #848A8C;">
+{% block content %}
     <div>
       <div class="container" style="padding-top: 20px;">
         <h1>{{ message_tittle }}</h1>
@@ -11,6 +10,5 @@
                 <p>{{ message_content }}</p>
             </div>
       </div>
-    </div>
     </div>
 {% endblock %}

@@ -83,7 +83,11 @@ def about(request):
 
 @login_required
 def username(request):
-    return HttpResponse("你好,"+request.user.username)
+    from django.contrib.auth.models import User
+    user = User.objects.filter(username=request.user.username)
+    print(user[0].email)
+
+    return HttpResponse("你好,"+user[0].username+" "+user[0].email)
 
 
 def dologin(request):
