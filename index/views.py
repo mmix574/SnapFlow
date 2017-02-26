@@ -22,11 +22,21 @@ class IndexView(AppBaseTemplateView):
     pass
 
 class MessageView(AppBaseTemplateView):
+
+    tittle = ""
     message = ""
+
     template_name = 'index/message.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['message_content'] =self.message
+        if(self.message):
+            context['message_content'] =self.message
+        else:
+            context['message_content'] = "you should pass 'message_content' parameter to the as_view() function"
+        if(self.tittle):
+            context['message_tittle'] = self.tittle
+        else:
+            context['message_tittle'] = "Alarm"
         return context
 
 class TestView(TemplateView):
@@ -61,10 +71,12 @@ def login(request):
 
     return render(request,'index/login.html',{'tittle':"登陆"})
 
-def logout(request):
-    auth.logout(request)
-    return render(request,'index/logout.html')
 
+class LogoutView(TemplateView):
+    template_name = 'index/logout.html'
+    def get(self, request, *args, **kwargs):
+        auth.logout(request)
+        return MessageView.as_view(tittle="退出成功",message="你已经完全登出，没有任何个人信息留在这台电脑上。")(request)
 
 def register(request):
     if(request.method=='GET'):
