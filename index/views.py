@@ -10,15 +10,8 @@ from django.http import HttpResponseRedirect
 
 def index(request):
     if(request.user.is_authenticated()):
-        userdata = {"username":request.user}
-        logined = True
         pass
-    else:
-        userdata = {}
-        logined = False
-        pass
-    return render(request,'index/index.html',{'tittle':"首页","userdata":userdata,"logined":logined})
-
+    return render(request,'index/index.html',{'tittle':"首页","user":request.user})
 
 def login(request):
     if(request.method=='GET'):
@@ -82,4 +75,4 @@ def dologin(request):
 
 def test(request):
     # return HttpResponse("")
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/username')
