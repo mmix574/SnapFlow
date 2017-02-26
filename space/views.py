@@ -29,7 +29,7 @@ from django.views.generic.base import TemplateView
 #         print("get view from parent!")
 #         return super().get(self,request,*args,**kwargs)
 
-from website.views import AppBaseTemplateView
+from index.appviews import AppBaseTemplateView
 class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
 

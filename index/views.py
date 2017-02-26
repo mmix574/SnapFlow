@@ -1,6 +1,4 @@
 from django.shortcuts import render
-
-
 from django.http import HttpResponse
 
 from django.contrib import auth
@@ -17,26 +15,32 @@ from django.template.response import TemplateResponse
 
 
 
-from website.views import AppBaseTemplateView
+from .appviews import AppBaseTemplateView
 
 class IndexView(AppBaseTemplateView):
     template_name = 'index/index.html'
     pass
 
 class MessageView(AppBaseTemplateView):
+    message = ""
     template_name = 'index/message.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['message_tittle'] = "Message Tittle"
-        context['message_content'] = "Message Content"
+        context['message_content'] =self.message
         return context
 
 class TestView(TemplateView):
     template_name = 'index/test.html'
     def get(self, request, *args, **kwargs):
-        return TemplateResponse(request,'index/test.html',{"content":"那你他妈的很吊哦"})
+        # from .appresponse import AppMessageResponse
+        # return AppMessageResponse()
+
+        # this is something you want 2017年2月26日 22:02:10
+        return MessageView.as_view(message="hello world")(request)
+        # return TemplateResponse(request,'index/test.html',{"content":"那你很棒哦"})
         # return JsonResponse(data={})
         # return super(TestView, self).get(request,args,kwargs)
+
 
 def login(request):
     if(request.method=='GET'):
@@ -95,4 +99,5 @@ def dologin(request):
 
 def test(request):
     # return HttpResponse("")
-    return MessageView.as_view()(request)
+    from .appresponse import AppMessageResponse
+    return AppMessageResponse()

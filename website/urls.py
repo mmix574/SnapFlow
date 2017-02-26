@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 """website URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,21 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 
-
 from django.conf.urls import include,url
 from django.contrib import admin
-# from index import views as index_view
 
 urlpatterns = [
+    # index
+    url(r'^', include('index.urls')),
     # admin
     url(r'^admin/',admin.site.urls),
-
+    # api
     url(r'^api/',include('api.urls')),
-
+    # space
     url(r'^space/',include('space.urls')),
-
-    # index
-    url(r'^',include('index.urls')),
 ]
 
 

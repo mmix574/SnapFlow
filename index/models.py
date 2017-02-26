@@ -16,5 +16,5 @@ def create_user_profile(sender,instance,created,**kwargs):
         profile.user = instance
         profile.save()
 
-
+# 添加事件监听
 post_save.connect(create_user_profile,sender=User)
