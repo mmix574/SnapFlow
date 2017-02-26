@@ -32,3 +32,5 @@ from django.views.generic.base import TemplateView
 from website.views import AppBaseTemplateView
 class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
+
+

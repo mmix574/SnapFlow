@@ -1,0 +1,4 @@
+
+目前只有login 和 logout 界面还在使用这几个文件，
+
+其他View请使用 class based view 和继承 interface /whatever.html 进行编写

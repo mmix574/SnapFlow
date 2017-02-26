@@ -8,10 +8,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
-def index(request):
-    if(request.user.is_authenticated()):
-        pass
-    return render(request,'index/index.html',{'tittle':"首页","user":request.user})
+# def index(request):
+#     if(request.user.is_authenticated()):
+#         pass
+#     return render(request,'index/index.html',{'tittle':"首页","user":request.user})
+from website.views import AppBaseTemplateView
+
+class IndexView(AppBaseTemplateView):
+    template_name = 'index/index.html'
+    pass
+
+
 
 def login(request):
     if(request.method=='GET'):

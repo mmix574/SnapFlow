@@ -1,10 +1,9 @@
 {% extends 'interface/base.html' %}
 
-{% block tittle %}
-    {{tittle}}
-{% endblock %}
+
 
 {% block body %}
     <h1>Hello World</h1>
     {{ logined }}
+    {{ user.username }}
 {% endblock %}

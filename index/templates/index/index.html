@@ -1,22 +1,5 @@
-{#<!DOCTYPE html>#}
-{#<html lang="zh-CN">#}
-{#  <head>#}
-{#    <meta charset="utf-8">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#    <meta name="description" content="">#}
-{##}
-{#    <title>Starter Template for Bootstrap</title>#}
-{##}
-{#    <!-- Bootstrap core CSS -->#}
-{#      {% load static %}#}
-{#    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">#}
-{#  </head>#}
-{##}
-{#  <body>#}
-{% load static %}
-{% include 'common/header.html' %}
+{% extends 'interface/base.html' %}
 
-
-{% include 'common/nav.html' %}
-
-{% include 'common/footer.html' %}
+{% block tittle %}
+    首页
+{% endblock %}
