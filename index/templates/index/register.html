@@ -13,7 +13,7 @@
     {% csrf_token %}
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
-    <input type="username" id="inputEmail" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
+    <input type="username" id="inputName" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
           <div style="height: 5px;"></div>
 
       <label for="inputPassword" class="sr-only">Password</label>
@@ -32,6 +32,9 @@
               <div style="height: 5px;"></div>
 
     <a class="btn btn-lg btn-default btn-block" href="login">返回登陆</a>
+    <div style="float: right;padding-right: 8px;">
+        <a href="/">返回首页</a>
+    </div>
 </div>
 
 
@@ -40,12 +43,20 @@
 
 <script type="application/javascript">
     function check(){
+        var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         if($("#inputEmail").val().length==0){
             $("#inputEmail").popup("请输入邮箱地址","right");
             $("#inputEmail").focus();
             return false;
-        }else
-            if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
+        }else if(!regex.test($("#inputEmail").val())){
+            $("#inputEmail").popup("邮箱格式不正确","right");
+            $("#inputEmail").focus();
+            return false;
+        }else if($("#inputName").val().length==0){
+            $("#inputName").popup("请输入用户名","right");
+            $("#inputName").focus();
+            return false;
+        }else if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
             $("#inputPassword1").popup("请输入密码","right");
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
@@ -59,11 +70,9 @@
             return false;
         }else if($("#inputPassword1").val().length<6){
             $("#inputPassword1").popup("密码的长度不能小于6位","right");
-
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
             $("#inputPassword1").focus();
-
             return false;
         }else{
             return true;
