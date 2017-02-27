@@ -26,7 +26,9 @@ def create(request):
     if request.method=="POST":
         form = AddForm(request.POST)
         model = form.save(commit=False)
-
+        model.result = model.a1+model.a2
+        model.save()
+        print(request.POST)
     else:
         form = AddForm()
 
