@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
 from . import apiviews
 
@@ -72,12 +73,23 @@ class UserRegisterView(apiviews.ApiView):
         username = user_data.get('username',None)
         password = user_data.get('password',None)
 
-        # if(email and username and password):
-        #     user = User.objects.get(username=username)
-        #     if(user):
-        #         return HttpResponse("user already exist")
-        #     pass
-        # else:
-        #     pass
-        return JsonResponse({})
+        if(email and username and password):
+            user_exist = True
+            try:
+                User.objects.get(username=username)
+            except ObjectDoesNotExist:
+                user_exist = False
+
+            if user_exist:
+                resp_data = {"isSuccess": False}
+                return self.BaseAcceptResponse("用户名已存在,请重新输入",resp_data)
+        else:
+            resp_data = {"isSuccess":False}
+            return self.ClientSideErrorWithMessage("用户信息不完整，请重试")
+
+        # 在里开始
+        user = User.objects.create(username=username,password=password,email=email)
+
+        resp_data = {"isSuccess": True}
+        return self.BaseAcceptResponse("用户注册成功!",resp_data)
 

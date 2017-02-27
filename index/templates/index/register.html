@@ -68,6 +68,10 @@
             $("#inputPassword2").val("");
             $("#inputPassword1").focus();
             return false;
+        }else if($("#inputPassword2").val().length==0){
+            $("#inputPassword2").popup("请再次输入密码","bottom");
+            $("#inputPassword2").focus();
+
         }else if($("#inputPassword1").val()!=$("#inputPassword2").val()){
             $("#inputPassword1").popup("两次输入的密码不一致","right");
             $("#inputPassword1").val("");
@@ -91,7 +95,7 @@
                 dataType:"json",
                 contentType: 'application/json; charset=utf-8',
                 success:function(response){
-                    console.log(response);
+                    $.modal("成功",response.message);
             },error:function(response){
                 //do nothing
             }});

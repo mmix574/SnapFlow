@@ -39,3 +39,24 @@ class ApiView(View):
     def ClientSideErrorWithMessage(self,message):
         resp = {"status":400,"message":message}
         return JsonResponse(resp)
+
+    # 其他信息存储在data 下
+    def BaseAcceptResponse(self,message,data):
+        resp = {"status":200,"message":message,"data":data}
+        return JsonResponse(resp)
+
+
+    # !!!!!!!!!!!!!!!!!!!!!!!
+    # 全部使用这个json response
+    # 2017年2月27日 15:25:26
+    def V2Response(self,status=200,message="None",code=-1,isSuccess=True,successStatement="None",errorReason="None",otherData={}):
+        data = {"isSuccess":isSuccess,"successStatement":successStatement,"errorReason":errorReason}
+        data.update(otherData)
+        # code 用来对应快速Debug .
+        resp = {"status":status,"code":code,"message":message,"data":data}
+        return JsonResponse(resp)
+
+
+    # def V3Response(self):
+    #     resp = {"status":406,"message":"not implement yet"}
+    #     return JsonResponse(resp)

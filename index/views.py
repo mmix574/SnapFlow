@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 
 
@@ -39,17 +40,7 @@ class MessageView(AppBaseTemplateView):
             context['message_tittle'] = "Alarm"
         return context
 
-class TestView(TemplateView):
-    template_name = 'index/test.html'
-    def get(self, request, *args, **kwargs):
-        # from .appresponse import AppMessageResponse
-        # return AppMessageResponse()
 
-        # this is something you want 2017年2月26日 22:02:10
-        return MessageView.as_view(message="hello world")(request)
-        # return TemplateResponse(request,'index/test.html',{"content":"那你很棒哦"})
-        # return JsonResponse(data={})
-        # return super(TestView, self).get(request,args,kwargs)
 
 
 def login(request):
@@ -113,5 +104,15 @@ def dologin(request):
         pass
     return HttpResponse("...logining...")
 
-def test(request):
-    pass
+
+class TestView(TemplateView):
+    template_name = 'index/test.html'
+    def get(self, request, *args, **kwargs):
+
+        # from django.contrib.auth.models import User
+        try:
+            print(User.objects.get(username="test1"))
+        except ObjectDoesNotExist:
+            return HttpResponse("用户不存在")
+            pass
+        return HttpResponse("Testing... 请继续Debug.")
