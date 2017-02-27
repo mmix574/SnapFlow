@@ -5,4 +5,4 @@ from django.db import models
 class AddModel(models.Model):
     a1 = models.IntegerField()
     a2 = models.IntegerField()
-    result = models.IntegerField()
+    result = models.IntegerField(null=True)
