@@ -81,15 +81,15 @@ class UserRegisterView(apiviews.ApiView):
                 user_exist = False
 
             if user_exist:
-                resp_data = {"isSuccess": False}
-                return self.BaseAcceptResponse("用户名已存在,请重新输入",resp_data)
+                return self.V2Response(code=1001,success=False,message="用户名已存在，请重新输入")
         else:
-            resp_data = {"isSuccess":False}
-            return self.ClientSideErrorWithMessage("用户信息不完整，请重试")
+            return self.V2Response(status=400,code=1002, success=False, message="用户信息不完整，请重试")
 
         # 在里开始
         user = User.objects.create(username=username,password=password,email=email)
 
-        resp_data = {"isSuccess": True}
-        return self.BaseAcceptResponse("用户注册成功!",resp_data)
+        print("注册用户中")
+        print(user)
+
+        return self.V2ResponseShortCut(True,2001,"用户注册成功!")
 

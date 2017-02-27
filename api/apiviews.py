@@ -49,13 +49,14 @@ class ApiView(View):
     # !!!!!!!!!!!!!!!!!!!!!!!
     # 全部使用这个json response
     # 2017年2月27日 15:25:26
-    def V2Response(self,status=200,message="None",code=-1,isSuccess=True,successStatement="None",errorReason="None",otherData={}):
-        data = {"isSuccess":isSuccess,"successStatement":successStatement,"errorReason":errorReason}
-        data.update(otherData)
-        # code 用来对应快速Debug .
-        resp = {"status":status,"code":code,"message":message,"data":data}
-        return JsonResponse(resp)
+    def V2Response(self,status=200,success=False,message="None",code=-1,otherStatement="None",otherData={}):
 
+        data = {"otherStatement":otherStatement}
+        data.update(otherData)
+        resp = {"status":status,"code":code,"success":success,"message":message,"data":data}
+        return JsonResponse(resp)
+    def V2ResponseShortCut(self,success,code,message):
+        return self.V2Response(success=success,code=code,message=message)
 
     # def V3Response(self):
     #     resp = {"status":406,"message":"not implement yet"}

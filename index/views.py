@@ -110,9 +110,8 @@ class TestView(TemplateView):
     def get(self, request, *args, **kwargs):
 
         # from django.contrib.auth.models import User
-        try:
-            print(User.objects.get(username="test1"))
-        except ObjectDoesNotExist:
-            return HttpResponse("用户不存在")
-            pass
+        resp = {"trythis":None}
+
+        return JsonResponse(resp)
+
         return HttpResponse("Testing... 请继续Debug.")

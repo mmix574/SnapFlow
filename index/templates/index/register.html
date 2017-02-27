@@ -27,6 +27,8 @@
         <input type="checkbox" value="remember-me"> 记住密码
       </label>
     </div>
+
+
     <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return check();">确定注册</button>
   </form>
               <div style="height: 5px;"></div>
@@ -95,7 +97,14 @@
                 dataType:"json",
                 contentType: 'application/json; charset=utf-8',
                 success:function(response){
-                    $.modal("成功",response.message);
+                    if(response.success == undefined){
+                        $.modal("提示",response.message)
+                    }else if(response.success){
+                        $.modal("成功",response.message);
+                    }else{
+                        $.modal("失败",response.message);
+                    }
+
             },error:function(response){
                 //do nothing
             }});
