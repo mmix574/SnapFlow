@@ -73,6 +73,9 @@ class UserRegisterView(apiviews.ApiView):
         password = user_data.get('password',None)
 
         if(email and username and password):
+            user = User.objects.get(username=username)
+            if(user):
+                return HttpResponse("user already exist")
             pass
         else:
             pass
