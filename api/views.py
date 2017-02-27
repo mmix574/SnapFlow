@@ -86,10 +86,9 @@ class UserRegisterView(apiviews.ApiView):
             return self.V2Response(status=400,code=1002, success=False, message="用户信息不完整，请重试")
 
         # 在里开始
-        user = User.objects.create(username=username,password=password,email=email)
-
-        print("注册用户中")
-        print(user)
+        user = User.objects.create(username=username,email=email)
+        user.set_password(password)
+        user.save()
 
         return self.V2ResponseShortCut(True,2001,"用户注册成功!")
 

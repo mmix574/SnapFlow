@@ -100,10 +100,17 @@
                     if(response.success == undefined){
                         $.modal("提示",response.message)
                     }else if(response.success){
+                        if(response.code==2001){
+                            $.modal("成功",response.message,function(){
+                                window.location.href = "/login";
+                            });
+                        }
                         $.modal("成功",response.message);
                     }else{
                         $.modal("失败",response.message);
                     }
+
+
 
             },error:function(response){
                 //do nothing
