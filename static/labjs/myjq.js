@@ -1,6 +1,9 @@
 $(document).ready(function () {
     $.fn.extend({
         popup:function(content,position){
+            if(this[0].timer){
+                clearTimeout(this[0].timer);
+            }
             $(this).popover({
                 trigger:'manual',
                 placement:position,
@@ -8,9 +11,10 @@ $(document).ready(function () {
             });
             $(this).popover('show');
             var that = this;
-            setTimeout(function(){
+
+            this[0].timer = setTimeout(function(){
                 $(that).popover('destroy');
-            },2000);
+            },1800);
         }
     });
 });

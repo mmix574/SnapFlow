@@ -45,25 +45,25 @@
     function check(){
         var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         if($("#inputEmail").val().length==0){
-            $("#inputEmail").popup("请输入邮箱地址","right");
+            $("#inputEmail").popup("请输入邮箱地址","bottom");
             $("#inputEmail").focus();
             return false;
         }else if(!regex.test($("#inputEmail").val())){
-            $("#inputEmail").popup("邮箱格式不正确","right");
+            $("#inputEmail").popup("邮箱格式不正确","bottom");
             $("#inputEmail").focus();
             return false;
         }else if($("#inputName").val().length==0){
-            $("#inputName").popup("请输入用户名","right");
+            $("#inputName").popup("请输入用户名","bottom");
             $("#inputName").focus();
             return false;
         }else if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
-            $("#inputPassword1").popup("请输入密码","right");
+            $("#inputPassword1").popup("请输入密码","bottom");
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
             $("#inputPassword1").focus();
             return false;
         }else if($("#inputPassword1").val().length<8){
-            $("#inputPassword1").popup("密码长度太短。密码必须包含至少 8 个字符。","right");
+            $("#inputPassword1").popup("密码长度太短。密码必须包含至少 8 个字符。","bottom");
             $("#inputPassword1").val("");
             $("#inputPassword2").val("");
             $("#inputPassword1").focus();
@@ -81,7 +81,9 @@
             $("#inputPassword1").focus();
             return false;
         }else{
-            return true;
+
+            $.modal('. 提示 .','账号或密码不正确');
+            return false;
         }
     }
 </script>

@@ -27,7 +27,7 @@ urlpatterns = [
     # space
     url(r'^space/',include('space.urls')),
     # timeline
-    url(r'^timeline$',include('timeline.urls')),
+    url(r'^timeline/',include('timeline.urls')),
 ]
 
 

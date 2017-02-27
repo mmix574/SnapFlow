@@ -38,8 +38,14 @@
     function user_validate(){
         var username = $("#inputName").val();
         var password = $('#inputPassword').val();
-        if(!username||!password){
-            return true;
+        if(!username){
+            $("#inputName").popup("请输入用户名","bottom");
+            return false;
+{#            return true;#}
+        }else if(!password){
+            $('#inputPassword').popup("请输入密码","bottom");
+            return false;
+{#            return true;#}
         }else{
             var data = {username:username,password:password};
 

@@ -48,3 +48,5 @@ def default(request):
     jsonStr = {"status":400,"message":"no specify any operation"}
     return HttpResponse(json.dumps(jsonStr))
 
+
+# class UserRegisterView()
