@@ -20,7 +20,22 @@ class ApiView(View):
     JsonValidateError = JsonResponse(JsonValidateDict)
 
     # 默认返回 '默认错误'
+    # default response
     def get(self, request):
         return JsonResponse(self.OperateErrorDict)
     def post(self,request):
         return JsonResponse(self.OperateErrorDict)
+
+
+    # error handel
+    def AcceptResponseWithMessage(self,message):
+        resp = {"status":200,"message":message}
+        return JsonResponse(resp)
+
+    def ServerSideErrorWithMessage(self,message):
+        resp = {"status":500,"message":message}
+        return JsonResponse(resp)
+
+    def ClientSideErrorWithMessage(self,message):
+        resp = {"status":400,"message":message}
+        return JsonResponse(resp)

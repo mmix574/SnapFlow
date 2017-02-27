@@ -68,5 +68,13 @@ class UserRegisterView(apiviews.ApiView):
         except Exception:
             return self.JsonValidateError
 
+        email = user_data.get('email',None)
+        username = user_data.get('username',None)
+        password = user_data.get('password',None)
+
+        if(email and username and password):
+            pass
+        else:
+            pass
         return JsonResponse({})
 
