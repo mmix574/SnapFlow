@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^space/',include('space.urls')),
     # timeline
     url(r'^timeline/',include('timeline.urls')),
+    # lab
+    url(r'lab',include('lab.urls'))
 ]
 
 
