@@ -68,9 +68,5 @@ class UserRegisterView(apiviews.ApiView):
         except Exception:
             return self.JsonValidateError
 
-            pass
-
-
         return JsonResponse({})
-        pass
 

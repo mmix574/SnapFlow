@@ -14,7 +14,7 @@ class ApiView(View):
     OperateErrorDict = {"status": 500, "message": "default server error: operation error Or unimplement method calling"}
 
     # JSON 解析错误
-    JsonValidateDict = {"status":400,"message":"Posting Json is Not validate,please check json agagin"}
+    JsonValidateDict = {"status":400,"message":"Posting Json is Not completely a JSON,please check json agagin"}
 
     OperateError = JsonResponse(OperateErrorDict)
     JsonValidateError = JsonResponse(JsonValidateDict)
