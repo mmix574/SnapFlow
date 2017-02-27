@@ -6,5 +6,5 @@ from . import apiviews
 urlpatterns = [
     url(r'^$',views.default),
     url(r'^user_validate$',views.user_validate),
-    url(r'^user_register', apiviews.ApiView.as_view()),
+    url(r'^user_register', views.UserRegisterView.as_view()),
 ]

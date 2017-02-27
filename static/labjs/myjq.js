@@ -14,7 +14,7 @@ $(document).ready(function () {
 
             this[0].timer = setTimeout(function(){
                 $(that).popover('destroy');
-            },1800);
+            },1000);
         }
     });
 });

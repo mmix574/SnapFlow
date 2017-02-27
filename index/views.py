@@ -114,6 +114,4 @@ def dologin(request):
     return HttpResponse("...logining...")
 
 def test(request):
-    # return HttpResponse("")
-    from .appresponse import AppMessageResponse
-    return AppMessageResponse()
+    pass

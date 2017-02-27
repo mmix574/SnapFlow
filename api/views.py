@@ -5,7 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from . import apiviews
+
+from django.http.response import JsonResponse
+
+
 import json
+
 
 OperateErrorJson = {"status":400,"message":"operation error"}
 
@@ -50,3 +56,21 @@ def default(request):
 
 
 # class UserRegisterView()
+
+
+
+class UserRegisterView(apiviews.ApiView):
+
+    def post(self, request):
+        try:
+            user_data = json.loads(request.body)
+
+        except Exception:
+            return self.JsonValidateError
+
+            pass
+
+
+        return JsonResponse({})
+        pass
+

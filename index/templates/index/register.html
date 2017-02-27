@@ -81,8 +81,20 @@
             $("#inputPassword1").focus();
             return false;
         }else{
+            {# 注册事件 #}
+            data = {email:$("#inputEmail").val(),username:$("#inputName").val(),"password":$("#inputPassword1").val()};
 
-            $.modal('. 提示 .','账号或密码不正确');
+            $.ajax({url:"/api/user_register",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType: 'application/json; charset=utf-8',
+                success:function(response){
+                    console.log(response);
+            },error:function(response){
+                //do nothing
+            }});
             return false;
         }
     }
