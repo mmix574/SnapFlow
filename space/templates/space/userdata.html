@@ -5,4 +5,11 @@
 {% endblock %}
 
 {% block content %}
+    <div class="container" style="padding-top: 50px;padding-bottom: 50px;">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" style="position:relative;left: 200px;">提交ma </button>
+        </form>
+    </div>
 {% endblock %}

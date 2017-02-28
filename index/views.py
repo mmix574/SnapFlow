@@ -115,6 +115,12 @@ def dologin(request):
     return HttpResponse("...logining...")
 
 
+class PasswordChangeView(AppBaseTemplateView):
+    template_name = 'index/passwordchange.html'
+
+
+
+
 class TestView(TemplateView):
     template_name = 'index/test.html'
     def get(self, request, *args, **kwargs):

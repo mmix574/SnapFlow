@@ -41,7 +41,8 @@ from index.models import UserProfile
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-
+from .forms import UserForm
+from django.contrib.auth.models import User
 
 @method_decorator(login_required,name='dispatch')
 class MemberView(AppBaseTemplateView):
@@ -73,9 +74,25 @@ class MemberView(AppBaseTemplateView):
         return super(MemberView, self).post(request,context={"form":form},*args,**kwargs)
 
 
-
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
+
+    def get(self, request,context={}, *args, **kwargs):
+
+        form = UserForm(instance=request.user)
+        return super(UserDataView, self).get(request,context={"form":form}, *args, **kwargs)
+
+
+    def post(self,request,context={},*args,**kwargs):
+
+        form = UserForm(request.POST)
+
+        # return HttpResponse(str(form.is_valid()))
+
+        return super(UserDataView, self).post(request,context={"form":form},*args,**kwargs)
+
+
+
 
 
 
