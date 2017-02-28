@@ -12,13 +12,28 @@
 </head>
 <body>
 
+{##}
+{#<div class="alert alert-success">#}
+{#  <strong>Success!</strong> Indicates a successful or positive action.#}
+{#</div>#}
+{##}
+{#<div class="alert alert-info">#}
+{#  <strong>Info!</strong> Indicates a neutral informative change or action.#}
+{#</div>#}
+{##}
+{#<div class="alert alert-warning">#}
+{#  <strong>Warning!</strong> Indicates a warning that might need attention.#}
+{#</div>#}
+{##}
+{#<div class="alert alert-danger">#}
 
-{% if False %}
-
-<div class="alert alert-warning alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;">
+{% if messages %}
+    {% for message in messages %}
+<div class="alert alert-{{ message.extra_tags }} alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;position:relative;text-align: center">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+      <strong>{{ message.extra_tags }}!&nbsp&nbsp</strong>   {{ message }}
 </div>
+    {% endfor %}
 
 {% endif %}
 
@@ -55,7 +70,7 @@
 {% endif %}
 
 {#-----------------------nav------------------------#}
-<div class="body-fix" style="background-color: #EEEEEE">
+<div class="body-fix" style="background-color: #EEEEEE;">
 <div style="box-shadow: 0px 0px 13px 3px #999;">
 <nav class="navbar navbar-inverse" style="border-radius: 0px;">
   <div class="container">

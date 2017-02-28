@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
 #
 # def upload_file(request):
 #     if request.method == 'POST':
@@ -18,12 +17,24 @@ from django.db.models.signals import post_save
 from django.conf import settings
 
 # 用户模型扩充
+from os import path
+def upload_to(instance,filename):
+
+    filename,filetype = filename.split('.')
+    _= path.join(settings.MEDIAFILES_DIRS[1],"ava",str(instance.user.id)+'.'+filetype)
+    print(_)
+    return _
+
 class UserProfile(models.Model):
+
     user = models.OneToOneField(User)
-    avatar = models.ImageField(null=True,blank=True,upload_to="cat/")
+    avatar = models.ImageField(null=True,blank=True,upload_to=upload_to)
+    # avatar = models.ImageField(null=True,blank=True)
     work_place = models.CharField(max_length=20)
     work_nickname = models.CharField(max_length=20)
     language = models.CharField(max_length=10,null=True,blank=True)
+
+
 
 
 def create_user_profile(sender,instance,created,**kwargs):

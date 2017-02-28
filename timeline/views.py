@@ -3,6 +3,10 @@ from .models import Comment
 
 from index.appviews import AppBaseTemplateView
 from .forms import CommentForm
+
+from website.utils import messages
+
+
 class IndexView(AppBaseTemplateView):
     template_name = 'timeline/index.html'
 
@@ -12,6 +16,10 @@ class IndexView(AppBaseTemplateView):
         context['list'] = list
         return context
 
+    def get(self, request,context={}, *args, **kwargs):
+        # messages.success(request,"你已经成功啦!")
+        return super(IndexView, self).get(request,context={}, *args, **kwargs)
+
 
 
 class CreateView(AppBaseTemplateView):
@@ -19,6 +27,7 @@ class CreateView(AppBaseTemplateView):
 
 
     def get(self, request,context={}, *args, **kwargs):
+
 
         form = CommentForm()
 

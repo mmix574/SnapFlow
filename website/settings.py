@@ -146,5 +146,7 @@ LOGIN_URL = '/login'
 
 AUTH_PROFILE_MODULE = 'index.UserProfile'
 
-MEDIA_URL = '/media/'
-MEDIAFILES_DIRS=(BASE_DIR,'media')
+MEDIA_URL = '/media_cdn/'
+MEDIAFILES_DIRS=(BASE_DIR,'media_cdn')
+
+MEDIA_ROOT = 'media_cdn'
