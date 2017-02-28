@@ -145,3 +145,5 @@ STATICFILES_DIRS=(BASE_DIR,'static')
 LOGIN_URL = '/login'
 
 AUTH_PROFILE_MODULE = 'index.UserProfile'
+
+
