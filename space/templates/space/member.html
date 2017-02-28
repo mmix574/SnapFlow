@@ -1,9 +1,17 @@
-{% extends 'interface/base.html' %}
+{% extends 'interface/base_display.html' %}
 
+{% block tittle %}
+    个人资料
+{% endblock %}
 
+{% block content %}
+    <div style="margin:20px 0px;">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a class="btn btn-primary" type="submit">提交</a>
+        </form>
+    </div>
 
-{% block body %}
-    <h1>Hello World</h1>
-    {{ logined }}
-    {{ user.username }}
+    <h1>{{ name }}</h1>
 {% endblock %}

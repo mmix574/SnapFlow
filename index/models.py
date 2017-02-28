@@ -15,12 +15,15 @@ from django.db.models.signals import post_save
 #     return render(request, 'upload.html', {'form': form})
 
 
+from django.conf import settings
+
 # 用户模型扩充
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    lang = models.CharField(max_length=10,null=True,blank=True)
-    avatar = models.ImageField(null=True,blank=True,upload_to='cat/')
-
+    avatar = models.ImageField(null=True,blank=True,upload_to=settings.MEDIA_URL)
+    work_place = models.CharField(max_length=20)
+    work_nickname = models.CharField(max_length=20)
+    language = models.CharField(max_length=10,null=True,blank=True)
 
 
 def create_user_profile(sender,instance,created,**kwargs):

@@ -12,11 +12,11 @@
 <body>
 
 
-{% if False %}
+{% if request.user.is_authenticated and loginpage %}
 
-<div class="alert alert-warning alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;">
+<div class="alert alert-warning alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;text-align: center">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+    <strong>提示 </strong> 你已经以会员<b> {{ request.user.username }}</b> 身份登陆了，重复登陆将注销上次的登陆
 </div>
 
 {% endif %}

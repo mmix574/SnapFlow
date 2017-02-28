@@ -53,14 +53,20 @@ def login(request):
         user = auth.authenticate(username=username,password=password)
         if(user):
             auth.login(request,user)
-            return HttpResponseRedirect('/')
+
+            next = request.POST.get("next",None)
+            print(next)
+            if next:
+                return HttpResponse(next)
+            else:
+                return HttpResponseRedirect('/')
         else:
             pass
         pass
     else:
         pass
 
-    return render(request,'index/login.html',{'tittle':"登陆"})
+    return render(request,'index/login.html',{'tittle':"登陆","loginpage":True})
 
 
 class LogoutView(TemplateView):

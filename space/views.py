@@ -29,8 +29,29 @@ from django.views.generic.base import TemplateView
 #         print("get view from parent!")
 #         return super().get(self,request,*args,**kwargs)
 
+
+from django.conf import settings
 from index.appviews import AppBaseTemplateView
+
+from django.contrib.auth.models import User
+from space.forms import UserForm
+
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+
+@method_decorator(login_required,name='dispatch')
 class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
+
+    def get_context_data(self, **kwargs):
+            
+        context = super(MemberView, self).get_context_data();
+        context['form'] = UserForm()
+        return context
+
+
+
+
 
 
