@@ -26,7 +26,8 @@ class AppBaseTemplateView(TemplateView):
         self.__additional_data['request'] = request
         if(context):
             self.__additional_data.update(context)
-        return super().get(request,*args,**kwargs)
+        # return super().get(request,*args,**kwargs)
+        return render(request, self.template_name, self.get_context_data())
 
     def post(self,request,context={},*args,**kwargs):
         self.__additional_data = {}
