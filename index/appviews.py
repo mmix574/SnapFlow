@@ -28,7 +28,6 @@ class AppBaseTemplateView(TemplateView):
             self.__additional_data.update(context)
         return super().get(request,*args,**kwargs)
 
-
     def post(self,request,context={},*args,**kwargs):
         self.__additional_data = {}
         self.__additional_data['user'] = request.user

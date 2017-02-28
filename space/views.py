@@ -1,3 +1,4 @@
+from website.utils import console
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -35,6 +36,8 @@ from index.appviews import AppBaseTemplateView
 
 from django.contrib.auth.models import User
 from space.forms import UserForm
+from space.forms import UserProfileForm
+from index.models import UserProfile
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -44,18 +47,20 @@ from django.contrib.auth.decorators import login_required
 class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(MemberView, self).get_context_data()
-        user = context['user']
-        context['form'] = UserForm(instance=user)
-        return context
-
     def get(self, request, *args, **kwargs):
-        return super(MemberView, self).get(request,*args,**kwargs)
+        up = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(instance=up)
+        return super(MemberView, self).get(request,context={"form":form},*args,**kwargs)
 
 
     def post(self,request,*args,**kwargs):
-        return super(MemberView, self).post(request,*args,**kwargs)
+        up = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(request.POST)
+        model = form.save(commit=False)
+        model.user = request.user
+        model.id = up.id
+        model.save()
+        return super(MemberView, self).post(request,context={"form":form},*args,**kwargs)
 
 
 

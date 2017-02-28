@@ -20,7 +20,7 @@ from django.conf import settings
 # 用户模型扩充
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    avatar = models.ImageField(null=True,blank=True,upload_to=settings.MEDIA_URL)
+    avatar = models.ImageField(null=True,blank=True,upload_to="cat/")
     work_place = models.CharField(max_length=20)
     work_nickname = models.CharField(max_length=20)
     language = models.CharField(max_length=10,null=True,blank=True)
