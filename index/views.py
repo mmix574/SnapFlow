@@ -42,22 +42,26 @@ class MessageView(AppBaseTemplateView):
 
 
 
+from website.utils import console
 
 def login(request):
+    context = {"tittle":"登陆","loginpage":True}
     if(request.method=='GET'):
+        if request.GET.get('next',None):
+            context['next'] = request.GET.get('next',None)
+            pass
         pass
     elif(request.method=='POST'):
         from django.contrib import auth
         username = request.POST.get("username","")
         password = request.POST.get("password","")
         user = auth.authenticate(username=username,password=password)
+
         if(user):
             auth.login(request,user)
-
-            next = request.POST.get("next",None)
-            print(next)
+            next = request.GET.get("next",None)
             if next:
-                return HttpResponse(next)
+                return HttpResponseRedirect(next)
             else:
                 return HttpResponseRedirect('/')
         else:
@@ -66,7 +70,7 @@ def login(request):
     else:
         pass
 
-    return render(request,'index/login.html',{'tittle':"登陆","loginpage":True})
+    return render(request,'index/login.html',context)
 
 
 class LogoutView(TemplateView):

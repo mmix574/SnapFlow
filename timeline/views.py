@@ -3,7 +3,8 @@ from .models import Comment
 
 from index.appviews import AppBaseTemplateView
 from .forms import CommentForm
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from website.utils import messages
 
 
@@ -22,6 +23,7 @@ class IndexView(AppBaseTemplateView):
 
 
 
+@method_decorator(login_required,name="dispatch")
 class CreateView(AppBaseTemplateView):
     template_name = "timeline/create.html"
 

@@ -7,7 +7,7 @@
 </style>
 
 <div class="container text-center" style="width: 300px;margin-top: 60px;" >
-  <form id="login-form" class="form-signin" action="login" method="post">
+  <form id="login-form" class="form-signin" action="login{% if next %}?next={{ next }}{% endif %}" method="post">
     <h2 class="form-signin-heading">. 登录 .</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
       {% csrf_token %}

@@ -55,12 +55,47 @@ class MemberView(AppBaseTemplateView):
 
     def post(self,request,*args,**kwargs):
         up = UserProfile.objects.get(user=request.user)
-        form = UserProfileForm(request.POST)
+
+
+        from website.utils import console
+        # console.log(request.POST)
+        # console.log(request.FILES)
+
+        form = UserProfileForm(request.POST,request.FILES)
         model = form.save(commit=False)
         model.user = request.user
         model.id = up.id
         model.save()
+
+        up = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(instance=up)
+
         return super(MemberView, self).post(request,context={"form":form},*args,**kwargs)
+
+
+
+class UserDataView(AppBaseTemplateView):
+    template_name = "space/userdata.html"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

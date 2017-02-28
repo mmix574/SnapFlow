@@ -21,7 +21,7 @@ from os import path
 def upload_to(instance,filename):
 
     filename,filetype = filename.split('.')
-    _= path.join(settings.MEDIAFILES_DIRS[1],"ava",str(instance.user.id)+'.'+filetype)
+    _= path.join("ava",str(instance.user.id)+'.'+filetype)
     print(_)
     return _
 
