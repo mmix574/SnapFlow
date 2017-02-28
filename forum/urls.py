@@ -1,8 +1,10 @@
 from django.conf.urls import url
 
 
-from .views import IndexView
+from . import views
 
 urlpatterns = [
-    url(r'^$',IndexView.as_view()),
+    url(r'^$',views.IndexView.as_view()),
+    url(r'^create/$',views.CreateView.as_view()),
+    url(r'^new/$', views.NewView.as_view()),
 ]
