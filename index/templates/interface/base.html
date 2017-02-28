@@ -81,7 +81,7 @@
 
         <ul class="nav navbar-nav navbar-right">
 
-            {% if not logined %}
+            {% if not user.is_authenticated %}
             <form class="navbar-form navbar-left">
              <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">

@@ -45,13 +45,17 @@ class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
 
     def get_context_data(self, **kwargs):
-            
-        context = super(MemberView, self).get_context_data();
-        context['form'] = UserForm()
+        context = super(MemberView, self).get_context_data()
+        user = context['user']
+        context['form'] = UserForm(instance=user)
         return context
 
+    def get(self, request, *args, **kwargs):
+        return super(MemberView, self).get(request,*args,**kwargs)
 
 
+    def post(self,request,*args,**kwargs):
+        return super(MemberView, self).post(request,*args,**kwargs)
 
 
 
