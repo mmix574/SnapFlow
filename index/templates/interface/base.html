@@ -73,9 +73,9 @@
       <ul class="nav navbar-nav">
         <li><a href="#">最新</a></li>
 {#        <li class="active"><a href="#">最新</a></li>#}
-          <li><a href="#about">板块</a></li>
+          <li><a href="/forum">板块</a></li>
         <li><a href="#about">问答</a></li>
-        <li><a href="#about">时间轴</a></li>
+        <li><a href="/timeline">时间轴</a></li>
 
       </ul>
 
@@ -112,9 +112,19 @@
               <li><a href="/space/member/">个人资料</a></li>
               <li><a href="#">消息中心</a></li>
               <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
+                  <li role="separator" class="divider"></li>
+
+                {% if user.is_staff %}
+                  <li class="dropdown-header">超级用户</li>
+
+                    <li style=""><a href="/admin">后台管理</a></li>
+                    <li role="separator" class="divider"></li>
+
+                {% endif %}
+
               <li class="dropdown-header">Other Options</li>
               <li><a href="#">设置</a></li>
+
                     <li><a href="/login">切换账户</a></li>
                   <li><a href="/logout">注销</a></li>
             </ul>

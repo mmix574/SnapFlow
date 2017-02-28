@@ -29,7 +29,9 @@ urlpatterns = [
     # timeline
     url(r'^timeline/',include('timeline.urls')),
     # lab
-    url(r'lab/',include('lab.urls'))
+    url(r'lab/',include('lab.urls')),
+    # forum
+    url(r'forum/',include('forum.urls')),
 ]
 
 
