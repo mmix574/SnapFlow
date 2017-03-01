@@ -14,12 +14,20 @@ from django.views.generic.base import View
 from django.http import JsonResponse
 from django.template.response import TemplateResponse
 
+from website.utils import console
 
 
 from .appviews import AppBaseTemplateView
 
 class IndexView(AppBaseTemplateView):
     template_name = 'index/index.html'
+
+    def get(self, request,context={}, *args, **kwargs):
+        # console.log()
+        return super(IndexView, self).get(request,context={}, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        return super(IndexView, self).get_context_data(**kwargs)
     pass
 
 class MessageView(AppBaseTemplateView):
@@ -42,7 +50,6 @@ class MessageView(AppBaseTemplateView):
 
 
 
-from website.utils import console
 
 def login(request):
     context = {"tittle":"登陆","loginpage":True}
@@ -51,6 +58,8 @@ def login(request):
             context['next'] = request.GET.get('next',None)
             pass
         pass
+
+
     elif(request.method=='POST'):
         from django.contrib import auth
         username = request.POST.get("username","")
@@ -131,3 +140,10 @@ class TestView(TemplateView):
         return JsonResponse(resp)
 
         return HttpResponse("Testing... 请继续Debug.")
+
+
+class NoneView(AppBaseTemplateView):
+    template_name = 'index/none.html'
+    def get(self, request,context={}, *args, **kwargs):
+
+        return super(NoneView, self).get(request,context={}, *args, **kwargs)

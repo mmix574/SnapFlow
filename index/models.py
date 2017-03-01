@@ -33,9 +33,10 @@ class UserProfile(models.Model):
     work_place = models.CharField(max_length=20)
     work_nickname = models.CharField(max_length=20)
     language = models.CharField(max_length=10,null=True,blank=True)
+    self_introduction = models.CharField(max_length=300)
 
-
-
+    def __str__(self):
+        return self.user.username + "avatar: "+ str(self.avatar) +"worknickname: "+str(self.work_nickname)
 
 def create_user_profile(sender,instance,created,**kwargs):
     if(created):

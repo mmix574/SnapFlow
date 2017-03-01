@@ -18,7 +18,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['id','avatar','work_place','work_nickname','language']
+        fields = ['id','avatar','work_place','work_nickname','language','self_introduction']
 
 
     #     avatar = models.ImageField(null=True,blank=True,upload_to='cat/')

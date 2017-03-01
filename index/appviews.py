@@ -5,6 +5,9 @@ from django.template.response import TemplateResponse
 
 from django.views.generic.base import TemplateView
 
+from django.contrib.auth.models import AnonymousUser
+
+from website.utils import console
 class AppBaseTemplateView(TemplateView):
 
 
@@ -17,6 +20,14 @@ class AppBaseTemplateView(TemplateView):
         # 子类可以通过父类的get_context_data 继续添加context数据
         context = super().get_context_data()
         context["tittle"] = "AppBaseTemplateView -- DEBUG"
+
+        # 判断用户是否已经登陆
+        request = self.request
+        if request.user.is_authenticated:
+            context['logined'] = True
+        else:
+            context['logined'] = False
+
         context.update(self.__additional_data)
         return context
 
