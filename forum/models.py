@@ -21,3 +21,13 @@ class SubClass(models.Model):
     create_user = models.ForeignKey(User)
     create_time = models.DateTimeField(auto_now=True)
     last_time = models.DateTimeField(auto_now_add=True)
+
+
+class Thread(models.Model):
+    tittle = models.CharField(max_length=20)
+    content = models.TextField()
+    image = models.ImageField(null=True,blank=True)
+    create_user = models.ForeignKey(User)
+    last_time = models.DateTimeField(auto_now_add=True)
+    create_time = models.DateTimeField(auto_now=True)
+    pass
