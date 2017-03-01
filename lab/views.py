@@ -38,12 +38,15 @@ def create(request):
 
 
 from .forms import PostForm
+from .models import PostModel
 
-class PostView(TemplateView):
-    template_name = 'lab/post.html'
+from django.views.generic import ListView
+class PostView(ListView):
+    template_name = 'lab/postlist.html'
+    model = PostModel
 
-    def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+
+
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -51,7 +54,7 @@ from .models import PostModel
 
 @method_decorator(login_required, name='dispatch')
 class PostEditView(TemplateView):
-    template_name = 'lab/post.html'
+    template_name = 'lab/postcreate.html'
 
     def get(self, request, *args, **kwargs):
 
@@ -71,6 +74,29 @@ class PostEditView(TemplateView):
         f.user = request.user
         f.save()
         return render(request,self.template_name,{"form":form})
+
+
+from django.views.generic import DetailView
+
+class PostDetailView(DetailView):
+    template_name = 'lab/detail.html'
+    model = PostModel
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        request = self.request
+
+        return context
+
+
+
+
+
+
+
+
+
+
 
 
 

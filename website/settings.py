@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost','192.168.1.5']
 # Application definition
 
 INSTALLED_APPS = [
+    'message',
     'lab',
     'timeline',
     'space',

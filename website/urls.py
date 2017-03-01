@@ -34,9 +34,8 @@ urlpatterns = [
     url(r'lab/',include('lab.urls')),
     # forum
     url(r't/',include('forum.urls')),
-
     #message
-
+    url(r'm/',include('message.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

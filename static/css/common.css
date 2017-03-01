@@ -6,3 +6,9 @@ body{
     /*background-color: #EEEEEE;*/
     background-color: #282828;
 }
+
+@media screen and (max-width: 992px){
+    #navbar-brand{
+        display: none;
+    }
+}
