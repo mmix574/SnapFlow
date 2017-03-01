@@ -49,6 +49,7 @@ class CreateView(AppBaseTemplateView):
 
 
 class DeleteView(AppBaseTemplateView):
+    # template_name = 'timeline/'
     pass
 
 

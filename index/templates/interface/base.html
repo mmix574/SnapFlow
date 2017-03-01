@@ -96,7 +96,7 @@
 
         <ul class="nav navbar-nav navbar-right">
 
-            {% if not user.is_authenticated %}
+            {% if not logined %}
             <form class="navbar-form navbar-left" action="/s" >
              <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search" name="q">
@@ -119,10 +119,13 @@
             <input type="text" class="form-control" placeholder="search" name="q">
             </div>
                 </form>
+                {% if logined and profile.avatar %}
+                    <li ><img style="width: 40px;height: 40px;position:relative;top: 5px;border-radius: 4px;" src="{{profile.avatar.url}}"></li>
+                {% endif %}
 
 {#            <li><a>消息</a></li>#}
             <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好, {{ user.username }}  <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ctime }}{{ user.username }}  <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="/space/userdata/">用户资料</a></li>
               <li><a href="/space/member/">UserProfile</a></li>

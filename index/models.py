@@ -45,10 +45,8 @@ class UserProfile(models.Model):
     objects = UserProfileManager()
 
     def __str__(self):
-        return self.user.username + "avatar: "+ str(self.avatar) +"worknickname: "+str(self.work_nickname)
+        return "[userprofile@user_id:"+str(self.user.id)+" username:"+self.user.username+"]"
 
-    def givemeabool(self):
-        return True
 
 
 # class UserProfileManager(models.Manager):

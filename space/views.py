@@ -56,23 +56,28 @@ class MemberView(AppBaseTemplateView):
 
     def post(self,request,*args,**kwargs):
         up = UserProfile.objects.get(user=request.user)
-
-
         from website.utils import console
         # console.log(request.POST)
         # console.log(request.FILES)
 
-        form = UserProfileForm(request.POST,request.FILES)
-        model = form.save(commit=False)
-        model.user = request.user
-        model.id = up.id
-        model.save()
+        form = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
+        # model = form.save(commit=False)
+        # model.user = request.user
+        # model.id = up.id
+        # model.save()
+        #
+        # up = UserProfile.objects.get(user=request.user)
+        # form = UserProfileForm(instance=up)
+        if form.is_valid():
+            form.save()
 
-        up = UserProfile.objects.get(user=request.user)
-        form = UserProfileForm(instance=up)
+        form = UserProfileForm(instance=request.user.userprofile)
 
         return super(MemberView, self).post(request,context={"form":form},*args,**kwargs)
 
+
+
+from django.contrib.auth.models import User
 
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
@@ -85,9 +90,14 @@ class UserDataView(AppBaseTemplateView):
 
     def post(self,request,context={},*args,**kwargs):
 
-        form = UserForm(request.POST)
+        form = UserForm(instance=request.user,data=request.POST)
 
-        # return HttpResponse(str(form.is_valid()))
+        if form.is_valid():
+            form.save()
+            print("saving...")
+
+        else:
+            print("form is not valid")
 
         return super(UserDataView, self).post(request,context={"form":form},*args,**kwargs)
 

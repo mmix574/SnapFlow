@@ -9,12 +9,17 @@
 {% block content %}
 <div class="container" style="padding-top: 20px;">
 
-    <a class="btn btn-primary" href="create">发布</a>
-
+    <a class="btn btn-primary" style="margin-left: 100px;" href="create">发布</a>
+    <hr/>
     {% for i in list %}
+        uid:{{ i.id }}
+        {% if i.user.userprofile.avatar %}
+
+        <img style="height: 64px;width: 64px;" src="{{i.user.userprofile.avatar.url}}">{{ i.created_time }}
+        {% endif %}
         <h1>{{ i.tittle }}</h1>
-        <p>{{ i.content}}</p>
-        <br/>
+        <p>content:{{ i.content}}</p>
+        <hr/>
     {% endfor %}
 
 </div>
