@@ -29,10 +29,12 @@ def user_validate(request):
         jsonStr = {'isSuccess':False}
         return HttpResponse(json.dumps(jsonStr))
     elif(request.method=="POST"):
-        requestJson = request.body
 
         try:
-            obj = json.loads(requestJson)
+            body_unicode = request.body.decode('utf-8')
+            obj = json.loads(body_unicode)
+
+            # obj = json.loads(requestJson)
         except Exception as e:
             # raise e
             return messageHandel(400,"Json Parse Error")
