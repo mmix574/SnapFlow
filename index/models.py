@@ -16,6 +16,12 @@ from django.db.models.signals import post_save
 
 from django.conf import settings
 
+
+class UserProfileManager(models.Manager):
+    def givemeabool(self):
+        return True
+
+
 # 用户模型扩充
 from os import path
 def upload_to(instance,filename):
@@ -35,8 +41,19 @@ class UserProfile(models.Model):
     language = models.CharField(max_length=10,null=True,blank=True)
     self_introduction = models.CharField(max_length=300)
 
+
+    objects = UserProfileManager()
+
     def __str__(self):
         return self.user.username + "avatar: "+ str(self.avatar) +"worknickname: "+str(self.work_nickname)
+
+    def givemeabool(self):
+        return True
+
+
+# class UserProfileManager(models.Manager):
+#     def givemeabool(self):
+#         return True
 
 def create_user_profile(sender,instance,created,**kwargs):
     if(created):
