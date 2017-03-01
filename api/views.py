@@ -64,7 +64,8 @@ class UserRegisterView(apiviews.ApiView):
 
     def post(self, request):
         try:
-            user_data = json.loads(request.body)
+            body_unicode = request.body.decode('utf-8')
+            user_data = json.loads(body_unicode)
 
         except Exception:
             return self.JsonValidateError
