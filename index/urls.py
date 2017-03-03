@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from . import views
+from . import v2views
 
 urlpatterns = [
     url(r'^$',views.IndexView.as_view()),
@@ -14,5 +15,5 @@ urlpatterns = [
     url(r'^test',views.TestView.as_view()),
     url(r'^passwordchange', views.PasswordChangeView.as_view()),
     url(r'^none$',views.NoneView.as_view()),
-
+    url(r'^w', v2views.V2Index.as_view()),
 ]

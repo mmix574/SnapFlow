@@ -12,6 +12,24 @@ body{
         display: none;
     }
 }
+.btn-primary,.btn-default{
+    background-image: none;
+}
 .btn-primary{
-    background-color: #2aabd2;
+    background-color: #26ad1e;
+    border: none;
+}
+.btn-primary:hover{
+    background-color: #333;
+}
+.btn-default:hover{
+    background-color: #e6e6e6;
+}
+
+a{
+    color:#0f0f0f;
+}
+a:hover{
+    color: #555;
+    text-decoration: none;
 }

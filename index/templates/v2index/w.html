@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{tittle}}</title>
+    <link rel="icon" href="{% static 'static/favicon.png' %}"/ >
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/common.css' %}"/>
+</head>
+<body>
+
+
+{% if request.user.is_authenticated and loginpage %}
+
+<div class="alert alert-warning alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;text-align: center">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <strong>提示 </strong> 你已经以会员<b> {{ request.user.username }}</b> 身份登陆了，重复登陆将注销上次的登陆
+</div>
+
+{% endif %}
+
+{% if True %}
+<div id = "header-warning">
+</div>
+{% endif %}
+
+
+{% if True %}
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="default-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+	<div class="modal-dialog" style="width: 300px;margin-top: 100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				</button>
+				<h4 class="modal-title" id="default-modal-tittle" style="text-align: center">
+					提示
+				</h4>
+			</div>
+			<div class="modal-body" id="default-modal-content" style="text-align: center">
+				在这里添加一些文本
+			</div>
+			<div class="modal-footer" style="text-align: center">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" >关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+{% endif %}
+
+<div class="container text-center" style="width: 300px;margin-top: 15%;background-color: #EEEEEE;opacity: 0.9;border-radius: 4px;box-shadow: 0px 1px 1px 2px #dddddd" >
+
+{#    <div calss="login">#}
+{#        <form id="login-form" class="form-signin" action="login{% if next %}?next={{ next }}{% endif %}" method="post">#}
+{#        <h2 class="form-signin-heading">. 登录 .</h2>#}
+{##}
+{#        <label for="inputEmail" class="sr-only">Email address</label>#}
+{#          {% csrf_token %}#}
+{#        <input type="text" id="inputName" name="username" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">#}
+{#              <div style="height: 5px;"></div>#}
+{##}
+{#          <label for="inputPassword" class="sr-only">Password</label>#}
+{#        <input type="text" id="inputPassword" name="password" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">#}
+{#        <div class="checkbox">#}
+{#          <label>#}
+{#            <input type="checkbox" value="remember-me"> 记住密码#}
+{#          </label>#}
+{#        </div>#}
+{#        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_validate();">登陆</button>#}
+{#      </form>#}
+{#                  <div style="height: 5px;"></div>#}
+{##}
+{#        <a class="btn btn-lg btn-default btn-block" onclick="return change2register()">注册</a>#}
+{#        <div style="float: right;padding-right: 8px;height: 40px;">#}
+{#            <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="register">
+        <form id="login-form" class="form-signin" action="login{% if next %}?next={{ next }}{% endif %}" method="post">
+            <h2 class="form-signin-heading">. 注册 .</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+          {% csrf_token %}
+        <input type="text" id="inputName" name="username" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
+              <div style="height: 5px;"></div>
+
+          <label for="inputPassword" class="sr-only">Password</label>
+        <input type="text" id="inputPassword" name="password" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> 记住密码
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return change2login();">登陆</button>
+      </form>
+                  <div style="height: 5px;"></div>
+
+        <a class="btn btn-lg btn-default btn-block" onclick="return register()">注册</a>
+        <div style="float: right;padding-right: 8px;height: 40px;">
+            <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
+
+<script type="application/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'labjs/myjq.js' %}"></script>
+<script type="application/javascript" src="{% static 'js/jquery.timers.js' %}"></script>
+
+<script type="application/javascript" src="{% static 'labjs/quietflow.min.js' %}"></script>
+<script type="application/javascript">
+    $("body").quietflow({
+      theme : "bouncingBalls",
+      specificColors : [
+        "rgba(255, 10, 50, .5)",
+        "rgba(10, 255, 50, .5)",
+        "rgba(10, 50, 255, .5)",
+        "rgba(0, 0, 0, .5)"
+      ]
+    })
+
+{#$("body").quietflow({#}
+{#  theme : "layeredTriangles"#}
+{#{);#}
+    function user_validate(){
+        var username = $("#inputName").val();
+        var password = $('#inputPassword').val();
+        if(!username){
+            $("#inputName").popup("请输入用户名","bottom");
+            return false;
+{#            return true;#}
+        }else if(!password){
+            $('#inputPassword').popup("请输入密码","bottom");
+            return false;
+{#            return true;#}
+        }else{
+            var data = {username:username,password:password};
+
+            $.ajax({url:"/api/user_validate",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType: 'application/json; charset=utf-8',
+                success:function(response){
+                    if(response.message == "success"){
+                        $("#login-form").submit();
+                    }else{
+                        $.modal('. 提示 .','账号或密码不正确');
+                        $("#inputPassword1").val("");
+                        $("#inputPassword2").val("");
+                        $("#inputPassword1").focus();
+                    }
+            },error:function(response){
+                //do nothing
+            }});
+
+            return false;
+        }
+    }
+
+
+    function register(){
+        var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+        if($("#inputEmail").val().length==0){
+            $("#inputEmail").popup("请输入邮箱地址","bottom");
+            $("#inputEmail").focus();
+            return false;
+        }else if(!regex.test($("#inputEmail").val())){
+            $("#inputEmail").popup("邮箱格式不正确","bottom");
+            $("#inputEmail").focus();
+            return false;
+        }else if($("#inputName").val().length==0){
+            $("#inputName").popup("请输入用户名","bottom");
+            $("#inputName").focus();
+            return false;
+        }else if($("#inputPassword1").val()==$("#inputPassword2").val()&&$("#inputPassword1").val().length==0){
+            $("#inputPassword1").popup("请输入密码","bottom");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else if($("#inputPassword1").val().length<8){
+            $("#inputPassword1").popup("密码长度太短。密码必须包含至少 8 个字符。","bottom");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else if($("#inputPassword2").val().length==0){
+            $("#inputPassword2").popup("请再次输入密码","bottom");
+            $("#inputPassword2").focus();
+
+        }else if($("#inputPassword1").val()!=$("#inputPassword2").val()){
+            $("#inputPassword1").popup("两次输入的密码不一致","right");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else if($("#inputPassword1").val().length<6){
+            $("#inputPassword1").popup("密码的长度不能小于6位","right");
+            $("#inputPassword1").val("");
+            $("#inputPassword2").val("");
+            $("#inputPassword1").focus();
+            return false;
+        }else{
+            {# 注册事件 #}
+            data = {email:$("#inputEmail").val(),username:$("#inputName").val(),"password":$("#inputPassword1").val()};
+
+            $.ajax({url:"/api/user_register",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType: 'application/json; charset=utf-8',
+                success:function(response){
+                    if(response.success == undefined){
+                        $.modal("提示",response.message)
+                    }else if(response.success){
+                        if(response.code==2001){
+                            $.modal("成功",response.message,function(){
+                                window.location.href = "/login";
+                            });
+                        }
+                        $.modal("成功",response.message);
+                    }else{
+                        $.modal("失败",response.message);
+                    }
+
+
+
+            },error:function(response){
+                //do nothing
+            }});
+            return false;
+        }
+    }
+
+    function change2register(){
+
+    }
+    function change2login(){
+
+    }
+
+</script>
