@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-class Thread (models.Model):
-    name = models.CharField(max_length=10)
+
 
 
 class Class(models.Model):
@@ -16,12 +14,11 @@ class Class(models.Model):
         return self.name
 
 
+# Create your models here.
+class Thread (models.Model):
+    name = models.CharField(max_length=10)
 
-# class Thread(models.Model):
-#     tittle = models.CharField(max_length=20)
-#     content = models.TextField()
-#     image = models.ImageField(null=True,blank=True)
-#     create_user = models.ForeignKey(User)
-#     last_time = models.DateTimeField(auto_now_add=True)
-#     create_time = models.DateTimeField(auto_now=True)
-#     pass
+
+
+class TAG(models.Model):
+    pass

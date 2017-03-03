@@ -25,7 +25,7 @@ SECRET_KEY = ')qx6_n(fzh$f0!78j@rucrubyzp^869o1pz!ib(2x=#iccfy_6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.1.5','taita.xyz','118.89.60.27','snapflow.top']
+ALLOWED_HOSTS = ['localhost','192.168.1.5','taita.xyz','118.89.60.27','']
 
 
 # Application definition
@@ -126,7 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en_us'
+# LANGUAGE_CODE = 'en_us'
+# LANGUAGE_CODE = 'zh_ch'
+LANGUAGE_CODE = 'zh_Hans'
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Shanghai'
