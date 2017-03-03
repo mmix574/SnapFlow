@@ -176,9 +176,9 @@
 
     function user_register(){
         var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
-        if($("#inputEmail").val().length==0){
-            $("#inputEmail").popup("请输入邮箱地址","bottom");
-            $("#inputEmail").focus();
+        if($("#registerInputEmail").val().length==0){
+            $("#registerInputEmail").popup("请输入邮箱地址","bottom");
+            $("#registerInputEmail").focus();
             return false;
         }else if(!regex.test($("#inputEmail").val())){
             $("#inputEmail").popup("邮箱格式不正确","bottom");
@@ -218,7 +218,7 @@
             return false;
         }else{
             {# 注册事件 #}
-            data = {email:$("#inputEmail").val(),username:$("#inputName").val(),"password":$("#inputPassword1").val()};
+            data = {email:$("#registerInputEmail").val(),username:$("#inputName").val(),"password":$("#inputPassword1").val()};
 
             $.ajax({url:"/api/user_register",
                 type:"POST",
