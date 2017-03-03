@@ -20,7 +20,8 @@ body{
     border: none;
 }
 .btn-primary:hover{
-    background-color: #333;
+    background-color: #50b350;
+    /*background-color: #35b370;*/
 }
 .btn-default:hover{
     background-color: #e6e6e6;
@@ -32,4 +33,57 @@ a{
 a:hover{
     color: #555;
     text-decoration: none;
+}
+
+.btn-primary:active:hover {
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625;
+}
+.btn-primary.active,.btn-primary:active{
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625;
+}
+
+/*华丽的分割线*/
+
+.btn.btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn.btn-success.focus,
+.btn.btn-success:focus {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  outline: none;
+  box-shadow: none;
+}
+.btn.btn-success:hover {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  outline: none;
+  box-shadow: none;
+}
+.btn.btn-success.active,
+.btn.btn-success:active {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  outline: none;
+}
+.btn.btn-success.active.focus,
+.btn.btn-success.active:focus,
+.btn.btn-success.active:hover,
+.btn.btn-success:active.focus,
+.btn.btn-success:active:focus,
+.btn.btn-success:active:hover {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  outline: none;
+  box-shadow: none;
 }

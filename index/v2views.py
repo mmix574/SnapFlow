@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from . import views as V1View
+from website.utils import console
 
 
 class V2Index(TemplateView):
@@ -19,9 +20,16 @@ class RegisterView(TemplateView):
     template_name = "v2index/w.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs);
+        context['tittle'] = "注册 # SnapFlow"
         context['view'] = "register"
         return context
 
+    def get(self, request, *args, **kwargs):
+        return render(request,self.template_name,self.get_context_data())
+
+    def post(self,request,*args,**kwargs):
+        console.log(request.POST)
+        return render(request,self.template_name,self.get_context_data())
 
 
 
@@ -29,12 +37,12 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
-from website.utils import console
 class LoginView(TemplateView):
     template_name = "v2index/w.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs);
+        context['tittle'] = "登陆 # SnapFlow"
         context['view'] = "login"
         return context
     

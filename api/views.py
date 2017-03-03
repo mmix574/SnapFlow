@@ -42,8 +42,7 @@ def user_validate(request):
         if("password" in obj and "username" in obj):
             user = authenticate(username = obj["username"],password = obj["password"])
 
-            console.log(obj["username"])
-            console.log(obj["password"])
+            console.log("Loging:"+obj["username"]+":"+obj["password"])
 
             if(user):
                 res = {"status":200,"message":"success","data":{"is_success":True,"username":obj["username"]}}
