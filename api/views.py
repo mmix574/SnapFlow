@@ -22,7 +22,7 @@ def messageHandel(status,message):
 
 
 # ---------------------------------------------
-
+from website.utils import console
 @csrf_exempt
 def user_validate(request):
     if(request.method=="GET"):
@@ -41,6 +41,10 @@ def user_validate(request):
             pass
         if("password" in obj and "username" in obj):
             user = authenticate(username = obj["username"],password = obj["password"])
+
+            console.log(obj["username"])
+            console.log(obj["password"])
+
             if(user):
                 res = {"status":200,"message":"success","data":{"is_success":True,"username":obj["username"]}}
                 return HttpResponse(json.dumps(res));

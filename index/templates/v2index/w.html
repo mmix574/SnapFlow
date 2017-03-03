@@ -57,19 +57,19 @@
         <form id="login-form" class="form-signin" action="/login/{% if next %}?next={{ next }}{% endif %}" method="post">
         <h2 class="form-signin-heading">. 登录 .</h2>
 
-        <label for="inputEmail" class="sr-only">Email address</label>
+        <label for="loginInputEmail" class="sr-only">Email address</label>
           {% csrf_token %}
-        <input type="text" id="inputName" name="username" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
+        <input type="text" id="loginInputName" name="username" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
               <div style="height: 5px;"></div>
 
-          <label for="inputPassword" class="sr-only">Password</label>
-        <input type="text" id="inputPassword" name="password" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
+          <label for="loginInputPassword" class="sr-only">Password</label>
+        <input type="text" id="loginInputPassword" name="password" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住密码
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_validate();">登陆</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_login();">登陆</button>
       </form>
                   <div style="height: 5px;"></div>
 
@@ -81,18 +81,18 @@
     <div class="register" id="register-div" {% ifnotequal view "register"%} style="display: none"{% endifnotequal %}>
         <form class="form-signin" action="/register/" method="post">
             <h2 class="form-signin-heading">.注册.</h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
+            <label for="registerInputEmail" class="sr-only">Email address</label>
             {% csrf_token %}
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
+            <input type="email" id="registerInputEmail" class="form-control" placeholder="Email address" required="on" autofocus="" autocomplete="off">
                   <div style="height: 5px;"></div>
-            <input type="username" id="inputName" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
+            <input type="username" id="registerInputName" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
                   <div style="height: 5px;"></div>
 
-              <label for="inputPassword" class="sr-only">Password</label>
-            <input type="text" id="inputPassword1" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
+              <label for="registerInputPassword" class="sr-only">Password</label>
+            <input type="text" id="registerInputPassword1" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
                       <div style="height: 5px;"></div>
 
-              <input type="text" id="inputPassword2" class="form-control" onfocus="this.type='password'" placeholder="Password Repeat" required="on" autocomplete="off">
+              <input type="text" id="registerInputPassword2" class="form-control" onfocus="this.type='password'" placeholder="Password Repeat" required="on" autocomplete="off">
 
             <div class="checkbox">
               <label>
@@ -108,7 +108,6 @@
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
         </div>
     </div>
-
 </div>
 
 </body>
@@ -121,7 +120,7 @@
 <script type="application/javascript" src="{% static 'labjs/myjq.js' %}"></script>
 <script type="application/javascript" src="{% static 'js/jquery.timers.js' %}"></script>
 
-<script type="application/javascript" src="{% static 'labjs/quietflow.min.js' %}"></script>
+<script type="application/javascript" src="{% static 'labjs/quietflow.js' %}"></script>
 <script type="application/javascript">
     $("body").quietflow({
       theme : "bouncingBalls",
@@ -136,15 +135,15 @@
 {#$("body").quietflow({#}
 {#  theme : "layeredTriangles"#}
 {#{);#}
-    function user_validate(){
-        var username = $("#inputName").val();
-        var password = $('#inputPassword').val();
+    function user_login(){
+        var username = $("#loginInputName").val();
+        var password = $('#loginInputPassword').val();
         if(!username){
-            $("#inputName").popup("请输入用户名","bottom");
+            $("#loginInputName").popup("请输入用户名","bottom");
             return false;
 {#            return true;#}
         }else if(!password){
-            $('#inputPassword').popup("请输入密码","bottom");
+            $('#loginInputPassword').popup("请输入密码","bottom");
             return false;
 {#            return true;#}
         }else{
@@ -160,10 +159,11 @@
                     if(response.message == "success"){
                         $("#login-form").submit();
                     }else{
+                        console.log(response)
                         $.modal('. 提示 .','账号或密码不正确');
-                        $("#inputPassword1").val("");
-                        $("#inputPassword2").val("");
-                        $("#inputPassword1").focus();
+                        $("#loginInputName").val("");
+                        $("#loginInputPassword").val("");
+                        $("#loginInputName").focus();
                     }
             },error:function(response){
                 //do nothing
