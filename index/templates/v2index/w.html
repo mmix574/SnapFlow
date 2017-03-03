@@ -79,7 +79,7 @@
         </div>
     </div>
     <div class="register" id="register-div" {% ifnotequal view "register"%} style="display: none"{% endifnotequal %}>
-        <form class="form-signin" action="register" method="post">
+        <form class="form-signin" action="/register/" method="post">
             <h2 class="form-signin-heading">.注册.</h2>
             <label for="inputEmail" class="sr-only">Email address</label>
             {% csrf_token %}
@@ -99,9 +99,7 @@
                 <input type="checkbox" value="remember-me"> 记住密码
               </label>
             </div>
-
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return check();">确定注册</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_register();">确定注册</button>
           </form>
           <div style="height: 5px;"></div>
 
@@ -176,7 +174,7 @@
     }
 
 
-    function register(){
+    function user_register(){
         var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         if($("#inputEmail").val().length==0){
             $("#inputEmail").popup("请输入邮箱地址","bottom");

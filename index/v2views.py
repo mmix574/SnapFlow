@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from . import views as V1View
+
 
 class V2Index(TemplateView):
     template_name = 'v2index/w.html'
@@ -50,8 +52,9 @@ class LoginView(TemplateView):
             if user:
                 login(request,user)
             else:
-                pass
+               return V1View.MessageView.as_view(tittle="用户名或者密码不正确",message="你输入的账号密码似乎有些不正确，请重试。")(request)
+
         else:
-            pass
+            return V1View.MessageView.as_view(tittle="用户名与密码请求不完整", message="如果多次出现这个提示，请联系管理员")(request)
 
         return HttpResponseRedirect("/");
