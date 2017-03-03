@@ -49,8 +49,6 @@ class MessageView(AppBaseTemplateView):
         return context
 
 
-
-
 def login(request):
     context = {"tittle":"登陆","loginpage":True}
     if(request.method=='GET'):
