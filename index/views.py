@@ -98,6 +98,13 @@ def register(request):
 
     return render(request,'index/register.html')
 
+
+
+def userdata(request):
+    return render(register,'index/userdatacomplete.html')
+
+
+
 def about(request):
     return render(request,'index/about.html')
 

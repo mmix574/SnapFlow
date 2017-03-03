@@ -1,0 +1,74 @@
+{% load static %}
+{% include 'common/header.html' %}
+<style type="text/css">
+    body{
+        background-color: #EEEEEE;
+    }
+</style>
+
+<div class="container text-center" style="width: 300px;margin-top: 60px;" >
+  <form id="login-form" class="form-signin" action="login{% if next %}?next={{ next }}{% endif %}" method="post">
+    <h2 class="form-signin-heading">. 登录 .</h2>
+    <label for="inputEmail" class="sr-only">Email address</label>
+      {% csrf_token %}
+    <input type="text" id="inputName" name="username" class="form-control" placeholder="Email address | Username" required="on" autofocus="" autocomplete="off">
+          <div style="height: 5px;"></div>
+
+      <label for="inputPassword" class="sr-only">Password</label>
+    <input type="text" id="inputPassword" name="password" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="remember-me"> 记住密码
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="return user_validate();">登陆</button>
+  </form>
+              <div style="height: 5px;"></div>
+
+    <a class="btn btn-lg btn-default btn-block" href="register">注册</a>
+    <div style="float: right;padding-right: 8px;">
+        <a href="/">返回首页</a>
+    </div>
+</div>
+
+{% include 'common/footer.html' %}
+{% include 'common/footer-animate.html' %}
+
+<script type="application/javascript">
+    function user_validate(){
+        var username = $("#inputName").val();
+        var password = $('#inputPassword').val();
+        if(!username){
+            $("#inputName").popup("请输入用户名","bottom");
+            return false;
+{#            return true;#}
+        }else if(!password){
+            $('#inputPassword').popup("请输入密码","bottom");
+            return false;
+{#            return true;#}
+        }else{
+            var data = {username:username,password:password};
+
+            $.ajax({url:"/api/user_validate",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType: 'application/json; charset=utf-8',
+                success:function(response){
+                    if(response.message == "success"){
+                        $("#login-form").submit();
+                    }else{
+                        $.modal('. 提示 .','账号或密码不正确');
+                        $("#inputPassword1").val("");
+                        $("#inputPassword2").val("");
+                        $("#inputPassword1").focus();
+                    }
+            },error:function(response){
+                //do nothing
+            }});
+
+            return false;
+        }
+    }
+</script>
