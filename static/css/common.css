@@ -12,3 +12,6 @@ body{
         display: none;
     }
 }
+.btn-primary{
+    background-color: #2aabd2;
+}
