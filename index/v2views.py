@@ -10,3 +10,12 @@ class V2Index(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(V2Index, self).get( request, *args, **kwargs)
+
+
+
+class RegisterView(TemplateView):
+    pass
+
+
+class LoginView(TemplateView):
+    pass
