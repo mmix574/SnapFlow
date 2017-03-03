@@ -16,9 +16,11 @@ class Class(models.Model):
 
 # Create your models here.
 class Thread (models.Model):
-    name = models.CharField(max_length=10)
-
-
+    tittle = models.CharField(max_length=20)
+    content = models.TextField(default="")
+    create_user = models.ForeignKey(User)
+    create_time = models.DateTimeField(auto_now=True)
+    last_time = models.DateTimeField(auto_now_add=True)
 
 class TAG(models.Model):
     pass

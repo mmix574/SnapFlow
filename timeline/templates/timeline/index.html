@@ -2,27 +2,50 @@
 
 
 {% block tittle %}
-    时间线
+    时间轴
 {% endblock %}
 
 
 {% block content %}
-<div class="container" style="padding-top: 20px;">
+{#<div class="container" style="padding-top: 20px;">#}
+{##}
+{#    <a class="btn btn-primary" style="margin-left: 100px;" href="create">发布</a>#}
+{#    <hr/>#}
+{#    {% for i in list %}#}
+{#        uid:{{ i.id }}#}
+{#        {% if i.user.userprofile.avatar %}#}
+{##}
+{#        <img style="height: 64px;width: 64px;" src="{{i.user.userprofile.avatar.url}}">{{ i.created_time }}#}
+{#        {% endif %}#}
+{#        <h1>{{ i.tittle }}</h1>#}
+{#        <p>content:{{ i.content}}</p>#}
+{#        <hr/>#}
+{#    {% endfor %}#}
+{##}
+{#</div>#}
+{##}
 
-    <a class="btn btn-primary" style="margin-left: 100px;" href="create">发布</a>
-    <hr/>
-    {% for i in list %}
-        uid:{{ i.id }}
-        {% if i.user.userprofile.avatar %}
-
-        <img style="height: 64px;width: 64px;" src="{{i.user.userprofile.avatar.url}}">{{ i.created_time }}
-        {% endif %}
-        <h1>{{ i.tittle }}</h1>
-        <p>content:{{ i.content}}</p>
-        <hr/>
-    {% endfor %}
-
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="media">
+				 <a href="#" class="pull-left"><img src="v3/default7.jpg" class="media-object" alt='' /></a>
+				<div class="media-body">
+					<h4 class="media-heading">
+						Nested media heading
+					</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+					<div class="media">
+						 <a href="#" class="pull-left"><img src="v3/default8.jpg" class="media-object" alt='' /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								Nested media heading
+							</h4> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 
 {% endblock %}

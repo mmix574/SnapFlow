@@ -23,28 +23,28 @@ class IndexView(AppBaseTemplateView):
 
 
 
-@method_decorator(login_required,name="dispatch")
-class CreateView(AppBaseTemplateView):
-    template_name = "timeline/create.html"
-
-
-    def get(self, request,context={}, *args, **kwargs):
-
-
-        form = CommentForm()
-
-        return super(CreateView, self).get(request,context={"form":form}, *args, **kwargs)
-
-    def post(self,request,context={},*args,**kwargs):
-        form = CommentForm(request.POST)
-
-        model = form.save(commit=False)
-
-        model.user = request.user
-
-        model.save()
-
-        return super(CreateView, self).post(request,context={},*args,**kwargs)
+# @method_decorator(login_required,name="dispatch")
+# class CreateView(AppBaseTemplateView):
+#     template_name = "timeline/create.html"
+#
+#
+#     def get(self, request,context={}, *args, **kwargs):
+#
+#
+#         form = CommentForm()
+#
+#         return super(CreateView, self).get(request,context={"form":form}, *args, **kwargs)
+#
+#     def post(self,request,context={},*args,**kwargs):
+#         form = CommentForm(request.POST)
+#
+#         model = form.save(commit=False)
+#
+#         model.user = request.user
+#
+#         model.save()
+#
+#         return super(CreateView, self).post(request,context={},*args,**kwargs)
 
 
 
