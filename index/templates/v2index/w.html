@@ -53,7 +53,7 @@
 
 <div class="container text-center" style="width: 300px;margin-top: 10%;background-color: #EEEEEE;opacity: 0.9;border-radius: 4px;box-shadow: 0px 1px 1px 2px #dddddd" >
 
-    <div class="login" id="login-div">
+    <div class="login" id="login-div" {% ifnotequal view "login"%} style="display: none"{% endifnotequal %}>
         <form id="login-form" class="form-signin" action="login{% if next %}?next={{ next }}{% endif %}" method="post">
         <h2 class="form-signin-heading">. 登录 .</h2>
 
@@ -78,7 +78,7 @@
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
         </div>
     </div>
-    <div class="register" id="register-div" style="display: none">
+    <div class="register" id="register-div" {% ifnotequal view "register"%} style="display: none"{% endifnotequal %}>
         <form class="form-signin" action="register" method="post">
             <h2 class="form-signin-heading">.注册.</h2>
             <label for="inputEmail" class="sr-only">Email address</label>

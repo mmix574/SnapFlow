@@ -14,8 +14,18 @@ class V2Index(TemplateView):
 
 
 class RegisterView(TemplateView):
-    pass
+    template_name = "v2index/w.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs);
+        context['view'] = "register"
+        return context
 
 
 class LoginView(TemplateView):
-    pass
+    template_name = "v2index/w.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs);
+        context['view'] = "login"
+        return context
+
