@@ -1,27 +1,15 @@
 {% extends 'interface/base_display.html' %}
 
 {% block tittle %}
-    首页
+    SnapFlow
 {% endblock %}
 
-{% block content %}
+{% block body %}
 
-    <div style="height: 100px;margin-bottom: 10px;"></div>
+<div class="jumbotron" >
+  <h1>SnapFlow</h1>
+  <p>一个支持内容定制化的问答社区</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
 
-    <div>
-        <h1>首页</h1>
-        <p>功能添加中...</p>
-    <br/>
-
-        {% if logined and profile.avatar %}
-        <h1>{{ ctime }}{{ user.username }}</h1>
-        <img src="{{ profile.avatar.url }}">
-        {% else %}
-            <h1>你还没有上传<b>头像</b>!</h1><a href="/space/member/" style="font-size: 120px;">点击我上传</a>
-        {% endif %}
-                <hr>
-    <h3>
-        {{ profile }}
-    </h3>
-    </div>
 {% endblock %}

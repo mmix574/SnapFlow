@@ -15,12 +15,6 @@ class Class(models.Model):
     def __str__(self):
         return self.name
 
-class SubClass(models.Model):
-    name = models.CharField(max_length=20)
-    pclass = models.ForeignKey(Class)
-    create_user = models.ForeignKey(User)
-    create_time = models.DateTimeField(auto_now=True)
-    last_time = models.DateTimeField(auto_now_add=True)
 
 
 # class Thread(models.Model):
