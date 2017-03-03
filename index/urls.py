@@ -9,9 +9,9 @@ urlpatterns = [
     # 提示消息
     url(r'message',views.MessageView.as_view()),
     # 登陆
-    url(r'^login$',v2views.LoginView.as_view()),
+    url(r'^login/$',v2views.LoginView.as_view()),
     # 注册
-    url(r'^register$',v2views.RegisterView.as_view()),
+    url(r'^register/$',v2views.RegisterView.as_view()),
     # 登出
     url(r'^logout$', views.LogoutView.as_view()),
 
