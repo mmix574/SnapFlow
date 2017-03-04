@@ -1,15 +1,34 @@
 {% extends 'interface/base.html' %}
 {% block tittle %}
 {% endblock %}
-
-
+<style>
+.container-warpper{
+    background-color: #ffffff;
+}
+</style>
 {% block body %}
-    <div class="container" style="background-color: #3c763d">
+<div class="container-warpper">
+    <div class="container">
         {% block adArea %}
-            <div style="margin-bottom: 20px;height: 20px;background-color: "></div>
+            <div style="height: 300px;background-color: #2aabd2"></div>
         {% endblock %}
-
-        <div style="height: 250px;float: left;background-color: #3c763d">1</div>
-        <div style="height: 250px;float: left">2</div>
     </div>
+    <div class="container">
+        {% block container %}
+        {% endblock %}
+    </div>
+
+    <div class="container">
+        <div style="float: left;width: 80%;height: 220px;">
+            {% block left %}
+                你
+            {% endblock %}
+        </div>
+        <div style="float:left;width: 20%;height: 220px;">
+            {% block right %}
+                看看你
+            {% endblock %}
+        </div>
+    </div>
+</div>
 {% endblock %}
