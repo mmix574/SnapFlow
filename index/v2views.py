@@ -5,7 +5,7 @@ from website.utils import console
 
 
 class V2Index(TemplateView):
-    template_name = 'v2index/w.html'
+    template_name = 'v2index/loginandregister.html'
 
     def get_context_data(self, **kwargs):
         return super(V2Index, self).get_context_data(**kwargs)
@@ -17,7 +17,7 @@ class V2Index(TemplateView):
 
 
 class RegisterView(TemplateView):
-    template_name = "v2index/w.html"
+    template_name = "v2index/loginandregister.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs);
         context['tittle'] = "注册 # SnapFlow"
@@ -38,7 +38,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 class LoginView(TemplateView):
-    template_name = "v2index/w.html"
+    template_name = "v2index/loginandregister.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs);

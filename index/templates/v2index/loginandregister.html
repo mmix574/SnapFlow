@@ -43,7 +43,7 @@
 				在这里添加一些文本
 			</div>
 			<div class="modal-footer" style="text-align: center">
-				<button type="button" class="btn btn-success" data-dismiss="modal" >关闭
+				<button type="button" class="btn btn-success" data-dismiss="modal" >确定
 				</button>
 			</div>
 		</div><!-- /.modal-content -->
@@ -191,35 +191,59 @@
         console.log(username);
         console.log(password1);
         console.log(password2);
-
-        return false;
+        if(email.val().length==0){
+            email.popup("请输入邮箱","right");
+            return false;
+        }
+        if(!regex.test(email.val())){
+            email.popup("邮箱格式不正确","right");
+            return false;
+        }
+        if(username.val().length==0){
+            username.popup("请输入用户名","right");
+            return false;
+        }
+        if(password1.val().length==0){
+            password1.popup("请输入密码","right");
+            return false;
+        }
+        if(password2.val().length==0){
+            password2.popup("请再次输入密码","right");
+            return false;
+        }
+        if(password1.val()!=password2.val()){
+            password1.popup("两次输入的密码不相同","right");
+            password1.val("");
+            password2.val("");
+            password1.focus();
+            return false;
+        }
             {# 注册事件 #}
-{#            data = {email:email.val(),username:username.val(),"password":password1.val()};#}
-{#            alert(data);#}
-{##}
-{#            $.ajax({url:"/api/user_register",#}
-{#                type:"POST",#}
-{#                async:true,#}
-{#                data:JSON.stringify(data),#}
-{#                dataType:"json",#}
-{#                contentType: 'application/json; charset=utf-8',#}
-{#                success:function(response){#}
-{#                    if(response.success == undefined){#}
-{#                        $.modal("提示",response.message)#}
-{#                    }else if(response.success){#}
-{#                        if(response.code==2001){#}
-{#                            $.modal("成功",response.message,function(){#}
-{#                                console.log(response)#}
-{#                            });#}
-{#                        }#}
-{#                        $.modal("成功",response.message);#}
-{#                    }else{#}
-{#                        $.modal("失败",response.message);#}
-{#                    }#}
-{##}
-{#            },error:function(response){#}
-{#            }});#}
-{#        }#}
+        data = {email:email.val(),username:username.val(),"password":password1.val()};
+            $.ajax({url:"/api/user_register",
+                type:"POST",
+                async:true,
+                data:JSON.stringify(data),
+                dataType:"json",
+                contentType: 'application/json; charset=utf-8',
+                success:function(response){
+                    if(response.success == undefined){
+                        $.modal("提示",response.message)
+                    }else if(response.success){
+                        if(response.code==2001){
+                            $.modal("成功",response.message,function(){
+                                change2login();
+                            });
+                        }
+                        $.modal("成功",response.message);
+                    }else{
+                        $.modal("失败",response.message);
+                    }
+
+            },error:function(response){
+                        $.modal("网络请求失败",response.message);
+            }});
+        return false;
     }
 
     function change2register(){
