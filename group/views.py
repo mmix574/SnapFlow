@@ -5,7 +5,7 @@ from index.views import AppBaseTemplateView
 
 
 class IndexView(AppBaseTemplateView):
-    template_name = ''
+    template_name = 'group/index.html'
     pass
 
 

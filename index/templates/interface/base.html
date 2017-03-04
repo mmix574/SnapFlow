@@ -126,7 +126,7 @@
             </div>
                 </form>
                 {% if logined and profile.avatar %}
-                    <li ><img style="width: 40px;height: 40px;position:relative;top: 5px;border-radius: 4px;" src="{{profile.avatar.url}}"></li>
+                    <li ><img style="width: 40px;height: 40px;position:relative;top: 5px;border-radius: 4px;left: 8px;box-shadow: 0px 0px 1px 1px #9d9d9d" src="{{profile.avatar.url}}"></li>
                 {% endif %}
 
 {#            <li><a>消息</a></li>#}
@@ -139,6 +139,7 @@
 {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
               <li><a href="/m">消息中心</a></li>
               <li><a href="/none">我的收藏</a></li>
+              <li><a href="/none">我的关注</a></li>
               <li><a href="/none">小组</a></li>
               <li><a href="/none">打卡</a></li>
               <li><a href="/none">历史记录</a></li>

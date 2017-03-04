@@ -21,5 +21,9 @@ class IndexView(AppBaseTemplateView):
         # messages.success(request,"你已经成功啦!")
         return super(IndexView, self).get(request,context={}, *args, **kwargs)
 
+    def post(self,request,context={},*args,**kwargs):
 
+
+
+        return super(IndexView, self).post(request,context={},*args,**kwargs)
 

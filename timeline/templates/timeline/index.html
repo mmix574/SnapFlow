@@ -26,14 +26,17 @@
 {##}
 {#</div>#}
 {##}
-
-<form role="form">
-  <div class="form-group">
-    <label for="name"> 输入你想问的问题</label>
-    <textarea style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3"></textarea>
-  </div>
-    <input class="btn btn-success" type="submit">
-</form>
+<div class="container"style="padding-top: 20px;padding-bottom: 0px">
+    <form role="form" method="post">
+        {% csrf_token %}
+      <div class="form-group">
+        <label for="name"> 你现在在想什么</label>
+        <textarea style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3"></textarea>
+      </div>
+        <input class="btn btn-success" type="submit">
+    </form>
+</div>
+    <div><hr/></div>
 
 {% for item in list %}
 <div style="padding-top: 20px;padding-bottom: 20px;">
