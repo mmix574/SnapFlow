@@ -37,6 +37,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(null=True,blank=True,upload_to=upload_to)
     set_avatar = models.BooleanField(default=False)
     # avatar = models.ImageField(null=True,blank=True)
+    work_year = models.IntegerField(default=0)
     work_place = models.CharField(max_length=20)
     work_nickname = models.CharField(max_length=20)
     language = models.CharField(max_length=10,null=True,blank=True)
