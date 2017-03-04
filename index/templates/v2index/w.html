@@ -77,6 +77,10 @@
         <div style="float: right;padding-right: 8px;height: 40px;">
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
         </div>
+
+        <div style="float: right;padding-right: 8px;height: 40px;">
+            <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">找回密码</a>
+        </div>
     </div>
     <div class="register" id="register-div" {% ifnotequal view "register"%} style="display: none"{% endifnotequal %}>
         <form name="register-form" class="form-signin" action="/register/" method="post">
@@ -88,7 +92,7 @@
             <input type="username" id="registerInputName" class="form-control" placeholder="Username" required="on" autofocus="" autocomplete="off">
                   <div style="height: 5px;"></div>
 
-              <label for="registerInputPassword" class="sr-only">Password</label>
+              <label for="registerInputPassword1" class="sr-only">Password</label>
             <input type="text" id="registerInputPassword1" class="form-control" onfocus="this.type='password'" placeholder="Password" required="on" autocomplete="off">
                       <div style="height: 5px;"></div>
 
@@ -99,13 +103,16 @@
                 <input type="checkbox" value="remember-me"> 记住密码
               </label>
             </div>
-            <button class="btn btn-lg btn-success btn-block" type="submit" onclick="return true;">确定注册</button>
+            <button class="btn btn-lg btn-success btn-block" type="submit" onclick="return false;">确定注册</button>
           </form>
           <div style="height: 5px;"></div>
 
         <a class="btn btn-lg btn-default btn-block" onclick="return change2login()">返回登陆</a>
         <div style="float: right;padding-right: 8px;height: 40px;">
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
+        </div>
+        <div style="float: right;padding-right: 8px;height: 40px;">
+            <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">使用手机号注册</a>
         </div>
     </div>
 </div>
@@ -176,53 +183,60 @@
 
     function user_register(){
         var regex = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
-        if($("#registerInputEmail").val().length==0){
-            $("#registerInputEmail").popup("请输入邮箱地址","bottom");
-            $("#registerInputEmail").focus();
+        var email = $("#registerInputEmail");
+        var username =  $("#registerInputName");
+        var password1 = $("#registerInputPassword1");
+        var password2 = $("#registerInputPassword2");
+
+{#        console.log(email.val());#}
+{#        console.log(username.val());#}
+{#        console.log(password1.val());#}
+{#        console.log(password2.val());#}
+        if(email.val().length==0){
+            email.popup("请输入邮箱地址","bottom");
+            email.focus();
             return false;
-        }else if(!regex.test($("#registerInputEmail").val())){
-            $("#registerInputName").popup("邮箱格式不正确","bottom");
-            $("#registerInputName").focus();
+        }else if(!regex.test(email.val())){
+           username.popup("邮箱格式不正确","bottom");
+            username.focus();
             return false;
-        }else if($("#registerInputName").val().length==0){
-            $("#registerInputName").popup("请输入用户名","bottom");
-            $("#registerInputName").focus();
+        }else if(username.val().length==0){
+            username.popup("请输入用户名","bottom");
+            username.focus();
             return false;
-        }else if($("#registerInputPassword1").val()==$("#registerInputPassword2").val()&&$("#registerInputPassword1").val().length==0){
-            $("#registerInputPassword1").popup("请输入密码","bottom");
-            $("#registerInputPassword1").val("");
-            $("#registerInputPassword2").val("");
-            $("#registerInputPassword1").focus();
+        }else if(password1.val()==password2.val()&&password1.val().length==0){
+            password1.popup("请输入密码","bottom");
+            password1.val("");
+            password1.val("");
+            password1.focus();
             return false;
-        }else if($("#registerInputPassword1").val().length<8){
-            $("#registerInputPassword1").popup("密码长度太短。密码必须包含至少 8 个字符。","bottom");
-            $("#registerInputPassword1").val("");
-            $("#registerInputPassword2").val("");
-            $("#registerInputPassword1").focus();
+        }else if(password1.val().length<8){
+            password1.popup("密码长度太短。密码必须包含至少 8 个字符。","bottom");
+            password1.val("");
+            password2.val("");
+            password1.focus();
             return false;
         }else if($("#inputPassword2").val().length==0){
-            $("#inputPassword2").popup("请再次输入密码","bottom");
-            $("#inputPassword2").focus();
-
-        }else if($("#registerInputPassword1").val()!=$("#inputPassword2").val()){
-            $("#registerInputPassword1").popup("两次输入的密码不一致","right");
-            $("#registerInputPassword1").val("");
-            $("#registerInputPassword2").val("");
-            $("#registerInputPassword1").focus();
+            password2.popup("请再次输入密码","bottom");
+            password2.focus();
             return false;
-        }else if($("#registerInputPassword1").val().length<6){
-            $("#registerInputPassword1").popup("密码的长度不能小于6位","right");
-            $("#registerInputPassword1").val("");
-            $("#registerInputPassword2").val("");
-            $("#registerInputPassword1").focus();
+        }else if(password1.val()!=password2.val()){
+            password1.popup("两次输入的密码不一致","right");
+            password1.val("");
+            password2.val("");
+            password1.focus();
+            return false;
+        }else if(password1.val().length<6){
+            password1.popup("密码的长度不能小于6位","right");
+            password1.val("");
+            password2.val("");
+            password1.focus();
             return false;
         }else{
             {# 注册事件 #}
-            data = {email:$("#registerInputEmail").val(),username:$("#registerInputName").val(),"password":$("#registerInputPassword1").val()};
-            console.log(data);
+            data = {email:email.val(),username:username.val(),"password":password1.val()};
             alert(data);
 
-            return false;
             $.ajax({url:"/api/user_register",
                 type:"POST",
                 async:true,
@@ -235,8 +249,7 @@
                     }else if(response.success){
                         if(response.code==2001){
                             $.modal("成功",response.message,function(){
-{#                                window.location.href = "/login/";#}
-                                    $(".form-signin").submit()
+                                console.log(response)
                             });
                         }
                         $.modal("成功",response.message);
@@ -245,8 +258,8 @@
                     }
 
             },error:function(response){
-                //do nothing
             }});
+
             return false;
         }
     }
