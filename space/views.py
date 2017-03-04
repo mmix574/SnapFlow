@@ -78,28 +78,34 @@ class MemberView(AppBaseTemplateView):
 
 
 from django.contrib.auth.models import User
-
+from website.utils import console
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
 
     def get(self, request,context={}, *args, **kwargs):
 
-        form = UserForm(instance=request.user)
-        return super(UserDataView, self).get(request,context={"form":form}, *args, **kwargs)
+        form1 = UserForm(instance=request.user)
+        form2 = UserProfileForm(instance=request.user)
+
+        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2}, *args, **kwargs)
 
 
     def post(self,request,context={},*args,**kwargs):
 
-        form = UserForm(instance=request.user,data=request.POST)
+        form1 = UserForm(instance=request.user,data=request.POST)
+        form2 = UserProfileForm(instance=request.user,data=request.POST)
 
-        if form.is_valid():
-            form.save()
-            print("saving...")
 
+        if form1.is_valid():
+            form1.save()
         else:
-            print("form is not valid")
+            console.log("form1 invalidate")
+        if form2.is_valid():
+            form2.save()
+        else:
+            console.log("form2 invalidate")
 
-        return super(UserDataView, self).post(request,context={"form":form},*args,**kwargs)
+        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2},*args,**kwargs)
 
 
 

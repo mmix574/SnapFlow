@@ -5,11 +5,63 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="padding-top: 50px;padding-bottom: 50px;">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary" style="position:relative;left: 200px;">提交ma </button>
-        </form>
-    </div>
+{#    <div class="container" style="padding-top: 50px;padding-bottom: 50px;">#}
+{#        <form method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            <button class="btn btn-primary" style="position:relative;left: 200px;">提交ma </button>#}
+{#        </form>#}
+{#    </div>#}
+    <div class="container" style="padding-top: 20px;padding-bottom: 20px;">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="tabbable" id="tabs-718245">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						 <a href="#panel-0" data-toggle="tab">用户资料</a>
+					</li>
+					<li>
+						 <a href="#panel-1" data-toggle="tab">用户头像</a>
+					</li>
+                    <li>
+						 <a href="#panel-2" data-toggle="tab">修改密码</a>
+					</li>
+                    <li>
+						 <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel-0">
+						<p>
+                            <form>
+                            {{ form1.as_p }}
+                            {{ form2.as_p }}
+						    </form>
+                        </p>
+					</div>
+					<div class="tab-pane" id="panel-1">
+						<p>
+							Howdy, I'm in Section 2.
+                            <br/>
+                            这里添加javascript 的动态头像选择区域
+						</p>
+					</div>
+                    <div class="tab-pane" id="panel-2">
+						<p>
+							Howdy, I'm in Section 3.
+						</p>
+					</div>
+                    <div class="tab-pane" id="panel-3">
+						<p>
+							Howdy, I'm in Section 3.
+                            <br/>
+                            fakeone
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}
