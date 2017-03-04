@@ -42,7 +42,7 @@ class UserProfile(models.Model):
     work_nickname = models.CharField(max_length=20)
     language = models.CharField(max_length=10,null=True,blank=True)
     self_introduction = models.CharField(max_length=300)
-
+    blog_adderss = models.URLField()
 
     objects = UserProfileManager()
 

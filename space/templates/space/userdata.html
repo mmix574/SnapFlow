@@ -33,9 +33,12 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="panel-0">
 						<p>
-                            <form>
+                            <form method="post">
+                            {% csrf_token %}
                             {{ form1.as_p }}
                             {{ form2.as_p }}
+
+                            <button class="btn btn-success" type="submit">提交</button>
 						    </form>
                         </p>
 					</div>
@@ -48,14 +51,34 @@
 					</div>
                     <div class="tab-pane" id="panel-2">
 						<p>
-							Howdy, I'm in Section 3.
+                            <form style="width: 300px;">
+                                <div class="form-group">
+                                    <label for="oldPassword">请输入原始密码</label>
+                                    <input class="form-control" type="password">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="newPassword">请再次输入密码</label>
+                                    <input class="form-control" type="password">
+                                </div>
+
+                                <button class="btn btn-success" style="float: left">提交</button>
+                            </form>
 						</p>
 					</div>
                     <div class="tab-pane" id="panel-3">
 						<p>
-							Howdy, I'm in Section 3.
-                            <br/>
-                            fakeone
+                            <form style="width: 300px;">
+                                <div class="form-group">
+                                    <label for="oldEmail">当前绑定的邮箱为</label>
+                                    <input class="form-control" id="oldEmail" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>未验证</label>
+                                </div>
+                                <button class="btn btn-success" onclick="return false;" >提交</button>
+                                <button class="btn btn-success" onclick="return false;">重新发送认证邮件</button>
+                            </form>
 						</p>
 					</div>
 				</div>
