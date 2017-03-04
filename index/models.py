@@ -31,10 +31,14 @@ def upload_to(instance,filename):
     print(_)
     return _
 
+
+def default_avatar():
+    return "/default-user-image.png"
+
 class UserProfile(models.Model):
 
     user = models.OneToOneField(User)
-    avatar = models.ImageField(null=True,blank=True,upload_to=upload_to)
+    avatar = models.ImageField(default=default_avatar,null=True,blank=True,upload_to=upload_to)
     set_avatar = models.BooleanField(default=False)
     # avatar = models.ImageField(null=True,blank=True)
     work_year = models.IntegerField(default=0)

@@ -80,6 +80,8 @@ class MemberView(AppBaseTemplateView):
 from django.contrib.auth.models import User
 from website.utils import console
 from website.utils import messages
+
+
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
 
@@ -88,21 +90,22 @@ class UserDataView(AppBaseTemplateView):
         form1 = UserForm(instance=request.user)
         form2 = UserProfileForm(instance=request.user.userprofile)
         # messages.success(request,"good");
+
         return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2}, *args, **kwargs)
 
 
     def post(self,request,context={},*args,**kwargs):
 
         form1 = UserForm(instance=request.user,data=request.POST)
-        form2 = UserProfileForm(instance=request.user.userprofile,data=request.POST,files=request.FILES)
+        form2 = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
 
+        console.log(request.FILES)
 
         if form1.is_valid():
             form1.save()
         else:
             console.log("form1 invalidate")
         if form2.is_valid():
-            console.log(form2)
             form2.save()
         else:
             console.log("form2 invalidate")
