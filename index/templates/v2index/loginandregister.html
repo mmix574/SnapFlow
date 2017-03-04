@@ -75,6 +75,7 @@
 
         <a class="btn btn-lg btn-default btn-block" onclick="return change2register()">注册</a>
         <div style="float: right;padding-right: 8px;height: 40px;">
+                           <div style="float: right;position: relative;top: 10px;margin-left: 5px;"><span class="glyphicon glyphicon-question-sign"></span></div>
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
         </div>
 
@@ -106,8 +107,8 @@
             <button class="btn btn-lg btn-success btn-block" type="submit" onclick="return user_register();">确定注册</button>
           </form>
           <div style="height: 5px;"></div>
-
         <a class="btn btn-lg btn-default btn-block" onclick="return change2login()">返回登陆</a>
+               <div style="float: right;position: relative;top: 10px;right: 4px;"><span class="glyphicon glyphicon-question-sign"></span></div>
         <div style="float: right;padding-right: 8px;height: 40px;">
             <a href="/" style="padding-bottom: 100px;position: relative;top: 10px;">返回首页</a>
         </div>
@@ -126,7 +127,6 @@
 <script type="application/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="application/javascript" src="{% static 'labjs/myjq.js' %}"></script>
 <script type="application/javascript" src="{% static 'js/jquery.timers.js' %}"></script>
-
 <script type="application/javascript" src="{% static 'labjs/quietflow.js' %}"></script>
 <script type="application/javascript">
     $("body").quietflow({
