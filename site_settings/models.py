@@ -6,3 +6,4 @@ from django.db import models
 
 class UserCreditName():
     pass
+
