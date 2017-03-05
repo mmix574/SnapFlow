@@ -18,10 +18,17 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['id','avatar','work_place','work_nickname','language','self_introduction']
+        fields = ['id','work_place','work_nickname','language','self_introduction']
 
 
     #     avatar = models.ImageField(null=True,blank=True,upload_to='cat/')
     # work_place = models.CharField(max_length=20)
     # work_nickname = models.CharField(max_length=20)
     # lang = models.CharField(max_length=10,null=True,blank=True)
+
+
+class UserAvatarForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['avatar']

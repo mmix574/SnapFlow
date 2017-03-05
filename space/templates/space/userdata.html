@@ -17,21 +17,21 @@
 		<div class="col-md-12 column">
 			<div class="tabbable" id="tabs-718245">
 				<ul class="nav nav-tabs">
-					<li class="active">
+					<li {% ifequal form_name 'form1' %}class="active"{% endifequal %}>
 						 <a href="#panel-0" data-toggle="tab">用户资料</a>
 					</li>
-					<li>
+					<li {% ifequal form_name 'form2' %}class="active"{% endifequal %}>
 						 <a href="#panel-1" data-toggle="tab">用户头像</a>
 					</li>
-                    <li>
+                    <li {% ifequal form_name 'form3' %}class="active"{% endifequal %}>
 						 <a href="#panel-2" data-toggle="tab">修改密码</a>
 					</li>
-                    <li>
+                    <li {% ifequal form_name 'form4' %}class="active"{% endifequal %}>
 						 <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="panel-0">
+					<div class="tab-pane {% ifequal form_name 'form1' %}active{% endifequal %}" id="panel-0">
 						<p>
                             <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -42,16 +42,19 @@
 						    </form>
                         </p>
 					</div>
-					<div class="tab-pane" id="panel-1">
+					<div class="tab-pane {% ifequal form_name 'form2' %}active{% endifequal %}" id="panel-1">
 						<p>
-
-{#                            {% if  %}#}
-							Howdy, I'm in Section 2.
-                            <br/>
-                            这里添加javascript 的动态头像选择区域
+                            <div>
+                                当前头像
+                            </div>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form3.as_p }}
+                                <button class="btn btn-success" type="submit">提交</button>
+                            </form>
 						</p>
 					</div>
-                    <div class="tab-pane" id="panel-2">
+                    <div class="tab-pane {% ifequal form_name 'form3' %}active{% endifequal %}" id="panel-2">
 						<p>
                             <form style="width: 300px;">
                                 <div class="form-group">
@@ -68,7 +71,7 @@
                             </form>
 						</p>
 					</div>
-                    <div class="tab-pane" id="panel-3">
+                    <div class="tab-pane {% ifequal form_name 'form4' %}active{% endifequal %}" id="panel-3">
 						<p>
                             <form style="width: 300px;">
                                 <div class="form-group">

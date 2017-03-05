@@ -38,6 +38,8 @@ from django.contrib.auth.models import User
 from space.forms import UserForm
 from space.forms import UserProfileForm
 from index.models import UserProfile
+from space.forms import UserAvatarForm
+
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -87,30 +89,41 @@ class UserDataView(AppBaseTemplateView):
 
     def get(self, request,context={}, *args, **kwargs):
 
+        # console.log()
+
         form1 = UserForm(instance=request.user)
         form2 = UserProfileForm(instance=request.user.userprofile)
-        # messages.success(request,"good");
+        form3 = UserAvatarForm(instance=request.user.userprofile)
 
-        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2}, *args, **kwargs)
+        form_name = "form1"
+        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2,"form3":form3,"form_name":form_name}, *args, **kwargs)
 
 
     def post(self,request,context={},*args,**kwargs):
 
         form1 = UserForm(instance=request.user,data=request.POST)
         form2 = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
+        form3 = UserAvatarForm(request.POST,request.FILES,instance=request.user.userprofile)
 
-        console.log(request.FILES)
-
+        form_name = None
         if form1.is_valid():
             form1.save()
+            form_name = "form1"
         else:
             console.log("form1 invalidate")
         if form2.is_valid():
             form2.save()
+            form_name = "form2"
         else:
             console.log("form2 invalidate")
 
-        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2},*args,**kwargs)
+        if form3.is_valid():
+            form3.save()
+            form_name = "form3"
+        else:
+            console.log("form3 invalidate")
+
+        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form_name":form_name},*args,**kwargs)
 
 
 
