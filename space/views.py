@@ -105,25 +105,32 @@ class UserDataView(AppBaseTemplateView):
         form2 = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
         form3 = UserAvatarForm(request.POST,request.FILES,instance=request.user.userprofile)
 
-        form_name = None
-        if form1.is_valid():
-            form1.save()
-            form_name = "form1"
-        else:
-            console.log("form1 invalidate")
-        if form2.is_valid():
-            form2.save()
-            form_name = "form2"
-        else:
-            console.log("form2 invalidate")
+        # form1 = UserForm(instance=request.user)
+        # form2 = UserProfileForm(instance=request.user.userprofile)
+        # form3 = UserAvatarForm(instance=request.user.userprofile)
 
-        if form3.is_valid():
-            form3.save()
-            form_name = "form3"
-        else:
-            console.log("form3 invalidate")
+        form_name = request.POST.get("form_name","form1")
 
-        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form_name":form_name},*args,**kwargs)
+        if form_name=="form1":
+            if form1.is_valid():
+                form1.save()
+            else:
+                console.log("form1 invalidate")
+            pass
+        if form_name=="form2":
+            if form2.is_valid():
+                form2.save()
+            else:
+                console.log("form2 invalidate")
+            pass
+        if form_name=="form3":
+            if form3.is_valid():
+                form3.save()
+            else:
+                console.log("form3 invalidate")
+            pass
+
+        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form3":form3,"form_name":form_name},*args,**kwargs)
 
 
 
