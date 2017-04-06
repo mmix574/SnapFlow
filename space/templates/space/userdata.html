@@ -17,24 +17,24 @@
 		<div class="col-md-12 column">
 			<div class="tabbable" id="tabs-718245">
 				<ul class="nav nav-tabs">
-					<li {% ifequal form_name 'form1' %}class="active"{% endifequal %}>
+					<li {% ifequal tab_name 'tab1' %}class="active"{% endifequal %}>
 						 <a href="#panel-0" data-toggle="tab">用户资料</a>
 					</li>
-					<li {% ifequal form_name 'form2' %}class="active"{% endifequal %}>
+					<li {% ifequal tab_name 'tab2' %}class="active"{% endifequal %}>
 						 <a href="#panel-1" data-toggle="tab">用户头像</a>
 					</li>
-                    <li {% ifequal form_name 'form3' %}class="active"{% endifequal %}>
+                    <li {% ifequal tab_name 'tab3' %}class="active"{% endifequal %}>
 						 <a href="#panel-2" data-toggle="tab">修改密码</a>
 					</li>
-                    <li {% ifequal form_name 'form4' %}class="active"{% endifequal %}>
+                    <li {% ifequal tab_name 'tab4' %}class="active"{% endifequal %}>
 						 <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane {% ifequal form_name 'form1' %}active{% endifequal %}" id="panel-0">
+					<div class="tab-pane {% ifequal tab_name 'tab1' %}active{% endifequal %}" id="panel-0">
 						<p>
                             <form method="post" enctype="multipart/form-data">
-                            <input name="form_name" value="form1" hidden="hidden">
+                            <input name="tab_name" value="tab1" hidden="hidden">
                             {% csrf_token %}
                             {{ form1.as_p }}
                             {{ form2.as_p }}
@@ -43,13 +43,13 @@
 						    </form>
                         </p>
 					</div>
-					<div class="tab-pane {% ifequal form_name 'form2' %}active{% endifequal %}" id="panel-1">
+					<div class="tab-pane {% ifequal tab_name 'tab2' %}active{% endifequal %}" id="panel-1">
 						<p>
                             <div>
                                 当前头像
                             </div>
                             <form method="post" enctype="multipart/form-data">
-                            <input name="form_name" value="form2" hidden="hidden">
+                            <input name="tab_name" value="tab2" hidden="hidden">
 
                                 {% csrf_token %}
                                 {{ form3.as_p }}
@@ -57,10 +57,10 @@
                             </form>
 						</p>
 					</div>
-                    <div class="tab-pane {% ifequal form_name 'form3' %}active{% endifequal %}" id="panel-2">
+                    <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-2">
 						<p>
-                            <form style="width: 300px;">
-                                <input name="form_name" value="form3" hidden="hidden">
+                            <form style="width: 300px;" method="post" action=".">
+                                <input name="tab_name" value="tab3" hidden="hidden">
 
                                 <div class="form-group">
                                     <label for="oldPassword">请输入原始密码</label>
@@ -76,10 +76,10 @@
                             </form>
 						</p>
 					</div>
-                    <div class="tab-pane {% ifequal form_name 'form4' %}active{% endifequal %}" id="panel-3">
+                    <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-3">
 						<p>
                             <form style="width: 300px;">
-                                <input name="form_name" value="form4" hidden="hidden">
+                                <input name="tab_name" value="tab4" hidden="hidden">
                                 <div class="form-group">
                                     <label for="oldEmail">当前绑定的邮箱为</label>
                                     <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">

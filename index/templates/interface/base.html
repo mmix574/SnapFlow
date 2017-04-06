@@ -72,7 +72,7 @@
 {#-----------------------nav------------------------#}
 <div class="body-fix" style="background-color: #EEEEEE;">
 <div style="box-shadow: 0px 0px 13px 0px #999;">
-<nav class="navbar navbar-default" style="border-radius: 0px;height: 20px;">
+<nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -126,7 +126,7 @@
             </div>
                 </form>
                 {% if logined and profile.avatar %}
-                    <li ><img style="width: 42px;height: 42px;border-radius:20px;position:relative;top: 5px;left: 8px;box-shadow: 0px 0px 1px 1px #9d9d9d" src="{{profile.avatar.url}}"></li>
+                    <li ><img style="width: 42px;height: 42px;border-radius:4px;position:relative;top: 5px;left: 8px;box-shadow: 0px 0px 1px 1px #AAA" src="{{profile.avatar.url}}"></li>
                 {% endif %}
 
 {#            <li><a>消息</a></li>#}
@@ -182,7 +182,7 @@
         padding-top: 30px;
     }
     .footer-link-div > ul > li > a{
-        color: #777;
+        color: #999;
         text-decoration: none;
 
     }

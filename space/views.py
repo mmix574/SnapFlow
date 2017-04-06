@@ -95,8 +95,8 @@ class UserDataView(AppBaseTemplateView):
         form2 = UserProfileForm(instance=request.user.userprofile)
         form3 = UserAvatarForm(instance=request.user.userprofile)
 
-        form_name = "form1"
-        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2,"form3":form3,"form_name":form_name}, *args, **kwargs)
+        tab_name = "tab1"
+        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2,"form3":form3,"tab_name":tab_name}, *args, **kwargs)
 
 
     def post(self,request,context={},*args,**kwargs):
@@ -109,28 +109,30 @@ class UserDataView(AppBaseTemplateView):
         # form2 = UserProfileForm(instance=request.user.userprofile)
         # form3 = UserAvatarForm(instance=request.user.userprofile)
 
-        form_name = request.POST.get("form_name","form1")
+        tab_name = request.POST.get("tab_name","tab1")
 
-        if form_name=="form1":
+        if tab_name=="tab1":
             if form1.is_valid():
                 form1.save()
             else:
                 console.log("form1 invalidate")
             pass
-        if form_name=="form2":
             if form2.is_valid():
                 form2.save()
             else:
                 console.log("form2 invalidate")
             pass
-        if form_name=="form3":
+
+        if tab_name=="tab2":
             if form3.is_valid():
                 form3.save()
             else:
                 console.log("form3 invalidate")
             pass
+        if tab_name=="tab3":
+            pass
 
-        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form3":form3,"form_name":form_name},*args,**kwargs)
+        return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form3":form3,"tab_name":tab_name},*args,**kwargs)
 
 
 
