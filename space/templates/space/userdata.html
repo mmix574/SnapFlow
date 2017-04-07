@@ -33,9 +33,14 @@
 				<div class="tab-content">
 					<div class="tab-pane {% ifequal tab_name 'tab1' %}active{% endifequal %}" id="panel-0">
 						<p>
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" enctype="multipart/form-data" style="width: 300px;">
                             <input name="tab_name" value="tab1" hidden="hidden">
                             {% csrf_token %}
+                            <div class="form-group">
+                                <label for="newPassword">用户名</label>
+                                <input class="form-control" name="username" type="text" value="{{ form1.username.value }}">
+                            </div>
+
                             {{ form1.as_p }}
                             {{ form2.as_p }}
 
@@ -46,22 +51,25 @@
 					<div class="tab-pane {% ifequal tab_name 'tab2' %}active{% endifequal %}" id="panel-1">
 						<p>
                             <div>
-                                当前头像
+                                <label>当前头像:</label>
                             </div>
                             <form method="post" enctype="multipart/form-data">
                             <input name="tab_name" value="tab2" hidden="hidden">
 
                                 {% csrf_token %}
+                                <div style="margin-bottom: 10px;margin-top: 10px;margin-left: 20px;">
+                                    <img src="/media_cdn/{{ form3.avatar.value }}" style="height: 200px;width: 200px;">
+                                </div>
                                 {{ form3.as_p }}
                                 <button class="btn btn-success" type="submit">提交</button>
                             </form>
 						</p>
 					</div>
-                    <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-2">
+                    <div class="tab-pane {% ifequal tab_name 'tab3' %}active{% endifequal %}" id="panel-2">
 						<p>
                             <form style="width: 300px;" method="post" action=".">
                                 <input name="tab_name" value="tab3" hidden="hidden">
-
+                                {% csrf_token %}
                                 <div class="form-group">
                                     <label for="oldPassword">请输入原始密码</label>
                                     <input class="form-control" type="password">

@@ -105,6 +105,7 @@ class UserDataView(AppBaseTemplateView):
         form2 = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
         form3 = UserAvatarForm(request.POST,request.FILES,instance=request.user.userprofile)
 
+
         # form1 = UserForm(instance=request.user)
         # form2 = UserProfileForm(instance=request.user.userprofile)
         # form3 = UserAvatarForm(instance=request.user.userprofile)
@@ -126,11 +127,17 @@ class UserDataView(AppBaseTemplateView):
         if tab_name=="tab2":
             if form3.is_valid():
                 form3.save()
+                form3 = UserAvatarForm(instance=request.user.userprofile)
             else:
                 console.log("form3 invalidate")
             pass
         if tab_name=="tab3":
             pass
+
+
+        form1 = UserForm(instance=request.user)
+        form2 = UserProfileForm(instance=request.user.userprofile)
+        form3 = UserAvatarForm(instance=request.user.userprofile)
 
         return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form3":form3,"tab_name":tab_name},*args,**kwargs)
 

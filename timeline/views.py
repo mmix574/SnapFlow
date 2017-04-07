@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 from website.utils import messages
 
 
+from .models import Comment
+from .forms import CommentForm
+
 class IndexView(AppBaseTemplateView):
     template_name = 'timeline/index.html'
 
@@ -22,7 +25,17 @@ class IndexView(AppBaseTemplateView):
         return super(IndexView, self).get(request,context={}, *args, **kwargs)
 
     def post(self,request,context={},*args,**kwargs):
+        content = request.POST.get("say_content",None)
+        if content:
+            print(content)
+        else:
+            print("None")
 
+
+        f = CommentForm()
+
+        if f.is_valid():
+            f.save()
 
 
         return super(IndexView, self).post(request,context={},*args,**kwargs)

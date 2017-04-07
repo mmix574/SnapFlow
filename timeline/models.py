@@ -10,3 +10,13 @@ class Comment(models.Model):
     content = models.CharField(max_length=120)
     created_time = models.DateTimeField(auto_now=True)
     last_operate = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        verbose_name = "时间轴"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.user.username+"--"+self.tittle+"--"+self.content
+
+

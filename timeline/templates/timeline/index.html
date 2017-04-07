@@ -1,3 +1,5 @@
+{% load humanize %}
+
 {% extends 'interface/base_display.html' %}
 
 
@@ -31,7 +33,7 @@
         {% csrf_token %}
       <div class="form-group">
         <label for="name"> 你现在在想什么</label>
-        <textarea style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3"></textarea>
+        <textarea style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3" name="say_content"></textarea>
       </div>
         <input class="btn btn-success" type="submit">
     </form>

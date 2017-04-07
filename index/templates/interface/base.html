@@ -70,6 +70,14 @@
 {% endif %}
 
 {#-----------------------nav------------------------#}
+<style>
+{##}
+{#    #navbar > ul:nth-child(1) > li:hover{#}
+{#        background-color: #eaeaea;#}
+{##}
+{#    }#}
+</style>
+
 <div class="body-fix" style="background-color: #EEEEEE;">
 <div style="box-shadow: 0px 0px 13px 0px #999;">
 <nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
@@ -92,7 +100,7 @@
       <ul class="nav navbar-nav">
         <li><a href="/">首页</a></li>
 {#        <li class="active"><a href="#">最新</a></li>#}
-          <li><a href="/t/">发现</a></li>
+          <li class=""><a href="/t/">发现</a></li>
         <li><a href="/t/create">问答</a></li>
         <li><a href="/time">时间轴</a></li>
 
@@ -118,6 +126,7 @@
                 </a>
             </li>
 
+
             {% else %}
 
                 <form class="navbar-form navbar-left" action="/s">
@@ -137,7 +146,7 @@
 {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
 {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
 {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
-              <li><a href="/m">消息中心</a></li>
+                <li><a href="/m">消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
               <li><a href="/none">我的收藏</a></li>
               <li><a href="/none">我的关注</a></li>
               <li><a href="/none">小组</a></li>
