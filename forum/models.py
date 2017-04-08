@@ -2,7 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class Class(models.Model):
+    name = models.CharField(max_length=20,blank=True,null=True)
+    chinese_name = models.CharField(max_length=20,blank=True,null=True)
+    create_user = models.ForeignKey(User,default=1,blank=True,null=True)
+    create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
+    last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    pass
+
+class SubClass(models.Model):
+    parent_class = models.ForeignKey(Class)
+
     name = models.CharField(max_length=20)
     chinese_name = models.CharField(max_length=20)
     create_user = models.ForeignKey(User)
