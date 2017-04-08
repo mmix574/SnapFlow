@@ -4,18 +4,23 @@ from django.contrib.auth.models import User
 
 
 class Class(models.Model):
-    name = models.CharField(max_length=20,blank=True,null=True)
-    chinese_name = models.CharField(max_length=20,blank=True,null=True)
+    name = models.CharField("名字",max_length=20,blank=True,null=True)
     create_user = models.ForeignKey(User,default=1,blank=True,null=True)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    pass
+
+    class Meta:
+        verbose_name = "父帖子类型"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
 
 class SubClass(models.Model):
     parent_class = models.ForeignKey(Class)
-
-    name = models.CharField(max_length=20)
-    chinese_name = models.CharField(max_length=20)
+    name = models.CharField("名字",max_length=20)
+    # chinese_name = models.CharField(max_length=20)
     create_user = models.ForeignKey(User)
     create_time = models.DateTimeField(auto_now=True,blank=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True)
@@ -24,7 +29,7 @@ class SubClass(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = "帖子类型"
+        verbose_name = "子帖子类型"
         verbose_name_plural = verbose_name
 
 
