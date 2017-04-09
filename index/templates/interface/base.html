@@ -80,7 +80,7 @@
 </style>
 
 <div class="body-fix" style="background-color: #EEEEEE;">
-<div style="box-shadow: 0px 0px 13px 0px #999;">
+<div style="box-shadow: 0px 0px 5px 0px #7a7a7a;">
 <nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
   <div class="container">
     <div class="navbar-header">
@@ -301,6 +301,7 @@
                             <div id="footer-statement" class="col-md-12" style="float: left;">
                                 <p style="color: #777;">Copyright;  ©2016-2017  Powered by <a style="color: #fbfbfb" href="https://www.djangoproject.com/">Django</a></p>
                                 <font style="color: rgb(226,226,226)">© 2005-2017 Django Software Foundation and individual contributors. Django is a registered trademark of the Django Software Foundation.</font>
+                                <p style="color: #777;"> 12 人在线   最高记录 76 </p>
                             </div>
                         </div>
 
@@ -321,12 +322,31 @@
 
 </div><!--body-fix-->
 
-<div style="height: 200px;width: 50px;background-color: #449d44;position: fixed;display: block;z-index: 999;bottom: 100px;right: 10px;">
-    <div style="height: 50px;width: 50px;text-align: center;border: 1px solid black">
-        <div>
-            <span class="glyphicon glyphicon-menu-up"></span>
-        </div>
+<style>
+
+
+</style>
+<div style="height: 200px;width: 50px;position: fixed;display: block;z-index: 999;bottom: 100px;right: 10px;">
+{#    复制我#}
+    <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+
+            <a onclick="return backtotop()">
+                <div style="height: 50px;width: 50px;">
+                    <span style="height: 50px;width:50px;top: 18px;" class="glyphicon glyphicon-menu-up"></span>
+                </div>
+            </a>
     </div>
+    {#    复制我#}
+    <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+
+            <a onclick="return backtotop()">
+                <div style="height: 50px;width: 50px;padding-top: 12px;">
+                    打卡
+                </div>
+            </a>
+    </div>
+{#    复制我#}
+
 
 </div>
 
@@ -335,3 +355,9 @@
 <script type="application/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="application/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="application/javascript" src="{% static 'labjs/myjq.js' %}"></script>
+<script>
+    function backtotop(){
+{#        alert("you clicked me");#}
+    }
+
+</script>

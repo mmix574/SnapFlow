@@ -42,59 +42,18 @@
     <div><hr/></div>
 
 {% for item in list %}
-<div style="padding-top: 20px;padding-bottom: 20px;">
-    <div class="media">
-      <div class="media-left">
-        <a href="#">
-          <img class="media-object" alt="64x64" style="width: 64px; height: 64px;" src="{{item.user.userprofile.avatar.url}}
+    <div class="container">
+          <img class="media-object" alt="60x60" style="width: 62px; height: 62px;border-radius: 4px;box-shadow: 0px 0px 5px #AAA" src="{{item.user.userprofile.avatar.url}}
 " data-holder-rendered="true">
-        </a>
-      </div>
-      <div class="media-body">
-        <h4 class="media-heading">{{ item.user.username }}</h4>
-          {{ item.content }}
-          {{ item.created_time | timesince }}前
-{#        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.#}
-      </div>
-    </div>
-</div>
+        <b>{{ item.user.username }}</b>
+        {{ item.created_time | naturaltime }}前
+        <p>{{ item.content }}</p>
 
+
+
+
+      </div>
+    <hr/>
 {% endfor %}
-
-    <div id="r_4213857" class="cell">
-
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tbody><tr>
-                <td width="48" valign="top" align="center"><img src="//v2ex.assets.uxengine.net/gravatar/a346c1587befe28d6462e11a659bbed5?s=48&amp;d=retro" class="avatar" border="0" align="default"></td>
-                <td width="10" valign="top"></td>
-                <td width="auto" valign="top" align="left"><div class="fr"><div id="thank_area_4213857" class="thank_area"><a href="#;" onclick="if (confirm('确认要不再显示来自 @cqcn1991 的这条回复？')) { ignoreReply(4213857, '15732'); }" class="thank" style="color: #ccc;">隐藏</a> &nbsp; &nbsp; &nbsp; <a href="#;" onclick="if (confirm('确认花费 10 个铜币向 @cqcn1991 的这条回复发送感谢？')) { thankReply(4213857, 'yoylwsuqqkpgvryabrdgaxmtgifglmlf'); }" class="thank">感谢回复者</a></div> &nbsp; <a href="#;" onclick="replyOne('cqcn1991');"><img src="//cdn.v2ex.com/static/img/reply.png" align="absmiddle" border="0" alt="Reply"></a> &nbsp;&nbsp; <span class="no">1</span></div>
-                    <div class="sep3"></div>
-                    <strong><a href="/member/cqcn1991" class="dark">cqcn1991</a></strong>&nbsp; &nbsp;<span class="fade small">10 小时 55 分钟前</span>
-                    <div class="sep5"></div>
-                    <div class="reply_content">搭车求点评
-<br><a target="_blank" href="https://github.com/cqcn1991/resume" rel="nofollow">https://github.com/cqcn1991/resume</a></div>
-                </td>
-            </tr>
-        </tbody></table>
-        </div>
-
-
-    <div id="r_4213695" class="cell">
-
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tbody><tr>
-                <td width="48" valign="top" align="center"><img src="//v2ex.assets.uxengine.net/gravatar/2d6a9377070e41d2c6d6e1c8bb33e3fc?s=48&amp;d=retro" class="avatar" border="0" align="default"></td>
-                <td width="10" valign="top"></td>
-                <td width="auto" valign="top" align="left"><div class="fr"><div id="thank_area_4213695" class="thank_area"><a href="#;" onclick="if (confirm('确认要不再显示来自 @crytis 的这条回复？')) { ignoreReply(4213695, '15732'); }" class="thank" style="color: #ccc;">隐藏</a> &nbsp; &nbsp; &nbsp; <a href="#;" onclick="if (confirm('确认花费 10 个铜币向 @crytis 的这条回复发送感谢？')) { thankReply(4213695, 'ybiiebsjvachrfifvyxvoxrvrcmjeygy'); }" class="thank">感谢回复者</a></div> &nbsp; <a href="#;" onclick="replyOne('crytis');"><img src="//cdn.v2ex.com/static/img/reply.png" align="absmiddle" border="0" alt="Reply"></a> &nbsp;&nbsp; <span class="no">1</span></div>
-                    <div class="sep3"></div>
-                    <strong><a href="/member/crytis" class="dark">crytis</a></strong>&nbsp; &nbsp;<span class="fade small">12 小时 21 分钟前 via iPhone</span>
-                    <div class="sep5"></div>
-                    <div class="reply_content">58 同城</div>
-                </td>
-            </tr>
-        </tbody></table>
-        </div>
-
-
 
 {% endblock %}
