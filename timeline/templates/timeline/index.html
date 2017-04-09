@@ -29,14 +29,16 @@
 {#</div>#}
 {##}
 <div class="container"style="padding-top: 20px;padding-bottom: 0px">
-    <form role="form" method="post">
+    <form role="form" method="post" onsubmit="return check();">
         {% csrf_token %}
       <div class="form-group">
           <span  style="top: 3px;" class="glyphicon glyphicon-map-marker"></span>
           <label for="name"> 你现在在想什么</label>
-          <textarea style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3" name="content"></textarea>
+          <textarea id="content-textarea" style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3" name="content"></textarea>
       </div>
-        <input class="btn btn-success" type="submit">
+        <div style="margin-left: 460px;"><span id="num-count">0</span>/500</div>
+        <button class="btn btn-success" type="submit">提交</button>
+{#        <input class="btn btn-success" type="submit">#}
     </form>
 </div>
     <div><hr/></div>
@@ -50,10 +52,31 @@
         <p>{{ item.content }}</p>
 
 
-
-
       </div>
     <hr/>
 {% endfor %}
 
+<script type="application/javascript">
+{#    $(document).on('input propertychange', 'textarea', function() {#}
+{#        //function code#}
+{#        alert('input textarea change');#}
+{#        #}
+{#    });#}
+{#    console.log($("#content-textarea"));#}
+{#    alert("hello world");#}
+
+    document.getElementById('content-textarea').onkeydown = function()
+    {
+        document.getElementById('num-count').innerText = this.value.length;
+        {#        num-count#}
+        if(this.value.length > 500){
+            this.value = this.value.slice(0,500);
+            event.returnValue = false;
+        }
+    };
+
+    function check(){
+        return (document.getElementById('content-textarea').value.length)!=0;
+    }
+</script>
 {% endblock %}
