@@ -8,9 +8,9 @@ body{
 }
 
 @media screen and (max-width: 992px){
-    #navbar-brand{
-        display: none;
-    }
+    /*#navbar-brand{*/
+        /*display: none;*/
+    /*}*/
 }
 /*.btn-primary,.btn-default{*/
     /*background-image: none;*/
