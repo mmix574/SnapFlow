@@ -1,10 +1,13 @@
 {% extends 'interface/base.html' %}
 {% block tittle %}
 {% endblock %}
+
+{#1140 940 720#}
 <style>
 .container-warpper{
     background-color: #ffffff;
 }
+
 </style>
 {% block body %}
 <div class="container-warpper">
@@ -19,12 +22,12 @@
     </div>
 
     <div class="container">
-        <div style="float: left;width: 80%;height: 220px;background-color: #3c763d">
+        <div style="float: left;width: 840px;height: 220px;background-color: #3c763d">
             {% block left %}
                 你
             {% endblock %}
         </div>
-        <div style="float:left;width: 20%;height: 220px;background-color: #8c8c8c">
+        <div style="float:left;width: 300px;height: 220px;background-color: #8c8c8c">
             {% block right %}
                 看看你
             {% endblock %}
