@@ -3,13 +3,27 @@
 {% endblock %}
 
 {#1140 940 720#}
+
+{% block body %}
 <style>
-.container-warpper{
-    background-color: #ffffff;
+@media screen and (min-width: 0px) and (max-width: 767px){
+
 }
 
+@media screen and (min-width: 768px) and (max-width: 991px){
+
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px){
+
+}
+
+@media screen and (min-width: 1200px){
+
+}
+
+
 </style>
-{% block body %}
 <div class="container-warpper">
     <div class="container">
         {% block adArea %}
@@ -22,7 +36,7 @@
     </div>
 
     <div class="container">
-        <div style="float: left;width: 840px;height: 220px;background-color: #3c763d">
+        <div class="content-left" style="float: left;width: 840px;height: 220px;background-color: #3c763d">
             {% block left %}
                 你
             {% endblock %}
