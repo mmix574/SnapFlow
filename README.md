@@ -1,2 +1,2 @@
 # SnapFlow
-2017 年本科毕业设计
+2017 GRADUATE WORK IN DGUT
