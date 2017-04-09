@@ -142,7 +142,8 @@ class UserDataView(AppBaseTemplateView):
         return super(UserDataView, self).post(request,context={"form1":form1,"form2":form2,"form3":form3,"tab_name":tab_name},*args,**kwargs)
 
 
-
+class UserHomePageView(AppBaseTemplateView):
+    pass
 
 
 
