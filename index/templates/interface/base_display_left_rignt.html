@@ -33,27 +33,28 @@
         width: 880px;
     }
 }
-
-
+.block-left , .block-right , .block-my-ad{
+    background-color: #FFFFFF;
+    box-shadow:1px 1px 7px #848A8C;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
 </style>
 <div class="container-warpper">
-    <div class="container" style="margin-bottom: 10px;">
-            <div style="box-shadow:0px 1px 7px #848A8C;border-radius: 4px;height: 300px;background-color: #FFFFFF">{% block adArea %}<p>adadadadadadadadadadadadadadadadadadadadadadadadadadad</p>{% endblock %}</div>
-    </div>
     <div class="container">
-        {% block container %}
+        {% block ad %}
+            <div class="block-my-ad">ad</div>
         {% endblock %}
     </div>
-
     <div class="container">
-        <div class="content-left" style="float: left;height: 220px;box-shadow:1px 1px 7px #848A8C;border-radius: 4px;background-color: #FFFFFF">
+        <div class="content-left" style="float: left;">
             {% block left %}
-                left
+                <div class="block-left">this is left</div>
             {% endblock %}
         </div>
-        <div class="content-right" style="float:left;height: 220px;background-color: #FFFFFF;box-shadow:1px 1px 7px #848A8C;border-radius: 4px;">
+        <div class="content-right" style="float:left;">
             {% block right %}
-                right
+                <div class="block-right">this is right</div>
             {% endblock %}
         </div>
     </div>
