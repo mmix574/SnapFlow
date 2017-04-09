@@ -6,8 +6,7 @@ from django.contrib.auth.models import User
 
 class Comment(models.Model):
     user = models.ForeignKey(User)
-    tittle = models.CharField(max_length=20)
-    content = models.CharField(max_length=120)
+    content = models.CharField(max_length=600)
     created_time = models.DateTimeField(auto_now=True)
     last_operate = models.DateTimeField(auto_now_add=True)
 
@@ -17,6 +16,6 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.user.username+"--"+self.tittle+"--"+self.content
+        return self.content
 
 

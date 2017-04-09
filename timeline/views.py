@@ -32,10 +32,21 @@ class IndexView(AppBaseTemplateView):
             print("None")
 
 
-        f = CommentForm()
+    #     #    user = models.ForeignKey(User)
+    # tittle = models.CharField(max_length=20)
+    # content = models.CharField(max_length=120)
+    # created_time = models.DateTimeField(auto_now=True)
+    # last_operate = models.DateTimeField(auto_now_add=True)
+
+
+        f = CommentForm(request.POST)
+        m = f.save(commit=False)
+        m.user = request.user
 
         if f.is_valid():
             f.save()
+        else:
+            print("not validate")
 
 
         return super(IndexView, self).post(request,context={},*args,**kwargs)

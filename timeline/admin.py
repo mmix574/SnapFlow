@@ -7,8 +7,8 @@ from django.contrib import admin
 
 
 class CommentAdmin(admin.ModelAdmin):
-    fields = ["user","tittle","content"]
-    list_display = ["user","tittle","content","created_time"]
+    fields = ["user","content"]
+    list_display = ["user","content","created_time"]
 
     #
     pass
