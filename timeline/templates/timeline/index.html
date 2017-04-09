@@ -48,7 +48,7 @@
           <img class="media-object" alt="60x60" style="width: 62px; height: 62px;border-radius: 4px;box-shadow: 0px 0px 5px #AAA" src="{{item.user.userprofile.avatar.url}}
 " data-holder-rendered="true">
         <b>{{ item.user.username }}</b>
-        {{ item.created_time | naturaltime }}前
+        {{ item.created_time | naturaltime }}
         <p>{{ item.content }}</p>
 
 
@@ -65,13 +65,15 @@
 {#    console.log($("#content-textarea"));#}
 {#    alert("hello world");#}
 
-    document.getElementById('content-textarea').onkeydown = function()
+    document.getElementById('content-textarea').onkeyup = function()
     {
-        document.getElementById('num-count').innerText = this.value.length;
-        {#        num-count#}
+        document.getElementById('num-count').innerText = document.getElementById('content-textarea').value.length;
         if(this.value.length > 500){
             this.value = this.value.slice(0,500);
             event.returnValue = false;
+        }else{
+            event.returnValue = true;
+
         }
     };
 
