@@ -10,8 +10,6 @@ class UserToUserMessage(models.Model):
 class SystemToUserMessage(models.Model):
     pass
 
-
-
 # @ 回复等，点赞等
 class EventMessage(models.Model):
     pass

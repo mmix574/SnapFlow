@@ -35,6 +35,7 @@ class SubClass(models.Model):
 
 # Create your models here.
 class Thread (models.Model):
+    sub_class = models.ForeignKey(SubClass,null=True)
     tittle = models.CharField(max_length=20,blank=True)
     content = models.TextField(default="")
     create_user = models.ForeignKey(User,default=1)
@@ -42,8 +43,20 @@ class Thread (models.Model):
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
     class Meta:
-
+        verbose_name = "帖子"
+        verbose_name_plural = verbose_name
         pass
+
+    def __str__(self):
+        return self.tittle
+
+class Comment(models.Model):
+    thread = models.ForeignKey(Thread)
+
+
+    pass
+
+
 
 class TAG(models.Model):
     pass
