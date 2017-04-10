@@ -5,6 +5,7 @@ from index.appviews import AppBaseTemplateView
 
 
 from .models import Class
+from .models import SubClass
 
 
 class IndexView(AppBaseTemplateView):
@@ -12,12 +13,25 @@ class IndexView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         display_class = Class.objects.all().order_by('order')
         context['display_class'] = display_class
+
+        first_class = {}
+        if len(display_class):
+            first_class = display_class[0]
+
+        print('hello')
+
+        tab = self.request.GET.get('tab','None')
+
+        if tab:
+            pass
+        else:
+            pass
+
+
         return context
-
-
-
 
 
 class CreateView(AppBaseTemplateView):
