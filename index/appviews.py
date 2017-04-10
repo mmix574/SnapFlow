@@ -35,7 +35,7 @@ class AppBaseTemplateView(TemplateView):
         # 子类可以通过父类的get_context_data 继续添加context数据
         context = super().get_context_data()
         context["tittle"] = "AppBaseTemplateView -- DEBUG"
-
+        context['view_name'] = self.request.resolver_match.url_name
         # 判断用户是否已经登陆
         request = self.request
         if request.user.is_authenticated:

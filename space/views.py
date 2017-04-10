@@ -89,8 +89,6 @@ class UserDataView(AppBaseTemplateView):
 
     def get(self, request,context={}, *args, **kwargs):
 
-        # console.log()
-
         form1 = UserForm(instance=request.user)
         form2 = UserProfileForm(instance=request.user.userprofile)
         form3 = UserAvatarForm(instance=request.user.userprofile)
