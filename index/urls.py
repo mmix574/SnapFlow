@@ -5,7 +5,7 @@ from . import v2views
 
 urlpatterns = [
     # 欢迎界面，包括未登录欢迎界面和登陆之后的欢迎界面
-    url(r'^$',views.IndexView.as_view()),
+    url(r'^$',views.IndexView.as_view(),name="_index"),
     # 提示消息
     # url(r'message',views.MessageView.as_view()),
     # 登陆

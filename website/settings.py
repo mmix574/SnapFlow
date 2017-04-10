@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'api',
     'forum',
     'index',
+    'fake',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

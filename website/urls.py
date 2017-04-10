@@ -36,6 +36,8 @@ urlpatterns = [
     url(r't/',include('forum.urls')),
     #message
     url(r'm/',include('message.urls')),
+    #fake
+    url(r'fake/',include('fake.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

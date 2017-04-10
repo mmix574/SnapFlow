@@ -16,6 +16,16 @@
     <style>
         .class-div{
             display: inline;
+            padding-left: 3px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 3px;
+        }
+        .class-div-active{
+            background-color: #383838;
+        }
+        .class-div-active >a{
+            color: #fefefe;
         }
         .subclass-list{
             background-color: #cfcfcf
@@ -30,12 +40,12 @@
     <div class="block-left">
         <div style="padding-top: 7px;padding-left: 10px;">
             {% for item in display_class %}
-                <div class="class-div">
+                <div class="class-div {% ifequal tab item.name %}class-div-active{% endifequal %}">
                     <a class="nav-a-btn-alike" href="?tab={{ item.name }}">{{ item }}</a>
                 </div>
             {% endfor %}
         </div>
-        <div class="subclass-list" style="">
+        <div class="subclass-list" style="margin-top: 10px;">
             <div class="subclass-list-item">1</div>
             <div class="subclass-list-item">1</div>
             <div class="subclass-list-item">1</div>

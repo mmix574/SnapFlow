@@ -21,15 +21,9 @@ class IndexView(AppBaseTemplateView):
         if len(display_class):
             first_class = display_class[0]
 
-        print('hello')
-
-        tab = self.request.GET.get('tab','None')
-
-        if tab:
-            pass
-        else:
-            pass
-
+        # tab control
+        tab = self.request.GET.get('tab',None)
+        context['tab'] = tab
 
         return context
 
