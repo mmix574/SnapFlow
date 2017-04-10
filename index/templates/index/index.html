@@ -1,10 +1,11 @@
-{% extends 'interface/base_display.html' %}
+{% extends 'interface/base_display_left_rignt.html' %}
 
 {% block tittle %}
     首页
 {% endblock %}
 
-{% block body %}
+{#{% block body %}#}
+
 {#<div class="container" style="padding-left: 0px;">#}
 {#    <div class="jumbotron" >#}
 {#      <h1>SnapFlow</h1>#}
@@ -12,77 +13,82 @@
 {#      <p><a class="btn btn-primary btn-lg" href="#" role="button">更多介绍</a></p>#}
 {#    </div>#}
 {#</div>#}
+{##}
+{#<style>#}
+{#    .carousel-control.left{ background-image:none;}#}
+{#    .carousel-control.right{ background-image:none;}#}
+{#    .carousel-inner > .item{#}
+{#        height: 600px;#}
+{#    }#}
+{#</style>#}
+{#<div>#}
+{#    <div id="myCarousel" class="carousel slide" style="background-image: url("/static/favicon.png")">#}
+{#        <!-- 轮播（Carousel）指标 -->#}
+{#        <ol class="carousel-indicators">#}
+{#            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>#}
+{#            <li data-target="#myCarousel" data-slide-to="1"></li>#}
+{#            <li data-target="#myCarousel" data-slide-to="2"></li>#}
+{#        </ol>#}
+{#        <!-- 轮播（Carousel）项目 -->#}
+{#        <div class="carousel-inner" style="background-image: url(/static/image/bg.jpg);color: #EEEEEE">#}
+{#            <div class="item active">#}
+{#                开始#}
+{#                <div class="container" style="padding-left: 0px;">#}
+{#                    <div class="jumbotron" style="background: none">#}
+{#                        <div style="width: 60%;float: left">#}
+{#                          <h1>SnapFlow</h1>#}
+{#                          <p>一个支持『 内容个性化定制 』的问答社区系统</p>#}
+{#                            <h3 class="introduction-caption">· 支持Markdown简约化评论</h3>#}
+{#                            <h3 class="introduction-caption">· 高度自定义的内容个性化定制</h3>#}
+{#                            <h3 class="introduction-caption">· 支持更快更强的WebSocket即时问题回答推送</h3>#}
+{#                            <h3 class="introduction-caption">· 自动化分词为你保驾护航 </h3>#}
+{#                            <h3 class="introduction-caption">· 支持简单粗暴却很有效的黑白关键词过滤 </h3>#}
+{#                          <p style="padding-top: 20px;"><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>#}
+{#                        </div>#}
+{#                        <a class="btn btn-default btn-lg">现在注册</a>#}
+{#                        <a class="btn btn-success btn-lg">现在登陆</a>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#            <div class="item">#}
+{#                开始#}
+{#                <div class="container" style="padding-left: 0px;">#}
+{#                    <div class="jumbotron" style="background: none" >#}
+{#                      <h1>他们都在用</h1>#}
+{#                      <p>一个支持『 内容个性化定制 』的问答社区</p>#}
+{#                      <p><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                开始#}
+{#                <div class="container" style="padding-left: 0px;">#}
+{#                    <div class="jumbotron" style="background: none" >#}
+{#                      <h1>现在加入会员行列还有优惠</h1>#}
+{#                      <p>一个支持『 内容个性化定制 』的问答社区</p>#}
+{#                      <p><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- 轮播（Carousel）导航 -->#}
+{#        <a class="carousel-control left" href="#myCarousel"#}
+{#            data-slide="prev">&lsaquo;#}
+{#        </a>#}
+{#        <a class="carousel-control right" href="#myCarousel"#}
+{#            data-slide="next">&rsaquo;#}
+{#        </a>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
 
-<style>
-    .carousel-control.left{ background-image:none;}
-    .carousel-control.right{ background-image:none;}
-    .carousel-inner > .item{
-        height: 600px;
-    }
-</style>
-<div>
-    <div id="myCarousel" class="carousel slide" style="background-image: url("/static/favicon.png")">
-        <!-- 轮播（Carousel）指标 -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <!-- 轮播（Carousel）项目 -->
-        <div class="carousel-inner" style="background-image: url(/static/image/bg.jpg);color: #EEEEEE">
-            <div class="item active">
-{#                开始#}
-                <div class="container" style="padding-left: 0px;">
-                    <div class="jumbotron" style="background: none">
-                        <div style="width: 60%;float: left">
-                          <h1>SnapFlow</h1>
-                          <p>一个支持『 内容个性化定制 』的问答社区系统</p>
-                            <h3 class="introduction-caption">· 支持Markdown简约化评论</h3>
-                            <h3 class="introduction-caption">· 高度自定义的内容个性化定制</h3>
-                            <h3 class="introduction-caption">· 支持更快更强的WebSocket即时问题回答推送</h3>
-                            <h3 class="introduction-caption">· 自动化分词为你保驾护航 </h3>
-                            <h3 class="introduction-caption">· 支持简单粗暴却很有效的黑白关键词过滤 </h3>
-                          <p style="padding-top: 20px;"><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>
-                        </div>
-                        <a class="btn btn-default btn-lg">现在注册</a>
-                        <a class="btn btn-success btn-lg">现在登陆</a>
-                    </div>
-                </div>
 
-            </div>
-            <div class="item">
-{#                开始#}
-                <div class="container" style="padding-left: 0px;">
-                    <div class="jumbotron" style="background: none" >
-                      <h1>他们都在用</h1>
-                      <p>一个支持『 内容个性化定制 』的问答社区</p>
-                      <p><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-{#                开始#}
-                <div class="container" style="padding-left: 0px;">
-                    <div class="jumbotron" style="background: none" >
-                      <h1>现在加入会员行列还有优惠</h1>
-                      <p>一个支持『 内容个性化定制 』的问答社区</p>
-                      <p><a class="btn btn-success btn-lg" href="#" role="button">更多介绍</a></p>
-                    </div>
-                </div>
-            </div>
+{% block ad %}
+    <div class="block-my-ad">
+        <div class="container">
+            <h1>首页</h1>
+            <p>施工中..</p>
         </div>
-        <!-- 轮播（Carousel）导航 -->
-        <a class="carousel-control left" href="#myCarousel"
-            data-slide="prev">&lsaquo;
-        </a>
-        <a class="carousel-control right" href="#myCarousel"
-            data-slide="next">&rsaquo;
-        </a>
     </div>
-</div>
-
-
-
-
-
 {% endblock %}

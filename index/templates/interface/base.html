@@ -105,7 +105,7 @@
 
 <div class="body-fix" style="background-color: #EEEEEE;">
     <div style="box-shadow: 0px 0px 5px 0px #7a7a7a;">
-        <nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
+        <nav class="navbar navbar-default" style="border-radius: 0px;{% block nav_style%}height: 52px;{% endblock %}">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -213,6 +213,9 @@
 
                 </div><!--/.nav-collapse -->
             </div>
+        
+        {% block nav_content %}
+        {% endblock %}
         </nav>
     </div>
     {% block body %}
