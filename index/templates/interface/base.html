@@ -178,8 +178,8 @@
                 <li class="dropdown-header">其他</li>
               <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span> &nbsp;历史记录</a></li>
 
-              <li><a href="/none"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;我的收藏</a></li>
-              <li><a href="/none">我的关注</a></li>
+              <li><a href="/none"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;我的收藏</a></li>
+              <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>
               <li><a href="/none"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;小组</a></li>
               <li><a href="/none"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;成就</a></li>
 
@@ -189,8 +189,8 @@
                 {% if user.is_staff %}
                   <li class="dropdown-header">超级用户</li>
 
-                    <li style=""><a href="/admin">后台管理</a></li>
-                    <li style=""><a href="/admin">发送系统消息</a></li>
+                    <li style=""><a href="/admin">管理面板</a></li>
+                    <li style=""><a href="/admin">Django后台</a></li>
                     <li role="separator" class="divider"></li>
 
                 {% endif %}
@@ -363,8 +363,17 @@
     <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
             <a onclick="return backtotop()">
-                <div style="height: 50px;width: 50px;padding-top: 12px;">
+                <div style="height: 50px;width: 50px;padding-top: 14px;">
                     打卡
+                </div>
+            </a>
+    </div>
+{#    复制我#}
+        <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+
+            <a onclick="return backtotop()">
+                <div style="height: 50px;width: 50px;padding-top: 14px;">
+                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>
                 </div>
             </a>
     </div>
