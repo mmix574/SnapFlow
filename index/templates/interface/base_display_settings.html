@@ -4,20 +4,53 @@
 
 {% block body %}
     <style>
-    .left{
+    .content-right{
+{#        background-color: #449d44;#}
+        float: left;
+    }
+    .content-left{
+{#        background-color: #8a6d3b;#}
+        float: left;
+        width:250px;
+        margin-right:10px;
+    }
+    @media screen and (min-width: 0px) and (max-width: 767px){
+    .content-right{
+        width:460px;
+    }
+    }
 
+    @media screen and (min-width: 768px) and (max-width: 991px){
+        .content-right{
+            width:460px;
         }
-    .right{
+    }
 
+    @media screen and (min-width: 992px) and (max-width: 1199px){
+        .content-right{
+            width:680px;
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        .content-right{
+            width: 880px;
+        }
+    }
+    .content-left,.content-right{
+            background-color: #FFFFFF;
+        box-shadow:1px 1px 7px #848A8C;
+        border-radius: 4px;
+        margin-bottom: 10px;
     }
     </style>
     <div class="container">
         {% block left %}
-
+            <div class="content-left">left</div>
         {% endblock %}
 
         {% block right %}
-
+            <div class="content-right">right</div>
         {% endblock %}
 
     </div>

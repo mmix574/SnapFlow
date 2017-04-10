@@ -1,16 +1,14 @@
-{% extends 'interface/base_display.html' %}
+{% extends 'interface/base_display_settings.html' %}
 
 {% block tittle %}
-    个人资料
+    test?
 {% endblock %}
 
-{% block content %}
-    <div class="container" style="margin:20px 0px;">
-        <form method="post" action="/space/member/" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary" type="submit">提交</button>
-        </form>
-    </div>
-    <h1>{{ name }}</h1>
+
+{% block left %}
+    <div class="content-left">iamleft</div>
+{% endblock %}
+
+{% block right %}
+    <div class="content-right">iamright</div>
 {% endblock %}
