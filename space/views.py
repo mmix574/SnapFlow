@@ -46,6 +46,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from django.contrib.auth.models import User
 
+
+
 @method_decorator(login_required,name='dispatch')
 class MemberView(AppBaseTemplateView):
     template_name = "space/member.html"
@@ -83,7 +85,7 @@ from django.contrib.auth.models import User
 from website.utils import console
 from website.utils import messages
 
-
+@method_decorator(login_required,name='dispatch')
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
 

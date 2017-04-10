@@ -1,12 +1,67 @@
-{% extends 'interface/base_display.html' %}
+{% extends 'interface/base_display_left_rignt.html' %}
 
 
 {% block tittle %}
-问答
+    提问
 {% endblock %}
 
-{% block content %}
-    <div class="container" style="padding-bottom: 20px;padding-top: 20px;padding-left: 40px;">
-        <a class="btn btn-default btn-md" href="/t/create">提问</a>
+
+{% block ad %}
+    <div class="block-my-ad">
+
+    </div>
+{% endblock %}
+
+{% block style-04101406 %}
+    <style>
+        .class-div{
+            display: inline;
+            padding-left: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 3px;
+        }
+        .class-div-active{
+            background-color: #383838;
+        }
+        .class-div-active >a{
+            color: #fefefe;
+        }
+        .subclass-list{
+            background-color: #f4f4f4;
+            padding-left: 5px;
+            padding-top: 7px;
+            padding-bottom:7px;
+        }
+        .subclass-list-item{
+            display: inline;
+            padding-left: 3px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 3px;
+            color: #909090;
+        }
+        .subclass-list-item>a{
+            color: #615f62;
+            font-size: 14px;
+        }
+        .subclass-list-item>a:hover{
+{#            color: #2e6da4;#}
+        }
+
+    </style>
+{% endblock %}
+
+{% block left %}
+    <div class="block-left">
+
+        <div style="height: 500px;"></div>
+    </div>
+{% endblock %}
+
+
+{% block right %}
+    <div class="block-right">
+        你好,{{ user.username }}
     </div>
 {% endblock %}

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">#}
+    {#    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">#}
     <title>{% block tittle %}{{ tittle }}{% endblock %} # SnapFlow</title>
     <link rel="icon" href="{% static 'static/favicon.png' %}"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
@@ -33,313 +33,324 @@
 
 {% if messages %}
     {% for message in messages %}
-<div class="alert alert-{{ message.extra_tags }} alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;position:relative;text-align: center">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <strong>{{ message.extra_tags }}!&nbsp&nbsp</strong>   {{ message }}
-</div>
+        <div class="alert alert-{{ message.extra_tags }} alert-dismissible fade in" role="alert" style="height: 50px;margin-bottom: 0px;position:relative;text-align: center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>{{ message.extra_tags }}!&nbsp&nbsp</strong>   {{ message }}
+        </div>
     {% endfor %}
 
 {% endif %}
 
 {% if True %}
-{#    捆绑 warning 插件不要删除#}
-<div id = "header-warning">
-</div>
+    {#    捆绑 warning 插件不要删除#}
+    <div id = "header-warning">
+    </div>
 {% endif %}
 
 
 {% if True %}
-{#   捆绑myjs 控件 不要删除 #}
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="default-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-	<div class="modal-dialog" style="width: 300px;margin-top: 100px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-				</button>
-				<h4 class="modal-title" id="default-modal-tittle" style="text-align: center">
-					提示
-				</h4>
-			</div>
-			<div class="modal-body" id="default-modal-content" style="text-align: center">
-				在这里添加一些文本
-			</div>
-			<div class="modal-footer" style="text-align: center">
-				<button type="button" class="btn btn-primary" data-dismiss="modal" >关闭
-				</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
+    {#   捆绑myjs 控件 不要删除 #}
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="default-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog" style="width: 300px;margin-top: 100px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title" id="default-modal-tittle" style="text-align: center">
+                        提示
+                    </h4>
+                </div>
+                <div class="modal-body" id="default-modal-content" style="text-align: center">
+                    在这里添加一些文本
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" >关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 {% endif %}
 
 {#-----------------------nav------------------------#}
 <style>
-{##}
-{#    #navbar > ul:nth-child(1) > li:hover{#}
-{#        background-color: #eaeaea;#}
-{##}
-{#    }#}
-{#    .navbar-warpper:hover{#}
-{#        background-color: #f7f7f7;#}
-{#    }#}
-{#    .navbar-warpper-div{#}
-{#        height:100%;#}
-{#        width: 100%;#}
-{#    }#}
-{#    .navbar-warpper-div:hover{#}
-{#        background-color: #d8d8d8;#}
-{#    }#}
-    .nav-a{
-{#        padding-top: 0px;#}
-{#        padding-bottom: 0px;#}
-{#        background-color: black;#}
-        margin-top: 15px;
-        margin-bottom:15px;
+    {##}
+    {#    #navbar > ul:nth-child(1) > li:hover{#}
+    {#        background-color: #eaeaea;#}
+    {##}
+    {#    }#}
+    {#    .navbar-warpper:hover{#}
+    {#        background-color: #f7f7f7;#}
+    {#    }#}
+    {#    .navbar-warpper-div{#}
+    {#        height:100%;#}
+    {#        width: 100%;#}
+    {#    }#}
+    {#    .navbar-warpper-div:hover{#}
+    {#        background-color: #d8d8d8;#}
+    {#    }#}
+    .nav-a-active{
+    {#        padding-top: 0px;#}
+    {#        padding-bottom: 0px;#}
+    {#        background-color: black;#}
+{#        margin-top: 15px;#}
+{#        margin-bottom:15px;#}
+
+        border-bottom: 2px solid #4aae4a;
     }
 
 
 </style>
 
 <div class="body-fix" style="background-color: #EEEEEE;">
-<div style="box-shadow: 0px 0px 5px 0px #7a7a7a;">
-<nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-{#    <a id="navbar-brand" class="navbar-brand" href="/">#}
-{#        SnapFlow</a>#}
-    <a id="navbar-brand" class="navbar-brand" href="/">
-        <img  style="height: 35px;width: 35px;position: relative;top: -8px;left: 18px;" src="/static/favicon.png">
-        </a>
+    <div style="box-shadow: 0px 0px 5px 0px #7a7a7a;">
+        <nav class="navbar navbar-default" style="border-radius: 0px;height: 52px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    {#    <a id="navbar-brand" class="navbar-brand" href="/">#}
+                    {#        SnapFlow</a>#}
+                    <a id="navbar-brand" class="navbar-brand" href="/" style="margin-right: 10px;">
+                        <img  style="height: 35px;width: 35px;position: relative;top: -8px;left: 18px;" src="/static/favicon.png">
+                    </a>
 
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="nav-a {% ifequal view_name "_index" %}nav-a-active{% endifequal %}" href="/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">首页</a>
+                        </li>
+                        {#        <li class="active"><a href="#">最新</a></li>#}
+                        <li class=""><a class="nav-a {% ifequal view_name '_finding' %}nav-a-active{% endifequal %}"  href="/t/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">发现</a></li>
+                        <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">提问</a></li>
+                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">时间轴</a></li>
+
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        {% if not logined %}
+                            <form class="navbar-form navbar-left" action="/s" >
+                                <div class="form-group" style="position: relative">
+                                    <input type="text" class="form-control" placeholder="搜一搜" name="q">
+                                    {#                <span class="glyphicon glyphicon-search" aria-hidden="true" style="position: absolute;top: 11px;left: 175px;"></span>#}
+                                </div>
+                            </form>
+
+
+                            <li ><a class="nav-a"  href="/register" style="padding-bottom: 0px;padding-top: 0px;">注册<span class="sr-only">(current)</span></a></li>
+                            <li ><a class="nav-a"  href="/login" style="padding-bottom: 0px;padding-top: 0px;">登陆</a></li>
+                            <li>
+                                <a style="font-size: 18px;padding-left: 0px;">
+                                    <span class="glyphicon glyphicon-question-sign"></span>
+                                </a>
+                            </li>
+
+
+                        {% else %}
+
+                            <form class="navbar-form navbar-left" action="/s">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="搜一搜" name="q">
+                                </div>
+                            </form>
+                            {% if logined and profile.avatar %}
+                                <li ><img style="width: 38px;height: 38px;border-radius:4px;position:relative;top: 8px;left: 8px;box-shadow: 0px 0px 1px 1px #AAA" src="{{profile.avatar.url}}"></li>
+                            {% endif %}
+
+                            {#            <li><a>消息</a></li>#}
+                            <li class="dropdown" style="position: relative;border-radius: 4px;padding-left: 10px;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ctime }}{{ user.username }}  <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    {#                <li class="dropdown-header">基本</li>#}
+                                    <li><a href="/space/userdata/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;个人中心</a></li>
+                                    {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
+                                    {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
+                                    {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
+
+
+                                    <li><a href="/m"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">其他</li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span> &nbsp;历史记录</a></li>
+
+                                    <li><a href="/none"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;我的收藏</a></li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;小组信息</a></li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;成就</a></li>
+                                    {#              <li><a href="/none"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;会员服务</a></li>#}
+
+                                    <li role="separator" class="divider"></li>
+
+                                    {% if user.is_staff %}
+                                        <li class="dropdown-header">超级用户</li>
+
+                                        <li style=""><a href="/admin">管理面板</a></li>
+                                        <li style=""><a href="/admin">Django后台</a></li>
+                                        <li role="separator" class="divider"></li>
+
+                                    {% endif %}
+
+                                    <li class="dropdown-header">其他选项</li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个性化设置</a></li>
+
+                                    {#                    <li><a href="/login">切换账户</a></li>#}
+                                    <li><a href="/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;注销</a></li>
+                                </ul>
+                            </li>
+
+                        {% endif %}
+
+                    </ul>
+
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
     </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a class="nav-a" href="/" style="padding-bottom: 0px;padding-top: 0px;">首页</a></li>
-{#        <li class="active"><a href="#">最新</a></li>#}
-          <li class=""><a class="nav-a"  href="/t/" style="padding-bottom: 0px;padding-top: 0px;">发现</a></li>
-        <li><a class="nav-a"  href="/t/create" style="padding-bottom: 0px;padding-top: 0px;">提问</a></li>
-        <li><a class="nav-a"  href="/time" style="padding-bottom: 0px;padding-top: 0px;">时间轴</a></li>
+    {% block body %}
+    {% endblock %}
+    {#----------------------------footer------------------------------#}
 
 
-      </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-
-            {% if not logined %}
-            <form class="navbar-form navbar-left" action="/s" >
-             <div class="form-group" style="position: relative">
-                <input type="text" class="form-control" placeholder="搜一搜" name="q">
-{#                <span class="glyphicon glyphicon-search" aria-hidden="true" style="position: absolute;top: 11px;left: 175px;"></span>#}
-            </div>
-            </form>
-
-
-            <li ><a class="nav-a"  href="/register" style="padding-bottom: 0px;padding-top: 0px;">注册<span class="sr-only">(current)</span></a></li>
-            <li ><a class="nav-a"  href="/login" style="padding-bottom: 0px;padding-top: 0px;">登陆</a></li>
-            <li>
-                <a style="font-size: 18px;padding-left: 0px;">
-                <span class="glyphicon glyphicon-question-sign"></span>
-                </a>
-            </li>
-
-
-            {% else %}
-
-                <form class="navbar-form navbar-left" action="/s">
-            <div class="form-group">
-            <input type="text" class="form-control" placeholder="搜一搜" name="q">
-            </div>
-                </form>
-                {% if logined and profile.avatar %}
-                    <li ><img style="width: 38px;height: 38px;border-radius:4px;position:relative;top: 8px;left: 8px;box-shadow: 0px 0px 1px 1px #AAA" src="{{profile.avatar.url}}"></li>
-                {% endif %}
-
-{#            <li><a>消息</a></li>#}
-            <li class="dropdown" style="position: relative;border-radius: 4px;padding-left: 10px;">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ctime }}{{ user.username }}  <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-{#                <li class="dropdown-header">基本</li>#}
-                <li><a href="/space/userdata/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;个人中心</a></li>
-{#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
-{#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
-{#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
-
-
-                <li><a href="/m"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
-
-              <li role="separator" class="divider"></li>
-                <li class="dropdown-header">其他</li>
-              <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span> &nbsp;历史记录</a></li>
-
-              <li><a href="/none"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;我的收藏</a></li>
-              <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>
-              <li><a href="/none"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;小组信息</a></li>
-              <li><a href="/none"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;成就</a></li>
-{#              <li><a href="/none"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;会员服务</a></li>#}
-
-                  <li role="separator" class="divider"></li>
-
-                {% if user.is_staff %}
-                  <li class="dropdown-header">超级用户</li>
-
-                    <li style=""><a href="/admin">管理面板</a></li>
-                    <li style=""><a href="/admin">Django后台</a></li>
-                    <li role="separator" class="divider"></li>
-
-                {% endif %}
-
-              <li class="dropdown-header">其他选项</li>
-              <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个性化设置</a></li>
-
-{#                    <li><a href="/login">切换账户</a></li>#}
-                <li><a href="/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;注销</a></li>
-            </ul>
-            </li>
-
-            {% endif %}
-
-        </ul>
-
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
-</div>
-{% block body %}
-{% endblock %}
-{#----------------------------footer------------------------------#}
-
-
-<style>
-    .footer-link-div{
-        float: left;
-        padding-top: 30px;
-    }
-    .footer-link-div > ul > li > a{
-        color: #d9d9d9;
-        text-decoration: none;
-
-    }
-    .footer-link-div > ul > li > a:hover{
-        color: rgb(254, 254, 254);
-    }
-    .footer-link-div{
-        width: 138px;
-    }
-    .footer-link-div > ul >li{
-        height:25px;
-    }
-    #footer-logo{
-        height: 200px;width: 200px;
-    }
-    #footer-statement{
-        padding-top: 10px;
-    }
-
-    {#    写在这里   #}
-   @media screen and (max-width: 992px){
-      #footer-logo {
-          margin-top: 40px;
-          margin-left: 10px;
-       }
-       #footer-statement{
-           padding-left: 15px;
-       }
-       .footer-logo{
-{#           display: none;#}
-{#            clear: both;#}
-       }
-       .footer-logo-container{
-           clear: both;
-           margin-left: 200px;
-           padding-top: 20px;
-       }
-   }
-
-   @media screen and (min-width: 992px){
-        #footer-statement{
-            padding-left: 0px;
+    <style>
+        .footer-link-div{
+            float: left;
+            padding-top: 30px;
         }
-{#        #foot > div > div:nth-child(3){#}
-{#            display: none;#}
-{#        }#}
-   }
+        .footer-link-div > ul > li > a{
+            color: #c0c0c0;
+            text-decoration: none;
 
-    @media screen and (min-width: 1200px) {
-       #footer-statement{
-           position: relative;
-           left: -55px;
-           padding-left: 20px;
-           padding-right: 20px;
+        }
+        .footer-link-div > ul > li > a:hover{
+            color: rgb(213, 213, 213);
+        }
+        .footer-link-div{
+            width: 138px;
+        }
+        .footer-link-div > ul >li{
+            height:25px;
+        }
+        #footer-logo{
+            height: 200px;width: 200px;
+        }
+        #footer-statement{
+            padding-top: 10px;
+        }
 
-       }
-    }
+        {#    写在这里   #}
+        @media screen and (max-width: 992px){
+            #footer-logo {
+                margin-top: 40px;
+                margin-left: 10px;
+            }
+            #footer-statement{
+                padding-left: 15px;
+            }
+            .footer-logo{
+            {#           display: none;#}
+            {#            clear: both;#}
+            }
+            .footer-logo-container{
+                clear: both;
+                margin-left: 200px;
+                padding-top: 20px;
+            }
+        }
 
-</style>
-<div style="width: 100%;margin-top: 20px;">
-    <div id="foot" style="background-color: #282828;height: 500px;padding: 50px;box-shadow: 0px -3px 4px #AAA;">
-        <div class="container" style="text-align: center">
-                        <div class="col-md-8" style="height: 150px;">
-                            <div class="col-md-12">
-                                <div class="footer-link-div">
-                                    <ul>
-                                        <li><a href="#">关于我们</a></li>
-                                        <li><a href="#">官方微信</a></li>
-                                        <li><a href="#">加入我们</a></li>
-                                        <li><a href="#">友情链接</a></li>
-                                    </ul>
-                                </div>
-                                <div class="footer-link-div">
-                                    <ul>
-                                        <li><a href="#">帮助中心</a></li>
-                                        <li><a href="#">教程中心</a></li>
-                                        <li><a href="#">侵权申述</a></li>
-                                        <li><a href="#">资源免责声明</a></li>
-                                    </ul>
-                                </div>
+        @media screen and (min-width: 992px){
+            #footer-statement{
+                padding-left: 0px;
+            }
+        {#        #foot > div > div:nth-child(3){#}
+        {#            display: none;#}
+        {#        }#}
+        }
 
-                                <div class="footer-link-div">
-                                    <ul>
-                                        <li><a href="#">发展建议</a></li>
-                                        <li><a href="#">BUG汇报</a></li>
-                                        <li><a href="#">我去前面探探路</a></li>
-                                        <li><a href="#">每周精选</a></li>
-                                    </ul>
-                                </div>
-                                <div class="footer-link-div">
-                                    <ul>
-                                        <li><a href="#">提交工单</a></li>
-                                        <li><a href="#">联系我们</a></li>
-                                        <li><a href="#">加入我们</a></li>
-                                        <li><a href="#">退出</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="footer-statement" class="col-md-12" style="float: left;">
-                                <p style="color: #777;">Copyright;  ©2016-2017  Powered by <a style="color: #fbfbfb" href="https://www.djangoproject.com/">Django</a></p>
-                                <font style="color: rgb(226,226,226)">© 2005-2017 Django Software Foundation and individual contributors. Django is a registered trademark of the Django Software Foundation.</font>
-                                <p style="color: #777;"> 12 人在线   最高记录 76 </p>
-                            </div>
+        @media screen and (min-width: 1200px) {
+            #footer-statement{
+                position: relative;
+                left: -55px;
+                padding-left: 20px;
+                padding-right: 20px;
+
+            }
+        }
+
+    </style>
+
+    <style>
+{#        2017年4月10日 23:01:13#}
+        #foot > div > div.col-md-8 > div:nth-child(1) > div > ul > li:hover{
+            border: 1px solid #EEEEEE;
+        }
+    </style>
+    <div style="width: 100%;margin-top: 20px;">
+        <div id="foot" style="background-color: #282828;height: 500px;padding: 50px;box-shadow: 0px -3px 4px #AAA;">
+            <div class="container" style="text-align: center">
+                <div class="col-md-8" style="height: 150px;">
+                    <div class="col-md-12">
+                        <div class="footer-link-div">
+                            <ul>
+                                <li><a href="#">关于我们</a></li>
+                                <li><a href="#">官方微信</a></li>
+                                <li><a href="#">招聘</a></li>
+                                <li><a href="#">友情链接</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-link-div">
+                            <ul>
+                                <li><a href="#">在线历史</a></li>
+                                <li><a href="#">教程中心</a></li>
+                                <li><a href="#">侵权申述</a></li>
+                                <li><a href="#">资源免责声明</a></li>
+                            </ul>
                         </div>
 
-                        <div class="footer-logo-container" style="margin-top: 28px;">
-                            <div class="footer-logo" style="float: left;">
-                                <img style="border-radius: 2px;height: 130px;width: 130px;box-shadow: 0 0 1px 1px #777" src="{% static 'image/liantu.png' %}" >
-                            </div>
-
-                            <div class="footer-logo" style="float: left;padding-left: 20px;">
-                                <img style="border-radius: 2px;height: 130px;width: 130px;box-shadow: 0 0 1px 1px #777"  src="{% static 'image/timg.jpg' %}" >
-                            </div>
+                        <div class="footer-link-div">
+                            <ul>
+                                <li><a href="#">笔记</a></li>
+                                <li><a href="#">收藏推荐</a></li>
+                                <li><a href="#">每周精选</a></li>
+                                <li><a href="#">周报日报</a></li>
+                            </ul>
                         </div>
+                        <div class="footer-link-div">
+                            <ul>
+                                <li><a href="#">提交工单</a></li>
+                                <li><a href="#">微信公众号</a></li>
+                                <li><a href="#">发展建议</a></li>
+                                <li><a href="#">我们的愿景</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="footer-statement" class="col-md-12" style="float: left;">
+                        <p style="color: #777;">Copyright;  ©2016-2017  Powered by <a style="color: #fbfbfb" href="https://www.djangoproject.com/">Django</a></p>
+                        <font style="color: rgb(226,226,226)">© 2005-2017 Django Software Foundation and individual contributors. Django is a registered trademark of the Django Software Foundation.</font>
+{#                        <p style="color: #777;"> 12 人在线   最高记录 76 </p>#}
+                    </div>
+                </div>
+
+                <div class="footer-logo-container" style="margin-top: 28px;">
+                    <div class="footer-logo" style="float: left;">
+                        <img style="border-radius: 2px;height: 130px;width: 130px;box-shadow: 0 0 1px 1px #777" src="{% static 'image/liantu.png' %}" >
+                    </div>
+
+                    <div class="footer-logo" style="float: left;padding-left: 20px;">
+                        <img style="border-radius: 2px;height: 130px;width: 130px;box-shadow: 0 0 1px 1px #777"  src="{% static 'image/002.png' %}" >
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-{#    <div style="height: 20px;background-color: #282828;position:relative;top:0px;"></div>#}
+        {#    <div style="height: 20px;background-color: #282828;position:relative;top:0px;"></div>#}
     </div>
 
 
@@ -350,37 +361,41 @@
 
 </style>
 <div style="height: 200px;width: 50px;position: fixed;display: block;z-index: 999;bottom: 100px;right: 10px;">
-{#    复制我#}
-    <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+    {#    复制我#}
+    <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
-            <a onclick="return backtotop()">
-                <div style="height: 50px;width: 50px;">
-                    <span style="height: 50px;width:50px;top: 18px;" class="glyphicon glyphicon-menu-up"></span>
-                </div>
-            </a>
+        <a onclick="return backtotop()">
+            <div>
+                <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-menu-up"></span>
+            </div>
+        </a>
     </div>
 
     {% if logined %}
 
-    {#    复制我#}
-    <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+        {#    复制我#}
+        <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
             <a onclick="return backtotop()">
-                <div style="height: 50px;width: 50px;padding-top: 14px;">
-                    打卡
-                </div>
+{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+{#                    打卡#}
+{#                </div>#}
+                <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-pencil"></span>
+
             </a>
-    </div>
-{#    复制我#}
-        <div style="height: 50px;width: 50px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+        </div>
+        {#    复制我#}
+        <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
             <a onclick="return backtotop()">
-                <div style="height: 50px;width: 50px;padding-top: 14px;">
-                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>
-                </div>
+{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+{#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
+{#                </div>#}
+                <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-envelope"></span>
+                <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>
             </a>
-    </div>
-{#    复制我#}
+        </div>
+        {#    复制我#}
     {% endif %}
 
 </div>
@@ -390,8 +405,8 @@
 
 <script>
     function backtotop(){
-         window.scrollTo(0,0);
-{#        alert("you clicked me");#}
+        window.scrollTo(0,0);
+        {#        alert("you clicked me");#}
     }
 
 </script>
