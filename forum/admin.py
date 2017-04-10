@@ -7,8 +7,8 @@ from .models import Thread
 
 class ClassAdmin(admin.ModelAdmin):
     pass
-    list_display = ["name","create_time"]
-
+    list_display = ["display_name","create_time","order"]
+    # ordering = 'order'
     # name = models.CharField("hehe", max_length=20, blank=True, null=True)
     # chinese_name = models.CharField(max_length=20, blank=True, null=True)
     # create_user = models.ForeignKey(User, default=1, blank=True, null=True)

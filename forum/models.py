@@ -9,13 +9,13 @@ class Class(models.Model):
     create_user = models.ForeignKey(User,default=1,blank=True,null=True)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-
+    order = models.IntegerField(default=1)
     class Meta:
         verbose_name = "父帖子类型"
         verbose_name_plural = verbose_name
-
+        ordering = ['order']
     def __str__(self):
-        return self.name
+        return self.display_name
 
 
 class SubClass(models.Model):
@@ -26,6 +26,7 @@ class SubClass(models.Model):
     create_user = models.ForeignKey(User)
     create_time = models.DateTimeField(auto_now=True,blank=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True)
+    order = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name

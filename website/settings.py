@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 'django.contrib.humanize'
     'django.contrib.humanize',
     'rest_framework',
+    'setting'
 ]
 
 MIDDLEWARE = [

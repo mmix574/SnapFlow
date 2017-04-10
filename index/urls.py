@@ -7,7 +7,7 @@ urlpatterns = [
     # 欢迎界面，包括未登录欢迎界面和登陆之后的欢迎界面
     url(r'^$',views.IndexView.as_view()),
     # 提示消息
-    url(r'message',views.MessageView.as_view()),
+    # url(r'message',views.MessageView.as_view()),
     # 登陆
     url(r'^login/$',v2views.LoginView.as_view()),
     # 注册
