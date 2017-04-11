@@ -39,7 +39,7 @@ class SubClass(models.Model):
 
 # Create your models here.
 class Thread (models.Model):
-    main_class = models.ForeignKey(Class,null=True)
+    main_class = models.ForeignKey(Class,null=True,blank=True)
     sub_class = models.ForeignKey(SubClass,null=True)
     tittle = models.CharField(max_length=20,blank=True)
     content = models.TextField(default="")
@@ -54,6 +54,17 @@ class Thread (models.Model):
 
     def __str__(self):
         return self.tittle
+
+
+
+from django.db.models import signals
+from django.dispatch import receiver
+
+def before_thread_save(sender, instance, created, **kwargs):
+    # print(len(kwargs))
+    pass
+
+signals.pre_save.connect(before_thread_save,sender=Thread)
 
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)

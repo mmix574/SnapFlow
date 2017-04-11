@@ -37,7 +37,7 @@ def default_avatar():
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     avatar = models.ImageField(default=default_avatar,null=True,blank=True,upload_to=upload_to)
     set_avatar = models.BooleanField(default=False)
     # avatar = models.ImageField(null=True,blank=True)
