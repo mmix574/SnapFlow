@@ -52,7 +52,7 @@
 
     </style>
     <style>
-        .div-hot{
+        .div-ad-head{
 {#            background-color: #449d44;#}
             border-left: 1px solid #aaaaaa;
             border-bottom: 1px solid #d9d9d9;
@@ -86,14 +86,14 @@
             <div class="subclass-list-item"><a href="#">深度学习</a></div>
             <div class="subclass-list-item"><a href="#">智能嵌入式</a></div>
         </div>
-        <div style="padding-bottom: 10px;">
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
-        </div>
+{#        <div style="padding-bottom: 10px;">#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+{#        </div>#}
     </div>
 {% endblock %}
 
@@ -111,7 +111,7 @@
     {% endif %}
     <div class="block-right">
         <div style="padding-bottom: 10px;">
-            <div class="div-hot" style="text-align: center">
+            <div class="div-ad-head" style="text-align: center">
                 今日热题
             </div>
             <div class="div-hot-today">
@@ -131,10 +131,10 @@
                 <a href="#">&nbsp;Google 云的流量到底是怎么计费的？我用价格计算器，加了流量费用没有一点变化</a>
             </div>
 
-
         </div>
     </div>
 
+    {#    广告区#}
     <div class="block-right">
         <a href="#">
             <img src="{% static '/image/profit/206.gif'%}" style="width: 100%">
@@ -161,12 +161,23 @@
             <img src="{% static '/image/profit/205.gif'%}" style="width: 100%">
         </a>
     </div>
-
-
     {#    <div class="block-right">#}
     {#        <img src="{% static '/image/profit/100.jpg' %}">#}
     {#        <img src="/static/image/profit/200.gif" style="width: 100%">#}
     {#    </div>#}
 
+{#    <div class="block-right">#}
+{#        <div class="div-ad-head" style="text-align: center">#}
+{#                运行状态#}
+{#        </div>#}
+{#        <div>#}
+{#            <div class="div-hot-today">#}
+{#                今日活跃:17#}
+{#            </div>#}
+{#            <div class="div-hot-today">#}
+{#                注册用户:50#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
 {% endblock %}

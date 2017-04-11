@@ -46,16 +46,35 @@
             font-size: 14px;
         }
         .subclass-list-item>a:hover{
-{#            color: #2e6da4;#}
+        {#            color: #2e6da4;#}
         }
 
     </style>
 {% endblock %}
 
 {% block left %}
-    <div class="block-left">
+    <div class="block-left" style="padding-left: 20px;padding-top: 20px;">
+        <div style="height: 500px;">
+            {#            <ol class="breadcrumb">#}
+            {#                <li><a href="#">Home</a></li>#}
+            {#                <li><a href="#">Library</a></li>#}
+            {#                <li class="active">Data</li>#}
+            {#            </ol>#}
 
-        <div style="height: 500px;"></div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle"
+                        data-toggle="dropdown">
+                    选择一个板块 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">功能</a></li>
+                    <li><a href="#">另一个功能</a></li>
+                    <li><a href="#">其他</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">分离的链接</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
