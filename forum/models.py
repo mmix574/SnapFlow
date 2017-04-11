@@ -41,7 +41,7 @@ class SubClass(models.Model):
 class Thread (models.Model):
     main_class = models.ForeignKey(Class,null=True,blank=True)
     sub_class = models.ForeignKey(SubClass,null=True,blank=True)
-    tittle = models.CharField(max_length=20,blank=True)
+    tittle = models.CharField(max_length=100,blank=True)
     content = models.TextField(default="")
     create_user = models.ForeignKey(User,default=1)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
@@ -71,7 +71,7 @@ def before_thread_save(sender, instance, **kwargs):
         except Exception as e:
             pass
 
-
+# 评论
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)
 

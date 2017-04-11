@@ -1,13 +1,15 @@
 {% extends 'interface/base_display_left_rignt.html' %}
 {% load static %}
 
+
 {% block tittle %}
-    提问
+    发现
 {% endblock %}
 
 
 {% block ad %}
     <div class="block-my-ad">
+
     </div>
 {% endblock %}
 
@@ -49,26 +51,37 @@
         }
 
     </style>
+    <style>
+        .div-ad-head{
+        {#            background-color: #449d44;#}
+            border-left: 1px solid #aaaaaa;
+            border-bottom: 1px solid #d9d9d9;
+            background-color: #F4F4F4;
+        }
+        .div-hot-today{
+            padding-left: 5px;
+            padding-top: 3px;
+        }
+        .div-hot-today > a{
+            font-size:10px;
+        }
+
+    </style>
 {% endblock %}
 
 {% block left %}
     <div class="block-left" style="padding-left: 20px;padding-top: 20px;padding-bottom: 20px;padding-right: 20px;">
         <div>
-            {#            <ol class="breadcrumb">#}
-            {#                <li><a href="#">Home</a></li>#}
-            {#                <li><a href="#">Library</a></li>#}
-            {#                <li class="active">Data</li>#}
-            {#            </ol>#}
-
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle"
                         data-toggle="dropdown">
-                    选择一个板块 <span class="caret"></span>
+                    <div style="display: inline-block;">选择一个板块 </div>
+                    <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">功能</a></li>
-                    <li><a href="#">另一个功能</a></li>
-                    <li><a href="#">其他</a></li>
+                    <li><a href="#">板块1</a></li>
+                    <li><a href="#">板块2</a></li>
+                    <li><a href="#">板块3</a></li>
                     <li class="divider"></li>
                     <li><a href="#">分离的链接</a></li>
                 </ul>
@@ -81,24 +94,32 @@
                     <input type="text" class="form-control" id="tittle" placeholder="" autocomplete="off"></div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">内容</label>
-{#                    <input style="height: 300px;" type="text" class="form-control" id="content" placeholder="" autocomplete="off"></div>#}
-
-                    <textarea  class="form-control" form="new_thread_form" name="content"></textarea>
+{#                    <textarea style="height: 200px;resize: none;" class="form-control" form="new_thread_form" name="content"></textarea>#}
+                    <div  style="height: 300px;" id="input-div"></div>
+                </div>
                 <div class="form-group">
-                    <label for="imageFile">File input</label>
+{#                    <label for="imageFile">File input</label>#}
                     <input type="file" id="imageFile" autocomplete="off">
-                    <p class="help-block">上传一张图片</p>
+                    <p class="help-block">你可以选择上传一张图片</p>
                 </div>
                 <button type="submit" class="btn btn-success">提交</button>
             </form>
         </div>
     </div>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/wangEditor.css' %}">
+<script src="{% static 'js/wangEditor.js' %}"></script>
+<script type="application/javascript">
+    var editor = new wangEditor('input-div');
+    editor.create();
+</script>
 {% endblock %}
 
 
 {% block right %}
-    <div class="block-right">
-        你好,{{ user.username }}
-    </div>
+    {% if logined %}
+        <div class="block-right" style="height: 150px;text-align: center">
+            <P>你好,{{ user.username }}</P>
+        </div>
+    {% endif %}
     {% include 'forum/ad_block.html' %}
 {% endblock %}

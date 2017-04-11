@@ -56,7 +56,7 @@ class IndexView(AppBaseTemplateView):
             content_list = Thread.objects.filter(main_class=tab_instance)
 
 
-        print(content_list)
+        # print(content_list)
         context['content_list'] = content_list
 
         return context
