@@ -44,9 +44,14 @@ class LoginView(TemplateView):
         context = super().get_context_data(**kwargs);
         context['tittle'] = "登陆 # SnapFlow"
         context['view'] = "login"
+        next_url = self.request.GET.get('next',None)
+        if next_url:
+            context['next_url'] = next_url
         return context
-    
+
     def get(self, request, *args, **kwargs):
+
+
         return super(LoginView, self).get(request, *args, **kwargs)
 
     # def post(self, request, *args, **kwargs):
@@ -65,4 +70,6 @@ class LoginView(TemplateView):
         else:
             return V1View.MessageView.as_view(tittle="用户名与密码请求不完整", message="如果多次出现这个提示，请联系管理员")(request)
 
-        return HttpResponseRedirect("/");
+        next_url = request.POST.get('next_url','/')
+        # print(str(next_url))
+        return HttpResponseRedirect(str(next_url));

@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404
 from .models import Class
 from .models import SubClass
 
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 
 from website.contrib.response import MessageResponse
 
@@ -33,7 +36,7 @@ class IndexView(AppBaseTemplateView):
 
         return context
 
-
+@method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
 

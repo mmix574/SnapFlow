@@ -69,13 +69,33 @@
             <div class="subclass-list-item"><a href="#">深度学习</a></div>
             <div class="subclass-list-item"><a href="#">智能嵌入式</a></div>
         </div>
-        <div style="height: 200px;"></div>
+        <div style="padding-bottom: 10px;">
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>
+        </div>
     </div>
 {% endblock %}
 
 
 {% block right %}
-    <div class="block-right">
-        你好,{{ user.username }}
+    {% if logined %}
+    <div class="block-right" style="height: 200px;text-align: center">
+        <P>你好,{{ user.username }}</P>
+        <a class="btn btn-default">创作新问题 <span style="font-size: 10px;" class="glyphicon glyphicon-pencil"></span></a>
     </div>
+    {% else %}
+    <div class="block-right">
+    请登录
+    </div>
+    {% endif %}
+    <div class="block-right">
+        <div style="text-align: center">
+            s
+        </div>
+    </div>
+
 {% endblock %}
