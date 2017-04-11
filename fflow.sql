@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-10 23:27:11
+Date: 2017-04-12 00:03:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,7 +61,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`) USING BTREE,
   CONSTRAINT `auth_permission_ibfk_1` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -123,6 +123,9 @@ INSERT INTO `auth_permission` VALUES ('54', 'Can delete comment', '18', 'delete_
 INSERT INTO `auth_permission` VALUES ('55', 'Can add system email info', '19', 'add_systememailinfo');
 INSERT INTO `auth_permission` VALUES ('56', 'Can change system email info', '19', 'change_systememailinfo');
 INSERT INTO `auth_permission` VALUES ('57', 'Can delete system email info', '19', 'delete_systememailinfo');
+INSERT INTO `auth_permission` VALUES ('58', 'Can add user summer', '20', 'add_usersummer');
+INSERT INTO `auth_permission` VALUES ('59', 'Can change user summer', '20', 'change_usersummer');
+INSERT INTO `auth_permission` VALUES ('60', 'Can delete user summer', '20', 'delete_usersummer');
 
 -- ----------------------------
 -- Table structure for auth_user
@@ -142,23 +145,24 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
 INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$30000$KfO4Gh9NksAs$foR9ECGRViVeyQVtUy12N59fMpv4IaYMbDItaDXaE1o=', '2017-03-04 01:04:06', '1', 'none', '', '', 'none@example.com', '1', '1', '2017-03-03 13:45:28');
-INSERT INTO `auth_user` VALUES ('2', 'pbkdf2_sha256$30000$a0Wt9R9rF2Lq$PN3RMty/dNaAy3bNvsTaC4KZ5c4K+9Hf68OF0Z/HmB4=', '2017-04-10 15:19:22', '1', 'admin', '管理员是我爸爸', '我是', 'admin@example.com', '1', '1', '2017-03-03 13:46:24');
+INSERT INTO `auth_user` VALUES ('2', 'pbkdf2_sha256$30000$a0Wt9R9rF2Lq$PN3RMty/dNaAy3bNvsTaC4KZ5c4K+9Hf68OF0Z/HmB4=', '2017-04-11 14:32:11', '1', 'admin', '管理员是我爸爸', '我是', 'admin@example.com', '1', '1', '2017-03-03 13:46:24');
 INSERT INTO `auth_user` VALUES ('3', 'password', null, '0', 'username', '', '', '', '0', '1', '2017-03-03 15:39:37');
 INSERT INTO `auth_user` VALUES ('4', 'pbkdf2_sha256$30000$jlx8heHH5x1D$We+WeJFmrLMUaO47QbtCJraw5To99VrQ7/eB4QsSlcs=', null, '0', 'user0098', '', '', 'kk@qq.com', '0', '1', '2017-03-04 01:00:34');
 INSERT INTO `auth_user` VALUES ('5', 'pbkdf2_sha256$30000$8ejPhpUg0BDu$Ppxs55G/b4SiA/37FDqDyrnlfnWe6Zn/I8626gvJWuQ=', null, '0', 'woshi', '', '', 'kk@qq.com', '0', '1', '2017-03-04 01:03:13');
 INSERT INTO `auth_user` VALUES ('6', 'pbkdf2_sha256$30000$5Qshwbpfkpmx$VBAzur3mhWZeWognNKqs4qfjbxXLV9CXTadlj6/KjJU=', null, '0', 'user00999', '', '', 'kk@qq.com', '0', '1', '2017-03-04 01:03:47');
-INSERT INTO `auth_user` VALUES ('7', 'pbkdf2_sha256$30000$bpTxPhC6YxK4$IZa44O+FfgZaTWJAEGPJrBVBGWFGaRzXYAlZS4aUtec=', '2017-03-04 02:10:01', '0', 'taita', '', '', 'taita@gmail.com', '0', '1', '2017-03-04 01:14:32');
+INSERT INTO `auth_user` VALUES ('7', 'pbkdf2_sha256$30000$bpTxPhC6YxK4$IZa44O+FfgZaTWJAEGPJrBVBGWFGaRzXYAlZS4aUtec=', '2017-04-11 01:09:47', '0', 'taita', '', '', 'taita@gmail.com', '0', '1', '2017-03-04 01:14:32');
 INSERT INTO `auth_user` VALUES ('8', 'pbkdf2_sha256$30000$VusGetCV584w$pu4Jo7WtDaa3nnESQxBYMGmqEITTV2F8+9Iqa42QY1s=', '2017-03-04 02:14:37', '0', 'mmix', '', '', 'mmix@gmail.com', '0', '1', '2017-03-04 02:14:29');
 INSERT INTO `auth_user` VALUES ('9', 'pbkdf2_sha256$30000$RRn77Kx9Zu5x$CpLnoMYR5ZukcZMfLzPaP4DN5+PKX8p3eEEcAdKhhnY=', '2017-03-04 05:36:30', '0', 'dgut', '', '', 'uu@qq.com', '0', '1', '2017-03-04 05:36:21');
 INSERT INTO `auth_user` VALUES ('10', 'pbkdf2_sha256$30000$qzotbKQXH4nw$GbDDU7KBOPg1JOtfEwN4I/uhTs2fPGw6EUCqq0PkJBM=', '2017-03-04 05:38:41', '0', 'woshidashabi', '', '', 'kk@qq.com', '0', '1', '2017-03-04 05:38:35');
 INSERT INTO `auth_user` VALUES ('11', 'pbkdf2_sha256$30000$GqKIvnE6mbBr$WM3yHt8HkVMlaMNUIdbxlSvGManuok9+TdOqFF7LpAQ=', '2017-04-07 07:25:13', '0', 'adminn', 'ddrff', '', 'test1@qq.com', '0', '1', '2017-04-06 13:00:01');
 INSERT INTO `auth_user` VALUES ('12', 'pbkdf2_sha256$30000$gReVAwznfApJ$YCFw9YrkvmQZYa1d6cFe/jwHmDumx4w53YzKhIJV/Ws=', '2017-04-07 07:37:26', '0', 'test2', 'hiash', '', 'test2@qq.com', '0', '1', '2017-04-07 07:35:50');
+INSERT INTO `auth_user` VALUES ('13', 'pbkdf2_sha256$30000$byXaOoMYHopg$GDq2V2InCTydqrQbg6lxNFNDzBXnKAg/KE1gNGkQsfc=', '2017-04-11 14:23:47', '0', 'll', '', '', 'll@qq.com', '0', '1', '2017-04-11 14:23:41');
 
 -- ----------------------------
 -- Table structure for auth_user_groups
@@ -216,7 +220,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_ibfk_1` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -298,6 +302,61 @@ INSERT INTO `django_admin_log` VALUES ('74', '2017-04-10 08:40:46', '12', '职�
 INSERT INTO `django_admin_log` VALUES ('75', '2017-04-10 14:11:50', '13', '计算机基础', '1', '[{\"added\": {}}]', '7', '2');
 INSERT INTO `django_admin_log` VALUES ('76', '2017-04-10 15:15:25', '13', '计算机基础', '3', '', '7', '2');
 INSERT INTO `django_admin_log` VALUES ('77', '2017-04-10 15:15:25', '9', '数码', '3', '', '7', '2');
+INSERT INTO `django_admin_log` VALUES ('78', '2017-04-11 01:12:52', '9', 'GO', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('79', '2017-04-11 07:14:57', '10', '跳槽', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('80', '2017-04-11 07:15:42', '11', '同事', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('81', '2017-04-11 07:16:15', '12', '转行', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('82', '2017-04-11 07:16:48', '13', 'C++', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('83', '2017-04-11 07:17:44', '14', '深圳', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('84', '2017-04-11 07:18:07', '15', '北京', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('85', '2017-04-11 07:18:20', '16', '广州', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('86', '2017-04-11 07:18:32', '17', '上海', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('87', '2017-04-11 07:18:49', '18', '杭州', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('88', '2017-04-11 07:19:39', '19', '租房', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('89', '2017-04-11 07:20:11', '20', '出行', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('90', '2017-04-11 07:21:31', '21', '打扮', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('91', '2017-04-11 07:22:43', '13', '带宽', '1', '[{\"added\": {}}]', '7', '2');
+INSERT INTO `django_admin_log` VALUES ('92', '2017-04-11 07:45:19', '22', '交友', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('93', '2017-04-11 07:46:31', '23', '程序员', '1', '[{\"added\": {}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('94', '2017-04-11 08:14:18', '1', '请问这个是什么', '2', '[{\"changed\": {\"fields\": [\"main_class\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('95', '2017-04-11 08:15:39', '1', '请问这个是什么', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('96', '2017-04-11 10:33:05', '2', '程序员的第一个贴子', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('97', '2017-04-11 10:36:46', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('98', '2017-04-11 10:37:20', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('99', '2017-04-11 10:37:38', '1', '请问这个是什么', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('100', '2017-04-11 10:38:04', '1', '请问这个是什么', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('101', '2017-04-11 10:39:13', '1', '请问这个是什么', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('102', '2017-04-11 10:55:51', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('103', '2017-04-11 10:56:13', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('104', '2017-04-11 10:56:41', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('105', '2017-04-11 10:57:36', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('106', '2017-04-11 10:57:51', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('107', '2017-04-11 10:58:23', '2', '程序员的第一个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('108', '2017-04-11 11:00:33', '3', '程序员的第二个贴子', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('109', '2017-04-11 11:00:45', '3', '程序员的第二个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('110', '2017-04-11 11:00:51', '3', '程序员的第二个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('111', '2017-04-11 11:03:45', '4', '程序员的第三个贴子', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('112', '2017-04-11 11:05:39', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('113', '2017-04-11 11:05:57', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('114', '2017-04-11 11:10:04', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('115', '2017-04-11 11:11:22', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('116', '2017-04-11 11:22:09', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('117', '2017-04-11 11:22:56', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('118', '2017-04-11 11:23:29', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('119', '2017-04-11 11:27:54', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('120', '2017-04-11 11:28:17', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('121', '2017-04-11 11:29:20', '4', '程序员的第三个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('122', '2017-04-11 11:29:57', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('123', '2017-04-11 11:32:16', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('124', '2017-04-11 11:32:41', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('125', '2017-04-11 11:33:14', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('126', '2017-04-11 11:33:54', '4', '程序员的第三个贴子', '2', '[{\"changed\": {\"fields\": [\"content\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('127', '2017-04-11 11:34:03', '3', '程序员的第二个贴子', '2', '[]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('128', '2017-04-11 12:53:27', '5', '你好,世界', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('129', '2017-04-11 12:58:46', '6', '如果硬盘被拆开如果被盗，会看到群晖里储存', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('130', '2017-04-11 12:59:51', '6', '如果硬盘被拆开如果被盗，会看到群晖里储存的东西吗', '2', '[{\"changed\": {\"fields\": [\"tittle\"]}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('131', '2017-04-11 13:02:12', '7', '这是云计算的第一个贴子', '1', '[{\"added\": {}}]', '8', '2');
+INSERT INTO `django_admin_log` VALUES ('132', '2017-04-11 16:02:13', '8', '中国人工智能产业数据图谱：55家医疗人工智能企业全扫描', '1', '[{\"added\": {}}]', '8', '2');
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -309,7 +368,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -324,6 +383,7 @@ INSERT INTO `django_content_type` VALUES ('18', 'forum', 'comment');
 INSERT INTO `django_content_type` VALUES ('17', 'forum', 'subclass');
 INSERT INTO `django_content_type` VALUES ('9', 'forum', 'tag');
 INSERT INTO `django_content_type` VALUES ('8', 'forum', 'thread');
+INSERT INTO `django_content_type` VALUES ('20', 'forum', 'usersummer');
 INSERT INTO `django_content_type` VALUES ('10', 'index', 'userprofile');
 INSERT INTO `django_content_type` VALUES ('4', 'lab', 'addmodel');
 INSERT INTO `django_content_type` VALUES ('5', 'lab', 'postmodel');
@@ -344,7 +404,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -403,6 +463,14 @@ INSERT INTO `django_migrations` VALUES ('59', 'forum', '0006_auto_20170410_1347'
 INSERT INTO `django_migrations` VALUES ('60', 'forum', '0007_auto_20170410_1422', '2017-04-10 06:22:31');
 INSERT INTO `django_migrations` VALUES ('61', 'forum', '0008_auto_20170410_1513', '2017-04-10 07:13:51');
 INSERT INTO `django_migrations` VALUES ('62', 'forum', '0009_auto_20170410_1514', '2017-04-10 07:14:42');
+INSERT INTO `django_migrations` VALUES ('63', 'forum', '0010_auto_20170411_1551', '2017-04-11 07:52:06');
+INSERT INTO `django_migrations` VALUES ('64', 'forum', '0011_auto_20170411_1552', '2017-04-11 07:52:43');
+INSERT INTO `django_migrations` VALUES ('65', 'forum', '0012_thread_main_class', '2017-04-11 07:54:38');
+INSERT INTO `django_migrations` VALUES ('66', 'forum', '0013_usersummer', '2017-04-11 08:17:59');
+INSERT INTO `django_migrations` VALUES ('67', 'forum', '0014_auto_20170411_1831', '2017-04-11 10:31:52');
+INSERT INTO `django_migrations` VALUES ('68', 'forum', '0015_auto_20170411_1832', '2017-04-11 10:32:42');
+INSERT INTO `django_migrations` VALUES ('69', 'forum', '0016_auto_20170411_1940', '2017-04-11 11:40:12');
+INSERT INTO `django_migrations` VALUES ('70', 'forum', '0017_auto_20170411_2059', '2017-04-11 12:59:46');
 
 -- ----------------------------
 -- Table structure for django_session
@@ -419,11 +487,12 @@ CREATE TABLE `django_session` (
 -- ----------------------------
 -- Records of django_session
 -- ----------------------------
+INSERT INTO `django_session` VALUES ('01vmip3fraoi41969qj2q6pu8qwinwww', 'ZDQwMmZkN2JiZDdjOWQzMjc0M2RiNjUyNGViMWVjNzA0NzA1ZGM5MTp7Il9hdXRoX3VzZXJfaWQiOiI3IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkODQ1MTgyYzQ5NzU4YTJjN2E1NzNmNjMzYTZmZDUxM2U3Y2JiNjFiIn0=', '2017-04-25 01:09:47');
 INSERT INTO `django_session` VALUES ('1uib5ejlh2rb5t111yv7qg31qqmvcxit', 'OTBiODc2M2FjOTBjNTUyZjk1NDNiMDczMmZiOWZjNjY0ODBmMDMwNDp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZmM5M2RkYjcwNmJiZjY2ODIyNTYwZTU2ZjQ2YWNhYTY2M2NmZjFiZCJ9', '2017-04-21 07:36:00');
 INSERT INTO `django_session` VALUES ('8tzrta0131blnq573mwomow8upd8wj2z', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-03 06:50:32');
+INSERT INTO `django_session` VALUES ('fvf8m9d2qs0jnppc0as99wwrn8afeykr', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-25 14:32:11');
 INSERT INTO `django_session` VALUES ('lw7rblukf2pe691urzc6qcclprdexydv', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-23 14:22:52');
 INSERT INTO `django_session` VALUES ('m3c22wdiz7daalh0j6l6ae07e818qasc', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-23 02:06:32');
-INSERT INTO `django_session` VALUES ('msflmxznfweshiernysrn3okq4n8h51h', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-24 15:19:22');
 INSERT INTO `django_session` VALUES ('o1prumc323bjijjv91s1yzqvr8w2uid8', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-23 04:58:52');
 INSERT INTO `django_session` VALUES ('t8h6txbc8yod8ylbnt0fztsyo76ngpbq', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-24 10:29:55');
 INSERT INTO `django_session` VALUES ('ulsclz23qdys7en4gn7fvaehagejqykr', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-03-31 14:38:39');
@@ -458,6 +527,7 @@ INSERT INTO `forum_class` VALUES ('8', 'design', '2017-04-10 06:01:53.764591', '
 INSERT INTO `forum_class` VALUES ('10', 'living', '2017-04-10 06:02:52.414126', '2017-04-10 06:02:52.414126', '2', '生活', '11');
 INSERT INTO `forum_class` VALUES ('11', 'more', '2017-04-10 06:15:41.284998', '2017-04-10 06:15:41.284998', '2', '更多', '9999');
 INSERT INTO `forum_class` VALUES ('12', 'career-spot', '2017-04-10 08:40:46.613725', '2017-04-10 08:40:39.300996', '2', '职场', '13');
+INSERT INTO `forum_class` VALUES ('13', 'bandwidth', '2017-04-11 07:22:43.295655', '2017-04-11 07:22:43.295655', '2', '带宽', '200');
 
 -- ----------------------------
 -- Table structure for forum_comment
@@ -493,7 +563,7 @@ CREATE TABLE `forum_subclass` (
   KEY `forum_subclass_parent_class_id_90da0dd4_fk_forum_class_id` (`parent_class_id`),
   CONSTRAINT `forum_subclass_create_user_id_6f56201b_fk_auth_user_id` FOREIGN KEY (`create_user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `forum_subclass_parent_class_id_90da0dd4_fk_forum_class_id` FOREIGN KEY (`parent_class_id`) REFERENCES `forum_class` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of forum_subclass
@@ -506,6 +576,21 @@ INSERT INTO `forum_subclass` VALUES ('5', 'artifiaicl-intennigence', '2017-04-10
 INSERT INTO `forum_subclass` VALUES ('6', 'deep-learning', '2017-04-10 07:15:47.671007', '2017-04-10 07:15:47.671007', '2', '5', '深度学习', '30');
 INSERT INTO `forum_subclass` VALUES ('7', 'data-mining', '2017-04-10 07:16:07.594368', '2017-04-10 07:16:07.594368', '2', '5', '数据挖掘', '30');
 INSERT INTO `forum_subclass` VALUES ('8', 'computer-networking', '2017-04-10 07:16:43.359887', '2017-04-10 07:16:43.359887', '2', '5', '计算机网络', '30');
+INSERT INTO `forum_subclass` VALUES ('9', 'go', '2017-04-11 01:12:52.471429', '2017-04-11 01:12:52.471429', '2', '2', 'GO', '13');
+INSERT INTO `forum_subclass` VALUES ('10', 'job-hopping', '2017-04-11 07:14:57.157715', '2017-04-11 07:14:57.157715', '2', '12', '跳槽', '10');
+INSERT INTO `forum_subclass` VALUES ('11', 'colleague', '2017-04-11 07:15:42.264294', '2017-04-11 07:15:42.264294', '2', '12', '同事', '50');
+INSERT INTO `forum_subclass` VALUES ('12', 'change-profession', '2017-04-11 07:16:15.405058', '2017-04-11 07:16:15.405058', '2', '12', '转行', '60');
+INSERT INTO `forum_subclass` VALUES ('13', 'c-plus-plus', '2017-04-11 07:16:48.754104', '2017-04-11 07:16:48.754104', '2', '2', 'C++', '100');
+INSERT INTO `forum_subclass` VALUES ('14', 'shenzhen', '2017-04-11 07:17:44.903232', '2017-04-11 07:17:44.903232', '2', '3', '深圳', '1');
+INSERT INTO `forum_subclass` VALUES ('15', 'beijing', '2017-04-11 07:18:07.394083', '2017-04-11 07:18:07.394584', '2', '3', '北京', '1');
+INSERT INTO `forum_subclass` VALUES ('16', 'guangzhou', '2017-04-11 07:18:20.305297', '2017-04-11 07:18:20.305297', '2', '3', '广州', '1');
+INSERT INTO `forum_subclass` VALUES ('17', 'shanghai', '2017-04-11 07:18:32.863794', '2017-04-11 07:18:32.863794', '2', '3', '上海', '1');
+INSERT INTO `forum_subclass` VALUES ('18', 'hangzhou', '2017-04-11 07:18:49.648593', '2017-04-11 07:18:49.648593', '2', '3', '杭州', '1');
+INSERT INTO `forum_subclass` VALUES ('19', 'renting', '2017-04-11 07:19:39.370902', '2017-04-11 07:19:39.370902', '2', '10', '租房', '1');
+INSERT INTO `forum_subclass` VALUES ('20', 'outing', '2017-04-11 07:20:11.599195', '2017-04-11 07:20:11.599195', '2', '10', '出行', '1');
+INSERT INTO `forum_subclass` VALUES ('21', 'dress-up', '2017-04-11 07:21:31.963959', '2017-04-11 07:21:31.963959', '2', '10', '打扮', '1');
+INSERT INTO `forum_subclass` VALUES ('22', 'make-friends', '2017-04-11 07:45:19.700290', '2017-04-11 07:45:19.700290', '2', '10', '交友', '1');
+INSERT INTO `forum_subclass` VALUES ('23', 'programmer', '2017-04-11 07:46:31.653733', '2017-04-11 07:46:31.653733', '2', '5', '程序员', '1');
 
 -- ----------------------------
 -- Table structure for forum_tag
@@ -526,23 +611,46 @@ CREATE TABLE `forum_tag` (
 DROP TABLE IF EXISTS `forum_thread`;
 CREATE TABLE `forum_thread` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tittle` varchar(20) NOT NULL,
+  `tittle` varchar(100) NOT NULL,
   `content` longtext NOT NULL,
   `create_time` datetime(6) DEFAULT NULL,
   `last_time` datetime(6) DEFAULT NULL,
   `create_user_id` int(11) NOT NULL,
   `sub_class_id` int(11),
+  `main_class_id` int(11),
   PRIMARY KEY (`id`),
   KEY `forum_thread_create_user_id_be494053_fk_auth_user_id` (`create_user_id`),
+  KEY `forum_thread_main_class_id_2d48ffb7_fk_forum_class_id` (`main_class_id`),
   KEY `forum_thread_sub_class_id_d74dbc71_fk_forum_subclass_id` (`sub_class_id`),
   CONSTRAINT `forum_thread_create_user_id_be494053_fk_auth_user_id` FOREIGN KEY (`create_user_id`) REFERENCES `auth_user` (`id`),
+  CONSTRAINT `forum_thread_main_class_id_2d48ffb7_fk_forum_class_id` FOREIGN KEY (`main_class_id`) REFERENCES `forum_class` (`id`),
   CONSTRAINT `forum_thread_sub_class_id_d74dbc71_fk_forum_subclass_id` FOREIGN KEY (`sub_class_id`) REFERENCES `forum_subclass` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of forum_thread
 -- ----------------------------
-INSERT INTO `forum_thread` VALUES ('1', '请问这个是什么', 'JAVASCRIPT', '2017-04-09 01:54:40.541265', '2017-04-09 01:54:40.541265', '5', '1');
+INSERT INTO `forum_thread` VALUES ('1', '请问这个是什么', 'Hello JavaScriptss', '2017-04-11 10:39:13.019080', '2017-04-09 01:54:40.541265', '5', '1', '2');
+INSERT INTO `forum_thread` VALUES ('2', '程序员的第一个贴子', '你好，世界s~ssssssss', '2017-04-11 10:58:23.694438', '2017-04-11 10:33:05.523561', '2', '23', null);
+INSERT INTO `forum_thread` VALUES ('3', '程序员的第二个贴子', '测试一下吧s', '2017-04-11 11:34:03.368912', '2017-04-11 11:00:33.196109', '2', '23', '5');
+INSERT INTO `forum_thread` VALUES ('4', '程序员的第三个贴子', '你还好吗?sssssssss', '2017-04-11 11:33:54.369391', '2017-04-11 11:03:45.413046', '4', '23', '5');
+INSERT INTO `forum_thread` VALUES ('5', '你好,世界', '来自程序员的关怀', '2017-04-11 12:53:27.457895', '2017-04-11 12:53:27.457895', '4', '23', '5');
+INSERT INTO `forum_thread` VALUES ('6', '如果硬盘被拆开如果被盗，会看到群晖里储存的东西吗', 'rt', '2017-04-11 12:59:51.418487', '2017-04-11 12:58:46.570729', '2', '23', '5');
+INSERT INTO `forum_thread` VALUES ('7', '这是云计算的第一个贴子', '云计算啦，开心的云计算', '2017-04-11 13:02:12.093460', '2017-04-11 13:02:12.093460', '11', '4', '5');
+INSERT INTO `forum_thread` VALUES ('8', '中国人工智能产业数据图谱：55家医疗人工智能企业全扫描', '随着计算和存储的成本大幅下降，计算能力的显著增长，以及IT巨头所搭建的人工智能生态逐渐完善，人工智能初创企业的难度在降低。可喜的是，近两年人工智能也深受资本的青睐，2017年第一季度就有30多家人工智能企业获得融资，落实到具体行业中，医疗健康领域的人工智能创业公司表现尤为突出，关注度和融资量最高。\r\n　　在虚拟助理、医疗大数据、医学影像、等医学领域，人工智能已经不再仅仅是探讨、研究了，大多数产品已经在服务我们普通大众。对此，动脉网对中国的医疗人工智能企业进行了盘点，了解一下中国医疗人工智能企业的发展现状。\r\n　　此次，动脉网收集的医疗人工智能企业合计55家，共分为9个领域：虚拟助理、医疗大数据、医学影像、智能语音、健身生物技术、健康生活方式管理、医疗搜索、癌症早筛、人工智能芯片。\r\n　　其中，上市公司有5家，获得融资的有24家，不包含上市公司，医疗人工智能创业企业共融资22.355亿人民币（数千万、数百万按照1000万、100万计算），未透露的有26家，参与医疗人工智能投资的机构和企业一共有59家（由于时间和信息量的关系，相信我们收集的数据并不全面，未收录到的企业和机构请与我们联系）。', '2017-04-11 16:02:13.194125', '2017-04-11 16:02:13.194629', '2', '5', '5');
+
+-- ----------------------------
+-- Table structure for forum_usersummer
+-- ----------------------------
+DROP TABLE IF EXISTS `forum_usersummer`;
+CREATE TABLE `forum_usersummer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of forum_usersummer
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for index_userprofile
@@ -562,7 +670,7 @@ CREATE TABLE `index_userprofile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`) USING BTREE,
   CONSTRAINT `index_userprofile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of index_userprofile
@@ -573,12 +681,13 @@ INSERT INTO `index_userprofile` VALUES ('3', null, '3', '', '', '', '', '0', '0'
 INSERT INTO `index_userprofile` VALUES ('4', null, '4', '', '', '', '', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('5', null, '5', '', '', '', '', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('6', null, '6', '', '', '', '', '0', '0', '');
-INSERT INTO `index_userprofile` VALUES ('7', 'ch', '7', 'ava/7.png', '腾讯TSG', '老板', '一个菜鸟', '0', '0', '');
+INSERT INTO `index_userprofile` VALUES ('7', 'ch', '7', 'ava/7.jpg', '腾讯TSG', '老板', '一个菜鸟', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('8', null, '8', '', '', '', '', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('9', 'dd', '9', 'ava/9.jpg', 'dd', 'dd', 'dd', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('10', null, '10', '/default-user-image.png', '', '', '', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('11', 'ss', '11', 'ava/11_2QT5W6D.jpg', 's', 's', 'sssss', '0', '0', '');
 INSERT INTO `index_userprofile` VALUES ('12', 'dfjhkh', '12', 'ava/12.jpg', 'jhsdifh', 'dshfi', 'dfhisod', '0', '0', '');
+INSERT INTO `index_userprofile` VALUES ('13', null, '13', '/default-user-image.png', '', '', '', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for lab_addmodel
@@ -691,7 +800,7 @@ CREATE TABLE `timeline_comment` (
   PRIMARY KEY (`id`),
   KEY `timeline_comment_user_id_971300bb_fk_auth_user_id` (`user_id`) USING BTREE,
   CONSTRAINT `timeline_comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of timeline_comment
@@ -715,3 +824,12 @@ INSERT INTO `timeline_comment` VALUES ('41', '世界信息互通联盟_百度搜
 INSERT INTO `timeline_comment` VALUES ('42', 'https://wj.qq.com/s/1206919/4d9d\r\n如果你或你身边的有朋友(仅限学生)想学习前端开发(网页开发、网站建设、 JavaScript 等技术)，我们正在免费招募一些学习者。\r\n学习方式：线上交流，每天会有规定的任务，以及专门的指导，有兴趣，有时间，而且能够长期坚持的朋友快来报名吧。\r\n这一期报名截止时间：2017 年 4 月 17 日\r\n转发给身边有需要的学生朋友~~', '2017-04-10 12:49:06', '2017-04-10 12:49:06', '2');
 INSERT INTO `timeline_comment` VALUES ('43', 'Hello', '2017-04-10 14:34:45', '2017-04-10 14:34:45', '2');
 INSERT INTO `timeline_comment` VALUES ('44', '我都不知道我在做什么', '2017-04-10 15:19:33', '2017-04-10 15:19:33', '2');
+INSERT INTO `timeline_comment` VALUES ('45', '早上好，今天又是美好的一天', '2017-04-11 00:14:50', '2017-04-11 00:14:50', '2');
+INSERT INTO `timeline_comment` VALUES ('46', '1、本套试卷来源于网上，由牛客网注册用户提供，除非经特别声明，牛客网不拥有该资料版权，亦不承担任何法律责任。\r\n2、未经网站或作者的同意不得转载，否则构成侵权，本网站或作者保留诉诸法律的权利。\r\n3、如发现本网站载有侵犯您著作权的侵权信息，可依法向我们提出权利申请，申请方式点击查看。', '2017-04-11 01:10:08', '2017-04-11 01:10:08', '7');
+INSERT INTO `timeline_comment` VALUES ('47', 'sss', '2017-04-11 03:47:00', '2017-04-11 03:47:00', '2');
+INSERT INTO `timeline_comment` VALUES ('48', '...我很忧郁', '2017-04-11 12:47:07', '2017-04-11 12:47:07', '2');
+INSERT INTO `timeline_comment` VALUES ('49', '我也来试试提交表单', '2017-04-11 14:23:58', '2017-04-11 14:23:58', '13');
+INSERT INTO `timeline_comment` VALUES ('50', '我也来试试提交表单', '2017-04-11 14:24:36', '2017-04-11 14:24:36', '13');
+INSERT INTO `timeline_comment` VALUES ('51', '我也来试试提交表单', '2017-04-11 14:24:40', '2017-04-11 14:24:40', '13');
+INSERT INTO `timeline_comment` VALUES ('52', '看来看去，就“支付宝”那个 ICON 好看点。但是支付宝里面东西太多，集天猫，淘宝，支付宝，美团， 58 ，朋友圈，等等。所以老早卸载不用了，现在主要使用微信付款转账等。\r\n\r\n主要说是 ICON ， LOGO （游戏类的除外）。看那些 LOGO 一个都不想下，这么美的 iphone ，那么丑的 ICON ，简直恶心到爆。\r\n\r\n使用 iphone ，只有下载国外的 ICON ，那个界面看起来才一致。\r\n\r\n我比较审美洁癖，请清拍！\r\n\r\n现在我的 APP 只有：招商银行(丑丑丑)， slack ， twitter ，微信(及格)，有邻(这个不错)，网易云音乐(太丑了)， ofo(褪不去的山寨范).', '2017-04-11 14:35:11', '2017-04-11 14:35:11', '2');
+INSERT INTO `timeline_comment` VALUES ('53', '要好好加油了啊↖(^ω^)↗', '2017-04-11 15:34:43', '2017-04-11 15:34:43', '2');

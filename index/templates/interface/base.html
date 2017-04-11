@@ -96,7 +96,6 @@
     {#        background-color: black;#}
 {#        margin-top: 15px;#}
 {#        margin-bottom:15px;#}
-
         border-bottom: 2px solid #6e6a70;
     }
 
@@ -123,14 +122,18 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+
+                        {% with '#000000' as color %}
+
                         <li>
-                            <a class="nav-a {% ifequal view_name "_index" %}nav-a-active{% endifequal %}" href="/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">首页</a>
+                            <a class="nav-a {% ifequal view_name "_index" %}nav-a-active{% endifequal %}" href="/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name "_index" %}color:{{ color }};{% endifequal %}">首页</a>
                         </li>
                         {#        <li class="active"><a href="#">最新</a></li>#}
-                        <li class=""><a class="nav-a {% ifequal view_name '_finding' %}nav-a-active{% endifequal %}"  href="/t/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">发现</a></li>
-                        <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">提问</a></li>
-                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;">时间轴</a></li>
+                        <li class=""><a class="nav-a {% ifequal view_name '_finding' %}nav-a-active{% endifequal %}"  href="/t/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_finding' %}color:{{ color }};{% endifequal %}">发现</a></li>
+                        <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_asking' %}color:{{ color }};{% endifequal %}">提问</a></li>
+                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">时间轴</a></li>
 
+                        {% endwith %}
 
                     </ul>
 
