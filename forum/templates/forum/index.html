@@ -80,11 +80,11 @@
         </div>
         {#        <div style="height: 2px;background-color: #8c5b5a"></div>#}
         <div class="subclass-list" style="border-left: 1px solid #666666;border-top: 1px solid #EEEEEE;border-bottom: 1px solid #EEEEEE">
-            {% if not  subtab %}
+            {% if not  display_sub_class %}
             <div class="subclass-list-item"><a href="#">默认</a></div>
             {% else %}
-                {% for i in subtab %}
-                    <div class="subclass-list-item"><a href="#">{{ i }}</a></div>
+                {% for i in display_sub_class %}
+                    <div class="subclass-list-item"><a href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
                 {% endfor %}
             {% endif %}
         </div>
@@ -96,6 +96,10 @@
 {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
 {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
 {#        </div>#}
+
+        {% for i in content_list %}
+            <div>{{ i.tittle }}</div>
+        {% endfor %}
     </div>
 {% endblock %}
 

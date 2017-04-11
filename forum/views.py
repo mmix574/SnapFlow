@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 
 from .models import Class
 from .models import SubClass
+from .models import Thread
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -40,19 +41,35 @@ class IndexView(AppBaseTemplateView):
         if not tab_instance:
             return context
 
-        subtab = SubClass.objects.filter(parent_class=tab_instance[0])
-        if not subtab:
+        display_sub_class = SubClass.objects.filter(parent_class=tab_instance[0])
+        if not display_sub_class:
             return context
-        context['subtab'] = list(subtab)
+        context['display_sub_class'] = list(display_sub_class)
+
+        subtab = self.request.GET.get('subtab',None)
+
+        content_list = {}
+        if tab and subtab:
+            subtab_instance = SubClass.objects.get(name=subtab)
+            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance)
+        elif tab:
+            content_list = Thread.objects.filter(main_class=tab_instance)
+
+
+        print(content_list)
+        context['content_list'] = content_list
+
         return context
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
 
+
+
+
 class SearchView(AppBaseTemplateView):
     template_name = 'forum/search.html'
 
-class NewView(AppBaseTemplateView):
-    template_name = 'forum/new.html'
-
+class DetailView(AppBaseTemplateView):
+    template_name = 'forum/detail.html'
 

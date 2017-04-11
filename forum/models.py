@@ -20,7 +20,7 @@ class Class(models.Model):
 
 class SubClass(models.Model):
     parent_class = models.ForeignKey(Class)
-    name = models.CharField("名字",max_length=50)
+    name = models.CharField(max_length=50)
     display_name = models.CharField("显示名字",max_length=50)
     # chinese_name = models.CharField(max_length=20)
     create_user = models.ForeignKey(User)
@@ -40,7 +40,7 @@ class SubClass(models.Model):
 # Create your models here.
 class Thread (models.Model):
     main_class = models.ForeignKey(Class,null=True,blank=True)
-    sub_class = models.ForeignKey(SubClass,null=True)
+    sub_class = models.ForeignKey(SubClass,null=True,blank=True)
     tittle = models.CharField(max_length=20,blank=True)
     content = models.TextField(default="")
     create_user = models.ForeignKey(User,default=1)
@@ -60,11 +60,17 @@ class Thread (models.Model):
 from django.db.models import signals
 from django.dispatch import receiver
 
-def before_thread_save(sender, instance, created, **kwargs):
-    # print(len(kwargs))
-    pass
 
-signals.pre_save.connect(before_thread_save,sender=Thread)
+@receiver(signals.pre_save,sender=Thread)
+def before_thread_save(sender, instance, **kwargs):
+    # if instance.sub_class and not instance.main_class:
+    if not instance.main_class and instance.sub_class:
+        # print("ready to do something")
+        try:
+            instance.main_class = SubClass.objects.get(id=instance.sub_class_id).parent_class
+        except Exception as e:
+            pass
+
 
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)
