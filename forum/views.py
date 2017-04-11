@@ -40,9 +40,10 @@ class IndexView(AppBaseTemplateView):
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
 
+class SearchView(AppBaseTemplateView):
+    template_name = 'forum/search.html'
+
 class NewView(AppBaseTemplateView):
     template_name = 'forum/new.html'
 
 
-class SearchView(AppBaseTemplateView):
-    template_name = 'forum/search.html'

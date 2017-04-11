@@ -1,8 +1,33 @@
-{% extends 'interface/base_display.html' %}
+{% extends 'interface/base_display_settings_a.html' %}
 
 {% block tittle %}
     搜索
 {% endblock %}
 
-{% block content %}
+
+{% block brand %}
+                    <span class="glyphicon glyphicon-search"></span>&nbsp;搜索历史
+{% endblock %}
+
+
+{% block li-area %}
+{#    <li class="li-avtive">#}
+{#        <a href="#download">项目一</a>#}
+{#    </li>#}
+{##}
+{#    <li>#}
+{#        <a href="#license-faqs">项目二</a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="#translations">项目三</a>#}
+{#    </li>#}
+{% endblock %}
+
+{% block right %}
+    <div class="content-right">
+        hello right
+    </div>
+    <div class="content-right">
+        hello right
+    </div>
 {% endblock %}

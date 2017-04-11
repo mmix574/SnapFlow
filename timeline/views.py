@@ -11,6 +11,11 @@ from website.utils import messages
 from .models import Comment
 from .forms import CommentForm
 
+
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+@method_decorator(login_required,name='dispatch')
 class IndexView(AppBaseTemplateView):
     template_name = 'timeline/index.html'
 

@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+
+from forum.views import SearchView
 urlpatterns = [
     # index
     url(r'^', include('index.urls')),
@@ -38,7 +40,8 @@ urlpatterns = [
     url(r'm/',include('message.urls')),
     #fake
     url(r'fake/',include('fake.urls')),
-
+    #search
+    # url(r'^s$',SearchView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

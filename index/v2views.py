@@ -71,5 +71,7 @@ class LoginView(TemplateView):
             return V1View.MessageView.as_view(tittle="用户名与密码请求不完整", message="如果多次出现这个提示，请联系管理员")(request)
 
         next_url = request.POST.get('next_url','/')
-        # print(str(next_url))
+        if not next_url:
+            next_url = '/'
+        print("登录成功，正在跳转到。"+str(next_url))
         return HttpResponseRedirect(str(next_url));
