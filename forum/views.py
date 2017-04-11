@@ -64,7 +64,18 @@ class IndexView(AppBaseTemplateView):
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
 
+        sub_class = SubClass.objects.all()
+        context['display_sub_class'] = sub_class
+        return context
+
+    def get(self, request, context={}, *args, **kwargs):
+        return super().get(request, context, *args, **kwargs)
+
+    def post(self, request, context={}, *args, **kwargs):
+        return super().post(request, context, *args, **kwargs)
 
 
 class SearchView(AppBaseTemplateView):

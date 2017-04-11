@@ -86,47 +86,52 @@
                         </div>
                     </li>
                     <li style="height: 2px;background-color: #EEEEEE"></li>
+
                     <li class="dropdown-header">总板块1</li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">总板块2</li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">总板块3</li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
-                    <li><a href="#">板块1</a></li>
-                    <li><a href="#">板块2</a></li>
-                    <li><a href="#">板块3</a></li>
+                    {% for i in display_sub_class %}
+                        <li><a href="javascript:return false;">{{ i.parent_class }} > {{ i.display_name }}</a></li>
+                    {% endfor %}
+{#                    <li class="dropdown-header">总板块1</li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li role="separator" class="divider"></li>#}
+{#                    <li class="dropdown-header">总板块2</li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li role="separator" class="divider"></li>#}
+{#                    <li class="dropdown-header">总板块3</li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
+{#                    <li><a href="#">板块1</a></li>#}
+{#                    <li><a href="#">板块2</a></li>#}
+{#                    <li><a href="#">板块3</a></li>#}
                     <li role="separator" class="divider"></li>
                 </ul>
             </div>
