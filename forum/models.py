@@ -74,7 +74,9 @@ def before_thread_save(sender, instance, **kwargs):
 # 评论
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)
-
+    # create_user = models.ForeignKey(User,default=1)
+    # create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
+    # last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
     pass
 
