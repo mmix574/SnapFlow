@@ -26,7 +26,11 @@ class ThreadAdmin(admin.ModelAdmin):
 #     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
 
-admin.site.register(SubClass)
+class SubClassAdmin(admin.ModelAdmin):
+    list_display = ['display_name','parent_class']
+
+
+admin.site.register(SubClass,SubClassAdmin)
 admin.site.register(Class,ClassAdmin)
 
 admin.site.register(Thread,ThreadAdmin)

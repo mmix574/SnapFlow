@@ -34,10 +34,12 @@ class SubClass(models.Model):
     class Meta:
         verbose_name = "子帖子类型"
         verbose_name_plural = verbose_name
+        ordering = ['parent_class','order']
 
 
 # Create your models here.
 class Thread (models.Model):
+    main_class = models.ForeignKey(Class,null=True)
     sub_class = models.ForeignKey(SubClass,null=True)
     tittle = models.CharField(max_length=20,blank=True)
     content = models.TextField(default="")

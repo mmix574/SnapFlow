@@ -13,6 +13,10 @@ from django.contrib.auth.decorators import login_required
 
 from website.contrib.response import MessageResponse
 
+# 定义默认tab
+def get_default_tab():
+    return "technique"
+
 class IndexView(AppBaseTemplateView):
     template_name = 'forum/index.html'
 
@@ -30,12 +34,17 @@ class IndexView(AppBaseTemplateView):
             return MessageResponse("提示","没有任何的ThreadType，请在数据库中先添加")
         context['display_class'] = display_class
 
-        tab = self.request.GET.get('tab',"technique")
+        tab = self.request.GET.get('tab',get_default_tab())
         context['tab'] = tab
+        tab_instance = Class.objects.filter(name=tab)
+        if not tab_instance:
+            return context
 
-
+        subtab = SubClass.objects.filter(parent_class=tab_instance[0])
+        if not subtab:
+            return context
+        context['subtab'] = list(subtab)
         return context
-
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
