@@ -62,6 +62,10 @@ class Comment(models.Model):
     pass
 
 
+class UserSummer(models.Model):
+    pass
+
+
 
 class TAG(models.Model):
     pass
