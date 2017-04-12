@@ -23,120 +23,112 @@
 {% endblock %}
 
 {% block right %}
-{#    version 1 2017-4-12 10:24:37 已弃用#}
+    <style>
+        .content-right{
+            padding-left: 12px;
+            padding-top: 10px;
+        }
+    </style>
 
-{#    <div class="container content-right" style="padding-left: 40px;padding-top: 30px;padding-bottom: 20px;">#}
-{#        <div class="row clearfix">#}
-{#            <div class="col-md-12 column">#}
-{#                <div class="tabbable" id="tabs-718245">#}
-{#                    <ul class="nav nav-tabs">#}
-{#                        <li {% ifequal tab_name 'tab1' %}class="active"{% endifequal %}>#}
-{#                            <a href="#panel-0" data-toggle="tab">用户资料</a>#}
-{#                        </li>#}
-{#                        <li {% ifequal tab_name 'tab2' %}class="active"{% endifequal %}>#}
-{#                            <a href="#panel-1" data-toggle="tab">用户头像</a>#}
-{#                        </li>#}
-{#                        <li {% ifequal tab_name 'tab3' %}class="active"{% endifequal %}>#}
-{#                            <a href="#panel-2" data-toggle="tab">修改密码</a>#}
-{#                        </li>#}
-{#                        <li {% ifequal tab_name 'tab4' %}class="active"{% endifequal %}>#}
-{#                            <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>#}
-{#                        </li>#}
-{#                    </ul>#}
-{#                    <div class="tab-content">#}
-{#                        <div class="tab-pane {% ifequal tab_name 'tab1' %}active{% endifequal %}" id="panel-0">#}
-{#                            <p>#}
-{#                            <form method="post" enctype="multipart/form-data" style="width: 300px;">#}
-{#                                <input name="tab_name" value="tab1" hidden="hidden">#}
-{#                                {% csrf_token %}#}
-{#                                <div class="form-group">#}
-{#                                    <label for="newPassword">用户名</label>#}
-{#                                    <input class="form-control" name="username" type="text" value="{{ form1.username.value }}">#}
-{#                                </div>#}
-{##}
-{#                                {{ form1.as_p }}#}
-{#                                {{ form2.as_p }}#}
-{##}
-{#                                <button class="btn btn-success" type="submit">提交</button>#}
-{#                            </form>#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="tab-pane {% ifequal tab_name 'tab2' %}active{% endifequal %}" id="panel-1">#}
-{#                            <p>#}
-{#                            <div>#}
-{#                                <label>当前头像:</label>#}
-{#                            </div>#}
-{#                            <form method="post" enctype="multipart/form-data">#}
-{#                                <input name="tab_name" value="tab2" hidden="hidden">#}
-{##}
-{#                                {% csrf_token %}#}
-{#                                <div style="margin-bottom: 10px;margin-top: 10px;margin-left: 20px;">#}
-{#                                    <img src="/media_cdn/{{ form3.avatar.value }}" style="height: 200px;width: 200px;">#}
-{#                                </div>#}
-{#                                {{ form3.as_p }}#}
-{#                                <button class="btn btn-success" type="submit">提交</button>#}
-{#                            </form>#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="tab-pane {% ifequal tab_name 'tab3' %}active{% endifequal %}" id="panel-2">#}
-{#                            <p>#}
-{#                            <form style="width: 300px;" method="post" action=".">#}
-{#                                <input name="tab_name" value="tab3" hidden="hidden">#}
-{#                                {% csrf_token %}#}
-{#                                <div class="form-group">#}
-{#                                    <label for="oldPassword">请输入原始密码</label>#}
-{#                                    <input class="form-control" type="password">#}
-{#                                </div>#}
-{##}
-{#                                <div class="form-group">#}
-{#                                    <label for="newPassword">请再次输入密码</label>#}
-{#                                    <input class="form-control" type="password">#}
-{#                                </div>#}
-{##}
-{#                                <button class="btn btn-success" style="float: left">提交</button>#}
-{#                            </form>#}
-{#                            </p>#}
-{#                        </div>#}
-{#                        <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-3">#}
-{#                            <p>#}
-{#                            <form style="width: 300px;">#}
-{#                                <input name="tab_name" value="tab4" hidden="hidden">#}
-{#                                <div class="form-group">#}
-{#                                    <label for="oldEmail">当前绑定的邮箱为</label>#}
-{#                                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">#}
-{#                                </div>#}
-{#                                <div class="form-group">#}
-{#                                    <label>未验证#}
-{#                                        <label class="glyphicon glyphicon-remove"></label>#}
-{#                                    </label>#}
-{#                                </div>#}
-{#                                <button class="btn btn-success" onclick="return false;" >提交</button>#}
-{#                                <button class="btn btn-success" onclick="return false;">重新发送认证邮件</button>#}
-{#                            </form>#}
-{#                            </p>#}
-{#                        </div>#}
-{#                    </div>#}
+    {% load my_filters %}
+    <div class="content-right">
+        <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">头像修改</div>
+        <hr/>
+        <div style="width: 200px;float: left">
+            <img style="width: 100%" src="/media_cdn/{{user_avatar_form.avatar.value}}">
+        </div>
+
+        <div style="width: 100px;float: left;margin-left: 20px;vertical-align: bottom">
+            <img style="width: 100%;border-radius: 2px;box-shadow: 0 0 1px 1px #e8e8e8;" src="/media_cdn/{{user_avatar_form.avatar.value}}">
+        </div>
+
+
+        <div style="clear: left"></div>
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_avatar_form.as_p}}
+            <button class="btn btn-default" type="submit">保存</button>
+        </form>
+        <hr>
+    </div>
+    <div class="content-right">
+        <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">用户资料</div>
+{#        <div>用户资料</div>#}
+        <hr>
+        <div style="padding-bottom: 20px;">
+        {{ user_form.as_p }}
+        {{ user_profile_form.as_p}}
+        </div>
+    </div>
+    <div class="content-right">
+        <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">密码修改</div>
+{#        <div>密码修改</div>#}
+        <hr>
+        <div style="padding-bottom: 20px;">
+            <form style="width: 300px;" method="post" action=".">
+                <input name="tab_name" value="tab3" hidden="hidden">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="oldPassword">输入原始密码</label>
+                    <input class="form-control" type="password">
+                </div>
+                <div style="height: 2px;border-bottom: 1px inset #ededed;position: relative;top: -5px;"></div>
+                <div class="form-group">
+                    <label for="newPassword">输入新密码</label>
+                    <input class="form-control" type="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">再次输入新密码</label>
+                    <input class="form-control" type="password">
+                </div>
+
+                <button class="btn btn-default" style="float: left">提交</button>
+            </form>
+            <div style="clear: left"></div>
+        </div>
+
+    </div>
+    <div class="content-right">
+        <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">邮箱绑定</div>
+{#        <div>邮箱绑定</div>#}
+        <hr>
+        <div style="padding-bottom: 20px;">
+            <form style="width: 300px;">
+                <input name="tab_name" value="tab4" hidden="hidden">
+                <div class="form-group">
+                    <label for="oldEmail">当前绑定的邮箱为</label>
+                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">
+                </div>
+                <div class="form-group">
+                    <label>未验证
+                        <label class="glyphicon glyphicon-remove"></label>
+                    </label>
+                </div>
+                <button class="btn btn-default" onclick="return false;" >提交</button>
+                <button class="btn btn-default" onclick="return false;">重新发送认证邮件</button>
+            </form>
+        </div>
+    </div>
+    <div class="content-right">
+        <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">手机绑定</div>
+{#        <div>邮箱绑定</div>#}
+        <hr>
+        <div style="padding-bottom: 20px;">
+{#            <form style="width: 300px;">#}
+{#                <input name="tab_name" value="tab4" hidden="hidden">#}
+{#                <div class="form-group">#}
+{#                    <label for="oldEmail">当前绑定的手机号为</label>#}
+{#                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">#}
 {#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-    <div class="content-right">
-        <div>头像修改</div>
-        {{ form3.as_p }}
-        <hr>
-    </div>
-    <div class="content-right">
-        <div>用户资料</div>
-        {{ form1.as_p }}
-        {{ form2.as_p }}
-        <hr>
-    </div>
-    <div class="content-right">
-        <div>密码修改</div>
-        <hr>
-    </div>
-    <div class="content-right">
-        <div>邮箱绑定</div>
-        <hr>
+                <div class="form-group">
+                    <label>未验证
+                        <label class="glyphicon glyphicon-remove"></label>
+                    </label>
+                </div>
+                <button class="btn btn-default" onclick="return false;" >提交</button>
+                <button class="btn btn-default" onclick="return false;">重新发送认证短信</button>
+            </form>
+        </div>
     </div>
 {% endblock %}

@@ -14,6 +14,7 @@ class UserForm(forms.ModelForm):
     #     # raise forms.ValidationError("呵呵  ...")
     #     return first_name
 
+
 class UserProfileForm(forms.ModelForm):
 
     class Meta:

@@ -58,20 +58,17 @@ class MemberView(AppBaseTemplateView):
 
 
 
-
-
 @method_decorator(login_required,name='dispatch')
 class UserDataView(AppBaseTemplateView):
     template_name = "space/userdata.html"
-
     def get(self, request,context={}, *args, **kwargs):
+        user_form = UserForm(instance=request.user)
+        user_profile_form = UserProfileForm(instance=request.user.userprofile)
+        user_avatar_form = UserAvatarForm(instance=request.user.userprofile)
 
-        form1 = UserForm(instance=request.user)
-        form2 = UserProfileForm(instance=request.user.userprofile)
-        form3 = UserAvatarForm(instance=request.user.userprofile)
+        return super(UserDataView, self).get(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form}, *args, **kwargs)
 
-        tab_name = "tab1"
-        return super(UserDataView, self).get(request,context={"form1":form1,"form2":form2,"form3":form3,"tab_name":tab_name}, *args, **kwargs)
+
 
 
     def post(self,request,context={},*args,**kwargs):
@@ -79,8 +76,6 @@ class UserDataView(AppBaseTemplateView):
         form1 = UserForm(instance=request.user,data=request.POST)
         form2 = UserProfileForm(request.POST,request.FILES,instance=request.user.userprofile)
         form3 = UserAvatarForm(request.POST,request.FILES,instance=request.user.userprofile)
-
-
         # form1 = UserForm(instance=request.user)
         # form2 = UserProfileForm(instance=request.user.userprofile)
         # form3 = UserAvatarForm(instance=request.user.userprofile)
