@@ -52,17 +52,35 @@ class UserDataView(AppBaseTemplateView):
             uaf = UserProfileForm(request.POST, instance=request.user.userprofile)
             if uaf.is_valid():
                 uaf.save()
-            uf = UserForm(request.POST,instance=request.user)
+
+            instance = User.objects.get(id=request.user.id)
+            uf = UserForm(request.POST,instance=instance)
+            # real_user = User.objects.get(id=request.user.id)
+            # if request.POST.get('first_name',None):
+            #     real_user.first_name = request.POST.get('first_name',None)
+            #     real_user.save()
+            # else:
+            #     print("something wrong")
+
+            print(uf)
+
             if uf.is_valid():
                 uf.save()
+            else:
+                print(uf.errors)
+
         elif form_name == 'password_changing':
             print('password_changing')
             pass
         elif form_name =='email_changing':
-            print('email_changing')
-            pass
+            user = User.objects.get(id=request.user.id)
+            if request.POST.get('email',None):
+                user.email = request.POST.get('email',None)
+                user.save()
 
-        user_form = UserForm(instance=request.user)
+
+        instance = User.objects.get(id=request.user.id)
+        user_form = UserForm(instance=instance)
         user_profile_form = UserProfileForm(instance=request.user.userprofile)
         user_avatar_form = UserAvatarForm(instance=request.user.userprofile)
 

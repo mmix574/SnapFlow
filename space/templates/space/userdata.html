@@ -58,7 +58,7 @@
         {#        <div>用户资料</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
-            <form method="post" action="#user_data" style="width: 300px;">
+            <form method="post" action="#user_data" style="width: 300px;" id="user_data_real_form">
                 {% csrf_token %}
                 <input name="form_name" value="user_data" hidden="hidden">
 {#                user_form #}
@@ -66,8 +66,9 @@
 {#                    user_avatar_form#}
                 <div class="form-group">
                     <label for="id_username">用户名:</label>
-                    <input disabled="disabled" class="form-control" id="id_username" maxlength="150" name="username" type="text" value="{{ user_form.username.value }}" required="">
+                    <input disabled="disabled" class="form-control" id="id_username" maxlength="150" name="namemaybe" type="text" value="{{ user_form.username.value }}" required="">
                 </div>
+                <input hidden="hidden" name="username" value="{{ user_form.username.value }}">
                 <div class="form-group">
                     <label for="id_first_name">姓名:</label>
                     <input class="form-control" id="id_first_name" maxlength="30" name="first_name" type="text" value="{{ user_form.first_name.value }}">
@@ -88,7 +89,8 @@
                 </div>
                 <div class="form-group">
                     <label>自我介绍:</label>
-                    <input class="form-control" id="id_self_introduction" maxlength="300" name="self_introduction" type="text" value="{{ user_profile_form.self_introduction.value }}" required="">
+{#                    <input class="form-control" id="id_self_introduction" maxlength="300" name="self_introduction" type="text" value="{{ user_profile_form.self_introduction.value }}" required="">#}
+                    <textarea style="height: 150px;width: 350px;" class="form-control" form="user_data_real_form" name="self_introduction">{{ user_profile_form.self_introduction.value }}</textarea>
                 </div>
                 <div style="clear: left"></div>
                 <button class="btn btn-default">保存</button>
@@ -129,12 +131,13 @@
         {#        <div>邮箱绑定</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
-            <form style="width: 300px;" method="post">
+            <form style="width: 300px;" method="post" action="#email_changing">
                 {% csrf_token %}
                 <input name="form_name" value="email_changing" hidden="hidden">
+{#                <input name="username" value="{{ user_form.username.value }}" hidden="hidden">#}
                 <div class="form-group">
                     <label for="oldEmail">当前绑定的邮箱为</label>
-                    <input class="form-control" id="oldEmail" type="email" value="{{ user_form.email.value }}">
+                    <input class="form-control" id="oldEmail" type="email" name="email" value="{{ user_form.email.value }}">
                 </div>
                 <div class="form-group">
                     <label>未验证
