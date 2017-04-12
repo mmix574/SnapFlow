@@ -109,6 +109,8 @@
         <div class="block-right" style="height: 200px;text-align: center">
             <P>你好,{{ user.username }}</P>
             <a href="{% url '_asking' %}" class="btn btn-default">创作新问题 <span style="font-size: 10px;" class="glyphicon glyphicon-pencil"></span></a>
+            <div style="clear: left;height: 10px;"></div>
+            <a href="{% url '_asking' %}" class="btn btn-default">加入{{ tab }}小组 <span style="font-size: 10px;" class="glyphicon glyphicon-pencil"></span></a>
         </div>
     {% else %}
         <div class="block-right">
