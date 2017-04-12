@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class UserMessageStatus(models.Model):
+    pass
 
 class UserToUserMessage(models.Model):
     pass

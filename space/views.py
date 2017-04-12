@@ -40,15 +40,31 @@ class UserDataView(AppBaseTemplateView):
         return super(UserDataView, self).get(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form}, *args, **kwargs)
 
 
-
-
     def post(self,request,context={},*args,**kwargs):
 
+        form_name = request.POST.get('form_name',None)
+
+        if form_name == "user_avatar_form":
+            uaf = UserAvatarForm(request.POST,request.FILES,instance=request.user.userprofile)
+            if uaf.is_valid():
+                uaf.save()
+        elif form_name == 'user_data':
+            uaf = UserProfileForm(request.POST, instance=request.user.userprofile)
+            if uaf.is_valid():
+                uaf.save()
+            uf = UserForm(request.POST,instance=request.user)
+            if uf.is_valid():
+                uf.save()
+        elif form_name == 'password_changing':
+            print('password_changing')
+            pass
+        elif form_name =='email_changing':
+            print('email_changing')
+            pass
 
         user_form = UserForm(instance=request.user)
         user_profile_form = UserProfileForm(instance=request.user.userprofile)
         user_avatar_form = UserAvatarForm(instance=request.user.userprofile)
-
 
         return super(UserDataView, self).post(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form},*args,**kwargs)
 

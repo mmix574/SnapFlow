@@ -44,7 +44,7 @@ class UserProfile(models.Model):
     work_year = models.IntegerField("工作年限",default=0)
     work_place = models.CharField("工作单位",max_length=20)
     work_nickname = models.CharField("职位",max_length=20)
-    language = models.CharField("使用语言",max_length=10,null=True,blank=True)
+    language = models.CharField("使用语言",max_length=10,blank=True)
     self_introduction = models.CharField("自我介绍",max_length=300)
     blog_adderss = models.URLField()
 
