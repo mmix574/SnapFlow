@@ -18,7 +18,7 @@
         <a href="#license-faqs">资料修改</a>
     </li>
     <li>
-        <a href="#translations">消息中心</a>
+        <a href="{% url '_messaging' %}">消息中心</a>
     </li>
 {% endblock %}
 
@@ -46,6 +46,7 @@
         <div style="clear: left"></div>
         <form method="post" action="." enctype="multipart/form-data">
             {% csrf_token %}
+            <input name="form_name" value="user_avatar_form" hidden="hidden">
             {{ user_avatar_form.as_p}}
             <button class="btn btn-default" type="submit">保存</button>
         </form>
@@ -53,16 +54,32 @@
     </div>
     <div class="content-right">
         <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">用户资料</div>
-{#        <div>用户资料</div>#}
+        {#        <div>用户资料</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
-        {{ user_form.as_p }}
-        {{ user_profile_form.as_p}}
+            <form method="post" action="." style="width: 300px;">
+                {% csrf_token %}
+                <input nam="form_name" value="user_data" hidden="hidden">
+                {#            {{ user_form.as_p }}#}
+                {#            {{ user_profile_form.as_p}}#}
+                <div class="form-group">
+                    <label for="id_username">用户名</label>
+                    <input disabled="disabled" class="form-control" id="id_username" maxlength="150" name="username" type="text" value="admin" required="">
+                </div>
+
+                <input id="id_first_name" maxlength="30" name="first_name" type="text" value="管理员是我爸爸">
+                <input id="id_work_place" maxlength="20" name="work_place" type="text" value="华为大工厂s" required="">
+                <input id="id_work_nickname" maxlength="20" name="work_nickname" type="text" value="产品经理s" required="">
+                <input id="id_language" maxlength="10" name="language" type="text" value="EN-ju">
+                <input id="id_self_introduction" maxlength="300" name="self_introduction" type="text" value="明天天气晴朗" required="">
+                <div style="clear: left"></div>
+                <button class="btn btn-default">保存</button>
+            </form>
         </div>
     </div>
     <div class="content-right">
         <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">密码修改</div>
-{#        <div>密码修改</div>#}
+        {#        <div>密码修改</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
             <form style="width: 300px;" method="post" action=".">
@@ -91,14 +108,14 @@
     </div>
     <div class="content-right">
         <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">邮箱绑定</div>
-{#        <div>邮箱绑定</div>#}
+        {#        <div>邮箱绑定</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
             <form style="width: 300px;">
                 <input name="tab_name" value="tab4" hidden="hidden">
                 <div class="form-group">
                     <label for="oldEmail">当前绑定的邮箱为</label>
-                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">
+                    <input class="form-control" id="oldEmail" type="email" value="{{ user_form.email.value }}">
                 </div>
                 <div class="form-group">
                     <label>未验证
@@ -112,22 +129,22 @@
     </div>
     <div class="content-right">
         <div style="position:relative;top: 7px;color: #EEEEEE;background-color: #373737;display: inline-block;padding: 2px 5px;border-radius: 4px;cursor: pointer;">手机绑定</div>
-{#        <div>邮箱绑定</div>#}
+        {#        <div>邮箱绑定</div>#}
         <hr>
         <div style="padding-bottom: 20px;">
-{#            <form style="width: 300px;">#}
-{#                <input name="tab_name" value="tab4" hidden="hidden">#}
-{#                <div class="form-group">#}
-{#                    <label for="oldEmail">当前绑定的手机号为</label>#}
-{#                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">#}
-{#                </div>#}
-                <div class="form-group">
-                    <label>未验证
-                        <label class="glyphicon glyphicon-remove"></label>
-                    </label>
-                </div>
-                <button class="btn btn-default" onclick="return false;" >提交</button>
-                <button class="btn btn-default" onclick="return false;">重新发送认证短信</button>
+            {#            <form style="width: 300px;">#}
+            {#                <input name="tab_name" value="tab4" hidden="hidden">#}
+            {#                <div class="form-group">#}
+            {#                    <label for="oldEmail">当前绑定的手机号为</label>#}
+            {#                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">#}
+            {#                </div>#}
+            <div class="form-group">
+                <label>未验证
+                    <label class="glyphicon glyphicon-remove"></label>
+                </label>
+            </div>
+            {#                <button class="btn btn-default" onclick="return false;" >提交</button>#}
+            <button class="btn btn-default" onclick="return false;">重新发送认证短信</button>
             </form>
         </div>
     </div>
