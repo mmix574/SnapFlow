@@ -10,6 +10,9 @@ class Class(models.Model):
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     order = models.IntegerField(default=1)
+    # sub_class = models.ManyToOneRel()
+    # models.ManyToManyField()
+
     class Meta:
         verbose_name = "父帖子类型"
         verbose_name_plural = verbose_name

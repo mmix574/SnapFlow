@@ -65,17 +65,19 @@ class IndexView(AppBaseTemplateView):
 
 
 from django.core import serializers
+import json
+from django.forms import model_to_dict
+
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-
+        main_class = Class.objects.all()
         sub_class = SubClass.objects.all()
-        context['display_sub_class'] = sub_class
-        json_data = serializers.serialize('json',sub_class)
-        context['display_sub_class_json'] = json_data
+
+
         return context
 
     def get(self, request, context={}, *args, **kwargs):
