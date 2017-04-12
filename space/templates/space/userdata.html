@@ -23,108 +23,120 @@
 {% endblock %}
 
 {% block right %}
-    {#    <div class="container" style="padding-top: 50px;padding-bottom: 50px;">#}
-    {#        <form method="post">#}
-    {#            {% csrf_token %}#}
-    {#            {{ form.as_p }}#}
-    {#            <button class="btn btn-primary" style="position:relative;left: 200px;">提交ma </button>#}
-    {#        </form>#}
-    {#    </div>#}
+{#    version 1 2017-4-12 10:24:37 已弃用#}
 
-    <div class="container content-right" style="padding-left: 40px;padding-top: 30px;padding-bottom: 20px;">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="tabbable" id="tabs-718245">
-                    <ul class="nav nav-tabs">
-                        <li {% ifequal tab_name 'tab1' %}class="active"{% endifequal %}>
-                            <a href="#panel-0" data-toggle="tab">用户资料</a>
-                        </li>
-                        <li {% ifequal tab_name 'tab2' %}class="active"{% endifequal %}>
-                            <a href="#panel-1" data-toggle="tab">用户头像</a>
-                        </li>
-                        <li {% ifequal tab_name 'tab3' %}class="active"{% endifequal %}>
-                            <a href="#panel-2" data-toggle="tab">修改密码</a>
-                        </li>
-                        <li {% ifequal tab_name 'tab4' %}class="active"{% endifequal %}>
-                            <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane {% ifequal tab_name 'tab1' %}active{% endifequal %}" id="panel-0">
-                            <p>
-                            <form method="post" enctype="multipart/form-data" style="width: 300px;">
-                                <input name="tab_name" value="tab1" hidden="hidden">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="newPassword">用户名</label>
-                                    <input class="form-control" name="username" type="text" value="{{ form1.username.value }}">
-                                </div>
-
-                                {{ form1.as_p }}
-                                {{ form2.as_p }}
-
-                                <button class="btn btn-success" type="submit">提交</button>
-                            </form>
-                            </p>
-                        </div>
-                        <div class="tab-pane {% ifequal tab_name 'tab2' %}active{% endifequal %}" id="panel-1">
-                            <p>
-                            <div>
-                                <label>当前头像:</label>
-                            </div>
-                            <form method="post" enctype="multipart/form-data">
-                                <input name="tab_name" value="tab2" hidden="hidden">
-
-                                {% csrf_token %}
-                                <div style="margin-bottom: 10px;margin-top: 10px;margin-left: 20px;">
-                                    <img src="/media_cdn/{{ form3.avatar.value }}" style="height: 200px;width: 200px;">
-                                </div>
-                                {{ form3.as_p }}
-                                <button class="btn btn-success" type="submit">提交</button>
-                            </form>
-                            </p>
-                        </div>
-                        <div class="tab-pane {% ifequal tab_name 'tab3' %}active{% endifequal %}" id="panel-2">
-                            <p>
-                            <form style="width: 300px;" method="post" action=".">
-                                <input name="tab_name" value="tab3" hidden="hidden">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="oldPassword">请输入原始密码</label>
-                                    <input class="form-control" type="password">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="newPassword">请再次输入密码</label>
-                                    <input class="form-control" type="password">
-                                </div>
-
-                                <button class="btn btn-success" style="float: left">提交</button>
-                            </form>
-                            </p>
-                        </div>
-                        <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-3">
-                            <p>
-                            <form style="width: 300px;">
-                                <input name="tab_name" value="tab4" hidden="hidden">
-                                <div class="form-group">
-                                    <label for="oldEmail">当前绑定的邮箱为</label>
-                                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">
-                                </div>
-                                <div class="form-group">
-                                    <label>未验证
-                                        <label class="glyphicon glyphicon-remove"></label>
-                                    </label>
-                                </div>
-                                <button class="btn btn-success" onclick="return false;" >提交</button>
-                                <button class="btn btn-success" onclick="return false;">重新发送认证邮件</button>
-                            </form>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{#    <div class="container content-right" style="padding-left: 40px;padding-top: 30px;padding-bottom: 20px;">#}
+{#        <div class="row clearfix">#}
+{#            <div class="col-md-12 column">#}
+{#                <div class="tabbable" id="tabs-718245">#}
+{#                    <ul class="nav nav-tabs">#}
+{#                        <li {% ifequal tab_name 'tab1' %}class="active"{% endifequal %}>#}
+{#                            <a href="#panel-0" data-toggle="tab">用户资料</a>#}
+{#                        </li>#}
+{#                        <li {% ifequal tab_name 'tab2' %}class="active"{% endifequal %}>#}
+{#                            <a href="#panel-1" data-toggle="tab">用户头像</a>#}
+{#                        </li>#}
+{#                        <li {% ifequal tab_name 'tab3' %}class="active"{% endifequal %}>#}
+{#                            <a href="#panel-2" data-toggle="tab">修改密码</a>#}
+{#                        </li>#}
+{#                        <li {% ifequal tab_name 'tab4' %}class="active"{% endifequal %}>#}
+{#                            <a href="#panel-3" data-toggle="tab">切换绑定邮箱</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                    <div class="tab-content">#}
+{#                        <div class="tab-pane {% ifequal tab_name 'tab1' %}active{% endifequal %}" id="panel-0">#}
+{#                            <p>#}
+{#                            <form method="post" enctype="multipart/form-data" style="width: 300px;">#}
+{#                                <input name="tab_name" value="tab1" hidden="hidden">#}
+{#                                {% csrf_token %}#}
+{#                                <div class="form-group">#}
+{#                                    <label for="newPassword">用户名</label>#}
+{#                                    <input class="form-control" name="username" type="text" value="{{ form1.username.value }}">#}
+{#                                </div>#}
+{##}
+{#                                {{ form1.as_p }}#}
+{#                                {{ form2.as_p }}#}
+{##}
+{#                                <button class="btn btn-success" type="submit">提交</button>#}
+{#                            </form>#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="tab-pane {% ifequal tab_name 'tab2' %}active{% endifequal %}" id="panel-1">#}
+{#                            <p>#}
+{#                            <div>#}
+{#                                <label>当前头像:</label>#}
+{#                            </div>#}
+{#                            <form method="post" enctype="multipart/form-data">#}
+{#                                <input name="tab_name" value="tab2" hidden="hidden">#}
+{##}
+{#                                {% csrf_token %}#}
+{#                                <div style="margin-bottom: 10px;margin-top: 10px;margin-left: 20px;">#}
+{#                                    <img src="/media_cdn/{{ form3.avatar.value }}" style="height: 200px;width: 200px;">#}
+{#                                </div>#}
+{#                                {{ form3.as_p }}#}
+{#                                <button class="btn btn-success" type="submit">提交</button>#}
+{#                            </form>#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="tab-pane {% ifequal tab_name 'tab3' %}active{% endifequal %}" id="panel-2">#}
+{#                            <p>#}
+{#                            <form style="width: 300px;" method="post" action=".">#}
+{#                                <input name="tab_name" value="tab3" hidden="hidden">#}
+{#                                {% csrf_token %}#}
+{#                                <div class="form-group">#}
+{#                                    <label for="oldPassword">请输入原始密码</label>#}
+{#                                    <input class="form-control" type="password">#}
+{#                                </div>#}
+{##}
+{#                                <div class="form-group">#}
+{#                                    <label for="newPassword">请再次输入密码</label>#}
+{#                                    <input class="form-control" type="password">#}
+{#                                </div>#}
+{##}
+{#                                <button class="btn btn-success" style="float: left">提交</button>#}
+{#                            </form>#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="tab-pane {% ifequal tab_name 'tab' %}active{% endifequal %}" id="panel-3">#}
+{#                            <p>#}
+{#                            <form style="width: 300px;">#}
+{#                                <input name="tab_name" value="tab4" hidden="hidden">#}
+{#                                <div class="form-group">#}
+{#                                    <label for="oldEmail">当前绑定的邮箱为</label>#}
+{#                                    <input class="form-control" id="oldEmail" type="email" value="{{ form1.email.value }}">#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <label>未验证#}
+{#                                        <label class="glyphicon glyphicon-remove"></label>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <button class="btn btn-success" onclick="return false;" >提交</button>#}
+{#                                <button class="btn btn-success" onclick="return false;">重新发送认证邮件</button>#}
+{#                            </form>#}
+{#                            </p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+    <div class="content-right">
+        <div>头像修改</div>
+        {{ form3.as_p }}
+        <hr>
     </div>
-
+    <div class="content-right">
+        <div>用户资料</div>
+        {{ form1.as_p }}
+        {{ form2.as_p }}
+        <hr>
+    </div>
+    <div class="content-right">
+        <div>密码修改</div>
+        <hr>
+    </div>
+    <div class="content-right">
+        <div>邮箱绑定</div>
+        <hr>
+    </div>
 {% endblock %}

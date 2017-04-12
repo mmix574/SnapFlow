@@ -7,35 +7,12 @@ from django.http import HttpResponseRedirect
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-
-def default(request):
-    return HttpResponseRedirect('/space/member/')
-
-def member(request):
-    # return HttpResponse("hello member...")
-    return render(request,"space/member.html",{"tittle":"hello world","user":request.user})
-
 from django.views.generic.base import TemplateView
-
-# @method_decorator(csrf_exempt, name='dispatch')
-# class MemberView(TemplateView):
-#     template_name = 'space/member.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(MemberView,self).get_context_data(**kwargs)
-#         context['tittle'] = "hello world!"
-#         return context
-#
-#     def get(self, request, *args, **kwargs):
-#         print("get view from parent!")
-#         return super().get(self,request,*args,**kwargs)
-
-
 from django.conf import settings
-from index.appviews import AppBaseTemplateView
-
 from django.contrib.auth.models import User
 from space.forms import UserForm
+
+from index.appviews import AppBaseTemplateView
 from space.forms import UserProfileForm
 from index.models import UserProfile
 from space.forms import UserAvatarForm
@@ -44,9 +21,9 @@ from space.forms import UserAvatarForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import UserForm
-from django.contrib.auth.models import User
 
-
+from website.utils import console
+from website.utils import messages
 
 @method_decorator(login_required,name='dispatch')
 class MemberView(AppBaseTemplateView):
@@ -81,9 +58,7 @@ class MemberView(AppBaseTemplateView):
 
 
 
-from django.contrib.auth.models import User
-from website.utils import console
-from website.utils import messages
+
 
 @method_decorator(login_required,name='dispatch')
 class UserDataView(AppBaseTemplateView):

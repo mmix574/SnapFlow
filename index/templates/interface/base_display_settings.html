@@ -6,11 +6,11 @@
     <style>
     .content-right{
 {#        background-color: #449d44;#}
-        float: left;
+{#        display: block;#}
     }
     .content-left{
 {#        background-color: #8a6d3b;#}
-        float: left;
+{#        display: block;#}
         width:230px;
         margin-right:10px;
     }
@@ -48,13 +48,15 @@
 
     {% endblock %}
     <div class="container">
-        {% block left %}
-            <div class="content-left">left</div>
-        {% endblock %}
-
+        <div class="content-left-wrapper" style="float: left">
+            {% block left %}
+              <div class="content-left">left</div>
+            {% endblock %}
+        </div>
+        <div class="content-left-wrapper" style="float: left">
         {% block right %}
             <div class="content-right">right</div>
         {% endblock %}
-
+        </div>
     </div>
 {% endblock %}
