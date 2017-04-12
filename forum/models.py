@@ -43,6 +43,7 @@ class Thread (models.Model):
     sub_class = models.ForeignKey(SubClass,null=True,blank=True)
     tittle = models.CharField(max_length=100,blank=True)
     content = models.TextField(default="")
+    # append_image = models.ImageField()
     create_user = models.ForeignKey(User,default=1)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)

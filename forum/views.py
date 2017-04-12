@@ -60,6 +60,11 @@ class IndexView(AppBaseTemplateView):
         context['content_list'] = content_list
 
         return context
+
+
+
+
+from django.core import serializers
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
@@ -69,6 +74,8 @@ class CreateView(AppBaseTemplateView):
 
         sub_class = SubClass.objects.all()
         context['display_sub_class'] = sub_class
+        json_data = serializers.serialize('json',sub_class)
+        context['display_sub_class_json'] = json_data
         return context
 
     def get(self, request, context={}, *args, **kwargs):

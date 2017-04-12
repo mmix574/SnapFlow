@@ -81,7 +81,7 @@
         {#        <div style="height: 2px;background-color: #8c5b5a"></div>#}
         <div class="subclass-list" style="border-left: 1px solid #666666;border-top: 1px solid #EEEEEE;border-bottom: 1px solid #EEEEEE">
             {% if not  display_sub_class %}
-            <div class="subclass-list-item"><a href="#">默认</a></div>
+            <div class="subclass-list-item"><a href="#">None</a></div>
             {% else %}
                 {% for i in display_sub_class %}
                     <div class="subclass-list-item"><a href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
