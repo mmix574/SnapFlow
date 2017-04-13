@@ -102,11 +102,15 @@
         <!-- 贴子列表 -->
         <div class="threads-div-wrapper">
             {% for i in content_list %}
-                {{ i.create_user }}
-                {{ i.create_user.email }}
-
-                <div class="threads-div" style="height: 50px;border-bottom: 1px solid #777">
-                    <a href="{{ i.id }}">{{ i.tittle }}</a>
+                <div style="padding-left: 10px;padding-top:10px;border-bottom: 1px solid #cccccc;">
+                    <div style="height: 64px;width: 64px;float: left;">
+                        <img style="width: 100%;border-radius: 4px;box-shadow: 0 0 1px 1px #777" src="{{ i.create_user.userprofile.avatar.url }}">
+                    </div>
+                    <a style="cursor: pointer;">{{ i.create_user.username }}</a>
+                    {{ i.create_time|timesince }}
+                    <div class="threads-div" style="height: 50px;">
+                        <a href="{{ i.id }}">{{ i.tittle }}</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>

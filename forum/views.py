@@ -45,12 +45,13 @@ class IndexView(AppBaseTemplateView):
         content_list = {}
         if tab and subtab:
             subtab_instance = SubClass.objects.get(name=subtab)
-            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance)
+            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).order_by('-last_time')
         elif tab:
-            content_list = Thread.objects.filter(main_class=tab_instance)
+            content_list = Thread.objects.filter(main_class=tab_instance).order_by('-last_time')
 
 
         context['content_list'] = content_list
+
 
         return context
 

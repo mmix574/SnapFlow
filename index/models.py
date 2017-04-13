@@ -39,13 +39,13 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     avatar = models.ImageField(default=default_avatar,null=True,blank=True,upload_to=upload_to)
-    set_avatar = models.BooleanField(default=False)
+    # set_avatar = models.BooleanField(default=False)
     # avatar = models.ImageField(null=True,blank=True)
-    work_year = models.IntegerField("工作年限",default=0)
-    work_place = models.CharField("工作单位",max_length=20)
-    work_nickname = models.CharField("职位",max_length=20)
+    work_year = models.IntegerField("工作年限",default=0,blank=True)
+    work_place = models.CharField("工作单位",max_length=20,blank=True)
+    work_nickname = models.CharField("职位",max_length=20,blank=True)
     language = models.CharField("使用语言",max_length=10,blank=True)
-    self_introduction = models.CharField("自我介绍",max_length=300)
+    self_introduction = models.CharField("自我介绍",max_length=300,blank=True)
     blog_adderss = models.URLField(blank=True)
 
     objects = UserProfileManager()

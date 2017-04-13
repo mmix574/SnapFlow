@@ -17,5 +17,6 @@ class UserprofileAdmin(UserAdmin):
     inlines = [ProfileInline]
 
 
+
 admin.site.unregister(User)
 admin.site.register(User,UserprofileAdmin)

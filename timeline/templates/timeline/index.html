@@ -1,5 +1,5 @@
 
-{% extends 'interface/base_display.html' %}
+{% extends 'interface/base_display_left_rignt.html' %}
 
 {% load humanize %}
 
@@ -8,63 +8,66 @@
 {% endblock %}
 
 
-{% block content %}
+{% block left %}
 
-
-    {#<div class="container" style="padding-top: 20px;">#}
-    {##}
-    {#    <a class="btn btn-primary" style="margin-left: 100px;" href="create">发布</a>#}
-    {#    <hr/>#}
-    {#    {% for i in list %}#}
-    {#        uid:{{ i.id }}#}
-    {#        {% if i.user.userprofile.avatar %}#}
-    {##}
-    {#        <img style="height: 64px;width: 64px;" src="{{i.user.userprofile.avatar.url}}">{{ i.created_time }}#}
-    {#        {% endif %}#}
-    {#        <h1>{{ i.tittle }}</h1>#}
-    {#        <p>content:{{ i.content}}</p>#}
-    {#        <hr/>#}
-    {#    {% endfor %}#}
-    {##}
-    {#</div>#}
-    {##}
-    <div class="container"style="padding-top: 20px;padding-bottom: 0px">
-        <form role="form" method="post" onsubmit="return check();">
-            {% csrf_token %}
-            <div class="form-group">
-                <span  style="top: 3px;" class="glyphicon glyphicon-map-marker"></span>
-                <label for="name"> 你现在在想什么</label>
-                <textarea id="content-textarea" style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3" name="content"></textarea>
-            </div>
-            <div style="margin-left: 460px;"><span id="num-count">0</span>/500</div>
-            <button class="btn btn-default" type="submit">提交<span class="glyphicon glyphicon-send"></span></button>
-            {#        <input class="btn btn-success" type="submit">#}
-        </form>
-    </div>
-    <div><hr/></div>
-
-    {% for item in list %}
-        <div class="container" style="padding-right: 50px;">
-            <div style="padding-left: 5px;">
-                <div style="float: left;">
-                    <img class="media-object" alt="60x60" style="width: 62px; height: 62px;border-radius: 4px;box-shadow: 0px 0px 5px #AAA" src="{{item.user.userprofile.avatar.url}}
-    " data-holder-rendered="true">
+    <div class="block-left">
+        {#<div class="container" style="padding-top: 20px;">#}
+        {##}
+        {#    <a class="btn btn-primary" style="margin-left: 100px;" href="create">发布</a>#}
+        {#    <hr/>#}
+        {#    {% for i in list %}#}
+        {#        uid:{{ i.id }}#}
+        {#        {% if i.user.userprofile.avatar %}#}
+        {##}
+        {#        <img style="height: 64px;width: 64px;" src="{{i.user.userprofile.avatar.url}}">{{ i.created_time }}#}
+        {#        {% endif %}#}
+        {#        <h1>{{ i.tittle }}</h1>#}
+        {#        <p>content:{{ i.content}}</p>#}
+        {#        <hr/>#}
+        {#    {% endfor %}#}
+        {##}
+        {#</div>#}
+        {##}
+        <div class="container" style="padding-top: 20px;padding-bottom: 0px">
+            <form role="form" method="post" onsubmit="return check();">
+                {% csrf_token %}
+                <div class="form-group">
+                    <span  style="top: 3px;" class="glyphicon glyphicon-map-marker"></span>
+                    <label for="name"> 你现在在想什么</label>
+                    <textarea id="content-textarea" style="resize: none;height: 160px;width: 500px;" class="form-control" rows="3" name="content"></textarea>
                 </div>
-                <div style="float: left;padding-left: 10px;">
-                    <a href="#">
-                        <b>{{ item.user.username }}</b>
-                    </a>
-                    {{ item.created_time | naturaltime }}
-                    <p style="border: 1px solid #a6a6a6;border-radius: 4px">人民币玩家</p>
-                </div>
-                <div style="float: right;">{{ item.id }}</div>
-                <div style="float: right;padding-right: 10px;"><span class="glyphicon glyphicon-comment"></span></div>
-            </div>
-            <div></div>
-            <div style="clear: left;background-color: #e5e5e5;padding: 10px;margin-top:70px;border-radius: 4px;color: #535353">{{ item.content }}</div>
+                <div style="margin-left: 460px;"><span id="num-count">0</span>/500</div>
+                <button class="btn btn-default" type="submit">提交<span class="glyphicon glyphicon-send"></span></button>
+                {#        <input class="btn btn-success" type="submit">#}
+            </form>
         </div>
-        <hr/>
-    {% endfor %}
+        <div><hr/></div>
+
+        {% for item in list %}
+            <div class="container" style="padding-right: 50px;">
+                <div style="padding-left: 5px;">
+                    <div style="float: left;">
+                        <img class="media-object" alt="60x60" style="width: 62px; height: 62px;border-radius: 4px;box-shadow: 0px 0px 5px #AAA" src="{{item.user.userprofile.avatar.url}}
+    " data-holder-rendered="true">
+                    </div>
+                    <div style="float: left;padding-left: 10px;">
+                        <a href="#">
+                            <b>{{ item.user.username }}</b>
+                        </a>
+                        {{ item.created_time | naturaltime }}
+                        <p style="border: 1px solid #a6a6a6;border-radius: 4px">人民币玩家</p>
+                    </div>
+                    <div style="float: right;">{{ item.id }}</div>
+                    <div style="float: right;padding-right: 10px;"><span class="glyphicon glyphicon-comment"></span></div>
+                </div>
+                <div></div>
+                <div style="clear: left;background-color: #e5e5e5;padding: 10px;margin-top:70px;border-radius: 4px;color: #535353">{{ item.content }}</div>
+            </div>
+            <hr/>
+        {% endfor %}
+
+
+    </div><!--block-left-->
 
     <script type="application/javascript">
         {#    $(document).on('input propertychange', 'textarea', function() {#}
