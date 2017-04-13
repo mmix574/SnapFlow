@@ -10,7 +10,18 @@
 
 
 {% block left %}
-    <div class="block-left">this is left</div>
+    <div class="block-left">
+        {{ thread.tittle }}
+        {{ thread.create_user }}
+        {{ thread.content}}
+        content
+    </div>
+
+
+    <!--评论区-->
+    <div class="block-left comment-area">
+        我是评论
+    </div>
 {% endblock %}
 
 {% block right %}

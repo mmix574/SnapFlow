@@ -22,7 +22,7 @@ def get_ctime():
 
 class AppBaseTemplateView(TemplateView):
     __additional_data = {}
-
+    status=""
     # 子类调用User 与 Request 的方法:
     # user = context['user']
     # request = context['request']
@@ -59,9 +59,13 @@ class AppBaseTemplateView(TemplateView):
     def get(self, request,context={}, *args, **kwargs):
         c = self.get_context_data()
         c.update(context)
+        if self.status:
+            return render(request, self.template_name, c,status=self.status)
         return render(request, self.template_name, c)
     def post(self,request,context={},*args,**kwargs):
         c = self.get_context_data()
         c.update(context)
+        if self.status:
+            return render(request, self.template_name, c,status=self.status)
         return render(request,self.template_name,c)
 

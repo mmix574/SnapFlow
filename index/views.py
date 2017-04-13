@@ -34,6 +34,7 @@ class MessageView(AppBaseTemplateView):
 
     tittle = ""
     message = ""
+    status = ""
 
     template_name = 'index/message.html'
     def get_context_data(self, **kwargs):
@@ -46,6 +47,9 @@ class MessageView(AppBaseTemplateView):
             context['message_tittle'] = self.tittle
         else:
             context['message_tittle'] = "Alarm"
+
+        if self.status:
+            context['status'] = self.status
         return context
 
 

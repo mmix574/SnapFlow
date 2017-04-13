@@ -50,7 +50,6 @@ class IndexView(AppBaseTemplateView):
             content_list = Thread.objects.filter(main_class=tab_instance)
 
 
-        print(content_list)
         context['content_list'] = content_list
 
         return context
@@ -97,7 +96,9 @@ class SearchView(AppBaseTemplateView):
 
 
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from index.views import MessageView
+
+from index.contrib.response import _Http404
 
 class DetailView(AppBaseTemplateView):
     template_name = 'forum/detail.html'
@@ -110,9 +111,12 @@ class DetailView(AppBaseTemplateView):
             return HttpResponseRedirect(reverse('_finding'))
 
         id = self.kwargs['id']
-        thread = Thread.objects.filter(id=id)
 
-        print(thread)
+        try:
+            thread = Thread.objects.get(id=id)
+        except Exception as e:
+            return _Http404(request)
 
-        return super().get(request, context, *args, **kwargs)
+
+        return super().get(request, {'thread':thread}, *args, **kwargs)
 

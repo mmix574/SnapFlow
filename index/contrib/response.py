@@ -7,6 +7,10 @@ def MessageResponse(tittle='tittle',content='content'):
 
 
 
+from index.views import MessageView
+def _Http404(request):
+    return MessageView.as_view(tittle="404", message="抱歉没有找到网页",status=404)(request)
+
 
 
 
