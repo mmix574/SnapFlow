@@ -17,13 +17,14 @@ class ClassAdmin(admin.ModelAdmin):
 
 
 class ThreadAdmin(admin.ModelAdmin):
-    list_display = ["tittle","content","main_class","sub_class","create_time"]
+    list_display = ["tittle","content",'create_user',"main_class","sub_class","create_time"]
 # #      sub_class = models.ForeignKey(SubClass,null=True)
 #     tittle = models.CharField(max_length=20,blank=True)
 #     content = models.TextField(default="")
 #     create_user = models.ForeignKey(User,default=1)
 #     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
 #     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    search_fields = ["tittle","content"]
 
 
 class SubClassAdmin(admin.ModelAdmin):

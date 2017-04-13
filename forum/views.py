@@ -68,6 +68,9 @@ from django.core import serializers
 import json
 from django.forms import model_to_dict
 
+
+from .forms import ThreadForm
+
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
@@ -80,12 +83,23 @@ class CreateView(AppBaseTemplateView):
             res.append({"parent_class_name":i.parent_class.display_name,"parent_class_id":i.parent_class.id,"sub_class_id":i.id,"name":i.name,"display_name":i.display_name})
 
         context['clsss_list'] = json.dumps(res)
+
+        context['form'] = ThreadForm()
         return context
 
     def get(self, request, context={}, *args, **kwargs):
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
+        d = request.POST
+        d.update({'create_user':request.user.id})
+        tf = ThreadForm(d)
+
+        if tf.is_valid():
+            tf.save()
+        else:
+            print(tf.errors)
+
         return super().post(request, context, *args, **kwargs)
 
 

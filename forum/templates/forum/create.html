@@ -93,41 +93,41 @@
 <!--    复制区域-->
     <div style="display: none;">
         <li id="header-li" style="padding-left: 10px;" > 板块</li>
-        <li id="clone-li"><a>测试</a></li>
+        <li id="clone-li" style="cursor: pointer"><a>测试</a></li>
         <li id="separator-li" role="separator" class="divider"></li>
     </div>
     <div class="block-left" style="padding-left: 20px;padding-top: 20px;padding-bottom: 20px;padding-right: 20px;">
 
-        <form action="." method="post" enctype="multipart/form-data">
-        <div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle"
-                        data-toggle="dropdown">
-                    <div style="display: inline-block;">选择一个板块 </div>
-                    <span class="caret"></span>
-                </button>
-                <ul id="class-container"  class="dropdown-menu" role="menu" style="width: 200px;height: 400px;overflow-y: scroll">
-                    <li style="height: 30px;">
-                        <div style="padding-left: 5px;padding-right: 5px;">
-                            <span style="float: left;top: 5px;" class="glyphicon glyphicon-search"></span>
-                            <div style="float: left;width: 30px;margin-left: 5px;"><input style="width: 150px;"></div>
-                        </div>
-                    </li>
-                    <li style="height: 2px;background-color: #EEEEEE"></li>
+        <form action="." method="post" enctype="multipart/form-data" id="thread-form">
+            {% csrf_token %}
+            <input id="sub_class_input" name="sub_class" value="1" hidden="hidden">
+            <div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown">
+                        <div id="select-a-block" style="display: inline-block;">选择一个板块 </div>
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="class-container"  class="dropdown-menu" role="menu" style="width: 200px;height: 400px;overflow-y: scroll">
+                        <li style="height: 30px;">
+                            <div style="padding-left: 5px;padding-right: 5px;">
+                                <span style="float: left;top: 5px;" class="glyphicon glyphicon-search"></span>
+                                <div style="float: left;width: 30px;margin-left: 5px;"><input style="width: 150px;"></div>
+                            </div>
+                        </li>
+                        <li style="height: 2px;background-color: #EEEEEE"></li>
 
-{#                    <li id="clone-li"><a>测试</a></li>#}
-                </ul>
+    {#                    <li id="clone-li"><a>测试</a></li>#}
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div style="padding-top: 10px">
-            <form role="form" id="new_thread_form">
-                {% csrf_token %}
+            <div style="padding-top: 10px">
                 <div class="form-group">
                     <label for="tittle">标题</label>
-                    <input type="text" class="form-control" id="tittle" placeholder="" autocomplete="off"></div>
+                    <input type="text" class="form-control" id="tittle" name="tittle" placeholder="" autocomplete="off"></div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">内容</label>
-                    <textarea style="height: 200px;resize: none;" class="form-control" form="new_thread_form" name="content"></textarea>
+                    <textarea style="height: 200px;resize: none;" class="form-control" form="thread-form" name="content"></textarea>
                     {#                    <div  style="height: 300px;" id="input-div"></div>#}
                 </div>
                 <div class="form-group">
@@ -136,19 +136,26 @@
                     <p class="help-block">你可以选择上传一张图片</p>
                 </div>
                 <button type="submit" class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
-            </form>
-        </div>
+            </div>
         </form>
     </div><!--block-left-->
-
 
     <script type="application/javascript">
         var origin_list = {{ clsss_list|safe }};
         for(var i in origin_list){
             var newNode = $('#clone-li').clone();
+            newNode.attr('value',origin_list[i].sub_class_id)
             newNode.children('a').text(origin_list[i].parent_class_name+" / "+origin_list[i].display_name);
             $("#class-container").append(newNode);
         }
+
+        $("#class-container > li").click(function(){
+            $("#sub_class_input").val(this.value);
+{#            console.log($(this).children('a').text());#}
+            $("#select-a-block").text($(this).children('a').text());
+{#            console.log(this.value);#}
+        });
+
     </script>
 {% endblock %}
 

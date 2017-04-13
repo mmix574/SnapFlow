@@ -44,10 +44,11 @@ class SubClass(models.Model):
 class Thread (models.Model):
     main_class = models.ForeignKey(Class,null=True,blank=True)
     sub_class = models.ForeignKey(SubClass,null=True,blank=True)
-    tittle = models.CharField(max_length=100,blank=True)
-    content = models.TextField(default="")
+
+    tittle = models.CharField(max_length=100)
+    content = models.TextField(default="",blank=True)
     # append_image = models.ImageField()
-    create_user = models.ForeignKey(User,default=1)
+    create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
