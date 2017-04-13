@@ -53,7 +53,7 @@
     </style>
     <style>
         .div-ad-head{
-{#            background-color: #449d44;#}
+        {#            background-color: #449d44;#}
             border-left: 1px solid #aaaaaa;
             border-bottom: 1px solid #d9d9d9;
             background-color: #F4F4F4;
@@ -81,30 +81,53 @@
         {#        <div style="height: 2px;background-color: #8c5b5a"></div>#}
         <div class="subclass-list" style="border-left: 1px solid #666666;border-top: 1px solid #EEEEEE;border-bottom: 1px solid #EEEEEE">
             {% if not  display_sub_class %}
-            <div class="subclass-list-item"><a href="#">None</a></div>
+                <div class="subclass-list-item"><a href="#">None</a></div>
             {% else %}
                 {% for i in display_sub_class %}
                     <div class="subclass-list-item"><a href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
                 {% endfor %}
             {% endif %}
         </div>
-{#        <div style="padding-bottom: 10px;">#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-{#        </div>#}
+        {#        <div style="padding-bottom: 10px;">#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
+        {#        </div>#}
 
-        {% for i in content_list %}
-            <div><a href="#">{{ i.tittle }}</a></div>
-        {% endfor %}
+
+
+        <!-- 贴子列表 -->
+        <div class="threads-div-wrapper">
+            {% for i in content_list %}
+                {{ i.create_user }}
+                {{ i.create_user.email }}
+
+                <div class="threads-div" style="height: 50px;border-bottom: 1px solid #777">
+                    <a href="{{ i.id }}">{{ i.tittle }}</a>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <hr/>
+        <!--分页-->
+        <div class="paging-div">
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li><a href="#">Previous</a></li>
+                    <input style="width: 25px;text-align: center" value="7">
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div style="text-align: center">7/100</div>
+
     </div>
-
-
     <!-- 所有版块 -->
-{#    后面使用include 进行分割#}
+    {#    后面使用include 进行分割#}
     <div class="block-left">
         所有版块
     </div>
@@ -134,18 +157,18 @@
     {#        <img src="/static/image/profit/200.gif" style="width: 100%">#}
     {#    </div>#}
 
-{#    <div class="block-right">#}
-{#        <div class="div-ad-head" style="text-align: center">#}
-{#                运行状态#}
-{#        </div>#}
-{#        <div>#}
-{#            <div class="div-hot-today">#}
-{#                今日活跃:17#}
-{#            </div>#}
-{#            <div class="div-hot-today">#}
-{#                注册用户:50#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    {#    <div class="block-right">#}
+    {#        <div class="div-ad-head" style="text-align: center">#}
+    {#                运行状态#}
+    {#        </div>#}
+    {#        <div>#}
+    {#            <div class="div-hot-today">#}
+    {#                今日活跃:17#}
+    {#            </div>#}
+    {#            <div class="div-hot-today">#}
+    {#                注册用户:50#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
     {% include 'forum/ad_block.html' %}
 {% endblock %}

@@ -1,18 +1,12 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.utils.decorators import method_decorator
 
 from index.appviews import AppBaseTemplateView
-from django.shortcuts import get_object_or_404
-
+from index.contrib.response import MessageResponse
 from .models import Class
 from .models import SubClass
 from .models import Thread
-
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-
-
-from website.contrib.response import MessageResponse
 
 # 定义默认tab
 def get_default_tab():
@@ -56,18 +50,13 @@ class IndexView(AppBaseTemplateView):
             content_list = Thread.objects.filter(main_class=tab_instance)
 
 
-        # print(content_list)
+        print(content_list)
         context['content_list'] = content_list
 
         return context
 
 
-
-
-from django.core import serializers
 import json
-from django.forms import model_to_dict
-
 
 from .forms import ThreadForm
 
@@ -106,6 +95,24 @@ class CreateView(AppBaseTemplateView):
 class SearchView(AppBaseTemplateView):
     template_name = 'forum/search.html'
 
+
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse
+
 class DetailView(AppBaseTemplateView):
     template_name = 'forum/detail.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get(self, request, context={}, *args, **kwargs):
+        if not 'id' in self.kwargs:
+            return HttpResponseRedirect(reverse('_finding'))
+
+        id = self.kwargs['id']
+        thread = Thread.objects.filter(id=id)
+
+        print(thread)
+
+        return super().get(request, context, *args, **kwargs)
 
