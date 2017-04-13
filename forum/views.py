@@ -74,10 +74,12 @@ class CreateView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        main_class = Class.objects.all()
-        sub_class = SubClass.objects.all()
+        sub_class =SubClass.objects.all()
+        res = []
+        for i in sub_class:
+            res.append({"parent_class_name":i.parent_class.display_name,"parent_class_id":i.parent_class.id,"sub_class_id":i.id,"name":i.name,"display_name":i.display_name})
 
-
+        context['clsss_list'] = json.dumps(res)
         return context
 
     def get(self, request, context={}, *args, **kwargs):

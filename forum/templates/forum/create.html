@@ -70,7 +70,15 @@
 {% endblock %}
 
 {% block left %}
+<!--    复制区域-->
+    <div style="display: none;">
+        <li id="header-li" style="padding-left: 10px;" > 板块</li>
+        <li id="clone-li"><a>测试</a></li>
+        <li id="separator-li" role="separator" class="divider"></li>
+    </div>
     <div class="block-left" style="padding-left: 20px;padding-top: 20px;padding-bottom: 20px;padding-right: 20px;">
+
+        <form action="." method="post" enctype="multipart/form-data">
         <div>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle"
@@ -78,7 +86,7 @@
                     <div style="display: inline-block;">选择一个板块 </div>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu" style="width: 200px;height: 400px;overflow-y: scroll">
+                <ul id="class-container"  class="dropdown-menu" role="menu" style="width: 200px;height: 400px;overflow-y: scroll">
                     <li style="height: 30px;">
                         <div style="padding-left: 5px;padding-right: 5px;">
                             <span style="float: left;top: 5px;" class="glyphicon glyphicon-search"></span>
@@ -87,11 +95,7 @@
                     </li>
                     <li style="height: 2px;background-color: #EEEEEE"></li>
 
-                    <li class="dropdown-header">板块</li>
-                    {% for i in display_sub_class %}
-                        <li><a href="javascript:return false;">{{ i.parent_class }} > {{ i.display_name }}</a></li>
-                    {% endfor %}
-                    <li role="separator" class="divider"></li>
+{#                    <li id="clone-li"><a>测试</a></li>#}
                 </ul>
             </div>
         </div>
@@ -113,10 +117,15 @@
                 <button type="submit" class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
             </form>
         </div>
-    </div>
-
+        </form>
+    </div><!--block-left-->
     <script type="application/javascript">
-        var origin_list = {{ display_sub_class_json|safe }};
+        var origin_list = {{ clsss_list|safe }};
+        for(var i in origin_list){
+            var newNode = $('#clone-li').clone();
+            newNode.children('a').text(origin_list[i].parent_class_name+" / "+origin_list[i].display_name);
+            $("#class-container").append(newNode);
+        }
     </script>
 {% endblock %}
 
