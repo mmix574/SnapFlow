@@ -70,6 +70,26 @@
 {% endblock %}
 
 {% block left %}
+    <style>
+        #ul-04131056 > li{
+            padding-bottom: 5px;
+        }
+    </style>
+    <div class="block-left" style="padding-top: 10px;padding-right: 10px;padding-bottom: 10px;">
+        <div style="margin-left: 12px;margin-bottom: 15px;">{% include "pieces/commom/badge.html" with content="注意事项"%}</div>
+        <ul id="ul-04131056" style="padding-left: 30px;">
+            <li>主题标题,
+    请在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。</li>
+            <li>可以在正文中为你要发布的主题添加更多细节。上传一张图片可能会帮助你更好的说明问题</li>
+            <li>
+    选择节点
+    在最后，请为你的提问选择一个版块。恰当的归类会让你的提问得到更快，以及更有效的回答,不恰当的主题内容可能会被删除。
+    </li>
+        <li>在发布300s内可以选择修改问题的标题以及内容,300秒禁止修改，如果有特殊情况请联系网站管理员。admin@snapflow.top</li>
+        </ul>
+        <div style="clear: left"></div>
+    </div>
+
 <!--    复制区域-->
     <div style="display: none;">
         <li id="header-li" style="padding-left: 10px;" > 板块</li>
@@ -119,6 +139,8 @@
         </div>
         </form>
     </div><!--block-left-->
+
+
     <script type="application/javascript">
         var origin_list = {{ clsss_list|safe }};
         for(var i in origin_list){
