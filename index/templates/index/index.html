@@ -1,5 +1,5 @@
 {% extends 'interface/base_display_left_rignt.html' %}
-
+{% load static %}
 {% block tittle %}
     首页
 {% endblock %}
@@ -91,10 +91,25 @@
             <p>施工中..</p>
         </div>
     </div>
+    <div class="block-my-ad">
+        <a href="https://c-nfa.jd.com/adclick?keyStr=udkZvQs253om4dIKV2EfPBod43UqT011R00Ti+FxmmuH5Wl/l0iF6NptwdmseOEEQuSExiV3DcCIAR7/YSwtOO7EdkZNC6dQsHAyWJAPNwfamvMIeIQiUhI0Vn1gTXasWoGmkzScp8bFEWkDT6naxqRWHR6KCe6nDtcfbKpMJh5zjky2RAbutfyp6VydWrVVO8kB+sSzSS0dWVpqx287jLMnQRjLX8LeruC5DQu2wwDKXBn/4XyfZBkqZDvr0dRqsYAhmxRmBoISpVNFyZRXL4a+892nOos/0aSRnf6vbMmf9HLeDipRHAKm4vcfN+U1KKFU6qVYkYEbrR18iEkgIA==&cv=2.0&url=https://sale.jd.com/act/XiA6CBb8cT.html">
+            <img style="width: 100%" src="{% static "image/index-aad.jpg" %}">
+        </a>
+    </div>
 {% endblock %}
 
 {% block left %}
+    <div class="block-left">
+        left
+    </div>
 {% endblock %}
 
 {% block right%}
+
+    <div class="block-right" style="text-align: center;padding: 10px;">
+        <a class="btn btn-default">个性化设置<span class="glyphicon glyphicon-wrench"></span></a>
+    </div>
+    {% include "forum/hot-block.html" %}
+    {% include "forum/hot_today.html" %}
+
 {% endblock %}

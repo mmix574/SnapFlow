@@ -174,11 +174,11 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ctime }}{{ user.username }}  <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     {#                <li class="dropdown-header">基本</li>#}
-                                    <li><a href="/space/userdata/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;个人中心</a></li>
+                                    <li><a href="/space/userdata/"><span class="glyphicon glyphicon-dashboard"></span>&nbsp;&nbsp;个人中心</a></li>
                                     {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
                                     {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
                                     {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
-                                    <li><a href="/m"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
+                                    <li><a href="/m"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
 
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">其他</li>
@@ -187,7 +187,7 @@
                                     <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;问题收藏</a></li>
                                     {#                                    <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>#}
                                     <li><a href="/none"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;小组信息</a></li>
-{#                                    <li><a href="/none"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;我的成就</a></li>#}
+                                    <li><a href="/none"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;关注好友</a></li>
                                     <li><a href="/none"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;会员服务</a></li>
                                     {#              <li><a href="/none"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;会员服务</a></li>#}
 
@@ -196,14 +196,14 @@
                                     {% if user.is_staff %}
                                         <li class="dropdown-header">超级用户</li>
 
-                                        <li><a href="/admin">管理面板</a></li>
-                                        <li><a href="/admin">Django后台</a></li>
+                                        <li><a href="/admin">管理面板&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span></a></li>
+                                        <li><a href="/admin">系统消息发送&nbsp;<span class="glyphicon glyphicon-exclamation-sign"></span></a></li>
                                         <li role="separator" class="divider"></li>
 
                                     {% endif %}
 
                                     <li class="dropdown-header">其他选项</li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个性化设置</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;个性化设置</a></li>
 
                                     {#                    <li><a href="/login">切换账户</a></li>#}
                                     <li><a href="/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;注销</a></li>
