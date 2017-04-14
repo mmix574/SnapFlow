@@ -50,7 +50,9 @@ class Thread (models.Model):
     # append_image = models.ImageField()
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
-    click = models.IntegerField(default=0)
+    view = models.IntegerField(default=0)
+    reply = models.IntegerField(default=0)
+
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_edit_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)

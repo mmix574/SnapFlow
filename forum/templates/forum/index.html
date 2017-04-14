@@ -106,11 +106,10 @@
                         <div style="height: 4px;"></div>
                         <div>
                             <a style="cursor: pointer;color: #777777;">{{ i.create_user.username }}</a>
-
-                            <div style="display: inline-block;color: #777777;">{{ i.create_time|timesince }}前</div>
+                            <div style="color: #777777;display: inline-block">{{ i.create_time|timesince }}前</div>
                             <div style="display: inline-block;position:relative;top: -2px;height: 4px;width: 4px;background-color: #777777;border-radius: 2px;"></div>
-                            <div></div>
-                            <div style="float: right;color: #777777;">回复20 |点赞30 |浏览10 </div>
+                            <div style="display: inline-block;border-radius: 2px;padding: 0 2px;cursor: pointer;"><a href="?tab={{ tab }}&subtab={{ i.sub_class.name }}">{{ i.sub_class }}</a></div>
+                            <div style="display: inline-block;float: right;color: #777777;">回复{{ i.reply }} |点赞{{ i.like }} |浏览{{ i.view }} </div>
                         </div>
                     </div>
                 </div>
