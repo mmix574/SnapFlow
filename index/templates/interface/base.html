@@ -94,8 +94,8 @@
     {#        padding-top: 0px;#}
     {#        padding-bottom: 0px;#}
     {#        background-color: black;#}
-{#        margin-top: 15px;#}
-{#        margin-bottom:15px;#}
+    {#        margin-top: 15px;#}
+    {#        margin-bottom:15px;#}
         border-bottom: 2px solid #6e6a70;
     }
 </style>
@@ -123,13 +123,15 @@
 
                         {% with '#000000' as color %}
 
-                        <li>
-                            <a class="nav-a {% ifequal view_name "_index" %}nav-a-active{% endifequal %}" href="/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name "_index" %}color:{{ color }};{% endifequal %}">首页</a>
-                        </li>
-                        {#        <li class="active"><a href="#">最新</a></li>#}
-                        <li class=""><a class="nav-a {% ifequal view_name '_finding' %}nav-a-active{% endifequal %}"  href="/t/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_finding' %}color:{{ color }};{% endifequal %}">发现</a></li>
-                        <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_asking' %}color:{{ color }};{% endifequal %}">提问</a></li>
-                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">时间轴</a></li>
+                            <li>
+                                <a class="nav-a {% ifequal view_name "_index" %}nav-a-active{% endifequal %}" href="/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name "_index" %}color:{{ color }};{% endifequal %}">首页</a>
+                            </li>
+                            {#        <li class="active"><a href="#">最新</a></li>#}
+                            <li class=""><a class="nav-a {% ifequal view_name '_finding' %}nav-a-active{% endifequal %}"  href="/t/" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_finding' %}color:{{ color }};{% endifequal %}">发现</a></li>
+                            <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_asking' %}color:{{ color }};{% endifequal %}">提问</a></li>
+                            {#                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">时间轴</a></li>#}
+
+                            <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">小组</a></li>
 
                         {% endwith %}
 
@@ -161,8 +163,8 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control search-input" placeholder="搜一搜" name="q" autocomplete="off">
                                 </div>
-{#                                搜索提示框#}
-{#                                <div class="search-hint" style="height: 200px;width: 200px;background-color: #449d44;position: absolute;display: block;"></div>#}
+                                {#                                搜索提示框#}
+                                {#                                <div class="search-hint" style="height: 200px;width: 200px;background-color: #449d44;position: absolute;display: block;"></div>#}
                             </form>
                             {% if logined and profile.avatar %}
                                 <li ><img style="width: 38px;height: 38px;border-radius:4px;position:relative;top: 8px;left: 8px;box-shadow: 0px 0px 1px 1px #dcdcdc" src="{{profile.avatar.url}}"></li>
@@ -176,18 +178,17 @@
                                     {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
                                     {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
                                     {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
-
-
                                     <li><a href="/m"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
 
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">其他</li>
-                                    <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span> &nbsp;历史记录</a></li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-book"></span> &nbsp;历史记录</a></li>
 
-                                    <li><a href="/none"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;问题收藏</a></li>
-{#                                    <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>#}
-                                    <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;小组信息</a></li>
-                                    <li><a href="/none"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;我的成就</a></li>
+                                    <li><a href="/none"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;问题收藏</a></li>
+                                    {#                                    <li><a href="/none"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;&nbsp;我的关注</a></li>#}
+                                    <li><a href="/none"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;小组信息</a></li>
+{#                                    <li><a href="/none"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;我的成就</a></li>#}
+                                    <li><a href="/none"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;会员服务</a></li>
                                     {#              <li><a href="/none"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;会员服务</a></li>#}
 
                                     <li role="separator" class="divider"></li>
@@ -195,8 +196,8 @@
                                     {% if user.is_staff %}
                                         <li class="dropdown-header">超级用户</li>
 
-                                        <li style=""><a href="/admin">管理面板</a></li>
-{#                                        <li style=""><a href="/admin">Django后台</a></li>#}
+                                        <li><a href="/admin">管理面板</a></li>
+                                        <li><a href="/admin">Django后台</a></li>
                                         <li role="separator" class="divider"></li>
 
                                     {% endif %}
@@ -215,7 +216,7 @@
 
                 </div><!--/.nav-collapse -->
             </div>
-        
+
         </nav>
     </div>
     {% block body %}
@@ -291,11 +292,12 @@
     </style>
 
     <style>
-{#        2017年4月10日 23:01:13#}
+        {#        2017年4月10日 23:01:13#}
         #foot > div > div.col-md-8 > div:nth-child(1) > div > ul > li:hover{
             border: 1px solid #EEEEEE;
         }
     </style>
+
     <div style="width: 100%;margin-top: 20px;">
         <div id="foot" style="background-color: #282828;height: 500px;padding: 50px;box-shadow: 0px -3px 4px #AAA;">
             <div class="container" style="text-align: center">
@@ -338,7 +340,7 @@
                     <div id="footer-statement" class="col-md-12" style="float: left;">
                         <p style="color: #777;">Copyright;  ©2016-2017  Powered by <a style="color: #fbfbfb" href="https://www.djangoproject.com/">Django</a></p>
                         <font style="color: rgb(226,226,226)">© 2005-2017 Django Software Foundation and individual contributors. Django is a registered trademark of the Django Software Foundation.</font>
-{#                        <p style="color: #777;"> 12 人在线   最高记录 76 </p>#}
+                        {#                        <p style="color: #777;"> 12 人在线   最高记录 76 </p>#}
                     </div>
                 </div>
 
@@ -380,9 +382,9 @@
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
             <a onclick="return backtotop()">
-{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-{#                    打卡#}
-{#                </div>#}
+                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+                {#                    打卡#}
+                {#                </div>#}
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-pencil"></span>
 
             </a>
@@ -391,9 +393,9 @@
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
 
             <a onclick="return backtotop()">
-{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-{#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-{#                </div>#}
+                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+                {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
+                {#                </div>#}
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-envelope"></span>
                 <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>
             </a>
@@ -401,25 +403,28 @@
         {#    复制我#}
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
             <a onclick="return backtotop()">
-{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-{#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-{#                </div>#}
+                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+                {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
+                {#                </div>#}
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-bullhorn"></span>
                 <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>
             </a>
         </div>
         {#    复制我#}
     {% endif %}
-        <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
-            <a onclick="return backtotop()">
-{#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-{#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-{#                </div>#}
-                <span style="height: 40px;width:40px;top: 13px;font-size: 16px" class="glyphicon glyphicon-qrcode"></span>
-{#                <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>#}
-            </a>
-        </div>
-        {#    复制我#}
+
+
+    <div id="wechat-qrcode" style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
+        <a onclick="return backtotop()">
+            {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
+            {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
+            {#                </div>#}
+            <span style="height: 40px;width:40px;top: 13px;font-size: 16px" class="glyphicon glyphicon-qrcode"></span>
+            {#                <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>#}
+        </a>
+        <div id="wechat-qrcode-img" style="margin: 10px;display: none;"><img  style="background-color: #ffffff;padding: 10px;border-radius: 4px;border: 1px solid #d7d7d7;position: relative;height: 120px;width:120px;left: -140px;top: -80px;" src="{% static 'static/image/weixin-qrcode.png' %}"></div>
+    </div>
+    {#    复制我#}
 </div>
 
 </body>
@@ -430,5 +435,15 @@
         window.scrollTo(0,0);
         {#        alert("you clicked me");#}
     }
+    $(document).ready(function(){
+{#        $("#wechat-qrcode").onmouseover(function(){#}
+{#            $("#wechat-qrcode-img").css("display","block");#}
+{#        });#}
+        $("#wechat-qrcode").mouseover(function(){
+            $("#wechat-qrcode-img").css("display","block");
+        }).mouseout(function(){
+            $("#wechat-qrcode-img").css("display","none");
+        });
+    });
 
 </script>

@@ -1,9 +1,0 @@
-<h1>欢迎你,{{ request.user.username }}</h1>
-
-<br/>
-{% for postmodel in object_list %}
-    <h1>{{ postmodel.pk }} {{ postmodel.user.username }}</h1>
-    <a style="color: #2aabd2" href="detail/{{ postmodel.pk }}">{{postmodel.tittle }}</a>
-    <p>{{postmodel.content }}</p>
-    <hr/>
-{% endfor %}

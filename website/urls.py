@@ -33,7 +33,6 @@ urlpatterns = [
     # timeline
     url(r'^time/',include('timeline.urls')),
     # lab
-    url(r'lab/',include('lab.urls')),
     # forum
     url(r't/',include('forum.urls')),
     #message
@@ -41,7 +40,7 @@ urlpatterns = [
     #fake
     url(r'fake/',include('fake.urls')),
     #search
-    # url(r'^s$',SearchView.as_view()),
+    url(r'^s$',SearchView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -53,6 +53,7 @@ class Thread (models.Model):
     view = models.IntegerField(default=0)
     reply = models.IntegerField(default=0)
 
+
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_edit_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
@@ -86,6 +87,7 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
+    content = models.TextField(blank=False)
     create_user = models.ForeignKey(User,related_name='thread_user')
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)

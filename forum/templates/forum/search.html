@@ -1,33 +1,68 @@
 {% extends 'interface/base_display_settings_a.html' %}
 
 {% block tittle %}
-    搜索
+    "{{ query }}"&nbsp;的搜索结果
 {% endblock %}
 
 
 {% block brand %}
-                    <span class="glyphicon glyphicon-search"></span>&nbsp;搜索历史
+    <span class="glyphicon glyphicon-search"></span>&nbsp;搜索历史
 {% endblock %}
 
 
 {% block li-area %}
-{#    <li class="li-avtive">#}
-{#        <a href="#download">项目一</a>#}
-{#    </li>#}
-{##}
-{#    <li>#}
-{#        <a href="#license-faqs">项目二</a>#}
-{#    </li>#}
-{#    <li>#}
-{#        <a href="#translations">项目三</a>#}
-{#    </li>#}
+    <li>
+        <a href="/s?q=云计算">云计算</a>
+    </li>
+
+    <li>
+        <a href="/s?q=Django Rest">Django Rest</a>
+    </li>
+    <li>
+        <a href="/s?q=微信小程序">微信小程序</a>
+    </li>
+    <li>
+        <a href="#">...</a>
+    </li>
 {% endblock %}
 
 {% block right %}
-    <div class="content-right">
-        hello right
+    <div class="content-right" style="padding: 10px;">
+        <div class="badge-class-div">
+            {% include 'pieces/commom/badge.html' with content="搜索结果" %}
+        </div>
+        {% if query %}
+            <div style="display: inline-block"><h3>{{ query }}</h3></div>
+            <div style="display: inline-block"><h2>的搜索结果</h2></div>
+            <div></div>
+            <div style="display: inline-block;">一共检索到</div>
+            <div style="display: inline-block">{{ search_list|length }}</div>
+            <div style="display: inline-block;">条内容</div>
+        {% else %}
+            <div style="display: inline-block"><h2>搜索内容为空,请重新搜索</h2></div>
+        {% endif %}
     </div>
-    <div class="content-right">
-        hello right
+    <div class="content-right" style="padding: 10px;">
+        {#        <div style="display: inline-block;">一共检索到</div>#}
+        {#        <div style="display: inline-block">0</div>#}
+        {#        <div style="display: inline-block;">条内容</div>#}
+
+        <!--我是搜索内容-->
+            {% for i in search_list %}
+                <div style="padding: 4px;border-bottom: 1px solid #c8c8c8;">
+                    <div class="avatar-wrapper" style="width: 30px;height: 30px;border-radius: 2px;display: inline-block;">
+                        <img src="{{ i.create_user.userprofile.avatar.url }}" style="width: 100%">
+                    </div>
+                    <div style="display: inline-block">
+                        <a href="/t/{{ i.id }}">{{ i.tittle }}</a>
+                    </div>
+                    <div class="time-div" style="display: inline-block;float: right;">{{ i.create_time|date }}</div>
+                </div>
+            {% endfor %}
+        <div>
+        </div>
+    </div>
+    <div class="content-right" style="padding: 10px;text-align: center">
+        页面切换
     </div>
 {% endblock %}

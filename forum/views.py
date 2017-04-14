@@ -95,11 +95,23 @@ class CreateView(AppBaseTemplateView):
 class SearchView(AppBaseTemplateView):
     template_name = 'forum/search.html'
 
+    def get(self, request, context={}, *args, **kwargs):
+        query = request.GET.get('q',None)
+        if not query:
+            return super().get(request, {"query":query}, *args, **kwargs)
+
+        search_list = Thread.objects.filter(tittle__contains=query)
+
+        # print(search_list)
+        return super().get(request, {"query":query,"search_list":search_list}, *args, **kwargs)
+
 
 from django.core.urlresolvers import reverse
 from index.views import MessageView
 
 from index.contrib.response import _Http404
+from forum.forms import CommentForm
+from .models import Comment
 
 class DetailView(AppBaseTemplateView):
     template_name = 'forum/detail.html'
@@ -118,6 +130,35 @@ class DetailView(AppBaseTemplateView):
         except Exception as e:
             return _Http404(request)
 
+        comment_form = CommentForm()
 
-        return super().get(request, {'thread':thread}, *args, **kwargs)
+        # get comment list from databases
+        comment_list = Comment.objects.filter(thread_id=id)
+        return super().get(request, {'thread':thread,'tid':id,'comment_form':comment_form,"comment_list":comment_list}, *args, **kwargs)
+
+
+    def post(self, request, context={}, *args, **kwargs):
+        if not 'id' in self.kwargs:
+            return HttpResponseRedirect(reverse('_finding'))
+
+        id = self.kwargs['id']
+
+        try:
+            thread = Thread.objects.get(id=id)
+        except Exception as e:
+            return _Http404(request)
+
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            m = comment_form.save(commit=False)
+            m.create_user = request.user
+            m.thread_id = id
+            m.save()
+
+        # get comment list from databases
+        comment_list = Comment.objects.filter(thread_id=id)
+        # get comment list from databases
+        return super().post(request, {'thread':thread,'tid':id,'comment_form':comment_form,"comment_list":comment_list}, *args, **kwargs)
+
+
 
