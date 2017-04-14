@@ -48,6 +48,9 @@ class Thread (models.Model):
     tittle = models.CharField(max_length=100)
     content = models.TextField(default="",blank=True)
     # append_image = models.ImageField()
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    click = models.IntegerField(default=0)
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
@@ -79,9 +82,11 @@ def before_thread_save(sender, instance, **kwargs):
 # 评论
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)
-    # create_user = models.ForeignKey(User,default=1)
-    # create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
-    # last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    create_user = models.ForeignKey(User,related_name='thread_user')
+    create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
+    last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
     pass
 
@@ -92,4 +97,6 @@ class UserSummer(models.Model):
 
 
 class TAG(models.Model):
+    thread = models.ForeignKey(Thread)
+    name = models.CharField(max_length=30)
     pass
