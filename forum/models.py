@@ -53,8 +53,8 @@ class Thread (models.Model):
     click = models.IntegerField(default=0)
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
-    last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-
+    last_edit_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    last_reply_time = models.DateTimeField(null=True,blank=True)
     class Meta:
         verbose_name = "帖子"
         verbose_name_plural = verbose_name
@@ -91,7 +91,7 @@ class Comment(models.Model):
     pass
 
 
-class UserSummer(models.Model):
+class UserThreadStatus(models.Model):
     pass
 
 

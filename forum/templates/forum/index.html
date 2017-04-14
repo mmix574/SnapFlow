@@ -71,6 +71,7 @@
 
 {% block left %}
     <div class="block-left" style="">
+        <!--一级列表-->
         <div style="padding-top: 12px;padding-left: 10px;padding-bottom: 8px;">
             {% for item in display_class %}
                 <div class="class-div {% ifequal tab item.name %}class-div-active{% endifequal %}">
@@ -78,38 +79,39 @@
                 </div>
             {% endfor %}
         </div>
-        {#        <div style="height: 2px;background-color: #8c5b5a"></div>#}
+        <!--二级列表-->
         <div class="subclass-list" style="border-left: 1px solid #666666;border-top: 1px solid #EEEEEE;border-bottom: 1px solid #EEEEEE">
             {% if not  display_sub_class %}
                 <div class="subclass-list-item"><a href="#">None</a></div>
             {% else %}
                 {% for i in display_sub_class %}
-                    <div class="subclass-list-item"><a href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
+                    <div class="subclass-list-item"><a style="{% ifequal subtab i.name %}background-color: #656565;color: #EEEEEE;padding: 3px;border-radius: 4px;{% endifequal %}" href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
                 {% endfor %}
             {% endif %}
         </div>
-        {#        <div style="padding-bottom: 10px;">#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#            <div class="content-list" style="height: 60px;border-bottom: 1px solid black"></div>#}
-        {#        </div>#}
-
-
-
         <!-- 贴子列表 -->
         <div class="threads-div-wrapper">
             {% for i in content_list %}
-                <div style="padding-left: 10px;padding-top:10px;border-bottom: 1px solid #cccccc;">
-                    <div style="height: 64px;width: 64px;float: left;">
-                        <img style="width: 100%;border-radius: 4px;box-shadow: 0 0 1px 1px #777" src="{{ i.create_user.userprofile.avatar.url }}">
+                <div class="content-list-wrapper" style="padding:10px;border-bottom: 1px solid #d9d9d9">
+                    <div class="list-left" style="height: 48px;width: 48px;float: left;">
+                        <img style="width: 100%;border-radius: 4px;box-shadow: 0 0 1px 1px #EEEEEE;" src="{{ i.create_user.userprofile.avatar.url }}">
                     </div>
-                    <a style="cursor: pointer;">{{ i.create_user.username }}</a>
-                    {{ i.create_time|timesince }}
-                    <div class="threads-div" style="height: 50px;">
-                        <a href="{{ i.id }}">{{ i.tittle }}</a>
+                    <div class="list-right" style="padding-left: 55px;">
+                        <div class="line-first" style="display: inline;">
+                            <div class="threads-div" style="">
+                                <a style="color: #373737;font-size: 15px" href="{{ i.id }}">{{ i.tittle }}</a>
+                            </div>
+                        </div>
+
+                        <div style="height: 4px;"></div>
+                        <div>
+                            <a style="cursor: pointer;color: #777777;">{{ i.create_user.username }}</a>
+
+                            <div style="display: inline-block;color: #777777;">{{ i.create_time|timesince }}前</div>
+                            <div style="display: inline-block;position:relative;top: -2px;height: 4px;width: 4px;background-color: #777777;border-radius: 2px;"></div>
+                            <div></div>
+                            <div style="float: right;color: #777777;">回复20 |点赞30 |浏览10 </div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}

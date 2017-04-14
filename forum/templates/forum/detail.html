@@ -12,9 +12,15 @@
 {% block left %}
     <div class="block-left">
         {{ thread.tittle }}
+        <div style="width: 64px;height: 64px;">
+            <img style="width: 100%;" src="{{ thread.create_user.userprofile.avatar.url }}">
+        </div>
+
         {{ thread.create_user }}
         {{ thread.content}}
         content
+        <!--标签处-->
+        <div></div>
     </div>
 
 
