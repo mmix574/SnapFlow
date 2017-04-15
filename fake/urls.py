@@ -5,6 +5,6 @@ from .views import fake_user
 
 
 urlpatterns = [
-    url(r'$',default_method),
     url(r'user$', fake_user),
+    url(r'$',default_method),
 ]

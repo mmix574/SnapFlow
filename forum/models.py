@@ -7,8 +7,8 @@ class Class(models.Model):
     name = models.CharField("name",max_length=50,blank=True,null=True)
     display_name = models.CharField("显示名字",max_length=50,null=True,blank=True)
     create_user = models.ForeignKey(User,default=1,blank=True,null=True)
-    create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
-    last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    last_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     order = models.IntegerField(default=1)
     # sub_class = models.ManyToOneRel()
     # models.ManyToManyField()
@@ -27,8 +27,8 @@ class SubClass(models.Model):
     display_name = models.CharField("显示名字",max_length=50)
     # chinese_name = models.CharField(max_length=20)
     create_user = models.ForeignKey(User)
-    create_time = models.DateTimeField(auto_now=True,blank=True)
-    last_time = models.DateTimeField(auto_now_add=True,blank=True)
+    create_time = models.DateTimeField(auto_now_add=True,blank=True)
+    last_time = models.DateTimeField(auto_now=True,blank=True)
     order = models.IntegerField(default=1)
 
     def __str__(self):
@@ -55,8 +55,8 @@ class Thread (models.Model):
 
 
     create_user = models.ForeignKey(User,null=False,blank=False)
-    create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
-    last_edit_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    last_edit_time = models.DateTimeField(auto_now=True,blank=True,null=True)
     last_reply_time = models.DateTimeField(null=True,blank=True)
     class Meta:
         verbose_name = "帖子"
@@ -89,8 +89,8 @@ class Comment(models.Model):
     dislike = models.IntegerField(default=0)
     content = models.TextField(blank=False)
     create_user = models.ForeignKey(User,related_name='thread_user')
-    create_time = models.DateTimeField(auto_now=True,blank=True,null=True)
-    last_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    last_time = models.DateTimeField(auto_now=True,blank=True,null=True)
 
     pass
 

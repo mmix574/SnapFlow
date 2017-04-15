@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.http.response import HttpResponse
-
+import random
 
 
 
@@ -15,7 +15,14 @@ def default_method(request):
 
 
 def fake_user(request):
-    u = User.objects.get(id=1)
+    users = User.objects.all()
+    u = random.choice(users)
+    print(u)
+    # u = User.objects.get(id=1)
     if u:
         login(request,u)
-    return HttpResponseRedirect("/")
+
+    #
+    return render(request,'fake/fake_user.html',{"user":u})
+
+    # return HttpResponseRedirect("/")

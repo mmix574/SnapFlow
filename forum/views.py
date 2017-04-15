@@ -124,6 +124,13 @@ class DetailView(AppBaseTemplateView):
             return HttpResponseRedirect(reverse('_finding'))
 
         id = self.kwargs['id']
+        try:
+            t = Thread.objects.get(id=id)
+            t.view = t.view+1
+            t.save()
+        except Exception as e:
+            pass
+
 
         try:
             thread = Thread.objects.get(id=id)
