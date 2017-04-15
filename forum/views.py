@@ -45,9 +45,9 @@ class IndexView(AppBaseTemplateView):
         content_list = {}
         if tab and subtab:
             subtab_instance = SubClass.objects.get(name=subtab)
-            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).order_by('-create_time')
+            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).order_by('-create_time')[:20]
         elif tab:
-            content_list = Thread.objects.filter(main_class=tab_instance).order_by('-create_time')
+            content_list = Thread.objects.filter(main_class=tab_instance).order_by('-create_time')[:20]
 
 
         context['content_list'] = content_list
@@ -161,6 +161,12 @@ class DetailView(AppBaseTemplateView):
             m.create_user = request.user
             m.thread_id = id
             m.save()
+            try:
+                t = Thread.objects.get(id=id)
+                t.reply = t.reply+1
+                t.save()
+            except Exception as e:
+                pass
 
         # get comment list from databases
         comment_list = Comment.objects.filter(thread_id=id)

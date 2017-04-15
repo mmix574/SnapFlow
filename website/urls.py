@@ -32,13 +32,16 @@ urlpatterns = [
     url(r'^space/',include('space.urls')),
     # timeline
     url(r'^time/',include('timeline.urls')),
-    # lab
     # forum
     url(r't/',include('forum.urls')),
     #message
     url(r'm/',include('message.urls')),
     #fake
     url(r'fake/',include('fake.urls')),
+    # history
+    url(r'history/',include('history.urls')),
+    # collection
+    url(r'collection/',include('collection.urls')),
     #search
     url(r'^s$',SearchView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

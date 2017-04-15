@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from index.appviews import AppBaseTemplateView
+
+
+class CollectionView(AppBaseTemplateView):
+    template_name = 'collection/collection.html'

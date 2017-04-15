@@ -1,0 +1,22 @@
+{% extends 'interface/base_display_settings_a.html' %}
+
+{% block brand %}
+    <span class="glyphicon glyphicon-book"></span>&nbsp;历史记录
+{% endblock %}
+{% block li-area %}
+    <li class="li-active">
+        <a href="#download">所有</a>
+    </li>
+    <li>
+        <a href="#license-faqs">我的提问</a>
+    </li>
+    <li>
+        <a href="#translations">我的回答</a>
+    </li>
+{% endblock %}
+
+{% block right %}
+    <div class="content-right">
+        {% url "_history" %}
+    </div>
+{% endblock %}
