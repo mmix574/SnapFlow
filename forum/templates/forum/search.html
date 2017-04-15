@@ -43,9 +43,9 @@
         {% endif %}
     </div>
     <div class="content-right" style="padding: 10px;">
-        {#        <div style="display: inline-block;">一共检索到</div>#}
-        {#        <div style="display: inline-block">0</div>#}
-        {#        <div style="display: inline-block;">条内容</div>#}
+                <div style="display: inline-block;">一共检索到</div>
+                <div style="display: inline-block">0</div>
+                <div style="display: inline-block;">条内容</div>
 
         <!--我是搜索内容-->
             {% for i in search_list %}
@@ -57,11 +57,14 @@
                         <a href="/t/{{ i.id }}">{{ i.tittle }}</a>
                     </div>
                     <div class="time-div" style="display: inline-block;float: right;">{{ i.create_time|date }}</div>
+                    <div style="clear: both"></div>
                 </div>
             {% endfor %}
         <div>
         </div>
     </div>
+
+
     <div class="content-right" style="padding: 10px;text-align: center">
         页面切换
     </div>

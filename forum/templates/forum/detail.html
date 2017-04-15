@@ -1,7 +1,7 @@
 {% extends 'interface/base_display_left_rignt.html' %}
 
 {% block tittle %}
-    贴子
+    {{ thread.tittle }}
 {% endblock %}
 
 {% block ad %}
@@ -62,4 +62,7 @@
 
 {% block right %}
     <div class="block-right">this is right</div>
+    {% include 'forum/hot_today.html' %}
+    {% include 'forum/hot-block.html' %}
+    {% include 'forum/ad_block.html' %}
 {% endblock %}

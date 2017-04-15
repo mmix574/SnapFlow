@@ -16,7 +16,13 @@
 {% endblock %}
 
 {% block right %}
-    <div class="content-right">
-        abc
+    <div class="content-right" style="padding: 10px;">
+        {% for i in collection_list %}
+            <div style="padding-bottom: 2px;border-bottom: 1px solid #cecece">
+                <div style="display: inline-block">{{ forloop.counter }}</div>
+                <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.thread.create_user.userprofile.avatar.url }}">
+                <div style="display: inline-block"><a href="/t/{{ i.thread_id }}">{{ i.thread.tittle }}</a></div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
