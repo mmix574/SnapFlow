@@ -10,7 +10,7 @@
 
 
 {% block left %}
-    <div class="block-left">
+    <div class="block-left" style="padding: 15px;">
         tittle:{{ thread.tittle }}
         <div style="width: 64px;height: 64px;">
             <img style="width: 100%;" src="{{ thread.create_user.userprofile.avatar.url }}">
@@ -18,7 +18,12 @@
 
         {{ thread.create_user }}
         <div style="clear: both"></div>
-        content:{{ thread.content}}
+
+        <!--内容-->
+        <div>
+            content:{{ thread.content|safe}}
+        </div>
+
         <!--标签处-->
         <div></div>
         <!--收藏按钮-->
@@ -39,7 +44,7 @@
                 <div>
                 {{ forloop.counter }}
                     {{ i.create_user.username }}
-                    {{ i.content }}
+                    {{ i.content}}
                 </div>
             {% endfor %}
         </div>

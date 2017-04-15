@@ -54,15 +54,15 @@ class Command(BaseCommand):
             # 创建用户
             u = User()
             u.username = _name
-            u.email = _name+"@gmail.com"
+            u.email = _name+"@163.com"
             u.save()
 
-            u.userprofile.language = "english"
-            u.work_place = "google"
-            u.userprofile.work_nickname = "hacker-painter"
-            u.userprofile.self_introduction = "もしも彼らが君の何かを盗んだとして それはくだらないものだよ  返して贳うまでもない筈甚至何故なら価値は生命に従って付いている"
+            u.userprofile.language = "chinese"
+            u.work_place = "微软亚洲研究院"
+            u.userprofile.work_nickname = "实验室助理"
+            u.userprofile.self_introduction = "PHP is a widely-used general-purpose scripting language that is especially suited for Web development and can be embedded into HTML."
 
-            u.userprofile.avatar="ava/"+_name+suffix
+            u.userprofile.avatar = "ava/"+_name+suffix
             u.userprofile.save()
             print("created user:"+_name)
 
