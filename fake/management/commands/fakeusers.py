@@ -65,5 +65,5 @@ class Command(BaseCommand):
             u.userprofile.avatar="ava/"+_name+suffix
             u.userprofile.save()
             print("created user:"+_name)
-            
+
         print("finished creating users")
