@@ -4,6 +4,9 @@ from django.contrib import admin
 from .models import Class
 from .models import SubClass
 from .models import Thread
+from .models import Comment
+from .models import TAG
+
 
 class ClassAdmin(admin.ModelAdmin):
     pass
@@ -35,3 +38,5 @@ admin.site.register(SubClass,SubClassAdmin)
 admin.site.register(Class,ClassAdmin)
 
 admin.site.register(Thread,ThreadAdmin)
+admin.site.register(Comment)
+admin.site.register(TAG)

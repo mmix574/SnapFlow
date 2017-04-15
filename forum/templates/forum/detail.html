@@ -11,7 +11,7 @@
 
 {% block left %}
     <div class="block-left" style="padding: 15px;">
-        tittle:{{ thread.tittle }}
+        <h4>{{ thread.tittle }}</h4>
         <div style="width: 64px;height: 64px;">
             <img style="width: 100%;" src="{{ thread.create_user.userprofile.avatar.url }}">
         </div>
@@ -20,42 +20,47 @@
         <div style="clear: both"></div>
 
         <!--内容-->
-        <div>
-            content:{{ thread.content|safe}}
+        <div style="background-color: #e7e7e7">
+            {{ thread.content|safe}}
         </div>
 
         <!--标签处-->
         <div></div>
         <!--收藏按钮-->
         <div>
-{#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
+            {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
             <button class="btn btn-default">已收藏 <span class="glyphicon glyphicon-paperclip"></span></button>
         </div>
         <div>
-            <button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+            {{ thread.like }}<button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
         </div>
     </div>
 
 
     <div class="block-left">
-            目前还没有评论
-        <div class="comment-list-wrapper">
+        {% if not comment_list %} 目前还没有评论
+        {% endif %}
+        <div class="comment-list-wrapper" style="padding: 10px;">
             {% for i in comment_list %}
-                <div>
-                {{ forloop.counter }}
-                    {{ i.create_user.username }}
-                    {{ i.content}}
+                <div style="padding: 5px;">
+                    <div style="display: inline-block">{{ forloop.counter }}</div>
+                    <img style="border-radius: 2px;height: 30px;width: 30px;" src="{{ i.create_user.userprofile.avatar.url }}">
+                    <div><b>{{ i.create_user.username }}</b></div>
+                    <div>{{ i.content}}</div>
+                    {{ i.create_time }}
                 </div>
             {% endfor %}
         </div>
     </div>
 
     <!--评论区-->
-    <div class="block-left comment-area">
+    <div class="block-left comment-area" style="padding: 20px;">
+        <div style="margin-bottom: 20px;">添加评论</div>
         <form action="." method="post">
             {% csrf_token %}
-            {{ comment_form.as_p }}
-            <button >提交</button>
+            <textarea class="form-control" cols="40" id="id_content" name="content" rows="10" required=""></textarea>
+            <div style="height: 10px;"></div>
+            <button class="btn btn-default">提交</button>
         </form>
     </div>
 {% endblock %}

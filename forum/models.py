@@ -52,7 +52,7 @@ class Thread (models.Model):
     dislike = models.IntegerField(default=0)
     view = models.IntegerField(default=0)
     reply = models.IntegerField(default=0)
-
+    # collection = models.IntegerField(default=0)
 
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
@@ -92,8 +92,9 @@ class Comment(models.Model):
     create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     last_time = models.DateTimeField(auto_now=True,blank=True,null=True)
 
-    pass
-
+    class Meta:
+        verbose_name = "评论"
+        verbose_name_plural = verbose_name
 
 class UserThreadStatus(models.Model):
     pass
