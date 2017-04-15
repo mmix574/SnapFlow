@@ -43,18 +43,35 @@ class IndexView(AppBaseTemplateView):
         subtab = self.request.GET.get('subtab',None)
         context['subtab'] = subtab
         content_list = {}
+        # 2017年4月15日20:03:14
+        p = int(self.request.GET.get('p',1))
+        if p<=0:
+            p=1
+
+        per_page = 20
+        count = 0
         if tab and subtab:
             subtab_instance = SubClass.objects.get(name=subtab)
-            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).order_by('-create_time')[:20]
+            count = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).count()
+            content_list = Thread.objects.filter(main_class=tab_instance,sub_class=subtab_instance).order_by('-create_time')[((p-1)*20):(p)*20]
         elif tab:
-            content_list = Thread.objects.filter(main_class=tab_instance).order_by('-create_time')[:20]
+            content_list = Thread.objects.filter(main_class=tab_instance).order_by('-create_time')[((p-1)*20):(p)*20]
+            count=Thread.objects.filter(main_class=tab_instance).count()
 
 
+        import math
+        page_count = math.ceil(count/per_page)
+
+        context['p'] = p
+        context['page_count'] = page_count
         context['content_list'] = content_list
-
 
         return context
 
+    def render_to_response(self, context, **response_kwargs):
+        response = super(IndexView,self).render_to_response(context, **response_kwargs)
+        response.set_cookie("good","good")
+        return response
 
 import json
 

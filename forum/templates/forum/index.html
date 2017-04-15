@@ -117,23 +117,28 @@
         </div>
 
 
-        <hr/>
         <!--分页-->
         <div class="paging-div">
             <nav aria-label="...">
                 <ul class="pager">
-                    <li><a href="#">Previous</a></li>
-                    <input style="width: 25px;text-align: center" value="7">
-                    <li><a href="#">Next</a></li>
+                    {% ifnotequal p 1 %}
+                    <li><a href="?p={{ p|add:-1 }}">Previous</a></li>
+                    {% endifnotequal %}
+                    <form action="." method="get" style="display: inline-block;">
+                        <input class="form-control" name="p" style="text-align: center;display: inline-block;width: 50px;border-radius: 4px;" value="{{ p }}">
+                    </form>
+                    {% if p < page_count%}
+                    <li><a href="?p={{ p|add:1 }}">Next</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
-        <div style="text-align: center">7/100</div>
+        <div style="text-align: center">{{ p }} / {{ page_count }}</div>
 
     </div>
     <!-- 所有版块 -->
     {#    后面使用include 进行分割#}
-    <div class="block-left">
+    <div class="block-left" style="text-align: center">
         所有版块
     </div>
 
