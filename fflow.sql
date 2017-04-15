@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-14 22:26:37
+Date: 2017-04-15 08:35:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -151,13 +151,13 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
 INSERT INTO `auth_user` VALUES ('1', 'pbkdf2_sha256$30000$KfO4Gh9NksAs$foR9ECGRViVeyQVtUy12N59fMpv4IaYMbDItaDXaE1o=', '2017-03-04 01:04:06', '1', 'none', '', '', 'none@example.com', '1', '1', '2017-03-03 13:45:28');
-INSERT INTO `auth_user` VALUES ('2', 'pbkdf2_sha256$30000$a0Wt9R9rF2Lq$PN3RMty/dNaAy3bNvsTaC4KZ5c4K+9Hf68OF0Z/HmB4=', '2017-04-14 14:24:07', '1', 'admin', '我是管理员', '我是', '', '1', '1', '2017-03-03 13:46:24');
+INSERT INTO `auth_user` VALUES ('2', 'pbkdf2_sha256$30000$a0Wt9R9rF2Lq$PN3RMty/dNaAy3bNvsTaC4KZ5c4K+9Hf68OF0Z/HmB4=', '2017-04-14 16:57:20', '1', 'admin', '我是管理员', '我是', '', '1', '1', '2017-03-03 13:46:24');
 INSERT INTO `auth_user` VALUES ('3', 'password', null, '0', 'username', '', '', '', '0', '1', '2017-03-03 15:39:37');
 INSERT INTO `auth_user` VALUES ('4', 'pbkdf2_sha256$30000$jlx8heHH5x1D$We+WeJFmrLMUaO47QbtCJraw5To99VrQ7/eB4QsSlcs=', null, '0', 'user0098', '', '', 'kk@qq.com', '0', '1', '2017-03-04 01:00:34');
 INSERT INTO `auth_user` VALUES ('5', 'pbkdf2_sha256$30000$8ejPhpUg0BDu$Ppxs55G/b4SiA/37FDqDyrnlfnWe6Zn/I8626gvJWuQ=', null, '0', 'woshi', '', '', 'kk@qq.com', '0', '1', '2017-03-04 01:03:13');
@@ -171,7 +171,7 @@ INSERT INTO `auth_user` VALUES ('12', 'pbkdf2_sha256$30000$gReVAwznfApJ$YCFw9Yrk
 INSERT INTO `auth_user` VALUES ('13', 'pbkdf2_sha256$30000$byXaOoMYHopg$GDq2V2InCTydqrQbg6lxNFNDzBXnKAg/KE1gNGkQsfc=', '2017-04-12 12:59:58', '0', 'll', '方大同的妹妹', '', '', '0', '1', '2017-04-11 14:23:41');
 INSERT INTO `auth_user` VALUES ('14', 'pbkdf2_sha256$30000$duDHHRn8vbI6$cCL+DsOhvPiVA3gr6EPaXQNPcZUtphrxH4dt+IOcoGI=', '2017-04-13 09:18:10', '0', 'kkk', '', '', 'kk@qq.com', '0', '1', '2017-04-13 09:17:58');
 INSERT INTO `auth_user` VALUES ('17', 'pbkdf2_sha256$30000$p40kwFt2PAJY$QFqj/tergFuCHhQ0nD8Pxeya02l066W52c7boBEQmoo=', '2017-04-13 09:58:22', '0', 'ssd', '', '', 'kk@qq.com', '0', '1', '2017-04-13 09:58:08');
-INSERT INTO `auth_user` VALUES ('18', 'pbkdf2_sha256$30000$99JV6TlvpSO1$60rXnrPB2xjHAsXdDULybmfXFrb6S54XXI5O6/M4UHU=', '2017-04-14 00:49:17', '0', '4xGAQzHJ', '', '', 'kk@qq.com', '0', '1', '2017-04-14 00:49:12');
+INSERT INTO `auth_user` VALUES ('29', '', null, '0', 'UujN3Dqa', '', '', 'UujN3Dqa@gmail.com', '0', '1', '2017-04-15 00:32:57');
 
 -- ----------------------------
 -- Table structure for auth_user_groups
@@ -229,7 +229,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_ibfk_1` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -393,6 +393,18 @@ INSERT INTO `django_admin_log` VALUES ('156', '2017-04-14 11:48:34', '38', '人�
 INSERT INTO `django_admin_log` VALUES ('157', '2017-04-14 11:49:19', '34', '手机', '2', '[{\"changed\": {\"fields\": [\"name\", \"display_name\"]}}]', '17', '2');
 INSERT INTO `django_admin_log` VALUES ('158', '2017-04-14 11:52:07', '39', '网络安全', '1', '[{\"added\": {}}]', '17', '2');
 INSERT INTO `django_admin_log` VALUES ('159', '2017-04-14 11:52:19', '39', '网络安全', '2', '[{\"changed\": {\"fields\": [\"order\"]}}]', '17', '2');
+INSERT INTO `django_admin_log` VALUES ('160', '2017-04-14 16:28:49', '18', '4xGAQzHJ', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('161', '2017-04-14 16:30:38', '19', 'eXu/f7JG', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('162', '2017-04-14 16:34:26', '20', 'c/hRO0a@', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('163', '2017-04-14 16:34:54', '21', 'gMlc4LyF', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('164', '2017-04-14 16:54:21', '22', 'Xx@/wAc/', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('165', '2017-04-14 16:54:27', '24', 'y73APTfx', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('166', '2017-04-14 16:54:37', '23', 'FTagWwH/', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('167', '2017-04-14 16:55:27', '25', 'ZPAN9EE6', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('168', '2017-04-14 16:56:02', '26', 'hW/hT/7Z', '2', '[{\"changed\": {\"fields\": [\"password\"]}}]', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('169', '2017-04-14 16:57:37', '26', 'hW/hT/7Z', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('170', '2017-04-15 00:30:39', '27', 'wL88Hyd@', '3', '', '14', '2');
+INSERT INTO `django_admin_log` VALUES ('171', '2017-04-15 00:32:47', '28', 'sSF_b@EF', '3', '', '14', '2');
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -543,7 +555,7 @@ INSERT INTO `django_session` VALUES ('01vmip3fraoi41969qj2q6pu8qwinwww', 'ZDQwMm
 INSERT INTO `django_session` VALUES ('1uib5ejlh2rb5t111yv7qg31qqmvcxit', 'OTBiODc2M2FjOTBjNTUyZjk1NDNiMDczMmZiOWZjNjY0ODBmMDMwNDp7Il9hdXRoX3VzZXJfaWQiOiIxMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZmM5M2RkYjcwNmJiZjY2ODIyNTYwZTU2ZjQ2YWNhYTY2M2NmZjFiZCJ9', '2017-04-21 07:36:00');
 INSERT INTO `django_session` VALUES ('8tzrta0131blnq573mwomow8upd8wj2z', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-03 06:50:32');
 INSERT INTO `django_session` VALUES ('d31qaebzbho6gi0ugqu0xc9wgvdhmtge', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-28 14:24:07');
-INSERT INTO `django_session` VALUES ('ir2q0gwrzqgek6wdgdey6lt19uvboegq', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-28 10:12:28');
+INSERT INTO `django_session` VALUES ('h8ojildtuqwzftoxfeqpotio0x5ugjja', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-28 16:57:20');
 INSERT INTO `django_session` VALUES ('lw7rblukf2pe691urzc6qcclprdexydv', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-23 14:22:52');
 INSERT INTO `django_session` VALUES ('m3c22wdiz7daalh0j6l6ae07e818qasc', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-23 02:06:32');
 INSERT INTO `django_session` VALUES ('t8h6txbc8yod8ylbnt0fztsyo76ngpbq', 'N2FjNDI4NTJiMGYyNzM3NWFjZWI3NzM3MTAyNmNmNDc1OThiZjUxNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxM2Y1NWFmNTY3ODcxOWZiOWU2N2UwZjI4NjM3MjFiN2E0MzYzYjFhIn0=', '2017-04-24 10:29:55');
@@ -599,7 +611,7 @@ CREATE TABLE `forum_comment` (
   KEY `forum_comment_create_user_id_c2040891_fk_auth_user_id` (`create_user_id`),
   CONSTRAINT `forum_comment_create_user_id_c2040891_fk_auth_user_id` FOREIGN KEY (`create_user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `forum_comment_thread_id_9cc3073e_fk_forum_thread_id` FOREIGN KEY (`thread_id`) REFERENCES `forum_thread` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of forum_comment
@@ -619,6 +631,7 @@ INSERT INTO `forum_comment` VALUES ('12', '28', '2017-04-14 12:35:28.348843', '2
 INSERT INTO `forum_comment` VALUES ('13', '15', '2017-04-14 12:56:45.338104', '2', '0', '2017-04-14 12:56:45.338104', '0', 'abcdefg');
 INSERT INTO `forum_comment` VALUES ('14', '30', '2017-04-14 14:22:09.042566', '7', '0', '2017-04-14 14:22:09.042566', '0', 'aas');
 INSERT INTO `forum_comment` VALUES ('15', '30', '2017-04-14 14:22:18.871216', '2', '0', '2017-04-14 14:22:18.871216', '0', 'bbdhs');
+INSERT INTO `forum_comment` VALUES ('16', '30', '2017-04-14 16:39:59.475989', '2', '0', '2017-04-14 16:39:59.475989', '0', '好的，我已经收到了');
 
 -- ----------------------------
 -- Table structure for forum_subclass
@@ -791,7 +804,7 @@ CREATE TABLE `index_userprofile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`) USING BTREE,
   CONSTRAINT `index_userprofile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of index_userprofile
@@ -811,7 +824,7 @@ INSERT INTO `index_userprofile` VALUES ('12', 'dfjhkh', '12', 'ava/12.jpg', 'jhs
 INSERT INTO `index_userprofile` VALUES ('13', 'English', '13', 'ava/13_GwlmGT1.jpg', '8', '9', 'hello world', '0', '');
 INSERT INTO `index_userprofile` VALUES ('14', '', '14', '/default-user-image.png', '', '', '', '0', '');
 INSERT INTO `index_userprofile` VALUES ('19', '', '17', 'ava/17.jpg', '', '', '', '0', '');
-INSERT INTO `index_userprofile` VALUES ('20', '', '18', '/default-user-image.png', '', '', '', '0', '');
+INSERT INTO `index_userprofile` VALUES ('31', 'english', '29', 'ava/UujN3Dqa.jpg', '', 'hacker-painter', 'もしも彼らが君の何かを盗んだとして それはくだらないものだよ  返して贳うまでもない筈甚至何故なら価値は生命に従って付いている', '0', '');
 
 -- ----------------------------
 -- Table structure for lab_addmodel

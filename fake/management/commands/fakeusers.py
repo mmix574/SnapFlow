@@ -8,7 +8,7 @@ from index.models import UserProfile
 
 def get_random_username():
     start_with = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@/./+/-/_"
+    seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@.+-_"
     sa = []
     sa.append(random.choice(start_with))
     for i in range(7):
@@ -18,33 +18,52 @@ def get_random_username():
 
 class Command(BaseCommand):
     help = 'what the fuck you are doing?'
-    # def add_arguments(self, parser):
-    #     parser.add_argument('poll_id', nargs='+', type=int)
 
 
     def handle(self, *args, **options):
+
         print("creating fake users")
-        # print(User.objects.all())
 
-        _name = get_random_username()
+        import os
+        import random
+        base_dir = 'fake/fake_user_avatar/'
+        dest_dir = 'media_cdn/ava/'
 
-        #
-        u = User()
-        u.username = _name
-        u.email = _name+"@gmail.com"
-        u.save()
+        file_list = os.listdir(base_dir)
+        while file_list:
+            # 创建随机名字
+            _name = get_random_username()
 
-        #
-        # create_user = User.objects.filter(username=_name)
-        # if not create_user:
-        #     return
+            # 移动头像文件
+            file_list = os.listdir(base_dir)
+            if not file_list:
+                print("avatar_path_has_no_file")
+                return
+            this_file = random.choice(file_list)
 
-        # user = create_user[0]
-        u.userprofile.language = "english"
-        u.work_place = "google"
-        u.userprofile.work_nickname = "hacker-painter"
-        u.userprofile.self_introduction = "もしも彼らが君の何かを盗んだとして それはくだらないものだよ  返して贳うまでもない筈甚至何故なら価値は生命に従って付いている"
 
-        u.userprofile.avatar="ava/2_4ydFf85.jpg"
+            suffix = this_file[this_file.rfind('.'):]
+            if not suffix:
+                print(this_file+"has no suffix")
+                return
 
-        u.userprofile.save()
+            file_path = base_dir+this_file
+            new_file_path = dest_dir+_name+suffix
+            os.rename(file_path,new_file_path)
+
+            # 创建用户
+            u = User()
+            u.username = _name
+            u.email = _name+"@gmail.com"
+            u.save()
+
+            u.userprofile.language = "english"
+            u.work_place = "google"
+            u.userprofile.work_nickname = "hacker-painter"
+            u.userprofile.self_introduction = "もしも彼らが君の何かを盗んだとして それはくだらないものだよ  返して贳うまでもない筈甚至何故なら価値は生命に従って付いている"
+
+            u.userprofile.avatar="ava/"+_name+suffix
+            u.userprofile.save()
+            print("created user:"+_name)
+            
+        print("finished creating users")
