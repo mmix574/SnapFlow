@@ -29,7 +29,7 @@ class UserToUserMessage(models.Model):
 
 
 class SystemToUserMessage(models.Model):
-    user = models.ForeignKey(User,default=1)
+    user = models.ForeignKey(User)
     content = models.CharField(max_length=500,null=True,blank=True)
     read = models.BooleanField(default=False)
     time = models.TimeField(auto_now=True)

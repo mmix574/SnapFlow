@@ -1,0 +1,20 @@
+<div class="content-left">
+    <nav class="nav">
+        <ul class="nav" style="padding-left: 10px;">
+            {#                <li role="separator" class="divider"></li>#}
+            <div class="navbar-brand" style="padding-bottom: 30px;">
+                <span class="glyphicon glyphicon-alert"></span>广播控制面板
+
+            </div>
+            <div style="height: 30px;"></div>
+            <hr/>
+
+            <li {% ifequal view_name "__add_broadcasting" %}class="li-active"{% endifequal %} >
+                <a href="{% url '__add_broadcasting' %}">添加广播</a>
+            </li>
+            <li {% ifequal view_name "__send_broadcasting" %}class="li-active" style="background-color: #eaeaea" {% endifequal %}>
+                <a href="{% url '__send_broadcasting' %}">发送广播</a>
+            </li>
+        </ul>
+    </nav>
+</div>

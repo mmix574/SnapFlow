@@ -86,6 +86,10 @@
                     <div class="subclass-list-item"><a style="{% ifequal subtab i.name %}background-color: #656565;color: #EEEEEE;padding: 3px;border-radius: 4px;{% endifequal %}" href="?tab={{ tab }}&subtab={{ i.name }}">{{ i }}</a></div>
                 {% endfor %}
             {% endif %}
+            {% if p < page_count%}
+                <div style="float: right;"><a href="?p={{ p|add:1 }}"><button style="float: right;position:relative;top: -4px;right: 10px;">Next</button></a></div>
+                <div style="float: right;padding-right: 15px;">{{ p }}/{{ page_count }}</div>
+            {% endif %}
         </div>
         <!-- 贴子列表 -->
         <div class="threads-div-wrapper">

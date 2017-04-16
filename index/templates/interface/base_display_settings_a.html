@@ -22,7 +22,6 @@
 
 {% block left %}
     <div class="content-left">
-
         <nav class="nav">
             <ul class="nav" style="padding-left: 10px;">
                 {#                <li role="separator" class="divider"></li>#}
@@ -48,12 +47,18 @@
             </ul>
 
         </nav>
-
     </div>
+
 {% endblock %}
 {% block right %}
     <div class="content-right">
         hello right
     </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script type="application/javascript">
+    </script>
 {% endblock %}
 
