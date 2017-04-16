@@ -34,9 +34,13 @@ class SubClassAdmin(admin.ModelAdmin):
     list_display = ['display_name','parent_class']
 
 
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id','content']
+
 admin.site.register(SubClass,SubClassAdmin)
 admin.site.register(Class,ClassAdmin)
 
 admin.site.register(Thread,ThreadAdmin)
-admin.site.register(Comment)
+admin.site.register(Comment,CommentAdmin)
 admin.site.register(TAG)

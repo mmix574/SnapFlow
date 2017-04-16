@@ -96,6 +96,10 @@ class Comment(models.Model):
         verbose_name = "评论"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return super().__str__()
+
+
 class UserThreadStatus(models.Model):
     pass
 
@@ -105,3 +109,10 @@ class TAG(models.Model):
     thread = models.ForeignKey(Thread)
     name = models.CharField(max_length=30)
     pass
+
+
+# 2017年4月16日14:26:03
+class ThreadLike(models.Model):
+    thread = models.ForeignKey(Thread,on_delete=models.CASCADE)
+    user = models.ForeignKey(User)
+    create_time = models.DateTimeField(auto_now_add=True)
