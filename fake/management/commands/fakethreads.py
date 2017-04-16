@@ -6,8 +6,8 @@ import random
 import json
 class Command(BaseCommand):
     help = 'Command Line Template'
-    main_class = "编程语言"
-    sub_class = "Python"
+    main_class = "城市"
+    sub_class = "北京"
 
     main_class_instance = None
     sub_class_instance = None
@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.before_handle()
-        f_name = "python-1-50.json"
+        f_name = "beijing-1-10.json"
 
         f = open('fake/fake_threads/'+f_name, encoding='utf-8')
         s = json.load(f)
