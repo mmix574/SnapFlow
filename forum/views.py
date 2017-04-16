@@ -29,7 +29,23 @@ class IndexView(AppBaseTemplateView):
             return MessageResponse("提示","没有任何的ThreadType，请在数据库中先添加")
         context['display_class'] = display_class
 
-        tab = self.request.GET.get('tab',get_default_tab())
+        tab = get_default_tab()
+        subtab = None
+
+        # tab 控制
+        if self.request.GET.get('tab',None) and self.request.GET.get('subtab',None):
+            tab = self.request.GET.get('tab',None)
+            subtab = self.request.GET.get('subtab',None)
+        elif self.request.GET.get('tab',None):
+            tab = self.request.GET.get('tab',None)
+        elif self.request.COOKIES.get('tab',None) and self.request.COOKIES.get('subtab',None):
+            tab = self.request.COOKIES.get('tab',None)
+            subtab = self.request.COOKIES.get('subtab',None)
+
+        if subtab=="None":
+            subtab = None
+
+
         context['tab'] = tab
         tab_instance = Class.objects.filter(name=tab)
         if not tab_instance:
@@ -40,7 +56,6 @@ class IndexView(AppBaseTemplateView):
             return context
         context['display_sub_class'] = list(display_sub_class)
 
-        subtab = self.request.GET.get('subtab',None)
         context['subtab'] = subtab
         content_list = {}
         # 2017年4月15日20:03:14
@@ -66,12 +81,13 @@ class IndexView(AppBaseTemplateView):
         context['page_count'] = page_count
         context['content_list'] = content_list
 
+
+        self.set_cooke('tab',tab)
+        self.set_cooke('subtab',subtab)
+
+
         return context
 
-    def render_to_response(self, context, **response_kwargs):
-        response = super(IndexView,self).render_to_response(context, **response_kwargs)
-        response.set_cookie("good","good")
-        return response
 
 import json
 

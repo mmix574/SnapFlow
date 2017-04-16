@@ -31,6 +31,12 @@ class AppBaseTemplateView(TemplateView):
     # 2017年3月1日 20:35:28
     # request,user,profile,logined,tittle
     #
+
+
+    # Cookie Setting
+    has_cookies = False
+    this_time_cookies = {}
+
     def get_context_data(self, **kwargs):
         # 子类可以通过父类的get_context_data 继续添加context数据
         context = super().get_context_data()
@@ -61,7 +67,11 @@ class AppBaseTemplateView(TemplateView):
         c.update(context)
         if self.status:
             return render(request, self.template_name, c,status=self.status)
-        return render(request, self.template_name, c)
+        response = render(request, self.template_name, c)
+        if self.has_cookies:
+            for i in self.this_time_cookies:
+                response.set_cookie(i,self.this_time_cookies[i])
+        return response
     def post(self,request,context={},*args,**kwargs):
         c = self.get_context_data()
         c.update(context)
@@ -69,3 +79,6 @@ class AppBaseTemplateView(TemplateView):
             return render(request, self.template_name, c,status=self.status)
         return render(request,self.template_name,c)
 
+    def set_cooke(self,key,value):
+        self.has_cookies = True
+        self.this_time_cookies[key] = value

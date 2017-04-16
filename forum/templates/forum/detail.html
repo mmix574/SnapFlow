@@ -10,44 +10,78 @@
 
 
 {% block left %}
+    <style>
+        .markdown_body > p >img{
+            width: 100%;
+        }
+    </style>
+    <script type="application/javascript">
+        function go_back(){
+            window.history.back();
+        }
+    </script>
     <div class="block-left" style="padding: 15px;">
-        <h4>{{ thread.tittle }}</h4>
-        <div style="width: 64px;height: 64px;">
-            <img style="width: 100%;" src="{{ thread.create_user.userprofile.avatar.url }}">
+        <button onclick="go_back()"><span class="glyphicon glyphicon-arrow-left"></span>返回</button>
+        <div></div>
+        <div style="float: left"><h4 style="">{{ thread.tittle }}</h4></div>
+        <div class="info-divs" style="float: right;padding-top: 10px;">
+            <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-eye-open">{{ thread.view }}</span></div>
+            <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-thumbs-up">{{ thread.like }}</span></div>
+            <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-comment">{{ thread.reply }}</span></div>
+            {#            <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon glyphicon-paperclip">{{ thread.like }}</span></div>#}
+
+        </div>
+        <div style="clear: both"></div>
+        <div style="width: 250px;">
+            <div style="display: block;">
+                <img style="height: 80px;width: 80px;border-radius: 2px;" src="{{ thread.create_user.userprofile.avatar.url }}">
+            </div>
+            <div style="width: 80px;text-align: center;overflow-x: auto;color: #98a57c;padding-top: 5px;"><a href="#" style="font-size: 16px;">{{ thread.create_user.username }}</a></div>
         </div>
 
-        {{ thread.create_user }}
         <div style="clear: both"></div>
 
+
         <!--内容-->
-        <div style="background-color: #e7e7e7">
+        <div class="thread-content" style="padding-left: 10px;border-left: 1px solid #686868;margin-top: 15px;">
             {{ thread.content|safe}}
         </div>
-
+        <hr/>
+        <div style="float: right;padding-top: 5px;">
+            {{ thread.create_time }}
+        </div>
         <!--标签处-->
         <div></div>
         <!--收藏按钮-->
-        <div>
+        <div style="display: inline-block">
             {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
-            <button class="btn btn-default">已收藏 <span class="glyphicon glyphicon-paperclip"></span></button>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-paperclip"></span>添加收藏</button>
         </div>
-        <div>
-            {{ thread.like }}<button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+        <div style="display: inline-block">
+            <button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>点赞</button>
         </div>
     </div>
 
 
     <div class="block-left">
-        {% if not comment_list %} 目前还没有评论
+        {% if not comment_list %}
+            <div style="text-align: center;padding-top: 15px;">目前还没有评论</div>
         {% endif %}
         <div class="comment-list-wrapper" style="padding: 10px;">
             {% for i in comment_list %}
-                <div style="padding: 5px;">
-                    <div style="display: inline-block">{{ forloop.counter }}</div>
-                    <img style="border-radius: 2px;height: 30px;width: 30px;" src="{{ i.create_user.userprofile.avatar.url }}">
-                    <div><b>{{ i.create_user.username }}</b></div>
-                    <div>{{ i.content}}</div>
-                    {{ i.create_time }}
+                <div style="padding: 5px;border-bottom: 1px solid #eaeaea">
+                    <div style="float: left;padding-top: 2px;">
+                        <div style="display: inline-block;width: 20px;">{{ forloop.counter }}</div>
+                        <img style="display: inline-block;border-radius: 2px;height: 40px;width: 40px;" src="{{ i.create_user.userprofile.avatar.url }}">
+                    </div>
+                    <div style="margin-left: 70px;">
+                        <a href="#"><div style="float: left;color: #616161;">{{ i.create_user.username }}：</div></a>
+                        <div style="float: left;">{{ i.content}}</div>
+                    </div>
+                    <div style="float: right;">
+                        <div style="">{{ i.create_time |timesince}} 前</div>
+                    </div>
+                    <div style="clear: both"></div>
                 </div>
             {% endfor %}
         </div>
@@ -55,18 +89,21 @@
 
     <!--评论区-->
     <div class="block-left comment-area" style="padding: 20px;">
-        <div style="margin-bottom: 20px;">添加评论</div>
+        <div style="margin-bottom: 20px;">
+            {% include 'pieces/commom/badge.html' with content="添加评论" %}
+        </div>
         <form action="." method="post">
             {% csrf_token %}
-            <textarea class="form-control" cols="40" id="id_content" name="content" rows="10" required=""></textarea>
+            <textarea class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="输入你的评论"></textarea>
             <div style="height: 10px;"></div>
+            <button class="btn btn-danger">清空</button>
             <button class="btn btn-default">提交</button>
         </form>
     </div>
 {% endblock %}
 
 {% block right %}
-    <div class="block-right">this is right</div>
+    {#    <div class="block-right">this is right</div>#}
     {% include 'forum/hot_today.html' %}
     {% include 'forum/hot-block.html' %}
     {% include 'forum/ad_block.html' %}

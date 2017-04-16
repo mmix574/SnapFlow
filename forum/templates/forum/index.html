@@ -8,9 +8,7 @@
 
 
 {% block ad %}
-    <div class="block-my-ad">
-
-    </div>
+    {% include 'pieces/base_display_left_rignt/ad-long.html' %}
 {% endblock %}
 
 {% block style-04101406 %}
@@ -92,7 +90,7 @@
         <!-- 贴子列表 -->
         <div class="threads-div-wrapper">
             {% for i in content_list %}
-                <div class="content-list-wrapper" style="padding:10px;border-bottom: 1px solid #d9d9d9">
+                <div class="content-list-wrapper" style="padding:8px 10px 8px 10px;border-bottom: 1px solid #d9d9d9;overflow: hidden">
                     <div class="list-left" style="height: 48px;width: 48px;float: left;">
                         <img style="width: 100%;height: 100%;border-radius: 4px;box-shadow: 0 0 1px 1px #EEEEEE;" src="{{ i.create_user.userprofile.avatar.url }}">
                     </div>
@@ -162,12 +160,12 @@
         </div>
     {% endif %}
 
-    <div class="block-right" style="padding: 10px;">
-        <div class="div-ad-head" style="text-align: center">
-                最热板块
-            </div>
-    </div>
-
+{#    <div class="block-right" style="padding: 10px;">#}
+{#        <div class="div-ad-head" style="text-align: center">#}
+{#                最热板块#}
+{#            </div>#}
+{#    </div>#}
+    {% include 'forum/hot-block.html' %}
 
     {% include 'forum/hot_today.html' %}
 
