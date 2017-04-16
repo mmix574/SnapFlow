@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.before_handle()
-        f_name = "beijing-1-10.json"
+        f_name = "__beijing-1-10.json"
 
         f = open('fake/fake_threads/'+f_name, encoding='utf-8')
         s = json.load(f)

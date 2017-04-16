@@ -44,3 +44,7 @@ admin.site.register(Class,ClassAdmin)
 admin.site.register(Thread,ThreadAdmin)
 admin.site.register(Comment,CommentAdmin)
 admin.site.register(TAG)
+
+
+from .models import ThreadLike
+admin.site.register(ThreadLike)

@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-
 class Class(models.Model):
     name = models.CharField("name",max_length=50,blank=True,null=True)
     display_name = models.CharField("显示名字",max_length=50,null=True,blank=True)
@@ -110,9 +109,18 @@ class TAG(models.Model):
     name = models.CharField(max_length=30)
     pass
 
+    class Meta:
+        verbose_name = "标签"
+        verbose_name_plural = verbose_name
+
+
 
 # 2017年4月16日14:26:03
 class ThreadLike(models.Model):
     thread = models.ForeignKey(Thread,on_delete=models.CASCADE)
     user = models.ForeignKey(User)
     create_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "点赞"
+        verbose_name_plural = verbose_name
