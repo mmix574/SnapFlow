@@ -120,7 +120,7 @@
             </button>
         </div>
         <div style="display: inline-block">
-            <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-warning{% endif %}">
+            <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-default{% endif %}">
                 <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
         </div>
     </div>
@@ -160,7 +160,7 @@
             <textarea class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="输入你的评论"></textarea>
             <div style="height: 10px;"></div>
             <button class="btn btn-danger">清空</button>
-            <button class="btn btn-default">提交</button>
+            <button class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
         </form>
     </div>
 {% endblock %}

@@ -4,7 +4,16 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
+from django.contrib.auth.models import User
+
 class UserMessageStatus(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    user_to_user_message_count = models.IntegerField(default=0)
+    system_to_user_message_count = models.IntegerField(default=0)
+    even_message_count = models.IntegerField(default=0)
+
     pass
 
 class UserToUserMessage(models.Model):
