@@ -47,4 +47,8 @@ admin.site.register(TAG)
 
 
 from .models import ThreadLike
-admin.site.register(ThreadLike)
+
+class ThreadLikeAdmin(admin.ModelAdmin):
+    list_display = ['thread','user']
+
+admin.site.register(ThreadLike,ThreadLikeAdmin)
