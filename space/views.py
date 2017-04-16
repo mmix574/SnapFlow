@@ -87,7 +87,7 @@ class UserDataView(AppBaseTemplateView):
         return super(UserDataView, self).post(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form},*args,**kwargs)
 
 
-class UserHomePageView(AppBaseTemplateView):
+class UserProfileView(AppBaseTemplateView):
     pass
 
 

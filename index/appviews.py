@@ -41,6 +41,7 @@ class AppBaseTemplateView(TemplateView):
         # 子类可以通过父类的get_context_data 继续添加context数据
         context = super().get_context_data()
         context["tittle"] = "AppBaseTemplateView -- DEBUG"
+        # 添加 url conf 中的 view_name
         context['view_name'] = self.request.resolver_match.url_name
         # 判断用户是否已经登陆
         request = self.request
@@ -58,11 +59,14 @@ class AppBaseTemplateView(TemplateView):
         context['request'] = request
         context['ctime'] = get_ctime()
 
+
         return context
 
 
     #donot edit 2017年3月1日 20:51:23
     def get(self, request,context={}, *args, **kwargs):
+
+        # ######
         c = self.get_context_data()
         c.update(context)
         if self.status:
@@ -73,6 +77,8 @@ class AppBaseTemplateView(TemplateView):
                 response.set_cookie(i,self.this_time_cookies[i])
         return response
     def post(self,request,context={},*args,**kwargs):
+
+        # ######
         c = self.get_context_data()
         c.update(context)
         if self.status:
