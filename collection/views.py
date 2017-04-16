@@ -37,6 +37,11 @@ def add_collection(request):
     if not thread_find:
         return JsonResponse({"code": 402, "message": "tid不正确", "success": False})
 
+
+    logs = Collection.objects.filter(thread=thread_find[0],create_user=request.user)
+    if logs:
+        return JsonResponse({"code":201,"message":"请勿重复添加","success":False})
+
     c = Collection()
     c.create_user = request.user
     c.thread = thread_find[0]

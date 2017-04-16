@@ -146,6 +146,9 @@ from index.contrib.response import _Http404
 from forum.forms import CommentForm
 from .models import Comment
 
+from .models import ThreadLike
+from collection.models import Collection
+
 class DetailView(AppBaseTemplateView):
     template_name = 'forum/detail.html'
     def get_context_data(self, **kwargs):
@@ -174,7 +177,25 @@ class DetailView(AppBaseTemplateView):
 
         # get comment list from databases
         comment_list = Comment.objects.filter(thread_id=id)
-        return super().get(request, {'thread':thread,'tid':id,'comment_form':comment_form,"comment_list":comment_list}, *args, **kwargs)
+
+
+
+        # get like from databased
+        liked = False
+        if request.user.is_authenticated():
+            tl = ThreadLike.objects.filter(thread=thread,user=request.user)
+            if tl:
+                liked = True
+
+        # get_collected from database
+        collected = False
+        cl = Collection.objects.filter(thread=thread,create_user=request.user)
+        if cl:
+            collected = True
+
+
+
+        return super().get(request, {'thread':thread,'tid':id,'comment_form':comment_form,"comment_list":comment_list,"liked":liked,"collected":collected}, *args, **kwargs)
 
 
     def post(self, request, context={}, *args, **kwargs):

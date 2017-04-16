@@ -22,9 +22,66 @@
         function go_back(){
             window.history.back();
         }
+        function toggle_like(){
+{#            console.log($("#like_span"));#}
+            $("#like_button").attr('disabled',true);
+            $("#like_span").text("...");
+
+            $.ajax({
+                url:"/t/like?tid="+{{ thread.id }},
+                success:function(data){
+                    if(data.success==true){
+                        console.log(data);
+                        setTimeout(function(){
+                            if(data.code==200){
+                                <!--取消点赞成功-->
+                                $("#like_span").text("已取消点赞");
+                            }else if(data.code==201){
+                                <!--点赞成功-->
+                                $("#like_span").text("已点赞");
+                            }
+                        },500);
+                    }else{
+                        setTimeout(function(){
+                            $("#like_button").attr('disabled',false);
+                            $("#like_span").text("点赞");
+                        },500);
+                    }
+                },
+                error:function(data){
+                    console.log(data)
+                }
+            });
+        }
+        function add_collection(){
+{#            /collection/add?tid=502#}
+            $.ajax({
+                url:"/collection/add?tid="+{{ thread.id }},
+                success:function(data){
+                    if(data.code==200){
+                        $("#collection_span").text("收藏成功");
+                        $("#collection_button").attr("disabled",true);
+                    }else if(data.code==201){
+                        $("#collection_span").text("收藏成功");
+                        $("#collection_button").attr("disabled",true);
+                    }
+                    else{
+                        $("#collection_span").text("发生错误 code:4001");
+                    }
+                    console.log(data);
+                },
+                error:function(data){
+                    $("#collection_span").text("发生错误 code 4002");
+                    console.log(data);
+                }
+            });
+
+        }
     </script>
     <div class="block-left" style="padding: 15px;">
-        <button onclick="go_back()"><span class="glyphicon glyphicon-arrow-left"></span>返回</button>
+
+        <a href="/t/"><button><span class="glyphicon glyphicon-arrow-left"></span>返回</button></a>
+
         <div></div>
         <div style="float: left"><h4 style="">{{ thread.tittle }}</h4></div>
         <div class="info-divs" style="float: right;padding-top: 10px;">
@@ -58,10 +115,13 @@
         <!--收藏按钮-->
         <div style="display: inline-block">
             {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
-            <button class="btn btn-default"><span class="glyphicon glyphicon-paperclip"></span>添加收藏</button>
+            <button id="collection_button" onclick="add_collection()" class="btn btn-default" {% if collected %}disabled="disabled"{% endif %}>
+                <span id="collection_span" class="glyphicon glyphicon-paperclip">{% if collected %}已收藏{% else %}添加收藏{% endif %}</span>
+            </button>
         </div>
         <div style="display: inline-block">
-            <button class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"></span>点赞</button>
+            <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-warning{% endif %}">
+                <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
         </div>
     </div>
 

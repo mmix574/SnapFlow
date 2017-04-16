@@ -100,6 +100,14 @@ class Comment(models.Model):
 
 
 class UserThreadStatus(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    thread_open = models.IntegerField(default=0)
+    reply_open = models.IntegerField(default=0)
+    
+    liked = models.IntegerField(default=0)
+    collected = models.IntegerField(default=0)
+    disliked = models.IntegerField(default=0)
+
     pass
 
 
