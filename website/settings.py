@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'history',
     'collection',
     'fake',
+    'site_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

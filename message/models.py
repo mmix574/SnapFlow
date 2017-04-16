@@ -14,10 +14,18 @@ class UserMessageStatus(models.Model):
     system_to_user_message_count = models.IntegerField(default=0)
     even_message_count = models.IntegerField(default=0)
 
-    pass
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = "用户信息状态"
+        verbose_name_plural = verbose_name
 
 class UserToUserMessage(models.Model):
-    pass
+
+    class Meta:
+        verbose_name = "用户消息"
+        verbose_name_plural = verbose_name
 
 
 class SystemToUserMessage(models.Model):
@@ -34,6 +42,8 @@ class SystemToUserMessage(models.Model):
 
 # @ 回复等，点赞等
 class EventMessage(models.Model):
-    pass
 
+    class Meta:
+        verbose_name = "事件消息"
+        verbose_name_plural = verbose_name
 

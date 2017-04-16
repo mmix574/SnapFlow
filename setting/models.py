@@ -8,3 +8,7 @@ class SystemEmailInfo(models.Model):
     name = models.CharField(default="admin",max_length=20)
     port = models.IntegerField()
     protocal = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = "系统邮箱"
+        verbose_name_plural = verbose_name
