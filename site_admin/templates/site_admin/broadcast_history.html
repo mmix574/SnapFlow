@@ -3,3 +3,19 @@
 {% block left %}
     {% include 'site_admin/pieces/nav-left.html' %}
 {% endblock %}
+
+{% block right %}
+    <div class="content-right" style="padding: 15px;">
+        <div style="text-align: center;">已发送的广播条数为 {{ broadcast_list |length }}</div>
+        <div>
+            {% for i in broadcast_list %}
+                {{ forloop.counter }}.
+                {{ i }}
+                <div style="display: inline-block">{{ i.create_time }}</div>
+                <div style="border-left: 1px solid #c2c2c2;padding-left: 10px;margin-left: 5px;">{{ i.content }}</div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% include 'pieces/commom/right-paging.html' %}
+{% endblock %}

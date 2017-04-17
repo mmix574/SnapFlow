@@ -37,7 +37,7 @@ class AdminCreateBroadcastingView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        broadcast_list = AdminBroadCast.objects.all()
+        broadcast_list = AdminBroadCast.objects.filter(sended=False)
         context['broadcast_list'] = broadcast_list
         return context
 
@@ -80,14 +80,35 @@ class AdminSendBroadcastingView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        broadcast_list = AdminBroadCast.objects.all()
+        broadcast_list = AdminBroadCast.objects.filter(sended=False)
         context['broadcast_list'] = broadcast_list
         return context
 
     def post(self, request, context={}, *args, **kwargs):
         if not self.validate():
             return MessageResponse("你不能访问这个网页","")
-        print(request.POST)
+
+        operation = request.POST.get('operation',None)
+        broadcasts = request.POST.get('_id',None)
+        if not operation or not broadcasts:
+            return super().post(request, context, *args, **kwargs)
+
+        if operation=="send":
+            for i in broadcasts:
+                try:
+                    bc = AdminBroadCast.objects.get(id=int(i))
+                    bc.sended = True
+                    bc.save()
+                except Exception as e:
+                    pass
+        elif operation=="delete":
+            for i in broadcasts:
+                try:
+                    bc = AdminBroadCast.objects.get(id=int(i))
+                    bc.delete()
+                except Exception as e:
+                    pass
+
         return super().post(request, context, *args, **kwargs)
 
     def get(self, request, context={}, *args, **kwargs):
@@ -111,6 +132,9 @@ class BroadCastHistoryView(AppBaseTemplateView):
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
             return MessageResponse("你不能访问这个网页","")
+
+        broadcast_list = AdminBroadCast.objects.filter(sended=True)
+        context['broadcast_list'] = broadcast_list
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
