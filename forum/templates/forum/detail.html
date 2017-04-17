@@ -17,6 +17,9 @@
         .topic_content > img{
             width:100%;
         }
+        .topic_content > a >img{
+            width: 100%;
+        }
     </style>
     <script type="application/javascript">
         function go_back(){
@@ -132,6 +135,7 @@
         {% endif %}
         <div class="comment-list-wrapper" style="padding: 10px;">
             {% for i in comment_list %}
+                <!--{{ i.id }}-->
                 <div style="padding: 5px;border-bottom: 1px solid #eaeaea">
                     <div style="float: left;padding-top: 2px;">
                         <div style="display: inline-block;width: 20px;">{{ forloop.counter }}</div>
