@@ -15,7 +15,7 @@ class UserMessageStatus(models.Model):
     even_message_count = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name = "用户信息状态"

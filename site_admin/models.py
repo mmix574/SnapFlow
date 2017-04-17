@@ -11,6 +11,7 @@ class AdminBroadCast(models.Model):
     content = models.TextField(blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
     last_edit = models.DateTimeField(auto_now=True)
+    sended = models.BooleanField(default=0)
 
     def __str__(self):
         return self.tittle

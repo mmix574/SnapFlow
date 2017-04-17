@@ -2,7 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-class UserCreditTypeA(models.Model):
+class UserCreditDefault(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     credit_point = models.IntegerField(default=10)
     last_modify = models.DateTimeField(auto_now=True)
@@ -10,6 +10,10 @@ class UserCreditTypeA(models.Model):
     class Meta:
         verbose_name = "用户积分"
         verbose_name_plural = verbose_name
+
+class CashPoint(models.Model):
+    pass
+
 
 class UserCreditNickName(models.Model):
     name = models.CharField(max_length=10)

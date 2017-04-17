@@ -33,17 +33,17 @@ urlpatterns = [
     # timeline
     url(r'^time/',include('timeline.urls')),
     # forum
-    url(r't/',include('forum.urls')),
+    url(r'^t/',include('forum.urls')),
     #message
-    url(r'm/',include('message.urls')),
+    url(r'^m/',include('message.urls')),
     #fake
-    url(r'fake/',include('fake.urls')),
+    url(r'^fake/',include('fake.urls')),
     # history
-    url(r'history/',include('history.urls')),
+    url(r'^history/',include('history.urls')),
     # collection
-    url(r'collection/',include('collection.urls')),
+    url(r'^collection/',include('collection.urls')),
     # site_admin
-    url(r'a/',include('site_admin.urls')),
+    url(r'^a/',include('site_admin.urls')),
     #search
     url(r'^s$',SearchView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

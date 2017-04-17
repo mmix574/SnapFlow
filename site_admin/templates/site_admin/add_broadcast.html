@@ -11,7 +11,7 @@
 
 {% block right %}
     <div class="content-right" style="padding: 15px;">
-        <div style="text-align: center;">广播条数为 {{ broadcast_list |length }}</div>
+        <div style="text-align: center;">等待发送的广播条数为 {{ broadcast_list |length }}</div>
         <div>
             {% for i in broadcast_list %}
                 {{ forloop.counter }}.
@@ -23,7 +23,11 @@
         </div>
     </div>
 
+    {% include 'pieces/commom/right-paging.html' %}
     <div class="content-right" style="padding: 20px;">
+        <div style="padding-bottom: 15px;">
+        {% include 'pieces/commom/badge.html' with content="添加广播" %}
+        </div>
         <form style="width: 400px;" action="." method="post">
             {% csrf_token %}
             <div class="form-group">

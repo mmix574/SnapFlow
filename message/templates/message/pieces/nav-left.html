@@ -8,14 +8,16 @@
             <hr/>
 
             <li>
+                <a href="{% url 'message_status' %}">消息状态</a>
+            </li>
+            <li>
                 <a href="{% url 'system_message' %}">系统消息</a>
             </li>
-
             <li>
-                <a href="">私信</a>
+                <a href="{% url 'private_message' %}">私信</a>
             </li>
             <li>
-                <a href="">通信好友</a>
+                <a href="">好友</a>
             </li>
         </ul>
     </nav>

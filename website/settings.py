@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'collection',
     'fake',
     'site_admin',
+    'credit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

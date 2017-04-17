@@ -81,15 +81,19 @@
             });
 
         }
+        function empty_input(){
+            $("#id_content").val("");
+            return false;
+        }
     </script>
     <div class="block-left" style="padding: 15px;">
 
-        <a href="/t/"><button><span class="glyphicon glyphicon-arrow-left"></span>返回</button></a>
+        <a onclick="go_back()"><button style="padding: 0 12px;"><span class="glyphicon glyphicon-arrow-left"></span></button></a>
 
-        <div style="display: inline-block;float: right;">{{ thread.main_class }} / {{ thread.sub_class }} / {{ thread.tittle|truncatechars:9 }}</div>
+        <div style="display: inline-block;float: right;padding-right: 10px;">{{ thread.main_class }} / {{ thread.sub_class }} / {{ thread.tittle|truncatechars:9 }}</div>
         <div></div>
-        <div style="float: left"><h4 style="">{{ thread.tittle }}</h4></div>
-        <div class="info-divs" style="float: right;padding-top: 10px;">
+        <div style="float: left"><h4 style="padding-left: 5px;margin-left: 2px;">{{ thread.tittle }}</h4></div>
+        <div class="info-divs" style="float: right;padding-top: 10px;padding-right: 10px;">
             <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-eye-open">{{ thread.view }}</span></div>
             <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-thumbs-up">{{ thread.like }}</span></div>
             <div style="display: inline-block;padding-right: 7px;"><span class="glyphicon glyphicon-comment">{{ thread.reply }}</span></div>
@@ -97,9 +101,9 @@
 
         </div>
         <div style="clear: both"></div>
-        <div style="width: 250px;">
+        <div style="width: 250px;padding-left: 10px;">
             <div style="display: block;">
-                <img style="height: 80px;width: 80px;border-radius: 2px;" src="{{ thread.create_user.userprofile.avatar.url }}">
+                <img style="height: 80px;width: 80px;border-radius: 40px;padding: 2px;box-shadow: 1px 1px 1px 1px #e1e1e1" src="{{ thread.create_user.userprofile.avatar.url }}">
             </div>
             <div style="width: 80px;text-align: center;color: #98a57c;padding-top: 5px;"><a href="#" style="font-size: 16px;">{{ thread.create_user.username }}</a></div>
         </div>
@@ -181,9 +185,13 @@
             {% csrf_token %}
             <textarea  {% if not logined %}disabled="disabled"{% endif %} class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="{% if logined %}输入你的评论{% else %}登录后可评论{% endif %}"></textarea>
             <div style="height: 10px;"></div>
-            <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-danger">清空</button>
+            <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-danger" onclick="return empty_input()">清空</button>
             <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
         </form>
+    </div>
+
+    <div class="block-left">
+{#        推荐？#}
     </div>
 {% endblock %}
 

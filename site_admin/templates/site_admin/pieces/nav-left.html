@@ -9,11 +9,14 @@
             <div style="height: 30px;"></div>
             <hr/>
 
-            <li {% ifequal view_name "__add_broadcasting" %}class="li-active"{% endifequal %} >
+            <li>
                 <a href="{% url '__add_broadcasting' %}">添加广播</a>
             </li>
-            <li {% ifequal view_name "__send_broadcasting" %}class="li-active" style="background-color: #eaeaea" {% endifequal %}>
+            <li>
                 <a href="{% url '__send_broadcasting' %}">发送广播</a>
+            </li>
+            <li>
+                <a href="{% url '__broadcast_history' %}">广播历史</a>
             </li>
         </ul>
     </nav>

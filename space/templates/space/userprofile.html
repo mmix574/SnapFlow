@@ -16,7 +16,7 @@
             <div>{{ request.user.userprofile.work_nickname }}@{{ request.user.userprofile.work_place }}</div>
 
             <div style="background-color: #cf4432;display: inline-block;width:400px;padding: 20px 20px;color: #ffffff;border-radius: 4px;margin-top: 10px;margin-bottom: 10px;">
-                {{ request.user.userprofile.self_introduction }}
+                <div style="padding-top: 20px;">{{ request.user.userprofile.self_introduction }}</div>
                 <div></div>
                 <div style="float: right;">-- {{ request.user.username }}</div>
                 <div></div>

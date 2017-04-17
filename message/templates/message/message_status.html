@@ -1,0 +1,15 @@
+{% extends 'interface/base_display_settings_b.html' %}
+
+{% block left %}
+    {% include 'message/pieces/nav-left.html' %}
+{% endblock %}
+
+{% block right %}
+    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
+        {% include 'pieces/commom/badge.html' with content="消息状态" %}
+        <div>私信:{{ user_message_status.user_to_user_message_count }}</div>
+        <div>系统消息:{{ user_message_status.system_to_user_message_count }}</div>
+        <div>事件消息:{{ user_message_status.even_message_count }}</div>
+
+    </div>
+{% endblock %}

@@ -6,13 +6,59 @@
 
 
 {% block left %}
-{% include 'site_admin/pieces/nav-left.html' %}
+    {% include 'site_admin/pieces/nav-left.html' %}
 {% endblock %}
 
 
 {% block right %}
-    <div class="content-right">
-        start!?
+    <div class="content-right" style="padding: 20px;">
+        {% if broadcast_list%}
+            <div style="text-align: center">共有{{ broadcast_list|length }}条系统消息,等待发送</div>
+        {% else %}
+            <div style="text-align: center">还未添加系统消息</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div style="display: inline-block">
+                <label>操作</label>
+                <select name="operation" id="select-operation" class="form-control" style="width: 200px;">
+                    <option value="">--选择操作--</option>
+                    <option value="send">发送</option>
+                    <option value="delete">删除</option>
+                </select>
+            </div>
+            <button id="submit-button" class="btn btn-danger" type="submit">请先选择操作</button>
+
+            <div>
+                {% for i in broadcast_list %}
+                    <input class="checkbox-inputs" type="checkbox" name="_id" value="{{ i.id }}">
+                    <div style="display: inline-block">{{ forloop.counter }}</div>
+                    <div style="display: inline-block">{{ i.tittle }}</div>
+                    <div style="margin-left: 20px;padding-left: 10px;border-left: 1px solid black;">{{ i.content }}</div>
+                {% endfor %}
+            </div>
+        </form>
+
     </div>
+    {% include 'pieces/commom/right-paging.html' %}
 {% endblock %}
 
+
+{% block script %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function(){
+            $(".checkbox-inputs").click(function(){
+            });
+
+            $("#select-operation").change(function(){
+
+                if($(this).val()=="send"){
+                    $("#submit-button").text("确定发送");
+                }else if($(this).val()=="delete"){
+                    $("#submit-button").text("确定删除");
+                }
+            })
+        });
+    </script>
+{% endblock %}
