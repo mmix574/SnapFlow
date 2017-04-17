@@ -19,8 +19,17 @@
     <div class="content-right" style="padding: 10px;">
         <div style="padding-bottom: 25px;">
             {% include 'pieces/commom/badge.html' with content="问题收藏" %}
+            <button id="start_edit_button" style="float: right;margin-right: 8px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
         </div>
-
+        <div id="opeartion-area-div">
+            <label>操作</label>
+            <div></div>
+            <select class="form-control" style="width: 300px;display: inline-block;">
+                <option>--选择操作--</option>
+                <option value="delete">删除</option>
+            </select>
+            <button style="display: inline-block;" class="btn btn-danger">请先选择操作</button>
+        </div>
         {% for i in collection_list %}
             <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
                 <div style="display: inline-block">{{ forloop.counter }}</div>
@@ -35,4 +44,8 @@
             <button class="">下一页</button>
         </div>
     </div>
+    <script>
+        function start_edit(){
+        }
+    </script>
 {% endblock %}
