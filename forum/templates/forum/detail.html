@@ -26,13 +26,14 @@
             window.history.back();
         }
         function toggle_like(){
-{#            console.log($("#like_span"));#}
+            {#            console.log($("#like_span"));#}
             $("#like_button").attr('disabled',true);
             $("#like_span").text("...");
 
             $.ajax({
                 url:"/t/like?tid="+{{ thread.id }},
                 success:function(data){
+                    console.log(data)
                     if(data.success==true){
                         console.log(data);
                         setTimeout(function(){
@@ -57,7 +58,7 @@
             });
         }
         function add_collection(){
-{#            /collection/add?tid=502#}
+            {#            /collection/add?tid=502#}
             $.ajax({
                 url:"/collection/add?tid="+{{ thread.id }},
                 success:function(data){
@@ -69,7 +70,7 @@
                         $("#collection_button").attr("disabled",true);
                     }
                     else{
-                        $("#collection_span").text("发生错误 code:4001");
+                        $("#collection_span").text(data.message);
                     }
                     console.log(data);
                 },
@@ -85,6 +86,7 @@
 
         <a href="/t/"><button><span class="glyphicon glyphicon-arrow-left"></span>返回</button></a>
 
+        <div style="display: inline-block;float: right;">{{ thread.main_class }} / {{ thread.sub_class }} / {{ thread.tittle|truncatechars:9 }}</div>
         <div></div>
         <div style="float: left"><h4 style="">{{ thread.tittle }}</h4></div>
         <div class="info-divs" style="float: right;padding-top: 10px;">
@@ -115,19 +117,35 @@
         </div>
         <!--标签处-->
         <div></div>
-        <!--收藏按钮-->
-        <div style="display: inline-block">
-            {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
-            <button id="collection_button" onclick="add_collection()" class="btn btn-default" {% if collected %}disabled="disabled"{% endif %}>
-                <span id="collection_span" class="glyphicon glyphicon-paperclip">{% if collected %}已收藏{% else %}添加收藏{% endif %}</span>
-            </button>
-        </div>
-        <div style="display: inline-block">
-            <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-default{% endif %}">
-                <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
-        </div>
-    </div>
 
+
+        {% if logined %}
+            <!--收藏按钮-->
+            <div style="display: inline-block">
+                {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
+                <button id="collection_button" onclick="add_collection()" class="btn btn-default" {% if collected %}disabled="disabled"{% endif %}>
+                    <span id="collection_span" class="glyphicon glyphicon-paperclip">{% if collected %}已收藏{% else %}添加收藏{% endif %}</span>
+                </button>
+            </div>
+            <div style="display: inline-block">
+                <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-default{% endif %}">
+                    <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
+            </div>
+        {% else %}
+            <div style="padding-bottom: 10px;">登录后收藏与点赞</div>
+            <div style="display: inline-block">
+                {#            <button class="btn btn-default">收藏 <span class="glyphicon glyphicon-paperclip"></span></button>#}
+                <button id="collection_button" class="btn btn-default" disabled="disabled">
+                    <span id="collection_span" class="glyphicon glyphicon-paperclip">{% if collected %}已收藏{% else %}添加收藏{% endif %}</span>
+                </button>
+            </div>
+            <button id="like_button" class="btn btn-default" disabled="disabled">
+                <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
+            <div style="display: inline-block">
+            </div>
+        {% endif %}
+
+    </div>
 
     <div class="block-left">
         {% if not comment_list %}
@@ -161,10 +179,10 @@
         </div>
         <form action="." method="post">
             {% csrf_token %}
-            <textarea class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="输入你的评论"></textarea>
+            <textarea  {% if not logined %}disabled="disabled"{% endif %} class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="{% if logined %}输入你的评论{% else %}登录后可评论{% endif %}"></textarea>
             <div style="height: 10px;"></div>
-            <button class="btn btn-danger">清空</button>
-            <button class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
+            <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-danger">清空</button>
+            <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
         </form>
     </div>
 {% endblock %}

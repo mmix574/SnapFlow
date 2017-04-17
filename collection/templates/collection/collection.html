@@ -7,22 +7,32 @@
     <li class="li-active">
         <a href="#download">所有</a>
     </li>
-{#    <li>#}
-{#        <a href="#license-faqs">我的提问</a>#}
-{#    </li>#}
-{#    <li>#}
-{#        <a href="#translations">我的回答</a>#}
-{#    </li>#}
+    {#    <li>#}
+    {#        <a href="#license-faqs">我的提问</a>#}
+    {#    </li>#}
+    {#    <li>#}
+    {#        <a href="#translations">我的回答</a>#}
+    {#    </li>#}
 {% endblock %}
 
 {% block right %}
     <div class="content-right" style="padding: 10px;">
+        <div style="padding-bottom: 25px;">
+            {% include 'pieces/commom/badge.html' with content="问题收藏" %}
+        </div>
+
         {% for i in collection_list %}
-            <div style="padding-bottom: 2px;border-bottom: 1px solid #cecece">
+            <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
                 <div style="display: inline-block">{{ forloop.counter }}</div>
                 <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.thread.create_user.userprofile.avatar.url }}">
                 <div style="display: inline-block"><a href="/t/{{ i.thread_id }}">{{ i.thread.tittle }}</a></div>
             </div>
         {% endfor %}
+    </div>
+    <div class="content-right" style="padding: 5px;">
+        <div style="text-align: center">
+            <button class="">上一页</button>
+            <button class="">下一页</button>
+        </div>
     </div>
 {% endblock %}

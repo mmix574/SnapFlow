@@ -5,25 +5,8 @@
 {% endblock %}
 
 
-{% block brand %}
-    <span class="glyphicon glyphicon-home"></span>&nbsp;个人中心
-{% endblock %}
-
-{% block li-area %}
-    <li class="li-avtive">
-        <a href="#download">个人展示</a>
-    </li>
-
-    <li class="li-active">
-        <a href="#license-faqs">资料修改</a>
-    </li>
-{#    <li role="separator" class="deliver"></li>#}
-{#    <li>#}
-{#        <a href="{% url '_messaging' %}">消息中心</a>#}
-{#    </li>#}
-    <li>
-        <a href="{% url '_messaging' %}">我的成就</a>
-    </li>
+{% block left %}
+    {% include 'space/pieces/left-nav.html' %}
 {% endblock %}
 
 {% block right %}

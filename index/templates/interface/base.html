@@ -174,7 +174,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ ctime }}{{ user.username }}  <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     {#                <li class="dropdown-header">基本</li>#}
-                                    <li><a href="/space/userdata/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;个人中心</a></li>
+                                    <li><a href="{% url 'user_profile' %}"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;个人中心</a></li>
                                     {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
                                     {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
                                     {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}

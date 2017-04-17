@@ -1,62 +1,60 @@
 {% extends 'interface/base.html' %}
 {% block tittle %}
 {% endblock %}
-
 {% block body %}
     <style>
-    .content-right{
-{#        background-color: #449d44;#}
-{#        display: block;#}
-    }
-    .content-left{
-{#        background-color: #8a6d3b;#}
-{#        display: block;#}
-        width:230px;
-        margin-right:10px;
-    }
-    @media screen and (min-width: 0px) and (max-width: 767px){
-    .content-right{
-        width:480px;
-    }
-    }
-
-    @media screen and (min-width: 768px) and (max-width: 991px){
         .content-right{
-            width:480px;
+        {#        background-color: #449d44;#}
+        {#        display: block;#}
         }
-    }
+        .content-left{
+        {#        background-color: #8a6d3b;#}
+        {#        display: block;#}
+            width:230px;
+            margin-right:10px;
+        }
+        @media screen and (min-width: 0px) and (max-width: 767px){
+            .content-right{
+                width:480px;
+            }
+        }
 
-    @media screen and (min-width: 992px) and (max-width: 1199px){
-        .content-right{
-            width:700px;
+        @media screen and (min-width: 768px) and (max-width: 991px){
+            .content-right{
+                width:480px;
+            }
         }
-    }
 
-    @media screen and (min-width: 1200px){
-        .content-right{
-            width: 800px;
+        @media screen and (min-width: 992px) and (max-width: 1199px){
+            .content-right{
+                width:700px;
+            }
         }
-    }
-    .content-left,.content-right{
+
+        @media screen and (min-width: 1200px){
+            .content-right{
+                width: 800px;
+            }
+        }
+        .content-left,.content-right{
             background-color: #FFFFFF;
-        box-shadow:1px 1px 7px #848A8C;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
+            box-shadow:1px 1px 7px #848A8C;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
     </style>
-    {% block style_410952 %}
-
+    {% block style %}
     {% endblock %}
     <div class="container">
         <div class="content-left-wrapper" style="float: left">
             {% block left %}
-              <div class="content-left">left</div>
+                <div class="content-left">left</div>
             {% endblock %}
         </div>
         <div class="content-left-wrapper" style="float: left">
-        {% block right %}
-            <div class="content-right">right</div>
-        {% endblock %}
+            {% block right %}
+                <div class="content-right">right</div>
+            {% endblock %}
         </div>
     </div>
     {% block script %}

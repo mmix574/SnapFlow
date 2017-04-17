@@ -1,0 +1,45 @@
+{% extends 'interface/base_display_settings.html' %}
+
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .li-active{
+        }
+    </style>
+{% endblock %}
+
+{% block left %}
+{#    copy nav and edit as a sigle file#}
+    <div class="content-left">
+        <nav class="nav">
+            <ul class="nav" style="padding-left: 10px;">
+                <div class="navbar-brand" style="padding-bottom: 30px;">
+                    <span class="glyphicon glyphicon-home"></span>&nbsp;导航
+                </div>
+                <div style="height: 30px;"></div>
+                <hr/>
+                <li class="li-active">
+                    <a href="#download">项目一</a>
+                </li>
+                <li>
+                    <a href="#license-faqs">项目二</a>
+                </li>
+                <li>
+                    <a href="#translations">项目三</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block right %}
+
+{% endblock %}
+
+
+{% block script %}
+    {{ block.super }}
+    <script>
+    </script>
+{% endblock %}

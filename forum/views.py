@@ -189,9 +189,10 @@ class DetailView(AppBaseTemplateView):
 
         # get_collected from database
         collected = False
-        cl = Collection.objects.filter(thread=thread,create_user=request.user)
-        if cl:
-            collected = True
+        if request.user.is_authenticated():
+            cl = Collection.objects.filter(thread=thread,create_user=request.user)
+            if cl:
+                collected = True
 
 
 

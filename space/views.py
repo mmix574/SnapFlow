@@ -86,12 +86,18 @@ class UserDataView(AppBaseTemplateView):
 
         return super(UserDataView, self).post(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form},*args,**kwargs)
 
-
+@method_decorator(login_required,name='dispatch')
 class UserProfileView(AppBaseTemplateView):
-    pass
+    template_name = 'space/userprofile.html'
+
+    def get(self, request, context={}, *args, **kwargs):
+
+        return super().get(request, context, *args, **kwargs)
 
 
-
+@method_decorator(login_required,name='dispatch')
+class UserAchieveView(AppBaseTemplateView):
+    template_name = 'space/userachieve.html'
 
 
 
