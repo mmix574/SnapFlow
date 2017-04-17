@@ -5,8 +5,10 @@ from index.appviews import AppBaseTemplateView
 
 
 class IndexView(AppBaseTemplateView):
-    template_name = 'message/index.html'
+    template_name = 'message/system_message.html'
 
 
 
 
+class SystemMessageView(AppBaseTemplateView):
+    template_name = 'message/system_message.html'

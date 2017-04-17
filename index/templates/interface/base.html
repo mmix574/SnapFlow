@@ -178,7 +178,7 @@
                                     {#              <li><a href="/space/userdata/"><s>用户资料</s></a></li>#}
                                     {#              <li><a href="/space/member/"><s>UserProfile</s></a></li>#}
                                     {#              <li><a href="/passwordchange"><s>修改密码</s></a></li>#}
-                                    <li><a href="/m"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
+                                    <li><a href="/m"><span class="glyphicon glyphicon-bell"></span>&nbsp;&nbsp;消息中心 <span class="badge" style="background-color: #26ad1e">1</span></a></li>
 
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">其他</li>
@@ -379,32 +379,19 @@
 
         {#    复制我#}
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
-
             <a onclick="return backtotop()">
-                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-                {#                    打卡#}
-                {#                </div>#}
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-pencil"></span>
 
             </a>
         </div>
-        {#    复制我#}
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
-
-            <a onclick="return backtotop()">
-                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-                {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-                {#                </div>#}
+            <a href="{% url '_messaging' %}">
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-envelope"></span>
                 <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>
             </a>
         </div>
-        {#    复制我#}
         <div style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
             <a onclick="return backtotop()">
-                {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-                {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-                {#                </div>#}
                 <span style="height: 40px;width:40px;top: 13px;" class="glyphicon glyphicon-bullhorn"></span>
                 <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>
             </a>
@@ -415,15 +402,10 @@
 
     <div id="wechat-qrcode" style="height: 40px;width: 40px;text-align: center;background-color: #f7f7f7;border-radius: 4px;box-shadow: 0px 0px 1px #777;margin-bottom: 5px;">
         <a onclick="return backtotop()">
-            {#                <div style="height: 40px;width:40px;padding-top: 11px;">#}
-            {#                    私信<span style="position: fixed;background-color: #2e9d32;" class="badge">1</span>#}
-            {#                </div>#}
             <span style="height: 40px;width:40px;top: 13px;font-size: 16px" class="glyphicon glyphicon-qrcode"></span>
-            {#                <span style="position: relative;background-color: #2e9d32;top: -40px;right: -15px;" class="badge">1</span>#}
         </a>
         <div id="wechat-qrcode-img" style="margin: 10px;display: none;"><img  style="background-color: #ffffff;padding: 10px;border-radius: 4px;border: 1px solid #d7d7d7;position: relative;height: 120px;width:120px;left: -140px;top: -80px;" src="{% static 'static/image/weixin-qrcode.png' %}"></div>
     </div>
-    {#    复制我#}
 </div>
 
 </body>
