@@ -6,5 +6,10 @@ from django.contrib import admin
 from .models import SystemEmailInfo
 from .models import WelcomeSystemMessage
 
+
+class WelcomeSystemMessageAdmin(admin.ModelAdmin):
+    list_display = ['tittle','content']
+
+
 admin.site.register(SystemEmailInfo)
-admin.site.register(WelcomeSystemMessage)
+admin.site.register(WelcomeSystemMessage,WelcomeSystemMessageAdmin)

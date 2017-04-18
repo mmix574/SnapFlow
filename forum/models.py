@@ -103,7 +103,6 @@ class UserThreadStatus(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     thread_open = models.IntegerField(default=0)
     reply_open = models.IntegerField(default=0)
-    
     liked = models.IntegerField(default=0)
     collected = models.IntegerField(default=0)
     disliked = models.IntegerField(default=0)
@@ -123,7 +122,6 @@ class TAG(models.Model):
 
 
 
-# 2017年4月16日14:26:03
 class ThreadLike(models.Model):
     thread = models.ForeignKey(Thread,on_delete=models.CASCADE)
     user = models.ForeignKey(User)
@@ -132,3 +130,6 @@ class ThreadLike(models.Model):
     class Meta:
         verbose_name = "点赞"
         verbose_name_plural = verbose_name
+
+
+# event signal

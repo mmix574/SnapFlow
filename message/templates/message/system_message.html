@@ -7,6 +7,16 @@
 {% endblock %}
 
 {% block right %}
+
+    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
+        {% include 'pieces/commom/badge.html' with content="消息状态" %}
+        <div style="height: 26px;"></div>
+        <a href="{% url 'system_message' %}"><div style="margin: 0 auto;display: inline-block">系统消息:<span style="border-bottom: 1px solid #646464">{{ user.messagestatus.system_to_user_message_count }}</span></div></a>
+        <div style="margin: 0 auto;display: inline-block;">私信:{{ user.messagestatus.user_to_user_message_count }}</div>
+        <div style="margin: 0 auto;display: inline-block">事件消息:{{ user.messagestatus.even_message_count }}</div>
+
+    </div>
+
     <div class="content-right" style="padding-bottom: 30px;padding-left: 20px;padding-top: 10px;">
         {% include 'pieces/commom/badge.html' with content="系统消息" %}
         <button style="float:right;margin-right: 20px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
@@ -14,7 +24,7 @@
 
         <form method="post">
             {% csrf_token %}
-            <div id="edit-control-div">
+            <div id="edit-control-div" style="display: none">
                 <label for="option-selector">选择操作</label>
                 <div></div>
                 <select name="operation" id="option-selector" class="form-control" style="width: 300px;display: inline-block;">
@@ -29,7 +39,7 @@
             <div class="system-message-wrapper" style="padding-top: 20px;">
                 {% for i in system_message %}
                     <div {% if i.read %} style="opacity: 0.5;padding-top: 10px;" {% endif %}>
-                        <input class="input-checkbox" type="checkbox" name="_id" value="{{ i.id }}">
+                        <input style="display: none;" class="input-checkbox" type="checkbox" name="_id" value="{{ i.id }}">
                         <div style="display:inline-block">{{ forloop.counter }}</div>
                         <img style="height: 60px;width: 60px;border-radius: 30px;" src="{% static 'image/broadcast.jpg' %}">
                         <div style="display: inline;">{{ i.tittle }}</div>

@@ -18,7 +18,7 @@ class IndexView(AppBaseTemplateView):
     template_name = 'message/__index.html'
 
     def get(self, request, context={}, *args, **kwargs):
-        return HttpResponseRedirect('/m/message-status')
+        return HttpResponseRedirect('/m/system-message')
 
 
 
@@ -31,7 +31,7 @@ class SystemMessageView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        sm = SystemToUserMessage.objects.filter(user=self.request.user)
+        sm = SystemToUserMessage.objects.filter(user=self.request.user).order_by('-time')
         context['system_message'] = sm
         return context
 
@@ -50,27 +50,32 @@ class SystemMessageView(AppBaseTemplateView):
         if operation=="read":
             for i in ids:
                 try:
-                    ms = SystemToUserMessage.objects.get(id=i,user=request.user)
-                    ms.read = True
-                    ms.save()
+                    stum = SystemToUserMessage.objects.get(id=i,user=request.user)
+                    if not stum.read:
+                        request.user.messagestatus.minus_system_to_user_message_count()
+                    stum.read = True
+                    stum.save()
                 except Exception as e:
                     pass
                 pass
         elif operation=="unread":
             for i in ids:
                 try:
-                    ms = SystemToUserMessage.objects.get(id=i,user=request.user)
-                    ms.read = False
-                    ms.save()
+                    stum = SystemToUserMessage.objects.get(id=i,user=request.user)
+                    if stum.read:
+                        request.user.messagestatus.add_system_to_user_message_count()
+                    stum.read = False
+                    stum.save()
                 except Exception as e:
                     pass
         elif operation=="delete":
             for i in ids:
                 try:
-                    ms = SystemToUserMessage.objects.get(id=i, user=request.user)
-                    if ms.read == True:
-                        request.user.messagestatus.system_to_user_message_count = request.user.messagestatus.system_to_user_message_count-1
-                    ms.delete()
+                    stum = SystemToUserMessage.objects.get(id=i, user=request.user)
+                    if not stum.read:
+                        request.user.messagestatus.minus_system_to_user_message_count()
+                    print(stum)
+                    stum.delete()
                 except Exception as e:
                     pass
             pass
@@ -112,13 +117,8 @@ class MessageStatusView(AppBaseTemplateView):
             return super().post(request, context, *args, **kwargs)
 
         if operation=="clear":
-            ums, created = MessageStatus.objects.get_or_create(user=request.user)
-            ums.user_to_user_message_count = 0
-            ums.system_to_user_message_count = 0
-            ums.even_message_count = 0;
-            ums.save()
-            pass
-
+            ums = request.user.messagestatus
+            ums.clear_all()
 
 
         return super().post(request, context, *args, **kwargs)
@@ -129,6 +129,10 @@ class MessageStatusView(AppBaseTemplateView):
         context["user_message_status"] = ums
         return context
 
-
+@method_decorator(login_required,name="dispatch")
 class FriendView(AppBaseTemplateView):
     template_name = 'message/friends.html'
+
+class EventMessageView(AppBaseTemplateView):
+    template_name = 'message/event_message.html'
+

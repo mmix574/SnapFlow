@@ -106,6 +106,8 @@ DATABASES = {
         'HOST': '127.0.0.1',              #数据库主机，默认为localhost
         'PORT': '3306',                   #数据库端口，MySQL默认为3306
         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'sql_mode':'traditional',
             'autocommit': True,
         },
     }

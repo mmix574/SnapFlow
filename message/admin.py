@@ -14,7 +14,10 @@ class SystemToUserMessageAdmin(admin.ModelAdmin):
     list_display = ['user','tittle','time']
 
 
+
+
 admin.site.register(SystemToUserMessage,SystemToUserMessageAdmin)
+
 admin.site.register(MessageStatus)
 admin.site.register(UserToUserMessage)
 admin.site.register(EventMessage)

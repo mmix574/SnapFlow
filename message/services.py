@@ -46,5 +46,6 @@ def send_system_message_to_single_user(user,message_tittle,message_content):
         ms.content = message_content
         ms.save()
 
+
     except Exception as e:
         pass

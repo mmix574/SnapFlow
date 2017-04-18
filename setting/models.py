@@ -22,3 +22,18 @@ class WelcomeSystemMessage(models.Model):
     class Meta:
         verbose_name = "初始化系统消息"
         verbose_name_plural = verbose_name
+
+
+# events
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from django.contrib.auth.models import User
+from message.services import send_system_message_to_single_user
+@receiver(post_save,sender=User)
+def send_system_message(sender,instance,created,**kwargs):
+    if created:
+        wsm = WelcomeSystemMessage.objects.all()
+        for m in wsm:
+            send_system_message_to_single_user(instance,m.tittle,m.content)

@@ -9,6 +9,8 @@
 {% block right %}
     <div class="content-right" style="padding: 20px 0px;">
         <div style="text-align: center">
+            <div></div>
+
             <div>
                 <img style="border: 1px solid #e4e4e4;padding: 2px;height: 100px;width: 100px;border-radius: 50px" src="{{ request.user.userprofile.avatar.url }}">
             </div>
@@ -16,7 +18,7 @@
             <div>{{ request.user.userprofile.work_nickname }}@{{ request.user.userprofile.work_place }}</div>
 
             <div style="background-color: #cf4432;display: inline-block;width:400px;padding: 20px 20px;color: #ffffff;border-radius: 4px;margin-top: 10px;margin-bottom: 10px;">
-                <div style="padding-top: 20px;">{{ request.user.userprofile.self_introduction }}</div>
+                <div style="padding-top: 20px;">{% if request.user.userprofile.self_introduction %}{{ request.user.userprofile.self_introduction }}{% else %}这个人很懒，什么都没有留下{% endif %}</div>
                 <div></div>
                 <div style="float: right;">-- {{ request.user.username }}</div>
                 <div></div>
