@@ -69,3 +69,19 @@ class Friend(models.Model):
     class Meta:
         verbose_name = "朋友"
         verbose_name_plural = verbose_name
+
+
+pass
+
+from django.db.models.signals import post_save
+
+
+def create_message_status(sender,instance,created,**kwargs):
+    if created:
+        ms = MessageStatus()
+        ms.user = instance
+        ms.save()
+
+post_save.connect(create_message_status,User)
+
+

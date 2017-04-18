@@ -18,3 +18,7 @@ class WelcomeSystemMessage(models.Model):
     tittle = models.CharField(max_length=80)
     content = models.TextField(default="",blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "初始化系统消息"
+        verbose_name_plural = verbose_name
