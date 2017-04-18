@@ -62,7 +62,12 @@ def add_comment_history(sender,instance,created,**kwargs):
 from collection.models import Collection
 @receiver(post_save,sender=Collection)
 def add_collection_history(sender,instance,created,**kwargs):
-    pass
+    if created:
+        h = History()
+        h.type="collecting"
+        h.brief_content = instance.thread.tittle
+        h.user=instance.create_user
+        h.save()
 
 
 
