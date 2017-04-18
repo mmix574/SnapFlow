@@ -10,7 +10,8 @@ from .models import EventMessage
 
 
 
-
+class SystemToUserMessageAdmin(admin.ModelAdmin):
+    list_display = ['','']
 
 admin.site.register(SystemToUserMessage)
 admin.site.register(UserMessageStatus)

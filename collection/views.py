@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 from index.appviews import AppBaseTemplateView
 from .models import Collection
 from forum.models import Thread
 
-
+@method_decorator(login_required,name="dispatch")
 class CollectionView(AppBaseTemplateView):
     template_name = 'collection/collection.html'
 
@@ -17,6 +18,23 @@ class CollectionView(AppBaseTemplateView):
         collection_list = Collection.objects.filter(create_user=self.request.user)
         context['collection_list'] = collection_list
         return context
+
+    def post(self, request, context={}, *args, **kwargs):
+        print(request.POST)
+        operation = request.POST.get("operation",None)
+        id_group = request.POST.getlist("ids",None)
+
+        if not operation or not id_group:
+            return super().post(request, context, *args, **kwargs)
+
+        if operation=="delete":
+            for i in id_group:
+                try:
+                    Collection.objects.get(id=int(i)).delete()
+                except Exception as e:
+                    pass
+
+        return super().post(request, context, *args, **kwargs)
 
 
 @csrf_exempt

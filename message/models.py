@@ -30,15 +30,18 @@ class UserToUserMessage(models.Model):
 
 class SystemToUserMessage(models.Model):
     user = models.ForeignKey(User)
-    content = models.CharField(max_length=500,null=True,blank=True)
+    tittle = models.CharField(max_length=80)
+    content = models.TextField(max_length=500,null=True,blank=True)
     read = models.BooleanField(default=False)
     time = models.TimeField(auto_now=True)
 
+    def __str__(self):
+        return self.content+"->"+self.user.username
     class Meta:
         verbose_name = "系统消息"
         verbose_name_plural = verbose_name
         pass
-    pass
+
 
 # @ 回复等，点赞等
 class EventMessage(models.Model):

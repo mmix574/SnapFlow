@@ -21,22 +21,29 @@
             {% include 'pieces/commom/badge.html' with content="问题收藏" %}
             <button id="start_edit_button" style="float: right;margin-right: 8px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
         </div>
-        <div id="opeartion-area-div">
-            <label>操作</label>
-            <div></div>
-            <select class="form-control" style="width: 300px;display: inline-block;">
-                <option>--选择操作--</option>
-                <option value="delete">删除</option>
-            </select>
-            <button style="display: inline-block;" class="btn btn-danger">请先选择操作</button>
-        </div>
-        {% for i in collection_list %}
-            <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
-                <div style="display: inline-block">{{ forloop.counter }}</div>
-                <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.thread.create_user.userprofile.avatar.url }}">
-                <div style="display: inline-block"><a href="/t/{{ i.thread_id }}">{{ i.thread.tittle }}</a></div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div id="opeartion-area-div" style="display: none;padding-bottom: 10px;margin-left: 20px;">
+                <label>操作</label>
+                <div></div>
+                <select name="operation" class="form-control" style="width: 300px;display: inline-block;" id="operation-selector">
+                    <option value="">--选择操作--</option>
+                    <option value="delete">删除</option>
+                </select>
+                <button id="submit-button" style="display: inline-block;" class="btn btn-danger">请先选择操作</button>
             </div>
-        {% endfor %}
+            {% for i in collection_list %}
+                <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
+                    <input class="checkbox-ids" style="margin-left: 14px;display: none;" type="checkbox" name="ids" value="{{ i.id }}">
+                    <div style="display: inline-block">{{ forloop.counter }}</div>
+                    <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.thread.create_user.userprofile.avatar.url }}">
+                    <div style="display: inline-block"><a href="/t/{{ i.thread_id }}">{{ i.thread.tittle }}</a></div>
+                    <div style="float: right;padding-right: 20px;">{{ i.create_time|date }}</div>
+                </div>
+            {% endfor %}
+        </form>
+
     </div>
     <div class="content-right" style="padding: 5px;">
         <div style="text-align: center">
@@ -46,6 +53,17 @@
     </div>
     <script>
         function start_edit(){
+            $(".checkbox-ids").toggle();
+            $("#opeartion-area-div").toggle();
         }
+
+        $(document).ready(function(){
+            $("#operation-selector").change(function(){
+                if($("#operation-selector").val()=="delete"){
+                    $("#submit-button").text("确定删除");
+                }
+            });
+        });
+
     </script>
 {% endblock %}

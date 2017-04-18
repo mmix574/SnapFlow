@@ -161,7 +161,7 @@
                 <div style="padding: 5px;border-bottom: 1px solid #eaeaea">
                     <div style="float: left;padding-top: 2px;">
                         <div style="display: inline-block;width: 20px;">{{ forloop.counter }}</div>
-                        <img style="display: inline-block;border-radius: 2px;height: 40px;width: 40px;" src="{{ i.create_user.userprofile.avatar.url }}">
+                        <img style="display: inline-block;border-radius: 2px;height: 40px;width: 40px;" src="{% if i.create_user.userprofile.avatar %}{{ i.create_user.userprofile.avatar.url }}{% endif %}">
                     </div>
                     <div style="margin-left: 70px;">
                         <a href="#"><div style="float: left;color: #616161;">{{ i.create_user.username }}：</div></a>
