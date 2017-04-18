@@ -20,8 +20,6 @@ def get_even_message_count(uid):
 
 
 
-
-
 def send_system_message_to_all(message_tittle,message_content):
     from message.models import SystemToUserMessage
     from django.contrib.auth.models import User
@@ -36,4 +34,17 @@ def send_system_message_to_all(message_tittle,message_content):
     pass
 
 def send_system_message_to_single_user(user,message_tittle,message_content):
-    pass
+    from django.contrib.auth.models import User
+    from message.models import SystemToUserMessage
+    try:
+        if type(user)==int:
+            user = User.objects.get(id=user)
+
+        ms = SystemToUserMessage()
+        ms.user = user
+        ms.tittle = message_tittle
+        ms.content = message_content
+        ms.save()
+
+    except Exception as e:
+        pass

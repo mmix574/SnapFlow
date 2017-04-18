@@ -12,3 +12,9 @@ class SystemEmailInfo(models.Model):
     class Meta:
         verbose_name = "系统邮箱"
         verbose_name_plural = verbose_name
+
+
+class WelcomeSystemMessage(models.Model):
+    tittle = models.CharField(max_length=80)
+    content = models.TextField(default="",blank=True)
+    create_time = models.DateTimeField(auto_now_add=True)
