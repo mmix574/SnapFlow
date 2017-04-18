@@ -21,4 +21,10 @@ admin.site.register(SystemToUserMessage,SystemToUserMessageAdmin)
 admin.site.register(MessageStatus)
 admin.site.register(UserToUserMessage)
 admin.site.register(EventMessage)
-admin.site.register(Friend)
+
+
+
+class FriendAdmin(admin.ModelAdmin):
+    list_display = ['user','has_friend']
+    search_fields = ['user']
+admin.site.register(Friend,FriendAdmin)

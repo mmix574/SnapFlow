@@ -1,6 +1,19 @@
 <div class="content-right" style="padding: 10px;">
-    <div style="text-align: center">
-        <button class="">上一页</button>
-        <button class="">下一页</button>
-    </div>
+    {#    <div style="text-align: center">#}
+    {#        <button class="">上一页</button>#}
+    {#        <button class="">下一页</button>#}
+    {#    </div>#}
+    <nav aria-label="...">
+        <ul class="pager">
+
+            <li><a href="?p=1">Previous</a></li>
+
+            <form action="." method="get" style="display: inline-block;">
+                <input class="form-control" name="p" style="text-align: center;display: inline-block;width: 50px;border-radius: 4px;" value="1">
+            </form>
+
+            <li><a href="?p=3">Next</a></li>
+
+        </ul>
+    </nav>
 </div>

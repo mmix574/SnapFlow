@@ -124,7 +124,7 @@ class Friend(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "朋友"
+        verbose_name = "好友"
         verbose_name_plural = verbose_name
 
 
