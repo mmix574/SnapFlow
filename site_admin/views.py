@@ -89,9 +89,12 @@ class AdminSendBroadcastingView(AppBaseTemplateView):
             return MessageResponse("你不能访问这个网页","")
 
         operation = request.POST.get('operation',None)
-        broadcasts = request.POST.get('_id',None)
+        broadcasts = request.POST.getlist('_id',None)
         if not operation or not broadcasts:
             return super().post(request, context, *args, **kwargs)
+        from message.services import send_system_message_to_all
+
+
 
         if operation=="send":
             for i in broadcasts:
@@ -99,6 +102,7 @@ class AdminSendBroadcastingView(AppBaseTemplateView):
                     bc = AdminBroadCast.objects.get(id=int(i))
                     bc.sended = True
                     bc.save()
+                    send_system_message_to_all(bc.tittle,bc.content)
                 except Exception as e:
                     pass
         elif operation=="delete":

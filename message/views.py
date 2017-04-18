@@ -8,6 +8,9 @@ from django.utils.decorators import method_decorator
 from django.http.response import HttpResponseRedirect
 
 
+# models
+from .models import SystemToUserMessage
+
 @method_decorator(login_required,name="dispatch")
 class IndexView(AppBaseTemplateView):
     template_name = 'message/__index.html'
@@ -43,10 +46,29 @@ class SystemMessageView(AppBaseTemplateView):
             return super().post(request, context, *args, **kwargs)
 
         if operation=="read":
-            pass
+            for i in ids:
+                try:
+                    ms = SystemToUserMessage.objects.get(id=i,user=request.user)
+                    ms.read = True
+                    ms.save()
+                except Exception as e:
+                    pass
+                pass
         elif operation=="unread":
-            pass
+            for i in ids:
+                try:
+                    ms = SystemToUserMessage.objects.get(id=i,user=request.user)
+                    ms.read = False
+                    ms.save()
+                except Exception as e:
+                    pass
         elif operation=="delete":
+            for i in ids:
+                try:
+                    ms = SystemToUserMessage.objects.get(id=i, user=request.user)
+                    ms.delete()
+                except Exception as e:
+                    pass
             pass
 
         return super().post(request, context, *args, **kwargs)
