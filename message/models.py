@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 
 
-
 # todo 2017年4月18日16:44:21
 class MessageStatusManager(models.Manager):
     def add_user_to_user_message_count(self):
@@ -25,6 +24,14 @@ class MessageStatusManager(models.Manager):
         pass
     def minus_even_message_count(self):
         pass
+
+    def clear_all(self):
+        self.user_to_user_message_count = 0
+        self.system_to_user_message_count = 0
+        self.even_message_count = 0
+        items = UserToUserMessage.objects.fiter(user=self.user)
+
+        # for i in items:
 
 
 class MessageStatus(models.Model):
@@ -49,7 +56,7 @@ class UserToUserMessage(models.Model):
     to_user = models.ForeignKey(User,related_name="B_user")
     content = models.CharField(max_length=500)
     create_time = models.DateTimeField(auto_now_add=True)
-
+    readed = models.BooleanField(default=False)
     class Meta:
         verbose_name = "私信"
         verbose_name_plural = verbose_name
