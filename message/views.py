@@ -68,6 +68,8 @@ class SystemMessageView(AppBaseTemplateView):
             for i in ids:
                 try:
                     ms = SystemToUserMessage.objects.get(id=i, user=request.user)
+                    if ms.read == True:
+                        request.user.messagestatus.system_to_user_message_count = request.user.messagestatus.system_to_user_message_count-1
                     ms.delete()
                 except Exception as e:
                     pass
