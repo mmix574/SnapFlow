@@ -31,7 +31,7 @@ class UserToUserMessage(models.Model):
 class SystemToUserMessage(models.Model):
     user = models.ForeignKey(User)
     tittle = models.CharField(max_length=80)
-    content = models.TextField(max_length=500,null=True,blank=True)
+    content = models.TextField(blank=True)
     read = models.BooleanField(default=False)
     time = models.TimeField(auto_now=True)
 
@@ -49,4 +49,11 @@ class EventMessage(models.Model):
     class Meta:
         verbose_name = "事件消息"
         verbose_name_plural = verbose_name
+
+
+
+class Friend(models.Model):
+    user = models.ForeignKey(User)
+    has_friend = models.ForeignKey(User,related_name="myfriend")
+    create_time = models.DateTimeField(auto_now_add=True)
 
