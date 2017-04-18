@@ -13,9 +13,9 @@
     <li>
         <a href="#translations">我的回答</a>
     </li>
-{#    <li>#}
-{#        <a href="#translations">问题浏览</a>#}
-{#    </li>#}
+    {#    <li>#}
+    {#        <a href="#translations">问题浏览</a>#}
+    {#    </li>#}
     <li>
         <a href="#translations">我的点赞</a>
     </li>
@@ -24,6 +24,10 @@
 
 {% block right %}
     <div class="content-right">
-        {% url "_history" %}
+        {% for i in history_list %}
+            <div>
+                {{ i }}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
