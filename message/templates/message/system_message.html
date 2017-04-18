@@ -7,5 +7,14 @@
 {% block right %}
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
         {% include 'pieces/commom/badge.html' with content="系统消息" %}
+        <div style="height: 20px;"></div>
+
+        <div class="system-message-wrapper">
+            {% for i in system_message %}
+                <div>{{ i }}</div>
+            {% endfor %}
+        </div>
     </div>
+    {% include 'pieces/commom/right-paging.html' %}
+
 {% endblock %}

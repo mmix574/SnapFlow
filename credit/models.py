@@ -14,6 +14,10 @@ class UserCreditDefault(models.Model):
 class CashPoint(models.Model):
     pass
 
+    class Meta:
+        verbose_name = "现金积分"
+        verbose_name_plural = verbose_name
+
 
 class UserCreditNickName(models.Model):
     name = models.CharField(max_length=10)

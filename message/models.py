@@ -57,3 +57,6 @@ class Friend(models.Model):
     has_friend = models.ForeignKey(User,related_name="myfriend")
     create_time = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "朋友"
+        verbose_name_plural = verbose_name

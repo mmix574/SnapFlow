@@ -7,7 +7,7 @@ from .models import SystemToUserMessage
 from .models import UserMessageStatus
 from .models import UserToUserMessage
 from .models import EventMessage
-
+from .models import Friend
 
 
 class SystemToUserMessageAdmin(admin.ModelAdmin):
@@ -17,3 +17,4 @@ admin.site.register(SystemToUserMessage)
 admin.site.register(UserMessageStatus)
 admin.site.register(UserToUserMessage)
 admin.site.register(EventMessage)
+admin.site.register(Friend)
