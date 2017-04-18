@@ -5,4 +5,8 @@ from django.contrib import admin
 
 from .models import History
 
-admin.site.register(History)
+
+class HistoryAdmin(admin.ModelAdmin):
+    list_display = ['user','type','brief_content','create_time']
+
+admin.site.register(History,HistoryAdmin)
