@@ -9,7 +9,9 @@ from django.http.response import HttpResponseRedirect
 
 
 # models
+from django.contrib.auth.models import User
 from .models import SystemToUserMessage
+from .models import UserToUserMessage
 
 @method_decorator(login_required,name="dispatch")
 class IndexView(AppBaseTemplateView):
@@ -78,10 +80,21 @@ class SystemMessageView(AppBaseTemplateView):
 class PrivateMessageView(AppBaseTemplateView):
     template_name = 'message/private_message.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        u2u_list = UserToUserMessage.objects.filter(user=self.request.user)
+
+        context['u2u_list'] = u2u_list
+        return context
+
+    def get(self, request, context={}, *args, **kwargs):
+        return super().get(request, context, *args, **kwargs)
+
+    def post(self, request, context={}, *args, **kwargs):
+        return super().post(request, context, *args, **kwargs)
 
 
-from django.contrib.auth.models import User
-from .models import UserMessageStatus
+from .models import MessageStatus
 
 
 @method_decorator(login_required,name="dispatch")
@@ -97,7 +110,7 @@ class MessageStatusView(AppBaseTemplateView):
             return super().post(request, context, *args, **kwargs)
 
         if operation=="clear":
-            ums, created = UserMessageStatus.objects.get_or_create(user=request.user)
+            ums, created = MessageStatus.objects.get_or_create(user=request.user)
             ums.user_to_user_message_count = 0
             ums.system_to_user_message_count = 0
             ums.even_message_count = 0;
@@ -110,6 +123,10 @@ class MessageStatusView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ums, created = UserMessageStatus.objects.get_or_create(user=self.request.user)
+        ums, created = MessageStatus.objects.get_or_create(user=self.request.user)
         context["user_message_status"] = ums
         return context
+
+
+class FriendView(AppBaseTemplateView):
+    template_name = 'message/friends.html'

@@ -1,4 +1,4 @@
-from .models import UserMessageStatus
+from .models import MessageStatus
 
 from django.contrib.auth.models import User
 
@@ -9,7 +9,7 @@ def get_user_to_user_message_count(uid):
         user = User.objects.get(id=uid)
     except:
         return None
-    ums = UserMessageStatus.objects.get_or_create(user=user)
+    ums = MessageStatus.objects.get_or_create(user=user)
 
 
 def get_system_to_user_message_count(uid):

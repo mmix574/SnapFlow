@@ -4,17 +4,18 @@ from django.contrib import admin
 
 
 from .models import SystemToUserMessage
-from .models import UserMessageStatus
+from .models import MessageStatus
 from .models import UserToUserMessage
 from .models import EventMessage
 from .models import Friend
 
 
 class SystemToUserMessageAdmin(admin.ModelAdmin):
-    list_display = ['','']
+    list_display = ['user','tittle','time']
 
-admin.site.register(SystemToUserMessage)
-admin.site.register(UserMessageStatus)
+
+admin.site.register(SystemToUserMessage,SystemToUserMessageAdmin)
+admin.site.register(MessageStatus)
 admin.site.register(UserToUserMessage)
 admin.site.register(EventMessage)
 admin.site.register(Friend)

@@ -13,10 +13,21 @@ class ProfileInline(admin.StackedInline):
     max_num = 1
     can_delete = False
 
+
+from message.models import MessageStatus
+class MessageStatusInline(admin.StackedInline):
+    model = MessageStatus
+    max_num = 1
+
+    can_delete = False
+    verbose_name = 'message'
+
 class UserprofileAdmin(UserAdmin):
-    inlines = [ProfileInline]
+    inlines = [ProfileInline,MessageStatusInline,]
 
 
 
 admin.site.unregister(User)
 admin.site.register(User,UserprofileAdmin)
+
+# admin.site.register(User,MessageStatusInline)

@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.models import User
 
-class UserMessageStatus(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-
+class MessageStatus(models.Model):
+    # user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User)
     user_to_user_message_count = models.IntegerField(default=0)
     system_to_user_message_count = models.IntegerField(default=0)
     even_message_count = models.IntegerField(default=0)
@@ -22,10 +22,17 @@ class UserMessageStatus(models.Model):
         verbose_name_plural = verbose_name
 
 class UserToUserMessage(models.Model):
+    user = models.ForeignKey(User,related_name="A_user")
+    to_user = models.ForeignKey(User,related_name="B_user")
+    content = models.CharField(max_length=500)
+    create_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = "用户消息"
+        verbose_name = "私信"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.content
 
 
 class SystemToUserMessage(models.Model):
@@ -41,6 +48,8 @@ class SystemToUserMessage(models.Model):
         verbose_name = "系统消息"
         verbose_name_plural = verbose_name
         pass
+
+
 
 
 # @ 回复等，点赞等

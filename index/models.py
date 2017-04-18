@@ -38,7 +38,7 @@ def default_avatar():
 class UserProfile(models.Model):
 
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    avatar = models.ImageField(default=default_avatar,null=True,blank=True,upload_to=upload_to)
+    avatar = models.ImageField(default=default_avatar,null=False,blank=False,upload_to=upload_to)
     # set_avatar = models.BooleanField(default=False)
     # avatar = models.ImageField(null=True,blank=True)
     work_year = models.IntegerField("工作年限",default=0,blank=True)
@@ -49,6 +49,13 @@ class UserProfile(models.Model):
     blog_adderss = models.URLField(blank=True)
 
     objects = UserProfileManager()
+
+    @property
+    def avatar_url(self):
+        if not self.avatar:
+            self.avatar = default_avatar()
+            self.save()
+        return self.avatar.url
 
     def __str__(self):
         return "[userprofile@user_id:"+str(self.user.id)+" username:"+self.user.username+"]"

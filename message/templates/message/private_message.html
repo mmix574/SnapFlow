@@ -9,5 +9,9 @@
 {% block right %}
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
         {% include 'pieces/commom/badge.html' with content="私信" %}
+        <div>
+            {{ u2u_list }}
+        </div>
     </div>
+
 {% endblock %}
