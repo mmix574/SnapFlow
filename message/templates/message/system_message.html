@@ -1,20 +1,71 @@
 {% extends 'interface/base_display_settings_b.html' %}
 
+{% load static %}
+
 {% block left %}
     {% include 'message/pieces/nav-left.html' %}
 {% endblock %}
 
 {% block right %}
-    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
+    <div class="content-right" style="padding-bottom: 30px;padding-left: 20px;padding-top: 10px;">
         {% include 'pieces/commom/badge.html' with content="系统消息" %}
+        <button style="float:right;margin-right: 20px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
         <div style="height: 20px;"></div>
 
-        <div class="system-message-wrapper">
-            {% for i in system_message %}
-                <div>{{ i }}</div>
-            {% endfor %}
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div id="edit-control-div">
+                <label for="option-selector">选择操作</label>
+                <div></div>
+                <select name="operation" id="option-selector" class="form-control" style="width: 300px;display: inline-block;">
+                    <option value="">-- 选择操作 --</option>
+                    <option value="read">标记为：已读</option>
+                    <option value="unread">标记为：未读</option>
+                    <option value="delete">删除</option>
+                </select>
+                <button class="btn btn-default" style="position:relative;top: -2px;" onclick="return select_all()">全选</button>
+                <button class="btn btn-default" style="position:relative;top: -2px;">确定</button>
+            </div>
+            <div class="system-message-wrapper" style="padding-top: 20px;">
+                {% for i in system_message %}
+                    <div {% if i.read %} style="opacity: 0.5;padding-top: 10px;" {% endif %}>
+                        <input class="input-checkbox" type="checkbox" name="_id" value="{{ i.id }}">
+                        <div style="display:inline-block">{{ forloop.counter }}</div>
+                        <img style="height: 60px;width: 60px;border-radius: 30px;" src="{% static 'image/broadcast.jpg' %}">
+                        <div style="display: inline;">{{ i.tittle }}</div>
+                        <div></div>
+                        <div style="display: inline-block;border-left: 1px solid black;padding-left: 5px;margin-left: 5px;">{{ i.content }}</div>
+                        <div style="float: right;padding-right: 20px;">{{ i.time }}</div>
+                        <div></div>
+                    </div>
+                {% endfor %}
+                <hr/>
+            </div>
+        </form>
     </div>
     {% include 'pieces/commom/right-paging.html' %}
+{% endblock %}
 
+{% block script%}
+    {{ block.super }}
+    <script>
+        var all_selected = false;
+        function start_edit(){
+            $("#edit-control-div").toggle();
+            $(".input-checkbox").toggle();
+        }
+        function select_all(){
+            if(!all_selected){
+                $(".input-checkbox").prop('checked',true);
+                all_selected = true;
+            }else{
+                $(".input-checkbox").prop('checked',false);
+                all_selected = false;
+            }
+            return false;
+        }
+        $(document).ready(function(){
+
+        });
+    </script>
 {% endblock %}

@@ -35,6 +35,20 @@ class SystemMessageView(AppBaseTemplateView):
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
+        print(request.POST)
+        operation = request.POST.get("operation",None)
+        ids = request.POST.getlist("_id",None)
+
+        if not operation or not ids:
+            return super().post(request, context, *args, **kwargs)
+
+        if operation=="read":
+            pass
+        elif operation=="unread":
+            pass
+        elif operation=="delete":
+            pass
+
         return super().post(request, context, *args, **kwargs)
 
 

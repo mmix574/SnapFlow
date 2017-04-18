@@ -33,7 +33,7 @@ class SystemToUserMessage(models.Model):
     tittle = models.CharField(max_length=80)
     content = models.TextField(blank=True)
     read = models.BooleanField(default=False)
-    time = models.TimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.content+"->"+self.user.username
