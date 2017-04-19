@@ -37,3 +37,8 @@ def send_system_message(sender,instance,created,**kwargs):
         wsm = WelcomeSystemMessage.objects.all()
         for m in wsm:
             send_system_message_to_single_user(instance,m.tittle,m.content)
+
+
+
+# 2017年4月19日23:36:42
+# UserCredit 奖励情况表

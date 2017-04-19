@@ -21,8 +21,8 @@
             width: 100%;
         }
         .markdown_body >p>a>img{
-        width: 100%;
-    }
+            width: 100%;
+        }
     </style>
     <script type="application/javascript">
         function go_back(){
@@ -167,7 +167,7 @@
                         <img style="display: inline-block;border-radius: 2px;height: 40px;width: 40px;" src="{% if i.create_user.userprofile.avatar %}{{ i.create_user.userprofile.avatar.url }}{% endif %}">
                     </div>
                     <div style="margin-left: 70px;">
-                        <a href="#"><div style="float: left;color: #616161;">{{ i.create_user.username }}：</div></a>
+                        <a class="bind-link" id="{{ i.id }}" style="cursor: pointer;" href="#{{ i.id }}"><div style="float: left;color: #616161;">{{ i.create_user.username }}<span>:</span></div></a>
                         <div style="float: left;">{{ i.content}}</div>
                     </div>
                     <div style="float: right;">
@@ -178,9 +178,19 @@
             {% endfor %}
         </div>
     </div>
-
+    <script>
+        $(document).ready(function(){
+            $(".bind-link").click(function(){
+                var username = $(this).children('div').text();
+                $("#id_content").val($("#id_content").val()+"@"+username+" ");
+                window.location.href = window.location.href+"#comment"
+                $("#id_content").focus()
+                return false;
+            });
+        });
+    </script>
     <!--评论区-->
-    <div class="block-left comment-area" style="padding: 20px;">
+    <a id="comment"><div class="block-left comment-area" style="padding: 20px;">
         <div style="margin-bottom: 20px;">
             {% include 'pieces/commom/badge.html' with content="添加评论" %}
         </div>
@@ -191,10 +201,10 @@
             <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-danger" onclick="return empty_input()">清空</button>
             <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
         </form>
-    </div>
+    </div></a>
 
     <div class="block-left">
-{#        推荐？#}
+        {#        推荐？#}
     </div>
 {% endblock %}
 
