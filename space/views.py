@@ -86,9 +86,18 @@ class UserDataView(AppBaseTemplateView):
 
         return super(UserDataView, self).post(request,context={"user_form":user_form,"user_profile_form":user_profile_form,"user_avatar_form":user_avatar_form},*args,**kwargs)
 
+
+
+from forum.models import UserThreadStatus
 @method_decorator(login_required,name='dispatch')
 class UserProfileView(AppBaseTemplateView):
     template_name = 'space/userprofile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_thread_status  = UserThreadStatus.objects.get(user=self.request.user)
+        context['user_thread_status'] = user_thread_status
+        return context
 
     def get(self, request, context={}, *args, **kwargs):
 

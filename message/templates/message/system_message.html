@@ -12,8 +12,8 @@
         {% include 'pieces/commom/badge.html' with content="消息状态" %}
         <div style="height: 26px;"></div>
         <a href="{% url 'system_message' %}"><div style="margin: 0 auto;display: inline-block">系统消息:<span style="border-bottom: 1px solid #646464">{{ user.messagestatus.system_to_user_message_count }}</span></div></a>
-        <div style="margin: 0 auto;display: inline-block;">私信:{{ user.messagestatus.user_to_user_message_count }}</div>
-        <div style="margin: 0 auto;display: inline-block">事件消息:{{ user.messagestatus.even_message_count }}</div>
+        <a href="{% url 'private_message' %}"><div style="margin: 0 auto;display: inline-block;">私信:<span style="border-bottom: 1px solid #646464">{{ user.messagestatus.user_to_user_message_count }}</span></div></a>
+        <a href="{% url 'event_message' %}"><div style="margin: 0 auto;display: inline-block">事件消息:<span style="border-bottom: 1px solid #646464">{{ user.messagestatus.even_message_count }}</span></div></a>
 
     </div>
 

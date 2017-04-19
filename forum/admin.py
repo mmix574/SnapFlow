@@ -6,7 +6,7 @@ from .models import SubClass
 from .models import Thread
 from .models import Comment
 from .models import TAG
-
+from .models import UserThreadStatus
 
 class ClassAdmin(admin.ModelAdmin):
     pass
@@ -52,3 +52,6 @@ class ThreadLikeAdmin(admin.ModelAdmin):
     list_display = ['thread','user']
 
 admin.site.register(ThreadLike,ThreadLikeAdmin)
+
+
+admin.site.register(UserThreadStatus)

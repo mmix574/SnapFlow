@@ -53,6 +53,9 @@ class Thread (models.Model):
     reply = models.IntegerField(default=0)
     # collection = models.IntegerField(default=0)
 
+    # 分数
+    score = models.IntegerField(default=1000)
+
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     last_edit_time = models.DateTimeField(auto_now=True,blank=True,null=True)
@@ -101,14 +104,15 @@ class Comment(models.Model):
 
 class UserThreadStatus(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    thread_open = models.IntegerField(default=0)
-    reply_open = models.IntegerField(default=0)
-    liked = models.IntegerField(default=0)
-    collected = models.IntegerField(default=0)
-    disliked = models.IntegerField(default=0)
+    question_count = models.IntegerField(default=0)
+    answering_count = models.IntegerField(default=0)
+    being_liked_count = models.IntegerField(default=0)
+    being_collected_count = models.IntegerField(default=0)
+    being_disliked_count = models.IntegerField(default=0)
 
-    pass
-
+    class Meta:
+        verbose_name = "用户状态"
+        verbose_name_plural = verbose_name
 
 
 class TAG(models.Model):
@@ -133,3 +137,25 @@ class ThreadLike(models.Model):
 
 
 # event signal
+from django.dispatch import receiver
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+
+@receiver(post_save,sender=User)
+def addUserThreadStatus(sender,instance,created,**kwargs):
+    if created:
+        uts = UserThreadStatus()
+        uts.user = instance
+        uts.save()
+
+@receiver(post_save,sender=Comment)
+def add_comment_count(sender,instance,created,**kwargs):
+    if created:
+        (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
+        ths.reply_open = ths.reply_open+1
+        ths.save()
+
+
+
+
