@@ -92,7 +92,7 @@ class IndexView(AppBaseTemplateView):
 import json
 
 from .forms import ThreadForm
-
+from django.http.response import HttpResponseRedirect
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
@@ -118,10 +118,12 @@ class CreateView(AppBaseTemplateView):
         tf = ThreadForm(d)
 
         if tf.is_valid():
-            tf.save()
+            m = tf.save()
+            return HttpResponseRedirect("/t/"+str(m.id))
         else:
             print(tf.errors)
 
+        # return HttpResponseRedirect("/t/"+str(tf.auto_id))
         return super().post(request, context, *args, **kwargs)
 
 

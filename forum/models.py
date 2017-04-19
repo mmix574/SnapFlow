@@ -140,8 +140,9 @@ class ThreadLike(models.Model):
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
 
-
+# 创建用户时添加对应的UserThreadStatus
 @receiver(post_save,sender=User)
 def addUserThreadStatus(sender,instance,created,**kwargs):
     if created:
@@ -149,13 +150,37 @@ def addUserThreadStatus(sender,instance,created,**kwargs):
         uts.user = instance
         uts.save()
 
+# comment 时候修改UserThreadStatus对应字段
 @receiver(post_save,sender=Comment)
 def add_comment_count(sender,instance,created,**kwargs):
     if created:
         (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
-        ths.reply_open = ths.reply_open+1
+        ths.answering_count = ths.answering_count+1
         ths.save()
 
 
+@receiver(post_save,sender=Thread)
+def add_question_count(sender,instance,created,**kwargs):
+    if created:
+        (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
+        ths.question_count = ths.question_count+1
+        ths.save()
 
 
+@receiver(post_save,sender=ThreadLike)
+def add_like_count(sender,instance,created,**kwargs):
+    if created:
+        (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.thread.create_user)
+        ths.being_liked_count = ths.being_liked_count+1
+        ths.save()
+
+@receiver(post_delete,sender=ThreadLike)
+def delete_like_count(sender,instance,**kwargs):
+    (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.thread.create_user)
+    if c:
+        return
+    else:
+        ths.being_liked_count = ths.being_liked_count-1
+        if ths.being_liked_count<0:
+            ths.being_liked_count = 0
+        ths.save()

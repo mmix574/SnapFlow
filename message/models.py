@@ -108,10 +108,13 @@ class SystemToUserMessage(models.Model):
         pass
 
 class EventMessage(models.Model):
+
+    types = (('being_liked',"收到赞"),('being_answering','收到答案'))
+
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    event_type = models.CharField(max_length=20,choices=types)
     url = models.URLField()
-    tittle = models.CharField(max_length=80)
-    content = models.TextField(blank=True)
+    brief_content = models.CharField(max_length=80)
     read = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
 

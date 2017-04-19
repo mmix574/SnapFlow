@@ -30,12 +30,11 @@
 
     </div>
     <div class="content-right" style="text-align: center">
-        <div>我的回答{{ user_thread_status.answering_count }}</div>
-        <div>我的提问{{ user_thread_status.question_count }}
-        </div>
-        <div>我收到的赞{{ user_thread_status.being_liked_count }}</div>
+        <div style="display: inline;margin-left: auto;margin-right: auto;">我的回答{{ user_thread_status.answering_count }}</div>
+        <div style="display: inline;margin-left: auto;margin-right: auto;">我的提问{{ user_thread_status.question_count }}</div>
+        <div style="display: inline;margin-left: auto;margin-right: auto;">我收到的赞{{ user_thread_status.being_liked_count }}</div>
     </div>
-    <div class="content-right">
+    <div class="content-right"  style="text-align: center">
         用户积分基本，登录，打卡等添加积分
     </div>
 {% endblock %}
