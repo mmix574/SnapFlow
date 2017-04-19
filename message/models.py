@@ -151,15 +151,40 @@ def create_message_status(sender,instance,created,**kwargs):
 
 
 
+
+
+from forum.models import ThreadLike
+from forum.models import Comment
+
+
+@receiver(post_save,sender=ThreadLike)
+def add_event_message_thread_like(sender,instance,**kwargs):
+    pass
+
+
+@receiver(post_save,sender=Comment)
+def add_event_message_comment(sender,instance,**kwargs):
+    pass
+
+
+
+
+# 2017年4月19日17:54:29
+# 事件消息
+@receiver(post_save,sender=EventMessage)
+def add_event_message_count(sender,instance,created,**kwargs):
+    if created:
+        instance.user.messagestatus.add_even_message_count()
+
+# 私信
+@receiver(post_save,sender=UserToUserMessage)
+def add_private_message_count(sender,instance,created,**kwargs):
+    if created:
+        instance.user.messagestatus.add_user_to_user_message_count()
+
+# 系统消息
 @receiver(post_save,sender=SystemToUserMessage)
 def add_system_message_count(sender,instance,created,**kwargs):
     if created:
         user = instance.user
         user.messagestatus.add_system_to_user_message_count()
-
-# post_save.connect(create_message_status,User)
-
-
-
-
-

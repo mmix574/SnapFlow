@@ -55,8 +55,8 @@
                     <div style="display: inline-block;width: 18px;">{{ forloop.revcounter }}</div>
                     <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.user.userprofile.avatar_url}}">
                     <div style="display: inline-block">{{ i.user.username }}</div>
-                    <div style="display: inline-block">的{{ i.ctype }}</div>
-                    <div style="display: inline-block"><a href="/t/{{ i.url }}">"{{ i.brief_content }}"</a></div>
+{#                    <div style="display: inline-block">{{ i.ctype }}</div>#}
+                    <div style="display: inline-block"><a href="{{ i.url }}">{{ i.brief_content }}</a></div>
                     <div style="float: right;padding-right: 20px;">{{ i.create_time|date }}</div>
                 </div>
             {% endfor %}

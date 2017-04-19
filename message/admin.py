@@ -25,7 +25,12 @@ class UserToUserMessageAdmin(admin.ModelAdmin):
     list_display = ['a_user','b_user','content','is_send']
 
 admin.site.register(UserToUserMessage,UserToUserMessageAdmin)
-admin.site.register(EventMessage)
+
+
+class EventMessageAdmin(admin.ModelAdmin):
+    list_display = ['user','event_type','brief_content','time']
+
+admin.site.register(EventMessage,EventMessageAdmin)
 
 
 

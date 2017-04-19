@@ -95,7 +95,7 @@ class UserProfileView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_thread_status  = UserThreadStatus.objects.get(user=self.request.user)
+        user_thread_status,c  = UserThreadStatus.objects.get_or_create(user=self.request.user)
         context['user_thread_status'] = user_thread_status
         return context
 

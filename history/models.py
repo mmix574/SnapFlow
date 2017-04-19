@@ -40,7 +40,7 @@ def add_like(sender,instance,created,**kwargs):
         h = History()
         h.type = "liking"
         h.user = instance.user
-        h.brief_content = instance.thread.tittle
+        h.brief_content = "您在主题"+'"'+instance.thread.tittle+'"'+" 中点了赞"
         h.url='/t/'+str(instance.thread.id)
         h.save()
 
@@ -50,7 +50,7 @@ def add_thread_history(sender,instance,created,**kwargs):
     if created:
         h = History()
         h.type = "asking"
-        h.brief_content = instance.tittle
+        h.brief_content = "您在"+'"'+instance.sub_class.display_name+'"'+"中提出了问题:"+'"'+instance.tittle+'"'
         h.user = instance.create_user
         h.url = '/t/'+str(instance.id)
         h.save()
@@ -61,7 +61,7 @@ def add_comment_history(sender,instance,created,**kwargs):
     if created:
         h = History()
         h.type = "answering"
-        h.brief_content = instance.content
+        h.brief_content = "您在主题"+'"'+instance.thread.tittle+'"'+"中的回答:"+instance.content
         h.user = instance.create_user
         h.url = '/t/'+str(instance.thread.id)
         h.save()
@@ -72,7 +72,7 @@ def add_collection_history(sender,instance,created,**kwargs):
     if created:
         h = History()
         h.type="collecting"
-        h.brief_content = instance.thread.tittle
+        h.brief_content = "您收藏了主题 "+'"'+instance.thread.tittle+'"'
         h.user=instance.create_user
         h.url = '/t/'+str(instance.thread.id)
         h.save()
