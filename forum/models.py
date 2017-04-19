@@ -158,12 +158,33 @@ def add_comment_count(sender,instance,created,**kwargs):
         ths.answering_count = ths.answering_count+1
         ths.save()
 
+@receiver(post_delete,sender=Comment)
+def delete_comment_count(sender,instance,**kwargs):
+    (ths, c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
+    if c:
+        return
+    else:
+        ths.answering_count = ths.answering_count + 1
+        if ths.answering_count < 0:
+            ths.answering_count = 0
+        ths.save()
 
 @receiver(post_save,sender=Thread)
 def add_question_count(sender,instance,created,**kwargs):
     if created:
         (ths,c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
         ths.question_count = ths.question_count+1
+        ths.save()
+
+@receiver(post_delete,sender=Thread)
+def delete_question_count(sender,instance,**kwargs):
+    (ths, c) = UserThreadStatus.objects.get_or_create(user=instance.create_user)
+    if c:
+        return
+    else:
+        ths.question_count = ths.question_count - 1
+        if ths.question_count < 0:
+            ths.question_count = 0
         ths.save()
 
 
