@@ -13,6 +13,10 @@ class History(models.Model):
     url = models.URLField(blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def ctype(self):
+        return self.get_type_display()
+
     def __str__(self):
         return self.user.username+"-->"+self.type+":"+self.brief_content
 

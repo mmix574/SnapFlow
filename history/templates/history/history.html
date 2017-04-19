@@ -3,34 +3,82 @@
 {% block brand %}
     <span class="glyphicon glyphicon-book"></span>&nbsp;历史记录
 {% endblock %}
+
 {% block li-area %}
     <li class="li-active">
-        <a href="#download">所有</a>
+        <a href="{% url "_history" %}">所有</a>
     </li>
     <li>
-        <a href="#license-faqs">我的提问</a>
+        <a href="{% url "_history_asking" %}">我的提问</a>
     </li>
     <li>
-        <a href="#translations">我的回答</a>
+        <a href="{% url "_history_answering" %}">我的回答</a>
     </li>
-    {#    <li>#}
-    {#        <a href="#translations">问题浏览</a>#}
-    {#    </li>#}
     <li>
-        <a href="#translations">我的点赞</a>
+        <a href="">我的点赞</a>
     </li>
 
 {% endblock %}
 
 {% block right %}
-    <div class="content-right">
-        {% for i in history_list %}
-            <div>
-                {{ i }}
-            <a href="{{ i.url }}">click</a>
-            </div>
-        {% endfor %}
-    </div>
 
+    <div class="content-right" style="padding: 10px;">
+        <div style="padding-bottom: 25px;">
+            {% include 'pieces/commom/badge.html' with content=badge_content %}
+            <button id="start_edit_button" style="float: right;margin-right: 8px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div id="opeartion-area-div" style="display: none;padding-bottom: 10px;margin-left: 20px;">
+                <label>操作</label>
+                <div></div>
+                <select name="operation" class="form-control" style="width: 300px;display: inline-block;" id="operation-selector">
+                    <option value="">--选择操作--</option>
+                    <option value="delete">删除</option>
+                </select>
+                <button id="select_all_button" style="display: inline-block;" class="btn btn-default" onclick="return select_all()">全选</button>
+                <button id="submit-button" style="display: inline-block;" class="btn btn-danger">请先选择操作</button>
+            </div>
+            {% for i in history_list %}
+                <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
+                    <input class="checkbox-ids" style="margin-left: 14px;display: none;" type="checkbox" name="ids" value="{{ i.id }}">
+                    <div style="display: inline-block;width: 18px;">{{ forloop.revcounter }}</div>
+                    <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.user.userprofile.avatar_url}}">
+                    <div style="display: inline-block">{{ i.user.username }}</div>
+                    <div style="display: inline-block">的{{ i.ctype }}</div>
+                    <div style="display: inline-block"><a href="/t/{{ i.url }}">"{{ i.brief_content }}"</a></div>
+                    <div style="float: right;padding-right: 20px;">{{ i.create_time|date }}</div>
+                </div>
+            {% endfor %}
+        </form>
+
+    </div>
     {% include 'pieces/commom/right-paging.html' %}
+
+    <script>
+        var selected = false
+        function start_edit(){
+            $(".checkbox-ids").toggle();
+            $("#opeartion-area-div").toggle();
+        }
+        function select_all(){
+            if(!selected){
+                $(".checkbox-ids").prop('checked',true);
+                selected = true
+            }else{
+                $(".checkbox-ids").prop('checked',false)
+                selected = false
+            }
+            return false;
+        }
+        $(document).ready(function(){
+            $("#operation-selector").change(function(){
+                if($("#operation-selector").val()=="delete"){
+                    $("#submit-button").text("确定删除");
+                }
+            });
+        });
+
+    </script>
 {% endblock %}
