@@ -60,3 +60,24 @@ class HistoryAnsweringView(HistoryView):
         context['badge_content'] = "我的回答"
         return context
 
+@method_decorator(login_required, name='dispatch')
+class HistoryLikingView(HistoryView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        history_list = History.objects.filter(user=self.request.user, type='liking').order_by('-create_time')[
+                       :100]
+        context['history_list'] = history_list
+        context['badge_content'] = "我的点赞"
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class HistoryCollectingView(HistoryView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        history_list = History.objects.filter(user=self.request.user, type='collecting').order_by('-create_time')[
+                       :100]
+        context['history_list'] = history_list
+        context['badge_content'] = "我的收藏"
+        return context
+

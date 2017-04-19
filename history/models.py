@@ -60,7 +60,7 @@ from forum.models import Comment
 def add_comment_history(sender,instance,created,**kwargs):
     if created:
         h = History()
-        h.type = "commenting"
+        h.type = "answering"
         h.brief_content = instance.content
         h.user = instance.create_user
         h.url = '/t/'+str(instance.thread.id)

@@ -15,7 +15,10 @@
         <a href="{% url "_history_answering" %}">我的回答</a>
     </li>
     <li>
-        <a href="">我的点赞</a>
+        <a href="{% url "_history_liking" %}">我的点赞</a>
+    </li>
+    <li>
+        <a href="{% url "_history_collecting" %}">我的收藏</a>
     </li>
 
 {% endblock %}
