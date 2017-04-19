@@ -89,7 +89,7 @@ class PrivateMessageView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        u2u_list = UserToUserMessage.objects.filter(user=self.request.user)
+        u2u_list = UserToUserMessage.objects.filter(a_user=self.request.user)
 
         context['u2u_list'] = u2u_list
         return context
@@ -129,10 +129,11 @@ class MessageStatusView(AppBaseTemplateView):
         context["user_message_status"] = ums
         return context
 
-@method_decorator(login_required,name="dispatch")
-class FriendView(AppBaseTemplateView):
-    template_name = 'message/friends.html'
 
 class EventMessageView(AppBaseTemplateView):
     template_name = 'message/event_message.html'
 
+
+@method_decorator(login_required,name="dispatch")
+class FriendView(AppBaseTemplateView):
+    template_name = 'message/friends.html'

@@ -8,10 +8,19 @@
 
 {% block right %}
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
-        {% include 'pieces/commom/badge.html' with content="私信" %}
-        <div>
-            {{ u2u_list }}
-        </div>
-    </div>
 
+        <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
+        {% for i in u2u_list %}
+
+            {% if i.is_send %}
+                <div><img style="height: 64px;width: 64px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+            {% else %}
+                <div><img style="height: 64px;width: 64px;" src="{{ i.b_user.userprofile.avatar_url }}"></div>
+            {% endif %}
+
+            <div>{{ i.content }}</div>
+        {% endfor %}
+    </div>
+    <div class="content-right">abc</div>
+    {% include "pieces/commom/right-paging.html" %}
 {% endblock %}

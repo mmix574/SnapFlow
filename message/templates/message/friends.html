@@ -7,6 +7,9 @@
 
 {% block right %}
     <div class="content-right">
-        abc
+        {% include 'pieces/commom/badgev2.html' with content="添加好友" %}
+    </div>
+    <div class="content-right">
+            {% include 'pieces/commom/badgev2.html' with content="发送消息" %}
     </div>
 {% endblock %}

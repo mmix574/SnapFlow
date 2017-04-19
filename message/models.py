@@ -78,12 +78,13 @@ class MessageStatus(models.Model):
 
 
 class UserToUserMessage(models.Model):
-    user = models.ForeignKey(User,related_name="A_user",on_delete=models.CASCADE)
-    to_user = models.ForeignKey(User,related_name="B_user")
+    a_user = models.ForeignKey(User,related_name="A_user",on_delete=models.CASCADE)
+    b_user = models.ForeignKey(User,related_name="B_user")
     content = models.CharField(max_length=500)
     create_time = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
 
+    is_send = models.BooleanField(default=False)
     class Meta:
         verbose_name = "私信"
         verbose_name_plural = verbose_name

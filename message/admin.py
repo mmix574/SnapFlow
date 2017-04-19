@@ -19,7 +19,12 @@ class SystemToUserMessageAdmin(admin.ModelAdmin):
 admin.site.register(SystemToUserMessage,SystemToUserMessageAdmin)
 
 admin.site.register(MessageStatus)
-admin.site.register(UserToUserMessage)
+
+
+class UserToUserMessageAdmin(admin.ModelAdmin):
+    list_display = ['a_user','b_user','content','is_send']
+
+admin.site.register(UserToUserMessage,UserToUserMessageAdmin)
 admin.site.register(EventMessage)
 
 
