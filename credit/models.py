@@ -2,14 +2,27 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-class UserCreditDefault(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+class CreditDefault(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     credit_point = models.IntegerField(default=10)
     last_modify = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "用户积分"
         verbose_name_plural = verbose_name
+
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save,sender=User)
+def create_credit_information(sender,instance,created,**kwargs):
+    if created:
+        ucd = CreditDefault()
+        ucd.user = instance
+        ucd.save()
+
+
 
 class CashPoint(models.Model):
     pass

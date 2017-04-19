@@ -16,13 +16,13 @@
             {#                <a href="{% url 'message_status' %}">消息状态</a>#}
             {#            </li>#}
             <li class="message-li">
-                <a href="{% url 'system_message' %}">系统消息</a>
+                <a href="{% url 'system_message' %}">系统消息<span class="badge" style="background: #2e9d32;left:5px;top:-2px;position: relative">{{ user.messagestatus.system_to_user_message_count }}</span></a>
             </li>
             <li class="message-li">
-                <a href="{% url 'event_message' %}">事件消息</a>
+                <a href="{% url 'event_message' %}">事件消息<span class="badge" style="background: #2e9d32;left:5px;top:-2px;position: relative">{{ user.messagestatus.even_message_count }}</span></a>
             </li>
             <li class="message-li">
-                <a href="{% url 'private_message' %}">私信</a>
+                <a href="{% url 'private_message' %}">私信<span class="badge" style="background: #2e9d32;left:5px;top:-2px;position: relative">{{ user.messagestatus.user_to_user_message_count }}</span></a>
             </li>
             <li class="message-li">
                 <a href="{% url 'space-friend' %}">好友</a>

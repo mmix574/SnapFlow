@@ -44,7 +44,10 @@ urlpatterns = [
     url(r'^collection/',include('collection.urls')),
     # site_admin
     url(r'^a/',include('site_admin.urls')),
-    #search
+    # credit
+    url(r'^credit/', include('credit.urls')),
+
+   #search
     url(r'^s$',SearchView.as_view()),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

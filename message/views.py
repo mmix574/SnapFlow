@@ -134,9 +134,45 @@ class EventMessageView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        event_message_list = EventMessage.objects.filter(user=self.request.user)
+        event_message_list = EventMessage.objects.filter(user=self.request.user).order_by('-time')
         context['event_message_list'] = event_message_list
         return context
+
+    def post(self, request, context={}, *args, **kwargs):
+        operation = request.POST.get('operation',None)
+        ids = request.POST.getlist('ids',None)
+
+        if operation=='read':
+            for i in ids:
+                try:
+                    msg = EventMessage.objects.get(user=request.user,id=i)
+                    if not msg.read:
+                        request.user.messagestatus.minus_even_message_count()
+                        pass
+                    msg.read = True
+                    msg.save()
+                except Exception as e:
+                    pass
+        elif operation=='unread':
+            for i in ids:
+                try:
+                    msg = EventMessage.objects.get(user=request.user,id=i)
+                    if msg.read:
+                        request.user.messagestatus.add_even_message_count()
+                    msg.read = False
+                    msg.save()
+                except Exception as e:
+                    pass
+        elif operation=='delete':
+            for i in ids:
+                try:
+                    msg = EventMessage.objects.get(user=request.user, id=i)
+                    msg.delete()
+                except Exception as e:
+                    pass
+            pass
+
+        return super().post(request, context, *args, **kwargs)
 
 
 @method_decorator(login_required,name="dispatch")

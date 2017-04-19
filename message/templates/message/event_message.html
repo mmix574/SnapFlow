@@ -14,16 +14,14 @@
 
     </div>
 
-    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
-        {% include 'pieces/commom/badge.html' with content="事件消息" %}
-
-
-        <div>
-            {% for i in event_message_list %}
-                <div>{{ i }}</div>
-            {% endfor %}
-        </div>
-    </div>
+    {#    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">#}
+    {#        {% include 'pieces/commom/badge.html' with content="事件消息" %}#}
+    {#        <div>#}
+    {#            {% for i in event_message_list %}#}
+    {#                <div>{{ i }}</div>#}
+    {#            {% endfor %}#}
+    {#        </div>#}
+    {#    </div>#}
 
     <div class="content-right" style="padding-bottom: 30px;padding-left: 20px;padding-top: 10px;">
         {% include 'pieces/commom/badge.html' with content="事件消息" %}
@@ -46,12 +44,14 @@
             </div>
             <div class="event-message-wrapper" style="padding-top: 20px;">
                 {% for i in event_message_list %}
-                    <div {% if i.read %} style="opacity: 0.5;padding-top: 10px;" {% endif %}>
-                        <input style="display: none;" class="input-checkbox" type="checkbox" name="_id" value="{{ i.id }}">
-                        <div style="display:inline-block">{{ forloop.counter }}</div>
-                        <div style="display: inline-block;border-left: 1px solid black;padding-left: 5px;margin-left: 5px;">{{ i.brief_content }}</div>
-                        <div style="float: right;padding-right: 20px;">{{ i.time }}</div>
-                        <div></div>
+                    <div style="padding-bottom: 10px;">
+                        <div {% if i.read %} style="opacity: 0.5;padding-top: 10px;" {% endif %}>
+                            <input style="display: none;" class="input-checkbox" type="checkbox" name="ids" value="{{ i.id }}">
+                            <div style="display:inline-block">{{ forloop.counter }}</div>
+                            <a href="{{ i.url }}"><div style="display: inline-block;border-left: 1px solid black;padding-left: 5px;margin-left: 5px;">{{ i.brief_content }}</div></a>
+                            <div style="float: right;padding-right: 20px;">{{ i.time }}</div>
+                            <div></div>
+                        </div>
                     </div>
                 {% endfor %}
                 <hr/>
@@ -59,6 +59,7 @@
         </form>
     </div>
 
+    {% include 'pieces/commom/right-paging.html' %}
 
 {% endblock %}
 

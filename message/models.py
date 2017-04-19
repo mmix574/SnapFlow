@@ -109,7 +109,7 @@ class SystemToUserMessage(models.Model):
 
 class EventMessage(models.Model):
 
-    types = (('being_liked',"收到赞"),('being_answering','收到答案'))
+    types = (('being_liked',"收到赞"),('being_answering','收到答案'),('being_at','收到@'))
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     event_type = models.CharField(max_length=20,choices=types)
@@ -168,7 +168,7 @@ def add_event_message_comment(sender,instance,**kwargs):
 
 
 
-
+# 加一减一
 # 2017年4月19日17:54:29
 # 事件消息
 @receiver(post_save,sender=EventMessage)
@@ -206,3 +206,51 @@ def minus_system_message_count(sender,instance,**kwargs):
 
 
 ##2017年4月19日19:11:21
+# 添加事件消息
+
+from django.contrib.auth.models import User
+from forum.models import Comment , ThreadLike
+from django.db.models.signals import post_save ,post_delete
+from django.dispatch import receiver
+
+@receiver(post_save,sender=Comment)
+def begingAnsweringMessage(sender,instance,created,**kwargs):
+    if created:
+        em = EventMessage()
+        em.user = instance.thread.create_user
+        em.url = '/t/'+str(instance.thread.id)
+        em.event_type = "being_answering"
+        em.brief_content = "您的问题"+'" '+instance.thread.tittle+' "'+"收到了 "+instance.create_user.username+" 的一个答案"
+        em.save()
+        pass
+
+
+@receiver(post_save,sender=ThreadLike)
+def begingCommentMessage(sender,instance,created,**kwargs):
+    if created:
+        em = EventMessage()
+        em.user = instance.thread.create_user
+        em.url = '/t/'+str(instance.thread.id)
+        em.event_type = "being_liked"
+        em.brief_content = "您的问题"+'"'+instance.thread.tittle+'"'+"收到了一个赞"
+        em.save()
+        pass
+
+
+import re
+@receiver(post_save,sender=Comment)
+def begingAtMessage(sender,instance,created,**kwargs):
+    users = re.findall(r'@(\w+)', instance.content)
+    if created:
+        for u in users:
+            try:
+                user = User.objects.get(username=u)
+                em = EventMessage()
+                em.user = user
+                em.url = '/t/' + str(instance.thread.id)
+                em.event_type = "being_at"
+                em.brief_content = "您收到了来自" + '"' + instance.thread.tittle + '"' + "中，用户 " + instance.create_user.username + " 的一个@"
+                em.save()
+            except Exception as e:
+                pass
+        pass
