@@ -37,6 +37,7 @@ def add_like(sender,instance,created,**kwargs):
         h.type = "liking"
         h.user = instance.user
         h.brief_content = instance.thread.tittle
+        h.url='/t/'+str(instance.thread.id)
         h.save()
 
 from forum.models import Thread
@@ -47,6 +48,7 @@ def add_thread_history(sender,instance,created,**kwargs):
         h.type = "asking"
         h.brief_content = instance.tittle
         h.user = instance.create_user
+        h.url = '/t/'+str(instance.id)
         h.save()
 
 from forum.models import Comment
@@ -57,6 +59,7 @@ def add_comment_history(sender,instance,created,**kwargs):
         h.type = "commenting"
         h.brief_content = instance.content
         h.user = instance.create_user
+        h.url = '/t/'+str(instance.thread.id)
         h.save()
 
 from collection.models import Collection
@@ -67,6 +70,7 @@ def add_collection_history(sender,instance,created,**kwargs):
         h.type="collecting"
         h.brief_content = instance.thread.tittle
         h.user=instance.create_user
+        h.url = '/t/'+str(instance.thread.id)
         h.save()
 
 
