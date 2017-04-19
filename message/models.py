@@ -61,7 +61,7 @@ class MessageStatus(models.Model):
         self.user_to_user_message_count = 0
         self.system_to_user_message_count = 0
         self.even_message_count = 0
-        items = UserToUserMessage.objects.filter(user=self.user)
+        items = UserToUserMessage.objects.filter(a_user=self.user)
         for i in items:
             i.read = True
             i.save()

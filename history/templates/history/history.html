@@ -1,25 +1,31 @@
-{% extends 'interface/base_display_settings_a.html' %}
+{% extends 'interface/base_display_settings_b.html' %}
 
-{% block brand %}
-    <span class="glyphicon glyphicon-book"></span>&nbsp;历史记录
-{% endblock %}
+{#{% block brand %}#}
+{#    <span class="glyphicon glyphicon-book"></span>&nbsp;历史记录#}
+{#{% endblock %}#}
+{##}
+{#{% block li-area %}#}
+{#    <li class="li-active">#}
+{#        <a href="{% url "_history" %}">所有</a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="{% url "_history_asking" %}">我的提问</a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="{% url "_history_answering" %}">我的回答</a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="{% url "_history_liking" %}">我的点赞</a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="{% url "_history_collecting" %}">我的收藏</a>#}
+{#    </li>#}
+{##}
+{#{% endblock %}#}
 
-{% block li-area %}
-    <li class="li-active">
-        <a href="{% url "_history" %}">所有</a>
-    </li>
-    <li>
-        <a href="{% url "_history_asking" %}">我的提问</a>
-    </li>
-    <li>
-        <a href="{% url "_history_answering" %}">我的回答</a>
-    </li>
-    <li>
-        <a href="{% url "_history_liking" %}">我的点赞</a>
-    </li>
-    <li>
-        <a href="{% url "_history_collecting" %}">我的收藏</a>
-    </li>
+{% block left %}
+
+{% include "history/pieces/nav-left.html" %}
 
 {% endblock %}
 

@@ -19,7 +19,7 @@ class HistoryView(AppBaseTemplateView):
         context = super().get_context_data(**kwargs)
         history_list = History.objects.filter(user=self.request.user).order_by('-create_time')[:100]
         context['history_list'] = history_list
-        context['badge_content'] = "所有问题"
+        context['badge_content'] = "所有记录"
         return context
     def get(self, request, context={}, *args, **kwargs):
         return super().get(request, context, *args, **kwargs)
@@ -80,4 +80,14 @@ class HistoryCollectingView(HistoryView):
         context['history_list'] = history_list
         context['badge_content'] = "我的收藏"
         return context
+
+@method_decorator(login_required, name='dispatch')
+class HistoryAdvancedView(AppBaseTemplateView):
+    template_name = 'history/history_advanced.html'
+
+    def post(self, request, context={}, *args, **kwargs):
+        operation = request.POST.get('operation',None)
+        if operation == "clear_all":
+            History.objects.filter(user=request.user).delete()
+        return super().post(request, context, *args, **kwargs)
 

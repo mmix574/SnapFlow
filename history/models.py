@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class History(models.Model):
-    type_chioces = (("asking","提问"),("answering","回答"),("liking","点赞"),("collecting","收藏"),("commenting","回答"))
+    type_chioces = (("asking","提问"),("answering","回答"),("liking","点赞"),("collecting","收藏"),("answering","回答"))
 
     user = models.ForeignKey(User)
     type = models.CharField(max_length=20,choices=type_chioces)
