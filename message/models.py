@@ -113,7 +113,7 @@ class EventMessage(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     event_type = models.CharField(max_length=20,choices=types)
-    url = models.URLField()
+    url = models.URLField(blank=True)
     brief_content = models.CharField(max_length=80)
     read = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
@@ -134,7 +134,7 @@ class Friend(models.Model):
 
 
 from django.db.models.signals import post_save
-
+from django.db.models.signals import post_delete
 
 
 # events
@@ -176,11 +176,20 @@ def add_event_message_count(sender,instance,created,**kwargs):
     if created:
         instance.user.messagestatus.add_even_message_count()
 
+@receiver(post_delete, sender=EventMessage)
+def minus_event_message_count(sender, instance, **kwargs):
+    instance.user.messagestatus.minus_even_message_count()
+
 # 私信
 @receiver(post_save,sender=UserToUserMessage)
 def add_private_message_count(sender,instance,created,**kwargs):
     if created:
         instance.user.messagestatus.add_user_to_user_message_count()
+
+@receiver(post_delete,sender=UserToUserMessage)
+def minus_private_message_count(sender,instance,**kwargs):
+    instance.user.messagestatus.minus_user_to_user_message_count()
+
 
 # 系统消息
 @receiver(post_save,sender=SystemToUserMessage)
@@ -188,3 +197,12 @@ def add_system_message_count(sender,instance,created,**kwargs):
     if created:
         user = instance.user
         user.messagestatus.add_system_to_user_message_count()
+
+@receiver(post_delete,sender=SystemToUserMessage)
+def minus_system_message_count(sender,instance,**kwargs):
+    user = instance.user
+    if not instance.read:
+        user.messagestatus.minus_system_to_user_message_count()
+
+
+##2017年4月19日19:11:21

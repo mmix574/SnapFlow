@@ -72,8 +72,6 @@ class SystemMessageView(AppBaseTemplateView):
             for i in ids:
                 try:
                     stum = SystemToUserMessage.objects.get(id=i, user=request.user)
-                    if not stum.read:
-                        request.user.messagestatus.minus_system_to_user_message_count()
                     print(stum)
                     stum.delete()
                 except Exception as e:
@@ -129,9 +127,16 @@ class MessageStatusView(AppBaseTemplateView):
         context["user_message_status"] = ums
         return context
 
-
+from .models import EventMessage
+@method_decorator(login_required,name="dispatch")
 class EventMessageView(AppBaseTemplateView):
     template_name = 'message/event_message.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event_message_list = EventMessage.objects.filter(user=self.request.user)
+        context['event_message_list'] = event_message_list
+        return context
 
 
 @method_decorator(login_required,name="dispatch")
