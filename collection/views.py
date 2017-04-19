@@ -15,7 +15,7 @@ class CollectionView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        collection_list = Collection.objects.filter(create_user=self.request.user)
+        collection_list = Collection.objects.filter(create_user=self.request.user).order_by('-create_time')
         context['collection_list'] = collection_list
         return context
 

@@ -32,3 +32,11 @@ class UserCreditNickName(models.Model):
     class Meta:
         verbose_name = "用户积分称号"
         verbose_name_plural = verbose_name
+
+
+
+class EveryDayCreditLog(models.Model):
+    pass
+
+class ThreadViewLog(models.Model):
+    pass
