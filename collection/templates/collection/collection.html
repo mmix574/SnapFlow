@@ -45,12 +45,13 @@
         </form>
 
     </div>
-    <div class="content-right" style="padding: 5px;">
-        <div style="text-align: center">
-            <button class="">上一页</button>
-            <button class="">下一页</button>
-        </div>
-    </div>
+{#    <div class="content-right" style="padding: 5px;">#}
+{#        <div style="text-align: center">#}
+{#            <button class="">上一页</button>#}
+{#            <button class="">下一页</button>#}
+{#        </div>#}
+{#    </div>#}
+    {% include 'pieces/commom/right-paging.html' %}
     <script>
         function start_edit(){
             $(".checkbox-ids").toggle();

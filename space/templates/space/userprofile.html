@@ -29,12 +29,12 @@
         </div>
 
     </div>
-    <div class="content-right" style="text-align: center">
-        <div style="display: inline;margin-left: auto;margin-right: auto;">我的回答{{ user_thread_status.answering_count }}</div>
-        <div style="display: inline;margin-left: auto;margin-right: auto;">我的提问{{ user_thread_status.question_count }}</div>
-        <div style="display: inline;margin-left: auto;margin-right: auto;">我收到的赞{{ user_thread_status.being_liked_count }}</div>
+    <div class="content-right" style="text-align: center;padding: 20px;">
+        <div style="display: inline;margin-left: auto;margin-right: auto;">我的回答:{{ user_thread_status.answering_count }}</div>
+        <div style="display: inline;margin-left: auto;margin-right: auto;">我的提问:{{ user_thread_status.question_count }}</div>
+        <div style="display: inline;margin-left: auto;margin-right: auto;">收到的赞:{{ user_thread_status.being_liked_count }}</div>
     </div>
-    <div class="content-right"  style="text-align: center">
+    <div class="content-right"  style="text-align: center;padding: 20px;">
         用户积分基本，登录，打卡等添加积分
     </div>
 {% endblock %}
