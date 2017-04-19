@@ -13,12 +13,18 @@
         {% for i in u2u_list %}
 
             {% if i.is_send %}
-                <div><img style="height: 64px;width: 64px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                <div style="float: right;">
+                    <div><img style="height: 64px;width: 64px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                    <div>{{ i.content }}</div>
+                </div>
+                <div></div>
             {% else %}
-                <div><img style="height: 64px;width: 64px;" src="{{ i.b_user.userprofile.avatar_url }}"></div>
+                <div>
+                    <div><img style="height: 64px;width: 64px;" src="{{ i.b_user.userprofile.avatar_url }}"></div>
+                    <div>{{ i.content }}</div>
+                </div>
             {% endif %}
 
-            <div>{{ i.content }}</div>
         {% endfor %}
     </div>
     <div class="content-right">abc</div>

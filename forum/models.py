@@ -83,7 +83,7 @@ def before_thread_save(sender, instance, **kwargs):
 
 # 评论
 class Comment(models.Model):
-    thread = models.ForeignKey(Thread)
+    thread = models.ForeignKey(Thread,on_delete=models.CASCADE)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
     content = models.TextField(blank=False)

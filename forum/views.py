@@ -230,3 +230,59 @@ class DetailView(AppBaseTemplateView):
 
 
 
+from index.contrib.response import MessageResponse
+from django.http.response import HttpResponseRedirect
+@method_decorator(login_required,name="dispatch")
+class FindingActionView(AppBaseTemplateView):
+    template_name = 'forum/action.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        tid = self.kwargs['id']
+        action = self.kwargs['action']
+        thread = Thread.objects.filter(id=tid)
+        if thread:
+            thread = thread[0]
+        else:
+            thread = {}
+
+        context['action'] = action
+        context['thread'] = thread
+        return context
+
+    def get(self, request, context={}, *args, **kwargs):
+        if not self.validate():
+            return MessageResponse('你没有权限访问这个页面',"")
+        return super().get(request, context, *args, **kwargs)
+
+    def post(self, request, context={}, *args, **kwargs):
+        if not self.validate():
+            return MessageResponse('你没有权限访问这个页面',"")
+
+
+        tid = request.POST.get('tid',None)
+        action = request.POST.get('action',None)
+
+        if action=="delete":
+            try:
+                thread = Thread.objects.get(id=tid)
+                thread.delete()
+            except Exception as e:
+                pass
+            finally:
+                return HttpResponseRedirect("/t")
+
+
+        return super().post(request, context, *args, **kwargs)
+
+    def validate(self):
+        user = self.request.user
+        if not user.is_authenticated():
+            return False
+        elif not user.is_staff:
+            return False
+        return True
+
+
+

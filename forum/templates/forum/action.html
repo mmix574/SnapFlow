@@ -1,0 +1,31 @@
+{% extends 'interface/base_display_left_rignt.html' %}
+
+
+
+
+{% block left %}
+    <div class="block-left"></div>
+{% endblock %}
+
+
+{% block right %}
+    <div class="block-right"></div>
+{% endblock %}
+
+{% block ad %}
+    <div class="block-my-ad">
+        <div style="padding: 30px;">
+            <h4>即将删除</h4>
+            {{ thread.create_user }}
+            <img style="height: 60px;width:60px;border: 1px solid #9f9f9f;" src="{{ thread.create_user.userprofile.avatar_url }}">发布的
+            "{{ thread.tittle }}"
+            <h3>确定删除?</h3>
+            <form method="post">
+                {% csrf_token %}
+                <input name="tid" value="{{ thread.id }}" hidden="hidden">
+                <input name="action" value="{{ action }}" hidden="hidden">
+                <button class="btn btn-danger" type="submit">确实删除</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
