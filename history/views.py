@@ -20,6 +20,7 @@ class HistoryView(AppBaseTemplateView):
         history_list = History.objects.filter(user=self.request.user).order_by('-create_time')[:100]
         context['history_list'] = history_list
         context['badge_content'] = "所有记录"
+        context['tittle'] = "所有记录"
         return context
     def get(self, request, context={}, *args, **kwargs):
         return super().get(request, context, *args, **kwargs)
@@ -49,6 +50,7 @@ class HistoryAskingView(HistoryView):
         history_list = History.objects.filter(user=self.request.user,type='asking').order_by('-create_time')[:100]
         context['history_list'] = history_list
         context['badge_content'] = "我的提问"
+        context['tittle'] = "我的提问"
         return context
 
 @method_decorator(login_required,name='dispatch')
@@ -58,6 +60,7 @@ class HistoryAnsweringView(HistoryView):
         history_list = History.objects.filter(user=self.request.user,type='answering').order_by('-create_time')[:100]
         context['history_list'] = history_list
         context['badge_content'] = "我的回答"
+        context['tittle'] = "我的回答"
         return context
 
 @method_decorator(login_required, name='dispatch')
@@ -68,6 +71,7 @@ class HistoryLikingView(HistoryView):
                        :100]
         context['history_list'] = history_list
         context['badge_content'] = "我的点赞"
+        context['tittle'] = "我的点赞"
         return context
 
 
@@ -79,11 +83,16 @@ class HistoryCollectingView(HistoryView):
                        :100]
         context['history_list'] = history_list
         context['badge_content'] = "我的收藏"
+        context['tittle'] = "我的收藏"
         return context
 
 @method_decorator(login_required, name='dispatch')
 class HistoryAdvancedView(AppBaseTemplateView):
     template_name = 'history/history_advanced.html'
+
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        return context
 
     def post(self, request, context={}, *args, **kwargs):
         operation = request.POST.get('operation',None)

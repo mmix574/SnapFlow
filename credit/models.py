@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class CreditDefault(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    credit_point = models.IntegerField(default=10)
+    credit_point = models.IntegerField(default=0)
     last_modify = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -21,8 +21,6 @@ def create_credit_information(sender,instance,created,**kwargs):
         ucd = CreditDefault()
         ucd.user = instance
         ucd.save()
-
-
 
 class CashPoint(models.Model):
     pass
@@ -53,3 +51,22 @@ class EveryDayCreditLog(models.Model):
 
 class ThreadViewLog(models.Model):
     pass
+
+
+class OnlineLog(models.Model):
+    pass
+
+class CreditExchangeCode(models.Model):
+    code = models.CharField(max_length=32)
+    point = models.IntegerField(default=0)
+    used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = "积分兑换"
+        verbose_name_plural = verbose_name
+
+
+# 积分事件绑定
