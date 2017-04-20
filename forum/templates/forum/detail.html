@@ -113,7 +113,6 @@
 
         <div style="clear: both"></div>
 
-
         <!--内容-->
         <div class="thread-content" style="padding-left: 10px;border-left: 1px solid #686868;margin-top: 15px;">
             {{ thread.content|safe}}
@@ -137,6 +136,9 @@
             <div style="display: inline-block">
                 <button id="like_button" onclick="toggle_like()" class="btn {% if liked %}btn-default{% else %}btn-default{% endif %}">
                     <span id="like_span" class="glyphicon glyphicon-thumbs-up">{% if liked %}已点赞{% else %}点赞{% endif %}</span></button>
+            </div>
+            <div style="display: inline-block">
+                <a href="#comment"><button class="btn btn-default">添加答案</button></a>
             </div>
         {% else %}
             <div style="padding-bottom: 10px;">登录后收藏与点赞</div>
@@ -192,11 +194,11 @@
     <!--评论区-->
     <a id="comment"><div class="block-left comment-area" style="padding: 20px;">
         <div style="margin-bottom: 20px;">
-            {% include 'pieces/commom/badge.html' with content="添加评论" %}
+            {% include 'pieces/commom/badge.html' with content="添加答案" %}
         </div>
         <form action="." method="post">
             {% csrf_token %}
-            <textarea  {% if not logined %}disabled="disabled"{% endif %} class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="{% if logined %}输入你的评论{% else %}登录后可评论{% endif %}"></textarea>
+            <textarea  {% if not logined %}disabled="disabled"{% endif %} class="form-control" cols="40" id="id_content" name="content" rows="10" required="" placeholder="{% if logined %}输入你的答案{% else %}登录后添加答案{% endif %}"></textarea>
             <div style="height: 10px;"></div>
             <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-danger" onclick="return empty_input()">清空</button>
             <button {% if not logined %}disabled="disabled"{% endif %} class="btn btn-default">提交&nbsp;<span class="glyphicon glyphicon-send"></span></button>
