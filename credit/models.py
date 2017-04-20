@@ -110,7 +110,17 @@ class CreditLog(models.Model):
         verbose_name_plural = verbose_name
 
     def is_today(self):
-        pass
+        from django.utils import timezone
+        today_start = timezone.now().date()
+        today_end = timezone.now().date()+timezone.timedelta(days=1)
+        today_start = timezone.datetime.combine(today_start,timezone.datetime.min.time())
+        today_end = timezone.datetime.combine(today_end,timezone.datetime.min.time())
+        today_start = timezone.make_aware(today_start, timezone.get_current_timezone())
+        today_end = timezone.make_aware(today_end, timezone.get_current_timezone())
+        if (self.time - today_start).total_seconds() > 0 and (self.time - today_end).total_seconds() <0:
+            return True
+        else:
+            return False
 
 # 积分事件绑定
 

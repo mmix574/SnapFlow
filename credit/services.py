@@ -3,6 +3,8 @@ def check_online_status(user):
     from django.utils import timezone
 
     minute_span = 1
+
+    # at lease 1
     check_times = 5
 
     if not user.is_authenticated():
@@ -29,15 +31,16 @@ def check_online_status(user):
 
         last_cl = CreditLog.objects.filter(user=user).order_by('-time')
 
-        cs, c = CreditStatus.objects.get_or_create(user=user)
-        cs.credit_point = cs.credit_point + 200
-        cs.save()
-        cl = CreditLog()
-        cl.user = user
-        cl.type = "online_reward"
-        cl.brief_content = "今日在线时长奖励" + ",积分+200"
-        cl.save()
+        if not last_cl or not last_cl[0].is_today():
 
+            cs, c = CreditStatus.objects.get_or_create(user=user)
+            cs.credit_point = cs.credit_point + 200
+            cs.save()
+            cl = CreditLog()
+            cl.user = user
+            cl.type = "online_reward"
+            cl.brief_content = "今日在线时长奖励" + ",积分+200"
+            cl.save()
 
     else:
         # donothing
