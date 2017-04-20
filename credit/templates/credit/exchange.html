@@ -23,7 +23,7 @@
             <form class="form-group" style="width: 300px;padding-top: 10px;" method="post">
                 {% csrf_token %}
                 <label>兑换码</label>
-                <input id="input" class="form-control" type="text">
+                <input id="input" class="form-control" type="text" name="change_code">
                 <div style="display: inline-block;margin-top: 15px;">已经输入</div><span id="input-length-span">0</span><div style="display: inline-block;">个字符</div>
                 <button style="margin-top: 10px;float: right" class="btn btn-default">确定兑换</button>
                 <div style="clear: both;"></div>
@@ -35,11 +35,11 @@
         {#        {% endif %}#}
 
         {% ifequal exchange_status "success" %}
-            <div class="exchange-status-div" style="color: #4cae4c">兑换成功</div>
+            <div class="exchange-status-div" style="color: #4cae4c">兑换成功，积分增加了{{ point_add }}，当前积分为{{ current_credit_point }}</div>
         {% endifequal %}
 
         {% ifequal exchange_status "fail" %}
-            <div class="exchange-status-div" style="color: #dd1144;">兑换失败</div>
+            <div class="exchange-status-div" style="color: #dd1144;">兑换失败{% if fail_message%},{{ fail_message }}{% endif %}</div>
         {% endifequal %}
 
 

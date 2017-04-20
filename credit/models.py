@@ -54,11 +54,25 @@ class ThreadViewLog(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
 
+class OnlineLogManager(models.Manager):
+    def today(self):
+        from datetime import datetime, timedelta, time
+        today = datetime.now().date()
+        tomorrow = today + timedelta(1)
+        today_start = datetime.combine(today, time())
+        today_end = datetime.combine(tomorrow, time())
+        return self.filter(date__lte=today_end, date__gte=today_start)
+
 class OnlineLog(models.Model):
     user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
 
-    pass
+    objects = OnlineLogManager()
+
+    class Meta:
+        verbose_name = "在线记录"
+        verbose_name_plural = verbose_name
+        
 
 class EverydaySign(models.Model):
     user = models.ForeignKey(User)
@@ -68,7 +82,7 @@ class CreditExchangeCode(models.Model):
     code = models.CharField(max_length=32)
     point = models.IntegerField(default=0)
     used = models.BooleanField(default=False)
-
+    time = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.code
 
@@ -78,7 +92,7 @@ class CreditExchangeCode(models.Model):
 
 
 class CreditLog(models.Model):
-    choices_types = (('answering','回答'),('asking','提问'),('everyday_login','每日登陆'),('everyday_sign','每日签到'),('online_reward','在线时长奖励'))
+    choices_types = (('answering','回答'),('asking','提问'),('everyday_login','每日登陆'),('everyday_sign','每日签到'),('online_reward','在线时长奖励'),('exchange','积分购买'))
 
     user = models.ForeignKey(User)
     type = models.CharField(max_length=20)

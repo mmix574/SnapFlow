@@ -35,17 +35,52 @@ class HistoryView(AppBaseTemplateView):
                 i.delete()
         return super().post(request, context, *args, **kwargs)
 
-
+from .models import CreditStatus
+from .models import CreditExchangeCode
+from .models import CreditLog
 @method_decorator(login_required,name="dispatch")
 class ExchangeView(AppBaseTemplateView):
     template_name = 'credit/exchange.html'
     def post(self, request, context={}, *args, **kwargs):
+        change_code = request.POST.get('change_code',None)
+        if not change_code:
+            return super().post(request, context, *args, **kwargs)
 
-        # context['exchange_status'] = 'success'
-        context['exchange_status'] = 'fail'
+        cs , c = CreditStatus.objects.get_or_create(user = request.user)
+
+        context['exchange_status'] = 'success'
+        cecs = CreditExchangeCode.objects.filter(code=change_code)
+
+        if not cecs:
+            context['exchange_status'] = 'fail'
+            return super().post(request, context, *args, **kwargs)
+        cec = cecs[0]
+
+        if cec.used:
+            context['exchange_status'] = 'fail'
+            context['fail_message'] = '你输入的兑换码已经在时间'+str(cec.time)+'兑换了'
+            return super().post(request, context, *args, **kwargs)
+
+        cs.credit_point = cs.credit_point + cec.point
+        cs.save()
+        cl = CreditLog()
+        cl.user = request.user
+        cl.type = 'exchange'
+        cl.brief_content = '您使用了现金兑换码"'+change_code+'"'+'积分增加了'+str(cec.point)
+        cl.save()
+
+        cec.used = True
+        cec.save()
+
+        context['point_add'] = cec.point
 
         return super().post(request, context, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cs , c = CreditStatus.objects.get_or_create(user = self.request.user)
+        context['current_credit_point'] = cs.credit_point
+        return context
 
 
 @method_decorator(login_required,name="dispatch")
