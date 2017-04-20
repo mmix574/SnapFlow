@@ -88,13 +88,22 @@ class AchievementView(AppBaseTemplateView):
     template_name = 'credit/achievement.html'
 
 from index.contrib.response import MessageResponse
+from credit.models import EverydaySign
 @method_decorator(login_required,name="dispatch")
 class DoEverydaySign(AppBaseTemplateView):
     template_name = 'credit/signeveryday.html'
 
+    def get_context_data(self, **kwargs):
+
+
+        return super().get_context_data(**kwargs)
+
     def get(self, request, context={}, *args, **kwargs):
-        return MessageResponse("1","2")
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
         return super().post(request, context, *args, **kwargs)
+
+
+
+

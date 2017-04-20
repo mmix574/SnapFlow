@@ -1,10 +1,11 @@
 from django.shortcuts import render_to_response
-
+from index.views import MessageView
 
 # 这里有bug，没有加载用户信息直接输出了消息.
-def MessageResponse(tittle='tittle',content='content'):
-    return render_to_response('index/message.html', context={'message_tittle':tittle, 'message_content':content})
-
+# fix
+def MessageResponse(request,tittle='tittle',content='content'):
+    return MessageView.as_view(tittle=tittle, message=content,status=404)(request)
+    # return render_to_response('index/message.html', context={'message_tittle':tittle, 'message_content':content})
 
 
 from index.views import MessageView

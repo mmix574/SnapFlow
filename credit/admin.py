@@ -18,8 +18,12 @@ class CreditExchangeCodeAdmin(admin.ModelAdmin):
 admin.site.register(models.CreditExchangeCode,CreditExchangeCodeAdmin)
 
 
+class CreditLogAdmin(admin.ModelAdmin):
+    list_display = ['user','brief_content','time']
+admin.site.register(models.CreditLog,CreditLogAdmin)
 
-admin.site.register(models.CreditLog)
+
+
 admin.site.register(models.UserCreditNickName)
 admin.site.register(models.CashPoint)
 

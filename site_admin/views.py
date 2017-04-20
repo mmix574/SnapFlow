@@ -16,7 +16,7 @@ class AdminView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
         return HttpResponseRedirect("/a/add-broadcast/")
 
     def validate(self):
@@ -43,12 +43,12 @@ class AdminCreateBroadcastingView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
 
         tittle = request.POST.get("tittle",None)
         content = request.POST.get("content",None)
@@ -86,7 +86,7 @@ class AdminSendBroadcastingView(AppBaseTemplateView):
 
     def post(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
 
         operation = request.POST.get('operation',None)
         broadcasts = request.POST.getlist('_id',None)
@@ -117,7 +117,7 @@ class AdminSendBroadcastingView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
         return super().get(request, context, *args, **kwargs)
 
     def validate(self):
@@ -135,7 +135,7 @@ class BroadCastHistoryView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
 
         broadcast_list = AdminBroadCast.objects.filter(sended=True)
         context['broadcast_list'] = broadcast_list
@@ -143,7 +143,7 @@ class BroadCastHistoryView(AppBaseTemplateView):
 
     def post(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse("你不能访问这个网页","")
+            return MessageResponse(request,"你不能访问这个网页","")
         return super().post(request, context, *args, **kwargs)
 
     def validate(self):

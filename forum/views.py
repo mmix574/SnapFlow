@@ -26,7 +26,7 @@ class IndexView(AppBaseTemplateView):
 
         display_class = Class.objects.all().order_by('order')
         if not (len(context)):
-            return MessageResponse("提示","没有任何的ThreadType，请在数据库中先添加")
+            return MessageResponse(self.request,"提示","没有任何的ThreadType，请在数据库中先添加")
         context['display_class'] = display_class
 
         tab = get_default_tab()
@@ -255,7 +255,7 @@ class FindingActionView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse('你没有权限访问这个页面',"")
+            return MessageResponse(request,'你没有权限访问这个页面',"")
         action = self.kwargs['action']
         tid = self.kwargs['id']
 
@@ -268,14 +268,14 @@ class FindingActionView(AppBaseTemplateView):
 
     def post(self, request, context={}, *args, **kwargs):
         if not self.validate():
-            return MessageResponse('你没有权限访问这个页面',"")
+            return MessageResponse(request,'你没有权限访问这个页面',"")
 
 
         tid = request.POST.get('tid',None)
         action = request.POST.get('action',None)
 
         if not tid or not action:
-            return MessageResponse("tid与action未指定","")
+            return MessageResponse(request,"tid与action未指定","")
 
         if action=="delete":
             try:

@@ -6,8 +6,8 @@ import random
 import json
 class Command(BaseCommand):
     help = 'Command Line Template'
-    main_class = "城市"
-    sub_class = "北京"
+    main_class = "技术"
+    sub_class = "程序员"
 
     main_class_instance = None
     sub_class_instance = None
@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.before_handle()
-        f_name = "__beijing-1-10.json"
+        f_name = "programmer150-300.json"
 
         f = open('fake/fake_threads/'+f_name, encoding='utf-8')
         s = json.load(f)
@@ -60,32 +60,37 @@ class Command(BaseCommand):
             return
         j = 1
         for i in s:
+            if j < 19:
+                j = j+1
+                continue
+            try:
+                self.get_data_ready(i)
 
-            self.get_data_ready(i)
+                t = Thread()
+                t.main_class = self.main_class_instance
+                t.sub_class = self.sub_class_instance
 
-            t = Thread()
-            t.main_class = self.main_class_instance
-            t.sub_class = self.sub_class_instance
+                t.tittle = i['tittle']
+                if not '?' in t.tittle:
+                    t.tittle = t.tittle+"?"
 
-            t.tittle = i['tittle']
-            if not '?' in t.tittle:
-                t.tittle = t.tittle+"?"
+                print(str(j),t.tittle)
+                j = j+1
+                t.create_user = self.user
+                if i['content']:
+                    t.content = str(i['content'][0])
+                else:
+                    t.content = ""
 
-            print(str(j),t.tittle)
-            j = j+1
-            t.create_user = self.user
-            if i['content']:
-                t.content = i['content'][0]
-            else:
-                t.content = ""
+                t.like = self.like
+                t.dislike = self.dislike
+                t.reply = self.reply
+                t.view = self.view
+                t.save()
 
-            t.like = self.like
-            t.dislike = self.dislike
-            t.reply = self.reply
-            t.view = self.view
-            t.save()
-
-            self.add_comment(t.id,i['comment'])
+                self.add_comment(t.id,i['comment'])
+            except:
+                pass
 
 
     def add_comment(self,tid,comment):
