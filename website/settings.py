@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['localhost','192.168.1.5','taita.xyz','118.89.60.27','snapflow.
 # Application definition
 
 INSTALLED_APPS = [
-    'group',
     'message',
     'timeline',
     'space',
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'fake',
     'site_admin',
     'credit',
+    'group',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

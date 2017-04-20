@@ -6,8 +6,8 @@ from index.views import AppBaseTemplateView
 
 class IndexView(AppBaseTemplateView):
     template_name = 'group/index.html'
-    pass
-
 
 class MyGroup(AppBaseTemplateView):
     pass
+
+

@@ -115,7 +115,7 @@
                             <li><a class="nav-a {% ifequal view_name '_asking' %}nav-a-active{% endifequal %}"  href="/t/create" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_asking' %}color:{{ color }};{% endifequal %}">提问</a></li>
                             {#                        <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">时间轴</a></li>#}
 
-                            <li><a class="nav-a {% ifequal view_name '_timeline' %}nav-a-active{% endifequal %}"  href="/time" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">小组</a></li>
+                            <li><a class="nav-a {% ifequal view_name 'group' %}nav-a-active{% endifequal %}"  href="{% url 'group' %}" style="padding-top: 13px;padding-bottom: 10px;padding-right: 7px;margin-right: 8px;padding-left: 7px;margin-left: 8px;{% ifequal view_name '_timeline' %}color:{{ color }};{% endifequal %}">小组</a></li>
 
                         {% endwith %}
 
