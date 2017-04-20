@@ -61,11 +61,13 @@ class OnlineLogManager(models.Manager):
 
         today = timezone.now().date()
         tomorrow = today + timedelta(1)
+        today_start = datetime.combine(today, timezone.now().time())
+        today_end = datetime.combine(tomorrow, timezone.now().time())
 
-        today = timezone.make_aware(today, timezone.get_current_timezone())
-        tomorrow = timezone.make_aware(tomorrow, timezone.get_current_timezone())
+        today_start = timezone.make_aware(today_start, timezone.get_current_timezone())
+        today_end = timezone.make_aware(today_end, timezone.get_current_timezone())
 
-        return self.filter(time__lte=tomorrow, time__gte=today)
+        return self.filter(time__lte=today_end, time__gte=today_start)
 
 class OnlineLog(models.Model):
     user = models.ForeignKey(User)
@@ -107,6 +109,8 @@ class CreditLog(models.Model):
         verbose_name = "积分记录"
         verbose_name_plural = verbose_name
 
+    def is_today(self):
+        pass
 
 # 积分事件绑定
 

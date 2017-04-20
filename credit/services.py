@@ -1,35 +1,47 @@
 def check_online_status(user):
-    pass
-    # from django.contrib.auth.models import User
-    # from .models import OnlineLog
-    # from django.utils import timezone
-    # if type(user) == int:
-    #     try:
-    #         user = User.objects.get(id=user)
-    #     except Exception as e:
-    #         pass
-    #
-    # try:
-    #     if not user.is_authenticated():
-    #         return
-    # except Exception as e:
-    #     pass
-    #
-    # count = OnlineLog.objects.today().filter(user=user).count()
-    #
-    # if count >= 4:
-    #     return
-    # elif count==0:
-    #     ol = OnlineLog()
-    #     ol.user = user
-    #     ol.save()
-    # else:
-    #     recent_log = OnlineLog.objects.today().filter(user=user).order_by('-time')[0]
-    #     recent_time = recent_log.time
-    #     now = timezone.now()
-    #     minute_delta = (now - recent_time)
-    #     dir(minute_delta)
-    #     pass
+    from .models import OnlineLog
+    from django.utils import timezone
+
+    minute_span = 1
+    check_times = 5
+
+    if not user.is_authenticated():
+        return
+    ols = OnlineLog.objects.today().filter(user=user).order_by('-time')
+    count = len(ols)
+
+    if count == 0:
+        ol = OnlineLog()
+        ol.user = user
+        ol.save()
+    elif count <=check_times-1:
+        last_ol = ols[0]
+        minute_passed = (timezone.now() -  last_ol.time).total_seconds()/60
+        if minute_passed < minute_span :
+            pass
+        else:
+            ol = OnlineLog()
+            ol.user = user
+            ol.save()
+    elif count ==check_times:
+        from credit.models import CreditStatus
+        from credit.models import CreditLog
+
+        last_cl = CreditLog.objects.filter(user=user).order_by('-time')
+
+        cs, c = CreditStatus.objects.get_or_create(user=user)
+        cs.credit_point = cs.credit_point + 200
+        cs.save()
+        cl = CreditLog()
+        cl.user = user
+        cl.type = "online_reward"
+        cl.brief_content = "今日在线时长奖励" + ",积分+200"
+        cl.save()
+
+
+    else:
+        # donothing
+        pass
 
 
 
