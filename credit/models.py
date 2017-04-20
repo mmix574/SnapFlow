@@ -72,7 +72,7 @@ class OnlineLog(models.Model):
     class Meta:
         verbose_name = "在线记录"
         verbose_name_plural = verbose_name
-        
+
 
 class EverydaySign(models.Model):
     user = models.ForeignKey(User)
