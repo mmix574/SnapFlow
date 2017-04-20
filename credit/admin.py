@@ -7,13 +7,9 @@ from . import models
 
 class CreditStatusAdmin(admin.ModelAdmin):
     list_display = ['user','credit_point']
-
 admin.site.register(models.CreditStatus,CreditStatusAdmin)
 
 
-
-admin.site.register(models.UserCreditNickName)
-admin.site.register(models.CashPoint)
 
 
 
@@ -24,3 +20,10 @@ admin.site.register(models.CreditExchangeCode,CreditExchangeCodeAdmin)
 
 
 admin.site.register(models.CreditLog)
+admin.site.register(models.UserCreditNickName)
+admin.site.register(models.CashPoint)
+
+
+class OnlineLogAdmin(admin.ModelAdmin):
+    list_display = ['user','time']
+admin.site.register(models.OnlineLog,OnlineLogAdmin)

@@ -61,7 +61,7 @@ class AppBaseTemplateView(TemplateView):
 
         # 积分记录刷新
         from credit.services import check_online_status
-        check_online_status()
+        check_online_status(self.request.user)
         return context
 
 

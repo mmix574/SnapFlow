@@ -56,18 +56,22 @@ class ThreadViewLog(models.Model):
 
 class OnlineLogManager(models.Manager):
     def today(self):
-        from datetime import datetime, timedelta, time
-        today = datetime.now().date()
+        from django.utils import timezone
+        from django.utils.timezone import datetime,timedelta
+
+        today = timezone.now().date()
         tomorrow = today + timedelta(1)
-        today_start = datetime.combine(today, time())
-        today_end = datetime.combine(tomorrow, time())
-        return self.filter(date__lte=today_end, date__gte=today_start)
+
+        today = timezone.make_aware(today, timezone.get_current_timezone())
+        tomorrow = timezone.make_aware(tomorrow, timezone.get_current_timezone())
+
+        return self.filter(time__lte=tomorrow, time__gte=today)
 
 class OnlineLog(models.Model):
     user = models.ForeignKey(User)
-    date = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True)
 
-    objects = OnlineLogManager()
+    objects= OnlineLogManager()
 
     class Meta:
         verbose_name = "在线记录"
