@@ -89,6 +89,8 @@ class UserDataView(AppBaseTemplateView):
 
 
 from forum.models import UserThreadStatus
+from credit.models import CreditStatus
+
 @method_decorator(login_required,name='dispatch')
 class UserProfileView(AppBaseTemplateView):
     template_name = 'space/userprofile.html'
@@ -97,6 +99,8 @@ class UserProfileView(AppBaseTemplateView):
         context = super().get_context_data(**kwargs)
         user_thread_status,c  = UserThreadStatus.objects.get_or_create(user=self.request.user)
         context['user_thread_status'] = user_thread_status
+        credit_status , c = CreditStatus.objects.get_or_create(user=self.request.user)
+        context['credit_status'] = credit_status
         return context
 
     def get(self, request, context={}, *args, **kwargs):

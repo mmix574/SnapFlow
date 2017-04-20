@@ -14,19 +14,38 @@ class IndexView(AppBaseTemplateView):
         return HttpResponseRedirect("history")
         # return super().get(request, context, *args, **kwargs)
 
-from .models import CreditDefault
+from .models import CreditStatus
+from .models import CreditLog
 @method_decorator(login_required,name="dispatch")
 class HistoryView(AppBaseTemplateView):
     template_name = 'credit/history.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        credit_status,c = CreditDefault.objects.get_or_create(user=self.request.user)
+        credit_status,c = CreditStatus.objects.get_or_create(user=self.request.user)
         context['credit_status'] = credit_status
+        credit_log = CreditLog.objects.filter(user=self.request.user).order_by('-time')[:100]
+        context['credit_log'] = credit_log
         return context
+
+    def post(self, request, context={}, *args, **kwargs):
+        action = request.POST.get('operation',None)
+        if action=="clear_all":
+            cl = CreditLog.objects.filter(user=request.user)
+            for i in cl:
+                i.delete()
+        return super().post(request, context, *args, **kwargs)
+
 
 @method_decorator(login_required,name="dispatch")
 class ExchangeView(AppBaseTemplateView):
     template_name = 'credit/exchange.html'
+    def post(self, request, context={}, *args, **kwargs):
+
+        # context['exchange_status'] = 'success'
+        context['exchange_status'] = 'fail'
+
+        return super().post(request, context, *args, **kwargs)
+
 
 
 @method_decorator(login_required,name="dispatch")

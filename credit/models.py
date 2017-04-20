@@ -2,23 +2,24 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
-class CreditDefault(models.Model):
+class CreditStatus(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     credit_point = models.IntegerField(default=0)
     last_modify = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "用户积分"
+        verbose_name = "用户积分状态"
         verbose_name_plural = verbose_name
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# 自动生成CreditDefault
 @receiver(post_save,sender=User)
 def create_credit_information(sender,instance,created,**kwargs):
     if created:
-        ucd = CreditDefault()
+        ucd = CreditStatus()
         ucd.user = instance
         ucd.save()
 
@@ -46,15 +47,22 @@ class UserCreditNickName(models.Model):
 
 
 
-class EveryDayCreditLog(models.Model):
-    pass
-
+from forum.models import Thread
 class ThreadViewLog(models.Model):
-    pass
+    thread = models.ForeignKey(Thread)
+    user = models.ForeignKey(User)
+    date = models.DateTimeField(auto_now_add=True)
 
 
 class OnlineLog(models.Model):
+    user = models.ForeignKey(User)
+    date = models.DateTimeField(auto_now_add=True)
+
     pass
+
+class EverydaySign(models.Model):
+    user = models.ForeignKey(User)
+    date = models.DateTimeField(auto_now_add=True)
 
 class CreditExchangeCode(models.Model):
     code = models.CharField(max_length=32)
@@ -69,4 +77,70 @@ class CreditExchangeCode(models.Model):
         verbose_name_plural = verbose_name
 
 
+class CreditLog(models.Model):
+    choices_types = (('answering','回答'),('asking','提问'),('everyday_login','每日登陆'),('everyday_sign','每日签到'),('online_reward','在线时长奖励'))
+
+    user = models.ForeignKey(User)
+    type = models.CharField(max_length=20)
+    brief_content = models.TextField()
+    credit_change = models.IntegerField(default=0)
+    time = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = "积分记录"
+        verbose_name_plural = verbose_name
+
+
 # 积分事件绑定
+
+#回复20,提问100,每日登陆10,签到30,在线时长满2小时+200
+
+from forum.models import Comment , Thread
+from django.dispatch import receiver
+from django.db.models.signals import post_save,post_delete
+
+@receiver(post_save,sender=Comment)
+def add_comment_credit_point(sender,instance,created,**kwargs):
+    if created:
+        user = instance.create_user
+        cs ,c = CreditStatus.objects.get_or_create(user=user)
+        cs.credit_point = cs.credit_point+20
+        cs.save()
+
+        cl = CreditLog()
+        cl.user = user
+        cl.type = "answering"
+        cl.brief_content = '您在主题下"'+instance.thread.tittle+'"评论了'+'积分+20'
+        cl.credit_change = 20
+        cl.save()
+
+
+@receiver(post_save,sender=Thread)
+def add_thread_credit_point(sender,instance,created,**kwargs):
+    if created:
+        user = instance.create_user
+        cs ,c = CreditStatus.objects.get_or_create(user=user)
+        cs.credit_point = cs.credit_point+100
+        cs.save()
+
+        cl = CreditLog()
+        cl.user = user
+        cl.type = "answering"
+        cl.brief_content = '您创建了问题"'+instance.tittle+'",'+'积分+100'
+        cl.credit_change = 100
+        cl.save()
+
+@receiver(post_delete,sender=Thread)
+def delete_thread_credit_point(sender,instance,**kwargs):
+    user = instance.create_user
+    cs, c = CreditStatus.objects.get_or_create(user=user)
+    cs.credit_point = cs.credit_point - 50
+    cs.save()
+
+    cl = CreditLog()
+    cl.user = user
+    cl.type = "answering"
+    cl.brief_content = '您创建了问题"' + instance.tittle + '"被删除了,' + '积分-50'
+    cl.credit_change = -50
+    cl.save()
+
+

@@ -9,3 +9,5 @@ class IndexView(AppBaseTemplateView):
     pass
 
 
+class MyGroup(AppBaseTemplateView):
+    pass

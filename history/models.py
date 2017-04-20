@@ -9,7 +9,7 @@ class History(models.Model):
 
     user = models.ForeignKey(User)
     type = models.CharField(max_length=20,choices=type_chioces)
-    brief_content = models.CharField(max_length=60)
+    brief_content = models.TextField()
     url = models.URLField(blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
 
@@ -23,7 +23,6 @@ class History(models.Model):
     class Meta:
         verbose_name = "历史"
         verbose_name_plural = verbose_name
-
 
 
 # event receive

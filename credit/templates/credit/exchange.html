@@ -5,6 +5,16 @@
 {% endblock %}
 
 
+{% block style %}
+    {{ block.super }}
+    <style>
+        .exchange-status-div{
+            margin-left:20px;
+            font-size: 18px;
+        }
+    </style>
+{% endblock %}
+
 {% block right %}
     <div class="content-right" style="padding-bottom: 20px;">
         <div>{% include 'pieces/commom/badgev2.html' with content='积分充值' %}</div>
@@ -19,7 +29,20 @@
                 <div style="clear: both;"></div>
             </form>
         </div>
-        <div>兑换失败</div>
+
+        {#        {% if exchange_status %}#}
+        {#            <div>兑换失败</div>#}
+        {#        {% endif %}#}
+
+        {% ifequal exchange_status "success" %}
+            <div class="exchange-status-div" style="color: #4cae4c">兑换成功</div>
+        {% endifequal %}
+
+        {% ifequal exchange_status "fail" %}
+            <div class="exchange-status-div" style="color: #dd1144;">兑换失败</div>
+        {% endifequal %}
+
+
     </div>
     <script type="application/javascript">
         $("#input").on('input',function(){

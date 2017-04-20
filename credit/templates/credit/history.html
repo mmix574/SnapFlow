@@ -6,13 +6,30 @@
 
 
 {% block right %}
+
+    <style>
+        .brief-content-wrapper{
+            padding:10px;
+        }
+    </style>
     <div class="content-right" style="padding-bottom: 20px;">
         <div>{% include 'pieces/commom/badgev2.html' with content='积分情况' %}</div>
-            <div style="text-align: center">当前积分 {{ credit_status.credit_point }}</div>
+        <div style="text-align: center">当前积分 {{ credit_status.credit_point }}</div>
     </div>
 
     <div class="content-right">
-        <div>{% include 'pieces/commom/badgev2.html' with content='积分历史' %}</div>
+        <div style="display: inline-block">{% include 'pieces/commom/badgev2.html' with content='积分历史' %}</div>
+        <div style="padding-left: 20px;">
+            <form method="post">
+                {% csrf_token %}
+                <input name="operation" value="clear_all" hidden="hidden">
+                <button style="float: right;position: relative;top: -30px;margin-right: 20px;" class="btn btn-danger">清空所有记录</button>
+            </form>
+            <div style="clear: both;"></div>
+            {% for i in credit_log %}
+                <div class="brief-content-wrapper">{{ i.brief_content }}</div>
+            {% endfor %}
+        </div>
     </div>
     {% include 'pieces/commom/right-paging.html' %}
 {% endblock %}

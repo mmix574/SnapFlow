@@ -59,7 +59,9 @@ class AppBaseTemplateView(TemplateView):
         context['request'] = request
         context['ctime'] = get_ctime()
 
-
+        # 积分记录刷新
+        from credit.services import check_online_status
+        check_online_status()
         return context
 
 

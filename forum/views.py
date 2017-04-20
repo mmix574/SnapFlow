@@ -256,6 +256,14 @@ class FindingActionView(AppBaseTemplateView):
     def get(self, request, context={}, *args, **kwargs):
         if not self.validate():
             return MessageResponse('你没有权限访问这个页面',"")
+        action = self.kwargs['action']
+        tid = self.kwargs['id']
+
+        if action=="delete":
+            pass
+        else:
+            return HttpResponseRedirect("/t/"+str(tid))
+
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
@@ -266,15 +274,20 @@ class FindingActionView(AppBaseTemplateView):
         tid = request.POST.get('tid',None)
         action = request.POST.get('action',None)
 
+        if not tid or not action:
+            return MessageResponse("tid与action未指定","")
+
         if action=="delete":
             try:
                 thread = Thread.objects.get(id=tid)
+                print(thread)
                 thread.delete()
             except Exception as e:
                 pass
             finally:
                 return HttpResponseRedirect("/t")
-
+        else:
+            return HttpResponseRedirect("/t/"+str(tid))
 
         return super().post(request, context, *args, **kwargs)
 
