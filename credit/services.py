@@ -47,4 +47,30 @@ def check_online_status(user):
         pass
 
 
+from django.contrib.auth.models import User
+from .models import CreditLog
+from .models import EverydaySign
+from .models import CreditStatus
 
+def do_everyday_sign(user):
+    sign_add_point = 100
+    sign = EverydaySign.objects.filter(user=user)
+    if not sign or not sign[0].is_today():
+        cs = CreditStatus.objects.get(user=user)
+        cs.credit_point = cs.credit_point+sign_add_point
+        cs.save()
+
+        cl = CreditLog()
+        cl.user = user
+        cl.type = 'everyday_sign'
+        cl.brief_content = '每日签到,积分'+'+'+str(sign_add_point)
+        cl.save()
+
+        es = EverydaySign()
+        es.user = user
+        es.save()
+        return True
+    else:
+        return False
+
+    return False

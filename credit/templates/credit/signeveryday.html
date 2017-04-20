@@ -11,6 +11,29 @@
 
 {% block right %}
     <div class="content-right">
-    abc
+        <div>
+            {% include 'pieces/commom/badgev2.html' with content="每日打卡" %}
+        </div>
+        <div style="padding: 20px;">
+            {% if signd_today %}
+                今天已经签过到了
+            {% else %}
+                今天还没有签到
+            {% endif %}
+        </div>
+        {% ifequal success "success" %}
+            <div style="color: #4cae4c;font-size: 18px;padding: 10px;">签到成功，积分+100</div>
+        {% endifequal %}
+
+        {% ifequal success "fail" %}
+            <div style="color: #dd1144;font-size: 18px;padding: 10px;">今日已经签过到了</div>
+        {% endifequal %}
+    </div>
+    <div class="content-right" style="padding: 20px;">
+        <form method="post">
+            {% csrf_token %}
+            <input name="operation" value="sign" hidden="hidden">
+            <button class="btn btn-default" type="submit">签到</button>
+        </form>
     </div>
 {% endblock %}

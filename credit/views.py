@@ -89,19 +89,44 @@ class AchievementView(AppBaseTemplateView):
 
 from index.contrib.response import MessageResponse
 from credit.models import EverydaySign
+from credit.models import CreditLog
 @method_decorator(login_required,name="dispatch")
 class DoEverydaySign(AppBaseTemplateView):
     template_name = 'credit/signeveryday.html'
 
     def get_context_data(self, **kwargs):
-
-
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        sign = EverydaySign.objects.filter(user=self.request.user)
+        signd_today = False
+        if not sign or not sign[0].is_today():
+            signd_today = False
+        else:
+            signd_today = True
+        context['signd_today'] = signd_today
+        return context
 
     def get(self, request, context={}, *args, **kwargs):
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
+        operation = request.POST.get('operation',None)
+        if not operation:
+            return super().post(request, context, *args, **kwargs)
+        if operation=='sign':
+            sign = EverydaySign.objects.filter(user=self.request.user)
+            if not sign or not sign[0].is_today():
+                # 打卡
+                from .services import do_everyday_sign
+                status = do_everyday_sign(request.user)
+                print(status,status,status)
+                if status:
+                    context['success'] = "success"
+                else:
+                    context['success'] = "fail"
+                return super().post(request, context, *args, **kwargs)
+            else:
+                context['success'] = "fail"
+                return super().post(request, context, *args, **kwargs)
         return super().post(request, context, *args, **kwargs)
 
 
