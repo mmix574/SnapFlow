@@ -13,29 +13,38 @@
 
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;padding-right: 20px;">
         <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信会话" %}</div>
-        <div style="float:right;position: relative;top: -40px;left: -30px;"><button>添加新会话</button><button>编辑</button></div>
-        <div style="padding-bottom: 10px;padding-left:10px;padding-top: 15px;border: 1px solid #dddddd;border-radius: 4px;overflow-y: scroll;background-color: #f6f6f6">
+        <div style="float:right;position: relative;top: -40px;left: -30px;"><a href="{% url 'space-friend' %}"><button style="margin-right: 10px;">添加新会话</button></a><button id="start-edit-button">编辑</button></div>
+        <div></div>
+        <div style="width: 100%;padding-bottom: 10px;padding-left:10px;padding-top: 15px;border: 1px solid #dddddd;border-radius: 4px;overflow-y: scroll;background-color: #f6f6f6">
             {% for i in session_list %}
+
                 <div class="avatar-div" style="display: inline;position: relative;">
-                    <img style="margin-bottom: 4px;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #cecece;padding: 1px;" src="{{ i.b_user.userprofile.avatar_url }}">
+                    <a href="?u={{ i.b_user.username }}">
+                        <img class="avatar-img" style="margin-bottom: 4px;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #cecece;padding: 1px;" src="{{ i.b_user.userprofile.avatar_url }}"> </a>
                     {#                    <div style="background-color: #0f0f0f;height: 60px;width:60px;border-radius: 30px;position: absolute;top: 0;left: 0px;right: 0;bottom: 0;text-align: center">asd</div>#}
-                    <span class="badge badge-close" style="cursor: pointer;position: relative;margin-left: -25px;top: -25px;background-color: #ce0a33;">x</span>
+                    <span class="badge badge-close" style="display: none;cursor: pointer;position: relative;margin-left: -25px;top: -25px;background-color: #ce0a33;">x</span>
                 </div>
+
             {% endfor %}
             <div style="clear: both;"></div>
         </div>
     </div>
     {#    2017年4月21日15:32:39#}
     <script>
-        $('.badge-close').click(function(){
-            console.log('closing');
+        $('#start-edit-button').click(function(){
+            $('.badge-close').toggle();
         });
+        $('.badge-close').click(function(){
+            //远程删除session信息
+            $(this).parent().remove();
+        });
+
     </script>
 
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
 
         <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
-        <div><label>与用户"<span style="color: #dd1144;">absdd</span>"的私信</label></div>
+        <div><label>正在与用户"<span style="color: #dd1144;">absdd</span>"通信...</label></div>
         {% for i in u2u_list %}
             {% if i.is_send %}
                 <div style="float: right;">
@@ -52,13 +61,29 @@
         {% endfor %}
     </div>
 
-    <div class="content-right" style="padding: 20px;">
-        <form>
-            <textarea class="form-control" style="height: 200px;"></textarea>
-            <button class="btn btn-danger">清空</button>
-            <button class="btn btn-default">发送<span class="glyphicon glyphicon-send"></span></button>
+    <div class="content-right" style="padding: 35px;">
+        <form method="post">
+            {% csrf_token %}
+            <textarea id="input-textarea" class="form-control" style="height: 200px;border-radius: 0px;"></textarea>
+            <div style="float: left;padding-top: 10px;">
+                已经输入<span id="input-length-count">0</span>个字
+            </div>
+            <div style="padding-top: 10px; float: right">
+                <button class="btn btn-danger" onclick="return clear_all()">清空</button>
+                <button class="btn btn-default">发送<span class="glyphicon glyphicon-send"></span></button>
+            </div>
+            <div style="clear: both"></div>
         </form>
     </div>
-
+    <script>
+        function clear_all(){
+            $('#input-length-count').text('0');
+            $("#input-textarea").val("");
+            return false;
+        }
+        $("#input-textarea").on('input',function(){
+            $('#input-length-count').text($(this).val().length);
+        });
+    </script>
     {% include "pieces/commom/right-paging.html" %}
 {% endblock %}

@@ -9,7 +9,7 @@ class Command(BaseCommand):
     main_class = "技术"
     sub_class = "程序员"
 
-    filename = "programmer-50-100.json"
+    filename = "programmer-1-50.json"
 
     main_class_instance = None
     sub_class_instance = None

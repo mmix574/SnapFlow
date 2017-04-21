@@ -6,7 +6,8 @@ class Command(BaseCommand):
     help = 'Command Line Template'
 
     def handle(self, *args, **options):
-        comments = Comment.objects.filter(content=" \r")
-        print(len(comments))
+        comments = Comment.objects.all()
         for i in comments:
-            i.delete()
+            if i.content.strip()=="":
+                print(i.id)
+                i.delete()
