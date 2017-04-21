@@ -38,3 +38,9 @@ class FriendAdmin(admin.ModelAdmin):
     list_display = ['user','has_friend']
     search_fields = ['user']
 admin.site.register(Friend,FriendAdmin)
+
+
+from .models import UserToUserMessageSession
+class UserToUserMessageSessionAdmin(admin.ModelAdmin):
+    list_display = ['a_user','b_user','time']
+admin.site.register(UserToUserMessageSession,UserToUserMessageSessionAdmin)

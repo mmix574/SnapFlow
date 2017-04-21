@@ -92,6 +92,18 @@ class UserToUserMessage(models.Model):
     # def __str__(self):
     #     return self.content
 
+class UserToUserMessageSession(models.Model):
+    a_user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='session_a_user')
+    b_user = models.ForeignKey(User,related_name='session_b_user')
+
+    time = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        verbose_name = "用户会话"
+        verbose_name_plural = verbose_name
+    pass
+
 
 class SystemToUserMessage(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
