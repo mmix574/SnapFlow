@@ -56,40 +56,71 @@
 
     </script>
 
-    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;">
+    {% if u and b_user%}
 
-        <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
-        <div><label>正在与用户"<span style="color: #dd1144;">absdd</span>"通信...</label></div>
-        {% for i in u2u_list %}
-            {% if i.is_send %}
-                <div style="float: right;">
-                    <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #d8d8d8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
-                    <div>{{ i.content }}</div>
-                </div>
-                <div></div>
-            {% else %}
-                <div>
-                    <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #e8e8e8;padding: 1px;" src="{{ i.b_user.userprofile.avatar_url }}"></div>
-                    <div>{{ i.content }}</div>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+        <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;padding-right: 20px;">
 
-    <div class="content-right" style="padding: 35px;">
-        <form method="post">
-            {% csrf_token %}
-            <textarea id="input-textarea" class="form-control" style="height: 200px;border-radius: 0px;"></textarea>
-            <div style="float: left;padding-top: 10px;">
-                已经输入<span id="input-length-count">0</span>个字
+            <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
+            <div><label>正在与用户"<span style="color: #dd1144;">{{ b_user.username }}</span>"通信...</label></div>
+            <div style="max-height: 600px;overflow-y: scroll;padding: 10px;border: 1px solid #c4c4c4;border-radius: 4px;">
+                {% for i in u2u_list %}
+                    {% ifequal i.a_user user %}
+                        <div style="float: right;">
+                            <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #d8d8d8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                            <div>{{ i.content }}</div>
+                            <div>{{ i.create_time|timesince}}前</div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    {% else %}
+                        <div>
+                            <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #e8e8e8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                            <div>{{ i.content }}</div>
+                            <div>{{ i.create_time|timesince}}前</div>
+                        </div>
+                        <div style="clear:both;"></div>
+                    {% endifequal %}
+                {% endfor %}
             </div>
-            <div style="padding-top: 10px; float: right">
-                <button class="btn btn-danger" onclick="return clear_all()">清空</button>
-                <button class="btn btn-default">发送<span class="glyphicon glyphicon-send"></span></button>
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="content-right" style="padding: 35px;">
+            <form method="post">
+                {% csrf_token %}
+                <input name="operation" value="send_message">
+                <textarea name="message" id="input-textarea" class="form-control" style="height: 200px;border-radius: 0px;"></textarea>
+                <div style="float: left;padding-top: 10px;">
+                    已经输入<span id="input-length-count">0</span>个字
+                </div>
+                <div style="padding-top: 10px; float: right">
+                    <button class="btn btn-danger" onclick="return clear_all()">清空</button>
+                    <button class="btn btn-default">发送<span class="glyphicon glyphicon-send"></span></button>
+                </div>
+                <div style="clear: both"></div>
+            </form>
+        </div>
+    {% elif u %}
+        <div class="content-right" style="padding-bottom: 20px;">
+            {% include 'pieces/commom/badgev2.html' with content="提示" %}
+            <div style="text-align: center;">
+                <h4>用户不存在，重新选择用户</h4>
             </div>
-            <div style="clear: both"></div>
-        </form>
-    </div>
+        </div>
+    {% else %}
+        <div class="content-right" style="padding-bottom: 20px;">
+            {% include 'pieces/commom/badgev2.html' with content="提示" %}
+            <div style="text-align: center;">
+                {% if session_list %}
+                    <h4>点击头像打开对话窗口</h4>
+                {% else %}
+                    <a href="{% url 'space-friend' %}">
+                        <button class="btn btn-default">搜索好友</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
     <script>
         function clear_all(){
             $('#input-length-count').text('0');

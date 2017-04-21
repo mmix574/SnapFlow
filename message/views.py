@@ -79,67 +79,68 @@ class SystemMessageView(AppBaseTemplateView):
 
 from .models import UserToUserMessageSession
 from .models import Friend
+from django.db.models import Q
 @method_decorator(login_required,name="dispatch")
 class PrivateMessageView(AppBaseTemplateView):
     template_name = 'message/private_message.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        u2u_list = UserToUserMessage.objects.filter(a_user=self.request.user)
-        context['u2u_list'] = u2u_list
+
 
         session_list = UserToUserMessageSession.objects.filter(a_user=self.request.user)
         context['session_list'] = session_list
 
-
-        session_open = True
+        # 这里添加好友。
         u = self.request.GET.get('u',None)
-        has_u_input = u
-        context['has_u_input'] = has_u_input
-        if not u:
-            session_open = False
-            return context
-        session_users = User.objects.filter(username=u)
-        if not session_users:
-            session_open = False
-            return context
 
-        chatting_user = session_users[0]
-        context['chatting_user'] = chatting_user
+        if not u:
+            return context
+        context['u'] = u
+
+        b_user = User.objects.filter(username=u)
+        if not b_user:
+            return context
+        else:
+            b_user = b_user[0]
+            context['b_user'] = b_user
+
+        # 添加好友
+        relationship,c = Friend.objects.get_or_create(user=self.request.user,has_friend=b_user)
+
+        # 添加session
+        session,c = UserToUserMessageSession.objects.get_or_create(a_user=self.request.user,b_user=b_user)
+
+
+        u2u_list = UserToUserMessage.objects.filter(Q(a_user=self.request.user,b_user=b_user)|Q(b_user=self.request.user,a_user=b_user))
+
+        context['u2u_list'] = u2u_list
 
         return context
 
     def get(self, request, context={}, *args, **kwargs):
-        # 这里添加好友。
 
-        u = request.GET.get('u',None)
-        if not u:
-            return super().get(request, context, *args, **kwargs)
 
-        try:
-            has_friend = User.objects.get(username=u)
-            if not has_friend:
-                return super().get(request, context, *args, **kwargs)
-
-            relationship = Friend.objects.filter(user=request.user,has_friend=has_friend)
-
-            if not relationship:
-                f = Friend()
-                f.user = request.user
-                f.has_friend = has_friend
-                f.save()
-
-        except:
-            pass
 
 
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
 
+        operation = request.POST.get('operation',None)
+        if not operation:
+            return super().post(request, context, *args, **kwargs)
 
+        if operation=='send_message':
+            message = request.POST.get('message',None)
+            if not message:
+                return super().post(request, context, *args, **kwargs)
+            print("sending",message)
 
-
+        #     打开两个会话
+        #     发送消息
+        #     用户消息状态改变
+        #     用户A(主动方)添加B好友
 
         return super().post(request, context, *args, **kwargs)
 

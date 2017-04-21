@@ -196,11 +196,11 @@ def minus_event_message_count(sender, instance, **kwargs):
 @receiver(post_save,sender=UserToUserMessage)
 def add_private_message_count(sender,instance,created,**kwargs):
     if created:
-        instance.user.messagestatus.add_user_to_user_message_count()
+        instance.a_user.messagestatus.add_user_to_user_message_count()
 
 @receiver(post_delete,sender=UserToUserMessage)
 def minus_private_message_count(sender,instance,**kwargs):
-    instance.user.messagestatus.minus_user_to_user_message_count()
+    instance.a_user.messagestatus.minus_user_to_user_message_count()
 
 
 # 系统消息
