@@ -62,7 +62,7 @@
 
             <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
             <div><label>正在与用户"<span style="color: #dd1144;">{{ b_user.username }}</span>"通信...</label></div>
-            <div style="max-height: 600px;overflow-y: scroll;padding: 10px;border: 1px solid #c4c4c4;border-radius: 4px;">
+            <div style="max-height: 400px;overflow-y: scroll;padding: 30px;border: 1px solid #c4c4c4;border-radius: 4px;">
                 {% for i in u2u_list %}
                     {% ifequal i.a_user user %}
                         <div style="float: right;">
@@ -87,6 +87,7 @@
         <div class="content-right" style="padding: 35px;">
             <form method="post">
                 {% csrf_token %}
+                <input name="b_user_id" value="{{ b_user.id }}">
                 <input name="operation" value="send_message">
                 <textarea name="message" id="input-textarea" class="form-control" style="height: 200px;border-radius: 0px;"></textarea>
                 <div style="float: left;padding-top: 10px;">

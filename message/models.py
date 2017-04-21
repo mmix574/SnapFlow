@@ -84,7 +84,6 @@ class UserToUserMessage(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
 
-    is_send = models.BooleanField(default=False)
     class Meta:
         verbose_name = "私信"
         verbose_name_plural = verbose_name
@@ -196,11 +195,11 @@ def minus_event_message_count(sender, instance, **kwargs):
 @receiver(post_save,sender=UserToUserMessage)
 def add_private_message_count(sender,instance,created,**kwargs):
     if created:
-        instance.a_user.messagestatus.add_user_to_user_message_count()
+        instance.b_user.messagestatus.add_user_to_user_message_count()
 
 @receiver(post_delete,sender=UserToUserMessage)
 def minus_private_message_count(sender,instance,**kwargs):
-    instance.a_user.messagestatus.minus_user_to_user_message_count()
+    instance.b_user.messagestatus.minus_user_to_user_message_count()
 
 
 # 系统消息

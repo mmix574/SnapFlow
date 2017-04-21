@@ -22,7 +22,7 @@ admin.site.register(MessageStatus)
 
 
 class UserToUserMessageAdmin(admin.ModelAdmin):
-    list_display = ['a_user','b_user','content','is_send']
+    list_display = ['a_user','b_user','content']
 
 admin.site.register(UserToUserMessage,UserToUserMessageAdmin)
 

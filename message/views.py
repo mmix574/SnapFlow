@@ -86,17 +86,18 @@ class PrivateMessageView(AppBaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-
         session_list = UserToUserMessageSession.objects.filter(a_user=self.request.user)
         context['session_list'] = session_list
 
-        # 这里添加好友。
         u = self.request.GET.get('u',None)
 
-        if not u:
+        if not u and not session_list:
             return context
-        context['u'] = u
+        elif u:
+            context['u'] = u
+        elif session_list:
+            u = session_list[0].b_user.username
+            context['u'] = u
 
         b_user = User.objects.filter(username=u)
         if not b_user:
@@ -111,19 +112,18 @@ class PrivateMessageView(AppBaseTemplateView):
         # 添加session
         session,c = UserToUserMessageSession.objects.get_or_create(a_user=self.request.user,b_user=b_user)
 
+        u2u_list = UserToUserMessage.objects.filter(Q(a_user=self.request.user,b_user=b_user)|Q(b_user=self.request.user,a_user=b_user),create_time__gt=session.time)
 
-        u2u_list = UserToUserMessage.objects.filter(Q(a_user=self.request.user,b_user=b_user)|Q(b_user=self.request.user,a_user=b_user))
+        for i in u2u_list:
+            # 标记为已读
+            if not i.read and i.b_user==self.request.user:
+                i.read = True
+                i.save()
+                self.request.user.messagestatus.minus_user_to_user_message_count()
 
         context['u2u_list'] = u2u_list
 
         return context
-
-    def get(self, request, context={}, *args, **kwargs):
-
-
-
-
-        return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
 
@@ -135,12 +135,31 @@ class PrivateMessageView(AppBaseTemplateView):
             message = request.POST.get('message',None)
             if not message:
                 return super().post(request, context, *args, **kwargs)
-            print("sending",message)
+            b_user_id = request.POST.get('b_user_id',None)
 
-        #     打开两个会话
-        #     发送消息
-        #     用户消息状态改变
+            if not b_user_id:
+                return super().post(request, context, *args, **kwargs)
+
+            b_user = User.objects.filter(id=b_user_id)
+            if not b_user:
+                return super().post(request, context, *args, **kwargs)
+
+            b_user = b_user[0]
+            a_user = request.user
+
+            #     打开两个会话
+            session, c = UserToUserMessageSession.objects.get_or_create(a_user=a_user,b_user=b_user)
+            session, c = UserToUserMessageSession.objects.get_or_create(a_user=b_user, b_user=a_user)
+
+            #     发送消息
+            msg = UserToUserMessage()
+            msg.content = message
+            msg.a_user = a_user
+            msg.b_user = b_user
+            msg.save()
+
         #     用户A(主动方)添加B好友
+            Friend.objects.get_or_create(user=a_user,has_friend=b_user)
 
         return super().post(request, context, *args, **kwargs)
 
