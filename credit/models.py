@@ -84,6 +84,10 @@ class EverydaySign(models.Model):
     user = models.ForeignKey(User)
     time = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "每日签到"
+        verbose_name_plural = verbose_name
+
     def is_today(self):
         from django.utils import timezone
         today_start = timezone.now().date()

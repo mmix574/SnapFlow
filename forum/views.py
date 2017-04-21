@@ -93,6 +93,7 @@ import json
 
 from .forms import ThreadForm
 from django.http.response import HttpResponseRedirect
+from .models import TAG
 @method_decorator(login_required,name='dispatch')
 class CreateView(AppBaseTemplateView):
     template_name = 'forum/create.html'
@@ -119,6 +120,14 @@ class CreateView(AppBaseTemplateView):
 
         if tf.is_valid():
             m = tf.save()
+            tags = request.POST.getlist('tag')
+            if tags:
+                for t in tags:
+                    tg = TAG()
+                    tg.thread_id = m.id
+                    tg.name = t
+                    tg.save()
+
             return HttpResponseRedirect("/t/"+str(m.id))
         else:
             print(tf.errors)
@@ -196,9 +205,9 @@ class DetailView(AppBaseTemplateView):
             if cl:
                 collected = True
 
+        tag_set = thread.tag_set.all()
 
-
-        return super().get(request, {'thread':thread,'tid':id,'comment_form':comment_form,"comment_list":comment_list,"liked":liked,"collected":collected}, *args, **kwargs)
+        return super().get(request, {'thread':thread,'tag_set':tag_set,'tid':id,'comment_form':comment_form,"comment_list":comment_list,"liked":liked,"collected":collected}, *args, **kwargs)
 
 
     def post(self, request, context={}, *args, **kwargs):

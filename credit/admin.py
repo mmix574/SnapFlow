@@ -27,6 +27,10 @@ admin.site.register(models.CreditLog,CreditLogAdmin)
 admin.site.register(models.UserCreditNickName)
 admin.site.register(models.CashPoint)
 
+class EverydaySignAdmin(admin.ModelAdmin):
+    list_display = ['user','time']
+
+admin.site.register(models.EverydaySign,EverydaySignAdmin)
 
 class OnlineLogAdmin(admin.ModelAdmin):
     list_display = ['user','time']

@@ -23,6 +23,16 @@
         .markdown_body >p>a>img{
             width: 100%;
         }
+{#        2017年4月21日11:55:21#}
+        .badge-tag-2{
+            background-color: #ffffff;
+            padding:3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid #dddddd;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
     </style>
     <script type="application/javascript">
         function go_back(){
@@ -117,13 +127,21 @@
         <div class="thread-content" style="padding-left: 10px;border-left: 1px solid #686868;margin-top: 15px;">
             {{ thread.content|safe}}
         </div>
+
+            <!--标签处-->
+        <div style="position:relative;top: 20px;">
+            {% if tag_set %}
+                {% for i in tag_set %}
+                    <div class="badge-tag-2">{{ i.name }}</div>
+                {% endfor %}
+            {% endif %}
+            <div></div>
+        </div>
         <hr/>
+
         <div style="float: right;padding-top: 5px;">
             {{ thread.create_time }}
         </div>
-        <!--标签处-->
-        <div></div>
-
 
         {% if logined %}
             <!--收藏按钮-->
@@ -169,7 +187,7 @@
                         <img style="display: inline-block;border-radius: 2px;height: 40px;width: 40px;" src="{% if i.create_user.userprofile.avatar %}{{ i.create_user.userprofile.avatar.url }}{% endif %}">
                     </div>
                     <div style="margin-left: 70px;">
-                        <a class="bind-link" id="{{ i.id }}" style="cursor: pointer;" href="#{{ i.id }}"><div style="float: left;color: #616161;">{{ i.create_user.username }}<span>:</span></div></a>
+                        <a class="bind-link" id="{{ i.id }}" style="cursor: pointer;" href="#{{ i.id }}"><div style="float: left;color: #616161;">{{ i.create_user.username }}</div></a>
                         <div style="float: left;">{{ i.content}}</div>
                     </div>
                     <div style="float: right;">

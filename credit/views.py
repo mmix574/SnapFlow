@@ -113,7 +113,7 @@ class DoEverydaySign(AppBaseTemplateView):
         if not operation:
             return super().post(request, context, *args, **kwargs)
         if operation=='sign':
-            sign = EverydaySign.objects.filter(user=self.request.user)
+            sign = EverydaySign.objects.filter(user=self.request.user).order_by('-time')
             if not sign or not sign[0].is_today():
                 # 打卡
                 from .services import do_everyday_sign

@@ -9,6 +9,8 @@ class Command(BaseCommand):
     main_class = "技术"
     sub_class = "程序员"
 
+    filename = "programmer-300-600.json"
+
     main_class_instance = None
     sub_class_instance = None
 
@@ -45,8 +47,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.before_handle()
-        f_name = "programmer150-300.json"
-
+        f_name = self.filename
         f = open('fake/fake_threads/'+f_name, encoding='utf-8')
         s = json.load(f)
 

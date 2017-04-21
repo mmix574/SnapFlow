@@ -11,5 +11,6 @@ urlpatterns = [
 
     url(r'^$',views.IndexView.as_view(),name="_finding"),
     url(r'^create/$',views.CreateView.as_view(),name="_asking"),
-    url(r'^like$', forum_api.add_like),
+    url(r'^like/$', forum_api.add_like),
+    url(r'^tag/', forum_api.get_tags),
 ]

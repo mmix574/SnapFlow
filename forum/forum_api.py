@@ -34,3 +34,21 @@ def add_like(request):
         thread_instance.save()
         return JsonResponse({"status":200,"code":201,"message":"点赞成功","success":True})
 
+import jieba
+
+import jieba.posseg as pseg
+
+def get_tags(request):
+
+        accept_type = ['v','n','f','ns','a','eng','t','nr','l','vn','nz','b','b','s','j','nt','an','z','nrt']
+
+        s = request.GET.get('s',None)
+        if not s :
+            return JsonResponse({})
+        else:
+            words = pseg.cut(s)
+            res = []
+            for word, flag in words:
+                if flag in accept_type:
+                    res.append(word)
+            return JsonResponse({"data":res})

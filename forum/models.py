@@ -56,6 +56,13 @@ class Thread (models.Model):
     # 分数
     score = models.IntegerField(default=1000)
 
+    def save_base(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.score = self.reply * 200 + self.like * 100 + self.view * 20
+        return super().save_base(raw, force_insert, force_update, using, update_fields)
+
+    # TAG
+
+
     create_user = models.ForeignKey(User,null=False,blank=False)
     create_time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     last_edit_time = models.DateTimeField(auto_now=True,blank=True,null=True)
@@ -118,7 +125,6 @@ class UserThreadStatus(models.Model):
 class TAG(models.Model):
     thread = models.ForeignKey(Thread)
     name = models.CharField(max_length=30)
-    pass
 
     class Meta:
         verbose_name = "标签"

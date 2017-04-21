@@ -54,7 +54,7 @@ from .models import CreditStatus
 
 def do_everyday_sign(user):
     sign_add_point = 100
-    sign = EverydaySign.objects.filter(user=user)
+    sign = EverydaySign.objects.filter(user=user).order_by('-time')
     if not sign or not sign[0].is_today():
         cs = CreditStatus.objects.get(user=user)
         cs.credit_point = cs.credit_point+sign_add_point

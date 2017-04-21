@@ -47,6 +47,15 @@
         .subclass-list-item>a:hover{
         {#            color: #2e6da4;#}
         }
+        .badge-tag{
+            background-color: #ffffff;
+            padding:5px 14px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 1px solid #dddddd;
+            margin-bottom: 5px;
+            margin-right: -18px;
+        }
 
     </style>
     <style>
@@ -128,12 +137,26 @@
             <div style="padding-top: 10px">
                 <div class="form-group">
                     <label for="tittle">标题</label>
-                    <input type="text" class="form-control" id="tittle" name="tittle" placeholder="" autocomplete="off"></div>
+                    <input id="tittle-input" type="text" class="form-control" id="tittle" name="tittle" placeholder="" autocomplete="off">
+                </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">内容</label>
                     <textarea style="height: 200px;resize: none;" class="form-control" form="thread-form" name="content"></textarea>
                     {#                    <div  style="height: 300px;" id="input-div"></div>#}
                 </div>
+
+
+                <!--标签复制-->
+                <div class="tag-cpoyme" id="tag-copyme" style="display: none;">
+                    <div class="badge-tag">我是TAG</div><span class="badge close-tag" style="position: relative;top: -10px;left: 0px;background-color: #ce0a33;cursor: pointer">x</span>
+                    <input  hidden="hidden">
+                </div>
+
+                <!--标签云-->
+                <div class="tag-div" id="tag-div">
+                    <div id="tag-loading" style="padding-left: 10px;display: none;">TAG云加载中...</div>
+                </div>
+                <hr/>
                 <div class="form-group">
                     {#                    <label for="imageFile">File input</label>#}
                     <input type="file" id="imageFile" autocomplete="off">
@@ -144,6 +167,7 @@
             </div>
         </form>
     </div><!--block-left-->
+
     <script type="application/javascript">
         function clear_all(){
             return false;
@@ -162,14 +186,8 @@
         <!--生成的li点击事件-->
         $("#class-container > li").click(function(){
             $("#sub_class_input").val(this.value);
-            {#            console.log($(this).children('a').text());#}
             $("#select-a-block").text($(this).children('a').text());
-            {#            console.log(this.value);#}
         });
-
-        {#        $("#subclass_search").change(function(){#}
-        {#            console.log("something change");#}
-        {#        });#}
         $("#subclass_search").on('input',function(e){
             var query = $("#subclass_search").val();
             $(".clone-li-class").remove();
@@ -191,8 +209,65 @@
                 {#            console.log(this.value);#}
             });
         });
+    </script>
+    <script type="application/javascript">
+        {#        for (var i=0;i<10;i++){#}
+        {#            var newNode = $('#tag-copyme').clone();#}
+        {#            newNode.children('div').text('abc'+i);#}
+        {#            newNode.children('input').attr("value","abc");#}
+        {##}
+        {#            newNode.css('display','inline-block');#}
+        {#            $("#tag-div").append(newNode);#}
+        {#        }#}
+        {#        $(".close-tag").click(function(){#}
+        {#            $(this).parent().remove();#}
+        {#        });#}
+
+
+        $('#tittle-input').blur(function(){
+            generate_tags();
+        });
+
+        function create_single_tag(tag_content){
+            var newNode = $('#tag-copyme').clone();
+            newNode.children('div').text(tag_content);
+            newNode.children('input').attr("name",'tag');
+            newNode.children('input').attr("value",tag_content);
+            newNode.css('display','inline-block');
+            $("#tag-div").append(newNode);
+
+            //重新绑定点击事件
+            $(".close-tag").click(function(){
+                $(this).parent().remove();
+            });
+        }
+
+        function generate_tags(){
+            $("#tag-div").find('.tag-cpoyme').remove();
+            tittle = $('#tittle-input').val();
+            if(tittle.length<5){
+                return ;
+            }
+            $("#tag-loading").css('display','block');
+            $.ajax({
+                url:'/t/tag/?s='+tittle,
+                success:function(data){
+                    setTimeout(function(){
+                        $("#tag-loading").css('display','none');
+                        data.data.forEach(function(item){
+                            create_single_tag(item)
+                        });
+                    },0);
+                },
+                error:function(data){
+                    $("#tag-loading").css('display','none');
+                    console.log(data);
+                }
+            });
+        }
 
     </script>
+
 {% endblock %}
 
 
@@ -200,6 +275,9 @@
     {% if logined %}
         <div class="block-right" style="height: 150px;text-align: center">
             <P>你好,{{ user.username }}</P>
+        </div>
+        <div class="block-right" style="padding: 20px;text-align: center;">
+            <a href="/t/create/" class="btn btn-default">发送问题广播 <span style="font-size: 10px;" class="glyphicon glyphicon-bullhorn"></span></a>
         </div>
     {% endif %}
     {% include 'forum/ad_block.html' %}
