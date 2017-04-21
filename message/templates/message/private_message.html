@@ -10,19 +10,18 @@
 
 
 {% block right %}
-
     <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-top: 10px;padding-right: 20px;">
         <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信会话" %}</div>
         <div style="float:right;position: relative;top: -40px;left: -30px;"><a href="{% url 'space-friend' %}"><button style="margin-right: 10px;">添加新会话</button></a><button id="start-edit-button">编辑</button></div>
         <div></div>
         <div style="width: 100%;padding-bottom: 10px;padding-left:10px;padding-top: 15px;border: 1px solid #dddddd;border-radius: 4px;overflow-y: scroll;background-color: #f6f6f6">
             {% for i in session_list %}
-
                 <div class="avatar-div" style="display: inline;position: relative;">
                     <input hidden="hidden" value="{{ i.id }}">
                     <a href="?u={{ i.b_user.username }}">
                         <img class="avatar-img" style="margin-bottom: 4px;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #cecece;padding: 1px;" src="{{ i.b_user.userprofile.avatar_url }}"> </a>
                     {#                    <div style="background-color: #0f0f0f;height: 60px;width:60px;border-radius: 30px;position: absolute;top: 0;left: 0px;right: 0;bottom: 0;text-align: center">asd</div>#}
+                    {% if i.message_count %}<span class="badge badge-close" style="cursor: pointer;position: relative;margin-left: -25px;top: -25px;background-color: #2e9d32;">{{ i.message_count }}</span>{% endif %}
                     <span class="badge badge-close" style="display: none;cursor: pointer;position: relative;margin-left: -25px;top: -25px;background-color: #ce0a33;">x</span>
                 </div>
 
@@ -49,7 +48,6 @@
                     console.log(data);
                 }
             });
-
             console.log(session_id);
             p.remove();
         });
@@ -62,18 +60,18 @@
 
             <div style="padding-bottom: 20px;">{% include 'pieces/commom/badge.html' with content="私信" %}</div>
             <div><label>正在与用户"<span style="color: #dd1144;">{{ b_user.username }}</span>"通信...</label></div>
-            <div style="max-height: 400px;overflow-y: scroll;padding: 30px;border: 1px solid #c4c4c4;border-radius: 4px;">
+            <div id="scroll-down-div" style="max-height: 400px;overflow-y: scroll;padding: 30px;border: 1px solid #c4c4c4;border-radius: 4px;">
                 {% for i in u2u_list %}
                     {% ifequal i.a_user user %}
-                        <div style="float: right;">
-                            <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #d8d8d8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                        <div style="float: right;margin-bottom: 20px;">
+                            <div><img style="float: right;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #d8d8d8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
                             <div>{{ i.content }}</div>
                             <div>{{ i.create_time|timesince}}前</div>
                         </div>
                         <div style="clear:both;"></div>
                     {% else %}
-                        <div>
-                            <div><img style="height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #e8e8e8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
+                        <div style="float: left;margin-bottom: 20px;">
+                            <div><img style="float:left;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #e8e8e8;padding: 1px;" src="{{ i.a_user.userprofile.avatar_url }}"></div>
                             <div>{{ i.content }}</div>
                             <div>{{ i.create_time|timesince}}前</div>
                         </div>
@@ -131,6 +129,7 @@
         $("#input-textarea").on('input',function(){
             $('#input-length-count').text($(this).val().length);
         });
+        $('#scroll-down-div').scrollTop($('#scroll-down-div')[0].scrollHeight );
     </script>
     {% include "pieces/commom/right-paging.html" %}
 {% endblock %}

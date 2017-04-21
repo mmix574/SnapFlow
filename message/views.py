@@ -114,15 +114,23 @@ class PrivateMessageView(AppBaseTemplateView):
 
         u2u_list = UserToUserMessage.objects.filter(Q(a_user=self.request.user,b_user=b_user)|Q(b_user=self.request.user,a_user=b_user),create_time__gt=session.time)
 
+
+        change = False
         for i in u2u_list:
             # 标记为已读
             if not i.read and i.b_user==self.request.user:
+                change = True
                 i.read = True
                 i.save()
                 self.request.user.messagestatus.minus_user_to_user_message_count()
+                session.message_count = session.message_count - 1
+                session.save()
 
         context['u2u_list'] = u2u_list
 
+        if change:
+            session_list = UserToUserMessageSession.objects.filter(a_user=self.request.user)
+            context['session_list'] = session_list
         return context
 
     def post(self, request, context={}, *args, **kwargs):
@@ -150,6 +158,9 @@ class PrivateMessageView(AppBaseTemplateView):
             #     打开两个会话
             session, c = UserToUserMessageSession.objects.get_or_create(a_user=a_user,b_user=b_user)
             session, c = UserToUserMessageSession.objects.get_or_create(a_user=b_user, b_user=a_user)
+            session.message_count = session.message_count + 1
+            session.save()
+
 
             #     发送消息
             msg = UserToUserMessage()

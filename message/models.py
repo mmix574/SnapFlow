@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.models import User
 
-
 class MessageStatus(models.Model):
     # user = models.ForeignKey(User,on_delete=models.CASCADE)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -74,6 +73,11 @@ class MessageStatus(models.Model):
             i.read = True
             i.save()
         self.save()
+        items = UserToUserMessageSession.objects.filter(b_user=self.user)
+        for i in items:
+            i.message_count = 0
+            i.save()
+
 
 
 
@@ -94,7 +98,7 @@ class UserToUserMessage(models.Model):
 class UserToUserMessageSession(models.Model):
     a_user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='session_a_user')
     b_user = models.ForeignKey(User,related_name='session_b_user')
-
+    message_count = models.IntegerField(default=0)
     time = models.DateTimeField(auto_now_add=True)
 
 
