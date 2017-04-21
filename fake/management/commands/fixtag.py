@@ -8,18 +8,25 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         import jieba.posseg as pseg
-        accept_type = ['v', 'n', 'f', 'ns', 'a', 'eng', 't', 'nr', 'l', 'vn', 'nz', 'b', 'b', 's', 'j', 'nt', 'an',
-                       'z', 'nrt']
+        # accept_type = ['v', 'n', 'f', 'ns', 'a', 'eng', 't', 'nr', 'l', 'vn', 'nz', 'b', 'b', 's', 'j', 'nt', 'an','z', 'nrt']
+        accept_type = ['n','ns','eng','nr','l','vn','nz','s','j','nt','nrt']
         threads = Thread.objects.all()
+        j = 1
         for t in threads:
             s = t.tittle
-            if not s:
-                continue
-            else:
-                words = pseg.cut(s)
-                for word, flag in words:
-                    if flag in accept_type:
-                        tag = TAG()
-                        tag.thread = t
-                        tag.name = word
-                        tag.save()
+            print(j,s)
+            words = pseg.cut(s)
+            for word, flag in words:
+                if flag in accept_type:
+                    tag = TAG()
+                    tag.thread = t
+                    tag.name = word[:30]
+                    tag.save()
+            j = j+1
+
+        # tags = TAG.objects.all()
+        # j = 1
+        # for i in tags:
+        #     print(j,i.name)
+        #     j=j+1
+        #     i.delete()

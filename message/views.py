@@ -7,7 +7,6 @@ from django.utils.decorators import method_decorator
 
 from django.http.response import HttpResponseRedirect
 
-
 # models
 from django.contrib.auth.models import User
 from .models import SystemToUserMessage
@@ -19,9 +18,6 @@ class IndexView(AppBaseTemplateView):
 
     def get(self, request, context={}, *args, **kwargs):
         return HttpResponseRedirect('/m/system-message')
-
-
-
 
 
 from .models import SystemToUserMessage
@@ -81,6 +77,7 @@ class SystemMessageView(AppBaseTemplateView):
         return super().post(request, context, *args, **kwargs)
 
 
+from .models import UserToUserMessageSession
 @method_decorator(login_required,name="dispatch")
 class PrivateMessageView(AppBaseTemplateView):
     template_name = 'message/private_message.html'
@@ -88,8 +85,10 @@ class PrivateMessageView(AppBaseTemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         u2u_list = UserToUserMessage.objects.filter(a_user=self.request.user)
-
         context['u2u_list'] = u2u_list
+
+        session_list = UserToUserMessageSession.objects.filter(a_user=self.request.user)
+        context['session_list'] = session_list
         return context
 
     def get(self, request, context={}, *args, **kwargs):

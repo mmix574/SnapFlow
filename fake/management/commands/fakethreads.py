@@ -9,7 +9,7 @@ class Command(BaseCommand):
     main_class = "技术"
     sub_class = "程序员"
 
-    filename = "programmer-300-600.json"
+    filename = "programmer-50-100.json"
 
     main_class_instance = None
     sub_class_instance = None
@@ -61,9 +61,9 @@ class Command(BaseCommand):
             return
         j = 1
         for i in s:
-            if j < 19:
-                j = j+1
-                continue
+            # if j < 19:
+            #     j = j+1
+            #     continue
             try:
                 self.get_data_ready(i)
 
@@ -88,6 +88,18 @@ class Command(BaseCommand):
                 t.reply = self.reply
                 t.view = self.view
                 t.save()
+
+                import jieba.posseg as pseg
+                from forum.models import TAG
+                accept_type = ['n', 'ns', 'eng', 'nr', 'l', 'vn', 'nz', 's', 'j', 'nt', 'nrt']
+                s = t.tittle
+                words = pseg.cut(s)
+                for word, flag in words:
+                    if flag in accept_type:
+                        tag = TAG()
+                        tag.thread = t
+                        tag.name = word[:30]
+                        tag.save()
 
                 self.add_comment(t.id,i['comment'])
             except:
