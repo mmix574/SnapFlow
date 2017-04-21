@@ -19,6 +19,7 @@
             {% for i in session_list %}
 
                 <div class="avatar-div" style="display: inline;position: relative;">
+                    <input hidden="hidden" value="{{ i.id }}">
                     <a href="?u={{ i.b_user.username }}">
                         <img class="avatar-img" style="margin-bottom: 4px;height: 60px;width: 60px;border-radius: 30px;box-shadow: 1px 1px 1px 1px #cecece;padding: 1px;" src="{{ i.b_user.userprofile.avatar_url }}"> </a>
                     {#                    <div style="background-color: #0f0f0f;height: 60px;width:60px;border-radius: 30px;position: absolute;top: 0;left: 0px;right: 0;bottom: 0;text-align: center">asd</div>#}
@@ -36,7 +37,21 @@
         });
         $('.badge-close').click(function(){
             //远程删除session信息
-            $(this).parent().remove();
+            var p = $(this).parent();
+            var session_id = parseInt(p.children('input').val());
+
+            $.ajax({
+                url:'/m/sessionclose/?id='+session_id,
+                success:function(data){
+                    console.log(data);
+                },
+                error:function (data) {
+                    console.log(data);
+                }
+            });
+
+            console.log(session_id);
+            p.remove();
         });
 
     </script>

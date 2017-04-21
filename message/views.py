@@ -78,6 +78,7 @@ class SystemMessageView(AppBaseTemplateView):
 
 
 from .models import UserToUserMessageSession
+from .models import Friend
 @method_decorator(login_required,name="dispatch")
 class PrivateMessageView(AppBaseTemplateView):
     template_name = 'message/private_message.html'
@@ -89,12 +90,57 @@ class PrivateMessageView(AppBaseTemplateView):
 
         session_list = UserToUserMessageSession.objects.filter(a_user=self.request.user)
         context['session_list'] = session_list
+
+
+        session_open = True
+        u = self.request.GET.get('u',None)
+        has_u_input = u
+        context['has_u_input'] = has_u_input
+        if not u:
+            session_open = False
+            return context
+        session_users = User.objects.filter(username=u)
+        if not session_users:
+            session_open = False
+            return context
+
+        chatting_user = session_users[0]
+        context['chatting_user'] = chatting_user
+
         return context
 
     def get(self, request, context={}, *args, **kwargs):
+        # 这里添加好友。
+
+        u = request.GET.get('u',None)
+        if not u:
+            return super().get(request, context, *args, **kwargs)
+
+        try:
+            has_friend = User.objects.get(username=u)
+            if not has_friend:
+                return super().get(request, context, *args, **kwargs)
+
+            relationship = Friend.objects.filter(user=request.user,has_friend=has_friend)
+
+            if not relationship:
+                f = Friend()
+                f.user = request.user
+                f.has_friend = has_friend
+                f.save()
+
+        except:
+            pass
+
+
         return super().get(request, context, *args, **kwargs)
 
     def post(self, request, context={}, *args, **kwargs):
+
+
+
+
+
         return super().post(request, context, *args, **kwargs)
 
 
@@ -116,7 +162,6 @@ class MessageStatusView(AppBaseTemplateView):
         if operation=="clear":
             ums = request.user.messagestatus
             ums.clear_all()
-
 
         return super().post(request, context, *args, **kwargs)
 
@@ -174,6 +219,57 @@ class EventMessageView(AppBaseTemplateView):
         return super().post(request, context, *args, **kwargs)
 
 
+from django.contrib.auth.models import User
+from django.db.models import Q
 @method_decorator(login_required,name="dispatch")
 class FriendView(AppBaseTemplateView):
     template_name = 'message/friends.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # 获取好友列表
+        friend_list =  Friend.objects.filter(user=self.request.user).order_by('-create_time')
+
+        context['friend_list'] = friend_list
+
+        return context
+
+    def get(self, request, context={}, *args, **kwargs):
+        return super().get(request, context, *args, **kwargs)
+
+    def post(self, request, context={}, *args, **kwargs):
+
+        print(request.POST)
+
+        operation = request.POST.get('operation',None)
+        if not operation:
+            return super().post(request, context, *args, **kwargs)
+
+        if operation=='search_friend':
+            friend_name = request.POST.get('friend_name',None)
+            if not friend_name:
+                return super().post(request, context, *args, **kwargs)
+
+            search_user_list = User.objects.filter(Q(username__contains=friend_name),~Q(id=self.request.user.id))
+            context['friend_name'] = friend_name
+            context['search_user_list'] = search_user_list
+            if not search_user_list:
+                context['search_result_statement'] = "没有查找到用户"
+            else:
+                context['search_result_statement'] = "一共查找到"+str(len(search_user_list))+" 名用户"
+
+        if operation=="delete_friend":
+            ids = request.POST.getlist('ids',None)
+            if not ids:
+                return super().post(request, context, *args, **kwargs)
+
+            for i in ids:
+                try:
+                    f = Friend.objects.get(user=request.user,has_friend=i)
+                    f.delete()
+                except:
+                    pass
+                pass
+
+        return super().post(request, context, *args, **kwargs)
+

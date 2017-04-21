@@ -1,7 +1,7 @@
 {% extends 'interface/base_display_settings_b.html' %}
 
 {% block tittle %}
-好友
+    好友
 {% endblock %}
 
 {% block left %}
@@ -11,9 +11,96 @@
 {% block right %}
     <div class="content-right">
         {% include 'pieces/commom/badgev2.html' with content="添加好友" %}
-        <div>asadasfdasfashjklhjl</div>
+        <div style="padding: 20px;">
+            <form method="post" id="form1">
+                {% csrf_token %}
+                <input name="operation" value="search_friend" hidden="hidden" required="required">
+                <label>搜索好友</label>
+                <div></div>
+                <input class="form-control" type="text" style="width: 300px;display: inline-block" name="friend_name" value="{{ friend_name }}">
+                <button class="btn btn-default">搜索</button>
+            </form>
+        </div>
+        <div style="padding: 0 20px;">
+            {% if search_result_statement %}
+                {{ search_result_statement }}
+            {% endif %}
+        </div>
+        <div style="padding: 20px;padding-right: 0px;">
+            {% if search_user_list  %}
+                <div class="search-result" style="max-height: 500px;overflow-y: scroll;">
+                    {% for i in search_user_list %}
+                        <div style="margin-top: 4px;padding-bottom: 4px;border-bottom: 1px solid #d8d8d8;">
+                            <img style="padding: 1px;box-shadow: 1px 1px 1px 1px #eeeeee;border-radius: 15px;height: 30px;width: 30px;" src="{{ i.userprofile.avatar_url }}">
+                            <div style="display: inline-block">{{ i }}</div>
+                            <div style="display: inline-block">{{ i.work_nickname }}</div>
+                            <a href="{% url 'private_message' %}?u={{ i.username }}"><button style="float: right;margin-right: 20px;">发送私信</button></a>
+                            <div></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+
     </div>
-    <div class="content-right">
-            {% include 'pieces/commom/badgev2.html' with content="我的好友" %}
+    <div class="content-right" style="padding-bottom: 20px;padding-left: 20px;padding-right: 20px;">
+        {% include 'pieces/commom/badgev2.html' with content="我的好友" %}
+        <div style="padding-bottom: 25px;">
+            <button id="start_edit_button" style="float: right;margin-right: 8px;margin-top: 5px;" onclick="return start_edit()">编辑</button>
+        </div>
+        <div style="clear: both"></div>
+        <form method="post" id="form2">
+            {% csrf_token %}
+            <div id="opeartion-area-div" style="display: none;padding-bottom: 10px;margin-left: 20px;">
+                <label>操作</label>
+                <div></div>
+                <select name="operation" class="form-control" style="width: 300px;display: inline-block;" id="operation-selector">
+                    <option value="">--选择操作--</option>
+                    <option value="delete_friend">删除</option>
+                </select>
+                <button id="select_all_button" style="display: inline-block;" class="btn btn-default" onclick="return select_all()">全选</button>
+                <button id="submit-button" style="display: inline-block;" class="btn btn-danger">请先选择操作</button>
+            </div>
+
+            <div style="margin-top: 12px;">
+                {% for i in friend_list %}
+                    <div style="margin-top: 4px;padding-bottom: 2px;border-bottom: 1px solid #cecece">
+                        <input class="checkbox-ids" style="margin-left: 14px;display: none;" type="checkbox" name="ids" value="{{ i.has_friend.id }}">
+                        <div style="display: inline-block;width: 18px;">{{ forloop.revcounter }}</div>
+                        <img style="height: 30px;width: 30px;display: inline-block;" src="{{ i.has_friend.userprofile.avatar_url}}">
+                        <div style="display: inline-block">{{ i.has_friend.username }}</div>
+                        <div style="float: right;"><button><a href="{% url 'private_message' %}?u={{ i.has_friend.username }}">发送私信</a></button></div>
+                        <div style="float: right;padding-right: 20px;margin-top: 4px;">{{ i.create_time }}</div>
+                        <div style="clear: both"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </form>
     </div>
+    <script>
+        var selected = false
+        function start_edit(){
+            $(".checkbox-ids").toggle();
+            $("#opeartion-area-div").toggle();
+        }
+        function select_all(){
+            if(!selected){
+                $(".checkbox-ids").prop('checked',true);
+                selected = true
+            }else{
+                $(".checkbox-ids").prop('checked',false)
+                selected = false
+            }
+            return false;
+        }
+        $(document).ready(function(){
+            $("#operation-selector").change(function(){
+                if($("#operation-selector").val()=="delete_friend"){
+                    $("#submit-button").text("确定删除");
+                }
+            });
+        });
+
+    </script>
 {% endblock %}
