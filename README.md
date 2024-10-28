@@ -101,9 +101,6 @@ python manage.py collectstatic
 ALLOWED_HOSTS = [
     'localhost',
     '192.168.1.5',
-    'taita.xyz',
-    '118.89.60.27',
-    'snapflow.top'
 ]
 ```
 
