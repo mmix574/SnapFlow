@@ -24,7 +24,7 @@ SECRET_KEY = ')qx6_n(fzh$f0!78j@rucrubyzp^869o1pz!ib(2x=#iccfy_6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.1.5','taita.xyz','118.89.60.27','snapflow.top']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.50.123']
 
 
 # Application definition
@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', #数据库引擎
         'NAME': 'fflow',                  #数据库名
         'USER': 'root',                   #用户名
-        'PASSWORD': 'zxcasdqwe',                   #密码
+        'PASSWORD': '',                   #密码
         'HOST': '127.0.0.1',              #数据库主机，默认为localhost
         'PORT': '3306',                   #数据库端口，MySQL默认为3306
         'OPTIONS': {
@@ -136,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-# LANGUAGE_CODE = 'en_us'
+LANGUAGE_CODE = 'en_us'
 # LANGUAGE_CODE = 'zh_ch'
-LANGUAGE_CODE = 'zh_Hans'
+# LANGUAGE_CODE = 'zh_hans'
 
 # TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Shanghai'
