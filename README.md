@@ -1,13 +1,26 @@
 # SnapFlow
-## 项目截图
 
-![截图1](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/1.png)
-![截图2](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/2.png)
-![截图3](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/3.png)
-![截图4](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/4.png)
-![截图5](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/5.png)
-![截图7](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/7.png)
-![截图8](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/8.png)
+![项目预览](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/1.png)
+
+## 项目介绍
+
+SnapFlow 是一个基于 Django 框架开发的社交媒体分享平台，专注于为用户提供图片分享和社交互动的服务。
+
+### 主要功能
+- 用户注册与认证系统
+- 图片上传与分享
+- 社交互动（关注、点赞、评论）
+- 个人主页定制
+- 图片标签系统
+- 搜索功能
+- 用户消息通知
+
+### 技术栈
+- 后端：Django 1.10.5
+- API：Django REST framework 3.5.4
+- 数据库：MySQL
+- 分词系统：结巴分词
+- 图片处理：Pillow
 
 ## 环境要求
 
@@ -105,3 +118,21 @@ python manage.py runserver 0.0.0.0:8000
 启动服务后，可通过以下地址访问：
 - 本地访问：http://localhost:8000
 - 局域网访问：http://[你的IP]:8000
+- 后台管理：http://localhost:8000/admin
+
+## 更多项目截图
+
+![用户界面](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/2.png)
+![图片分享](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/3.png)
+![社交功能](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/4.png)
+![个人主页](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/5.png)
+![消息系统](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/7.png)
+![搜索功能](https://raw.githubusercontent.com/mmix574/SnapFlow/master/github_readme/8.png)
+
+## 贡献指南
+
+欢迎提交 Issue 和 Pull Request 来帮助改进项目。
+
+## 许可证
+
+本项目采用 MIT 许可证，详情请参见 LICENSE 文件。	
